@@ -65,20 +65,7 @@
         color: var(--muted);
         font-size: 13px;
         font-family: "IBM Plex Mono", monospace;
-        margin-left: auto;
       }
-      .back {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-        transition: color 0.2s;
-      }
-      .back:hover { color: var(--accent); }
-      .back svg { width: 15px; height: 15px; }
       .wrapper {
         max-width: 900px;
         margin: 0 auto;
@@ -363,19 +350,117 @@
         margin-bottom: 4px;
         color: #cbd5e1;
       }
+      .hidden {
+        display: none !important;
+      }
+      .header-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .back-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        padding: 6px 12px;
+        border-radius: var(--radius);
+        cursor: pointer;
+      }
+      .back-btn:hover {
+        background: var(--surface2);
+      }
+      .home-intro {
+        text-align: center;
+        margin: 40px 0 32px;
+      }
+      .home-intro h2 {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      .home-intro p {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 8px;
+      }
+      .home-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 640px) {
+        .home-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .home-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px 20px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .home-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .home-card-eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+      .home-card.oficial .home-card-eyebrow {
+        color: var(--accent2);
+      }
+      .home-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      .home-card p {
+        color: var(--muted);
+        font-size: 13.5px;
+      }
     </style>
   </head>
   <body>
     <header>
-      <a class="back" href="../index.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-        Menu
-      </a>
       <div class="badge">CS0-003</div>
       <h1>CySA+ Interactive Study</h1>
-      <span>2026</span>
+      <div class="header-right">
+        <button class="back-btn hidden" id="back-btn" onclick="showView('home')">← Início</button>
+        <span>2026</span>
+      </div>
     </header>
     <div class="wrapper">
+
+      <div id="view-home">
+        <div class="home-intro">
+          <h2>O que você quer estudar hoje?</h2>
+          <p>Escolha uma trilha abaixo. Dá pra trocar a qualquer momento pelo botão "← Início".</p>
+        </div>
+        <div class="home-cards">
+          <div class="home-card" onclick="showView('course')">
+            <div class="home-card-eyebrow">Guia de Estudo (IA)</div>
+            <h3>Guia de Estudo + Questões de Prática</h3>
+            <p>14 unidades cobrindo todo o edital do CS0-003, com explicações e ~700 questões de prática geradas por IA para fixar os conceitos.</p>
+          </div>
+          <div class="home-card oficial" onclick="showView('oficial')">
+            <div class="home-card-eyebrow">Banco Oficial CertMaster</div>
+            <h3>Questões Oficiais CS0-003</h3>
+            <p>147 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (item 2.1).</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-course" class="hidden">
 
       <!-- UNIT 1 -->
       <div class="domain-header">
@@ -962,10 +1047,339 @@
         </div>
       </div>
 
+      </div>
+
+      <div id="view-oficial" class="hidden">
+
+      <div class="domain-header" style="border-left-color:var(--accent2)">
+        <div class="domain-eyebrow" style="color:var(--accent2)">CertMaster Practice — CS0-003</div>
+        <h2>Domínio 1.0 — Security Operations</h2>
+        <p>Banco oficial do CertMaster Practice. 122 questões reais, organizadas pelos 5 itens do Domínio 1 da ementa oficial.</p>
+      </div>
+
+      <div class="objective" id="obj-1.1">
+        <div class="obj-title" onclick="toggleObjective('obj-1.1')">
+          <span class="obj-num">1.1</span>
+          <h3>Arquitetura de Sistemas e Rede</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Controles de Acesso</span>
+              <span class="topic-pill">Zero Trust</span>
+              <span class="topic-pill">Virtualização vs Contêineres</span>
+              <span class="topic-pill">SSO — Riscos</span>
+              <span class="topic-pill">SSO e Passwordless — Rollout</span>
+              <span class="topic-pill">SSO — Vantagens</span>
+              <span class="topic-pill">Logging em Segurança</span>
+              <span class="topic-pill">Segurança Serverless</span>
+              <span class="topic-pill">Superfície de Ataque</span>
+              <span class="topic-pill">Logging Centralizado</span>
+              <span class="topic-pill">Ambientes Multi-Plataforma</span>
+              <span class="topic-pill">Hardening de SO</span>
+              <span class="topic-pill">Sincronização de Tempo e Logs</span>
+              <span class="topic-pill">PKI (Infraestrutura de Chave Pública)</span>
+              <span class="topic-pill">Segmentação de Rede</span>
+              <span class="topic-pill">Dados do Portador (CHD)</span>
+              <span class="topic-pill">DLP (Data Loss Prevention)</span>
+              <span class="topic-pill">Arquitetura Cloud e Segurança</span>
+              <span class="topic-pill">Passwordless + SSO</span>
+              <span class="topic-pill">SDN e Virtualização — Segurança</span>
+              <span class="topic-pill">SDN — Benefício Principal</span>
+              <span class="topic-pill">Hardening — Motivação</span>
+              <span class="topic-pill">Sincronização de Tempo</span>
+              <span class="topic-pill">Windows Event Viewer — Níveis de Log</span>
+              <span class="topic-pill">Proteção de CHD e PII</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 1.1 (<em>"Explain the importance of system and network architecture concepts in security operations"</em>): conceitos de arquitetura de sistemas e de rede aplicados às operações de segurança — Zero Trust, autenticação única (SSO) e passwordless, infraestrutura de chave pública (PKI), segmentação de rede, redes definidas por software (SDN), virtualização e contêineres, computação serverless, ambientes multiplataforma, hardening de sistemas operacionais, prevenção de perda de dados (DLP), proteção de dados do portador de cartão (CHD) e PII, logging centralizado e sincronização de tempo (NTP) — e por que cada escolha arquitetural impacta a superfície de ataque da organização.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 1.1 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-1.1">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-1.1"></div></div>
+            <button class="btn-reset" onclick="resetSection('1.1')">Sortear Novas</button>
+          </div>
+          <div id="qlist-1.1"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-1.2">
+        <div class="obj-title" onclick="toggleObjective('obj-1.2')">
+          <span class="obj-num">1.2</span>
+          <h3>Indicadores de Atividade Maliciosa</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Indicadores de Host</span>
+              <span class="topic-pill">Indicadores de Rede</span>
+              <span class="topic-pill">Ameaças Internas (Insider)</span>
+              <span class="topic-pill">Análise de Logs — Application Log</span>
+              <span class="topic-pill">Detecção de Dispositivos Rogue</span>
+              <span class="topic-pill">Atividade Anômala de Rede</span>
+              <span class="topic-pill">Análise de Logs de Aplicação</span>
+              <span class="topic-pill">Consumo de CPU e Processos Maliciosos</span>
+              <span class="topic-pill">Tarefas Agendadas e Anomalias no SO</span>
+              <span class="topic-pill">Indicadores de Rede — DDoS</span>
+              <span class="topic-pill">Beaconing e Comunicação C2</span>
+              <span class="topic-pill">Resposta a Incidentes — Isolamento</span>
+              <span class="topic-pill">Verificação de Logs de Sistema</span>
+              <span class="topic-pill">Tarefas Agendadas Não Autorizadas</span>
+              <span class="topic-pill">Engenharia Social e Links Ofuscados</span>
+              <span class="topic-pill">Mitigação de DDoS</span>
+              <span class="topic-pill">Anomalias de Registry</span>
+              <span class="topic-pill">Varreduras para Rogue Devices</span>
+              <span class="topic-pill">Revisão de Contas e Privilégios</span>
+              <span class="topic-pill">Evasão de Antivírus</span>
+              <span class="topic-pill">Consumo de Disco e Malware</span>
+              <span class="topic-pill">Tráfego em Porta Inesperada</span>
+              <span class="topic-pill">Beaconing e Processos Maliciosos</span>
+              <span class="topic-pill">Consumo de Memória</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 1.2 (<em>"Given a scenario, analyze indicators of potentially malicious activity"</em>): análise de indicadores de atividade potencialmente maliciosa em hosts e na rede — consumo anômalo de CPU, memória e disco, processos maliciosos, beaconing e comunicação C2, tráfego em portas inesperadas, DDoS, dispositivos rogue, tarefas agendadas não autorizadas, anomalias no registro do Windows, ameaças internas (insider), engenharia social e evasão de antivírus — a base para diferenciar comportamento normal de comportamento suspeito.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 1.2 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-1.2">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-1.2"></div></div>
+            <button class="btn-reset" onclick="resetSection('1.2')">Sortear Novas</button>
+          </div>
+          <div id="qlist-1.2"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-1.3">
+        <div class="obj-title" onclick="toggleObjective('obj-1.3')">
+          <span class="obj-num">1.3</span>
+          <h3>Ferramentas e Técnicas de Investigação</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Sandbox / Malware Analysis</span>
+              <span class="topic-pill">Segurança de E-mail</span>
+              <span class="topic-pill">Atividade Anômala de Conta</span>
+              <span class="topic-pill">SIEM — Indicadores Maliciosos</span>
+              <span class="topic-pill">Honeypots / Deception</span>
+              <span class="topic-pill">Perícia Digital Forense</span>
+              <span class="topic-pill">SIEM e EDR</span>
+              <span class="topic-pill">Packet Capture — Wireshark e tcpdump</span>
+              <span class="topic-pill">SOAR vs SIEM</span>
+              <span class="topic-pill">Segurança de E-mail — SPF e DKIM</span>
+              <span class="topic-pill">Análise de E-mail — Hash</span>
+              <span class="topic-pill">Packet Capture — tcpdump e Wireshark</span>
+              <span class="topic-pill">Segurança de E-mail — SPF</span>
+              <span class="topic-pill">Ameaças de E-mail — Cousin Domain</span>
+              <span class="topic-pill">Segurança de E-mail — DMARC</span>
+              <span class="topic-pill">Ferramentas de Script — Nmap</span>
+              <span class="topic-pill">Ferramentas de Investigação — WHOIS e AbuseIPDB</span>
+              <span class="topic-pill">Python — Comando strings</span>
+              <span class="topic-pill">Python — Expressões Regulares</span>
+              <span class="topic-pill">PowerShell vs Shell Script</span>
+              <span class="topic-pill">Hashing em Segurança</span>
+              <span class="topic-pill">JSON vs XML</span>
+              <span class="topic-pill">PowerShell e XML</span>
+              <span class="topic-pill">Hashing e Cabeçalhos</span>
+              <span class="topic-pill">XML — Estrutura</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 1.3 (<em>"Given a scenario, use appropriate tools or techniques to determine malicious activity"</em>): ferramentas e técnicas usadas para investigar atividade maliciosa — SIEM e EDR, SOAR, captura de pacotes (Wireshark/tcpdump), sandboxing e análise de malware, honeypots, perícia digital forense, segurança de e-mail (SPF, DKIM, DMARC, cousin domains), ferramentas de investigação como WHOIS e AbuseIPDB, e linguagens de script (Python, PowerShell) e formatos de dados (JSON, XML) usados para automatizar análises.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 1.3 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-1.3">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-1.3"></div></div>
+            <button class="btn-reset" onclick="resetSection('1.3')">Sortear Novas</button>
+          </div>
+          <div id="qlist-1.3"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-1.4">
+        <div class="obj-title" onclick="toggleObjective('obj-1.4')">
+          <span class="obj-num">1.4</span>
+          <h3>Threat Intelligence e Threat Hunting</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">OSINT e Reconhecimento</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 1.4 (<em>"Compare and contrast threat-intelligence and threat-hunting concepts"</em>): inteligência contra ameaças e busca proativa de ameaças (threat hunting), com foco em OSINT (<em>Open-Source Intelligence</em>) e técnicas de reconhecimento — como um agente malicioso coleta informações publicamente disponíveis (redes sociais, DNS, metadados) para planejar um ataque, e como um analista usa esse mesmo tipo de informação para se antecipar a ameaças.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 1.4 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-1.4">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-1.4"></div></div>
+            <button class="btn-reset" onclick="resetSection('1.4')">Sortear Novas</button>
+          </div>
+          <div id="qlist-1.4"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-1.5">
+        <div class="obj-title" onclick="toggleObjective('obj-1.5')">
+          <span class="obj-num">1.5</span>
+          <h3>Eficiência e Melhoria de Processos</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Webhooks e APIs</span>
+              <span class="topic-pill">Plugins e Integrações</span>
+              <span class="topic-pill">Priorização de Automação</span>
+              <span class="topic-pill">Automação com SOAR</span>
+              <span class="topic-pill">Coordenação e Comunicação da Equipe</span>
+              <span class="topic-pill">Orquestração de Inteligência de Ameaças</span>
+              <span class="topic-pill">Single Pane of Glass</span>
+              <span class="topic-pill">Benefícios da Automação</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 1.5 (<em>"Explain the importance of efficiency and process improvement in security operations"</em>): eficiência e melhoria de processos nas operações de segurança — automação com SOAR, orquestração de inteligência de ameaças, enriquecimento de dados (data enrichment), integração via webhooks e APIs, plugins e funcionalidades estendidas, consolidação de ferramentas num painel único (single pane of glass), priorização de tarefas para automação, coordenação e comunicação da equipe do SOC, e os benefícios de negócio de investir em automação.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 1.5 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-1.5">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-1.5"></div></div>
+            <button class="btn-reset" onclick="resetSection('1.5')">Sortear Novas</button>
+          </div>
+          <div id="qlist-1.5"></div>
+        </div>
+      </div>
+
+      <div class="domain-header" style="border-left-color:#ab7fff">
+        <div class="domain-eyebrow" style="color:#ab7fff">CertMaster Practice — CS0-003</div>
+        <h2>Domínio 2.0 — Vulnerability Management</h2>
+        <p>Banco oficial do CertMaster Practice. Item 2.1 da ementa oficial do Domínio 2.</p>
+      </div>
+
+      <div class="objective" id="obj-2.1">
+        <div class="obj-title" onclick="toggleObjective('obj-2.1')">
+          <span class="obj-num">2.1</span>
+          <h3>Métodos e Conceitos de Vulnerability Scanning</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Asset Discovery</span>
+              <span class="topic-pill">SLOs — Operations</span>
+              <span class="topic-pill">SLOs — Performance</span>
+              <span class="topic-pill">SLOs — Scheduling</span>
+              <span class="topic-pill">Internal vs External</span>
+              <span class="topic-pill">Agent vs Agentless</span>
+              <span class="topic-pill">Credentialed vs Non-Credentialed</span>
+              <span class="topic-pill">Passive vs Active</span>
+              <span class="topic-pill">Static vs Dynamic</span>
+              <span class="topic-pill">Critical Infrastructure — ICS/SCADA</span>
+              <span class="topic-pill">Operational Technology (OT)</span>
+              <span class="topic-pill">Security Baselines</span>
+              <span class="topic-pill">Industry Frameworks — PCI DSS</span>
+              <span class="topic-pill">CIS Benchmarks</span>
+              <span class="topic-pill">OWASP</span>
+              <span class="topic-pill">ISO</span>
+              <span class="topic-pill">Fingerprinting</span>
+              <span class="topic-pill">Fuzzing</span>
+              <span class="topic-pill">Reverse Engineering</span>
+              <span class="topic-pill">Network Segmentation</span>
+              <span class="topic-pill">Regulatory Requirements</span>
+              <span class="topic-pill">Sensitivity Levels</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 2.1 (<em>"Given a scenario, implement vulnerability scanning methods and concepts"</em>): descoberta de ativos (asset discovery) e considerações especiais de scan — operações, performance e agendamento (scheduling) — para não interromper sistemas críticos; escopo interno vs. externo; métodos baseados em agente vs. agentless; scans credenciados vs. não credenciados; scanning passivo vs. ativo e análise estática vs. dinâmica; particularidades de infraestrutura crítica (ICS/SCADA e OT); comparação de configurações contra security baselines; e frameworks/padrões da indústria como PCI DSS, CIS Benchmarks, OWASP e ISO que orientam e validam esses processos.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 2.1 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-2.1">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-2.1"></div></div>
+            <button class="btn-reset" onclick="resetSection('2.1')">Sortear Novas</button>
+          </div>
+          <div id="qlist-2.1"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-master-oficial">
+        <div
+          class="obj-title"
+          style="background: #131a24; border-bottom: 2px solid var(--accent2)"
+          onclick="toggleObjective('obj-master-oficial')"
+        >
+          <span
+            class="obj-num"
+            style="color: var(--accent2); background: rgba(63, 185, 80, 0.1)"
+            >FINAL</span
+          >
+          <h3>Simulado Master Oficial</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="section-label">Simulado Master Oficial (até 50 Questões — Domínios 1 e 2)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-master-oficial">
+              0 <span>/ 50</span>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-fill" id="prog-master-oficial"></div>
+            </div>
+            <button class="btn-reset" onclick="resetSection('master-oficial')">
+              Gerar Novo Exame
+            </button>
+          </div>
+          <div id="qlist-master-oficial"></div>
+        </div>
+      </div>
+
+      </div>
+
     </div>
+    <script src="js/shuffle.js"></script>
     <script>
-      let masterQuestionsDb = {};
+      let courseDb = {};
+      let oficialDb = {};
       let activeSelection = {};
+
+      function getDbForTopic(topic) {
+        return topic.indexOf(".") !== -1 ? oficialDb : courseDb;
+      }
+
+      function showView(name) {
+        const containerIds = {
+          home: "view-home",
+          course: "view-course",
+          oficial: "view-oficial",
+        };
+        Object.values(containerIds).forEach((id) => {
+          document.getElementById(id).classList.add("hidden");
+        });
+        document.getElementById(containerIds[name]).classList.remove("hidden");
+        const backBtn = document.getElementById("back-btn");
+        if (name === "home") {
+          backBtn.classList.add("hidden");
+        } else {
+          backBtn.classList.remove("hidden");
+        }
+        window.scrollTo(0, 0);
+      }
 
       function toggleObjective(id) {
         const objElement = document.getElementById(id);
@@ -989,47 +1403,65 @@
       }
 
       async function loadQuestions() {
+        const failures = [];
         try {
-          const response = await fetch("questions.json");
-          masterQuestionsDb = await response.json();
-          initAllSections();
+          const res = await fetch("questions.json");
+          courseDb = await res.json();
         } catch (error) {
-          console.error("Erro ao ler banco de dados de questões:", error);
+          console.error("Erro ao ler questions.json:", error);
+          failures.push("questions.json");
+        }
+        try {
+          const res = await fetch("practice_questions.json");
+          oficialDb = await res.json();
+        } catch (error) {
+          console.error("Erro ao ler practice_questions.json:", error);
+          failures.push("practice_questions.json");
+        }
+        initAllSections();
+        if (failures.length > 0) {
           alert(
-            "Erro ao carregar o ficheiro 'questions.json'. Certifica-te de que os ficheiros estão alojados num servidor para evitar restrições de CORS.",
+            "Erro ao carregar " +
+              failures.join(" e ") +
+              ". Certifica-te de que os ficheiros estão alojados num servidor para evitar restrições de CORS.",
           );
         }
       }
 
       function initAllSections() {
-        const topics = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
-        topics.forEach((topic) => selectAndRenderSection(topic));
-        selectAndRenderMaster();
+        const courseTopics = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
+        const oficialTopics = ["1.1","1.2","1.3","1.4","1.5","2.1"];
+        courseTopics.forEach((topic) => selectAndRenderSection(topic));
+        oficialTopics.forEach((topic) => selectAndRenderSection(topic));
+        selectAndRenderMaster("master", courseDb);
+        selectAndRenderMaster("master-oficial", oficialDb);
       }
 
       function selectAndRenderSection(topic) {
-        const allTopicQuestions = masterQuestionsDb[topic] || [];
+        const db = getDbForTopic(topic);
+        const allTopicQuestions = db[topic] || [];
         let cloned = JSON.parse(JSON.stringify(allTopicQuestions));
         shuffle(cloned);
-        activeSelection[topic] = cloned.slice(0, 10);
+        activeSelection[topic] = cloned.slice(0, 10).map(shuffleOptions);
         const container = document.getElementById("qlist-" + topic);
         if (!container) return;
         renderQuestionBlock(container, activeSelection[topic], topic);
         updateScoreUI(topic);
       }
 
-      function selectAndRenderMaster() {
+      function selectAndRenderMaster(key, db) {
         let pool = [];
-        Object.keys(masterQuestionsDb).forEach((key) => {
-          pool = pool.concat(masterQuestionsDb[key]);
+        Object.keys(db).forEach((k) => {
+          pool = pool.concat(db[k]);
         });
         let cloned = JSON.parse(JSON.stringify(pool));
         shuffle(cloned);
-        activeSelection["master"] = cloned.slice(0, 50);
-        const container = document.getElementById("qlist-master");
+        const size = Math.min(50, cloned.length);
+        activeSelection[key] = cloned.slice(0, size).map(shuffleOptions);
+        const container = document.getElementById("qlist-" + key);
         if (!container) return;
-        renderQuestionBlock(container, activeSelection["master"], "master");
-        updateScoreUI("master");
+        renderQuestionBlock(container, activeSelection[key], key);
+        updateScoreUI(key);
       }
 
       function renderQuestionBlock(container, questionsList, sectionKey) {
@@ -1141,7 +1573,9 @@
 
       function resetSection(sec) {
         if (sec === "master") {
-          selectAndRenderMaster();
+          selectAndRenderMaster("master", courseDb);
+        } else if (sec === "master-oficial") {
+          selectAndRenderMaster("master-oficial", oficialDb);
         } else {
           selectAndRenderSection(sec);
         }

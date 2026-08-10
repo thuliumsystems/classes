@@ -1,0 +1,2513 @@
+{
+  "1.1": [
+    {
+      "t": "Controles de Acesso",
+      "q": "A project manager needs to verify users and authorize access to systems and applications. Which security control should the project manager implement?",
+      "opts": [
+        "Role-based access control (RBAC)",
+        "Single sign-on (SSO)",
+        "Intrusion detection system (IDS)",
+        "Multi-factor authentication"
+      ],
+      "ans": 3,
+      "exp": "Multi-factor authentication (MFA) verifica a identidade do usuário usando dois ou mais fatores (algo que sabe, algo que tem, algo que é). A autorização (RBAC) complementa a verificação, mas o controle primário para verificar usuários é o MFA.",
+      "w": [
+        "SSO simplifica autenticação mas não adiciona fator extra de verificação.",
+        "RBAC controla acesso após autenticação, não verifica a identidade.",
+        "IDS detecta intrusões, não verifica identidade de usuários."
+      ]
+    },
+    {
+      "t": "Zero Trust",
+      "q": "Which of the following best represents how system and network architecture concepts are related to security operations?",
+      "opts": [
+        "Virtual private network (VPN) creates an encrypted tunnel for remote access.",
+        "Secure access service edge (SASE) combines network and security functions in a cloud-delivered model.",
+        "Zero trust architecture eliminates implicit trust and requires continuous verification of every access request.",
+        "Cloud access security broker (CASB) enforces security policies between cloud users and providers."
+      ],
+      "ans": 2,
+      "exp": "Zero Trust (ZTA) é o conceito arquitetural mais fundamental que conecta arquitetura de sistema/rede com operações de segurança. Ele elimina a confiança implícita, exige verificação contínua e segmentação micro-perimeter, impactando diretamente como as operações de segurança são projetadas e executadas.",
+      "w": [
+        "CASB é um controle específico para nuvem, não um conceito arquitetural amplo.",
+        "SASE é um modelo de entrega de serviços, não o conceito arquitetural central.",
+        "VPN é uma tecnologia de conectividade, não um conceito arquitetural de segurança."
+      ]
+    },
+    {
+      "t": "Virtualização vs Contêineres",
+      "q": "Which of the following is a significant difference between containerization and virtualization in the context of security operations?",
+      "opts": [
+        "Containerization provides stronger isolation than virtualization because each container has its own kernel.",
+        "Containerization requires a hypervisor to manage containers, while virtualization does not.",
+        "Virtualization is less secure than containerization because VMs share the same OS kernel.",
+        "Virtualization enables multiple operating systems to run on a single physical machine, while containerization shares the host OS kernel."
+      ],
+      "ans": 3,
+      "exp": "Virtualização usa um hypervisor para executar múltiplos sistemas operacionais convidados (cada um com seu próprio kernel) em um único host. Containerização compartilha o kernel do sistema operacional host entre contêineres, o que tem implicações de segurança: o isolamento é mais leve mas o breakout de container pode comprometer o host.",
+      "w": [
+        "Contêineres compartilham o kernel do host, portanto o isolamento é mais fraco que VMs, não mais forte.",
+        "Em virtualização, cada VM tem seu próprio kernel; contêineres compartilham o kernel do host.",
+        "Contêineres não requerem hypervisor; usam o kernel do host diretamente. Virtualização requer hypervisor."
+      ]
+    },
+    {
+      "t": "SSO — Riscos",
+      "q": "Which of the following is a potential security risk associated with implementing a single sign-on (SSO) solution in a security operations environment?",
+      "opts": [
+        "Elimination of password complexity requirements",
+        "Reduced visibility into user activity across applications",
+        "Increased risk of phishing attacks",
+        "Automatic revocation of all access when one application is compromised"
+      ],
+      "ans": 2,
+      "exp": "SSO concentra a autenticação em um único ponto. Se um atacante obtém as credenciais do usuário via phishing, ele tem acesso a todos os sistemas que o SSO cobre. Isso aumenta significativamente o impacto de um ataque de phishing bem-sucedido, criando um single point of failure para autenticação.",
+      "w": [
+        "SSO não elimina requisitos de complexidade de senha; eles continuam sendo definidos pela política.",
+        "SSO pode aumentar a visibilidade (logs centralizados), não reduzir.",
+        "Comprometer uma aplicação não revoga automaticamente todas as outras; SSO não funciona assim."
+      ]
+    },
+    {
+      "t": "SSO e Passwordless — Rollout",
+      "q": "A company is implementing a new authentication system that uses passwordless and SSO capabilities. During the rollout, the IT team notices some employees are having trouble accessing certain applications and resources, while others are experiencing no issues. Upon investigation, the team discovers that some applications and resources are not compatible with the new system. What is the best course of action for the IT team to take in response to this issue?",
+      "opts": [
+        "Continue the rollout and manually grant access to affected employees",
+        "Keep the new system and create separate workaround accounts for incompatible applications",
+        "Disable passwordless authentication and keep only SSO for compatible applications",
+        "Immediately roll back the passwordless and SSO authentication system and revert to the previous system"
+      ],
+      "ans": 3,
+      "exp": "Quando um novo sistema de autenticação causa perda de acesso a aplicações e recursos críticos, a ação mais segura é reverter (rollback) para o sistema anterior imediatamente, restaurando a produtividade. Depois, a equipe deve planejar a migração adequada — testando compatibilidade, criando um plano de transição e abordando as aplicações incompatíveis.",
+      "w": [
+        "Continuar com acesso quebrado prejudica a produtividade e pode causar incidentes.",
+        "Criar contas alternativas fragmenta a segurança e a gestão de identidades.",
+        "Manter SSO parcial com workarounds cria inconsistência e confusão operacional."
+      ]
+    },
+    {
+      "t": "SSO — Vantagens",
+      "q": "What are the advantages of implementing single sign-on (SSO) technology for an organization's authentication process? (Select the two best options.)",
+      "opts": [
+        "Enabling passwordless authentication through the use of smart cards or mobile devices",
+        "Providing offline access to all applications without authentication",
+        "Eliminating all security risks associated with password management",
+        "Improving user experience by reducing the need for multiple logins and passwords"
+      ],
+      "ans": 3,
+      "exp": "SSO reduz a fadiga de senhas ao exigir que o usuário se autentique apenas uma vez para acessar múltiplas aplicações. Isso melhora significativamente a experiência do usuário (UX) e reduz chamados de help desk relacionados a senhas esquecidas. A segunda melhor opção (passwordless via smart cards) também é um benefício, mas a redução de múltiplos logins é a vantagem primária.",
+      "w": [
+        "Passwordless via smart cards pode ser um recurso adicional, mas não é um benefício direto do SSO.",
+        "Nenhuma tecnologia elimina todos os riscos de senhas; SSO reduz alguns riscos mas cria outros.",
+        "SSO não elimina a necessidade de autenticação; ainda requer verificação inicial."
+      ]
+    },
+    {
+      "t": "Logging em Segurança",
+      "q": "Which logging concepts are crucial in security operations? (Select the three best options.)",
+      "opts": [
+        "Event correlation — analysis of related log entries across different systems to detect patterns",
+        "Log rotation — automatic archiving and cleanup of old log files to manage storage",
+        "Centralized logging — aggregation of logs from multiple sources into a single repository",
+        "Local logging only — storing logs only on each individual system without centralization"
+      ],
+      "ans": 2,
+      "exp": "Centralized logging é o conceito mais crucial: permite que todos os logs de diferentes fontes (servidores, firewalls, aplicações) sejam agregados em um repositório único para análise e busca. Sem centralização, a correlação de eventos e a detecção de incidentes em toda a organização são inviáveis.",
+      "w": [
+        "Log rotation é importante para gerenciamento de armazenamento, não para segurança operacional.",
+        "Event correlation é um recurso que depende do logging centralizado, não um conceito de logging em si.",
+        "Logs locais sem centralização impedem correlação e análise em toda a organização."
+      ]
+    },
+    {
+      "t": "Segurança Serverless",
+      "q": "A security analyst is responsible for ensuring a company's serverless infrastructure is secure. Recently, the company had a data breach due to a misconfigured serverless function. Which security measure should the analyst implement to prevent future data breaches on the company's serverless infrastructure?",
+      "opts": [
+        "Disable all serverless functions",
+        "Increase the function timeout to maximum",
+        "Configure access control",
+        "Move all workloads back to on-premises servers"
+      ],
+      "ans": 2,
+      "exp": "A causa raiz foi uma função serverless mal configurada. Implementar controle de acesso adequado — incluindo princípio do menor privilégio (least privilege), permissões IAM granulares e revisão de configurações — previne acesso não autorizado a dados. Serverless requer configuração explícita de permissões para cada função.",
+      "w": [
+        "Desabilitar funções serverless elimina os benefícios da tecnologia sem resolver a causa raiz.",
+        "Migrar para on-premises é uma mudança radical e desnecessária; o problema é de configuração, não de plataforma.",
+        "Aumentar timeout não tem relação com segurança; é uma configuração de desempenho."
+      ]
+    },
+    {
+      "t": "Superfície de Ataque",
+      "q": "Which of the following options describe the benefits of reducing the attack surface and limiting access to sensitive resources? (Select the two best options.)",
+      "opts": [
+        "It helps to reduce the risk of unauthorized access to sensitive data.",
+        "It guarantees 100% protection against all cyber threats.",
+        "It enhances the ability to detect and respond to anomalous activity.",
+        "It eliminates the need for monitoring and logging."
+      ],
+      "ans": 0,
+      "exp": "Reduzir a superfície de ataque (desabilitando serviços desnecessários, aplicando hardening, segmentando rede) diminui os vetores que um atacante pode explorar, reduzindo diretamente o risco de acesso não autorizado a dados sensíveis. Quanto menos portas abertas e serviços expostos, menor a probabilidade de exploração.",
+      "w": [
+        "Redução da superfície de ataque pode facilitar a detecção (menos ruído), mas não é o benefício principal.",
+        "Nenhuma medida garante proteção 100%; segurança é gestão de risco, não eliminação total.",
+        "Monitoramento continua necessário mesmo com superfície reduzida; atacantes ainda podem tentar acessar."
+      ]
+    },
+    {
+      "t": "Logging Centralizado",
+      "q": "A medium-sized business collects and analyzes all security-related logs from various sources, including web servers and payment processing systems, to detect and respond to security incidents in real time. By implementing centralized logging, the organization hopes to enhance its ability to prevent and mitigate cyber-attacks, as well as comply with regulatory requirements. Which of the following statements accurately describe the role of centralized logging in cyber security operations?",
+      "opts": [
+        "Centralized logging eliminates the need for endpoint detection and response (EDR) tools.",
+        "Centralized logging only stores log files but does not help with incident detection.",
+        "Centralized logging allows security personnel to track and analyze system activity, detect potential security incidents, and respond quickly to threats.",
+        "Centralized logging automatically blocks all malicious traffic before it reaches the network."
+      ],
+      "ans": 2,
+      "exp": "O logging centralizado agrega logs de múltiplas fontes em um único repositório, permitindo que analistas de segurança busquem, correlacionem e analisem eventos em toda a organização. Isso possibilita a detecção de incidentes que seriam invisíveis examinando logs individuais e acelera a resposta a ameaças.",
+      "w": [
+        "Centralized logging coleta dados, não bloqueia tráfego; bloqueio é função de firewall/IPS.",
+        "EDR fornece visibilidade de endpoint que logs centralizados sozinhos não capturam.",
+        "Detecção de incidentes é um dos principais propósitos do logging centralizado."
+      ]
+    },
+    {
+      "t": "Ambientes Multi-Plataforma",
+      "q": "What do serverless, cloud, hybrid, and on-premises environments all use in security operations? (Select the three best options.)",
+      "opts": [
+        "Incident response procedures — every environment needs a plan for detecting and responding to incidents.",
+        "Security frameworks — provide structured approaches to managing security across all environments.",
+        "Identical hardware configuration — all environments use the same physical servers regardless of platform.",
+        "Access control mechanisms — authentication and authorization controls are required in every environment."
+      ],
+      "ans": 3,
+      "exp": "Todos os ambientes — serverless, cloud, híbrido e on-premises — exigem mecanismos de controle de acesso (IAM, MFA, RBAC) para verificar identidades e autorizar acesso a recursos. É um requisito universal de segurança, independente da plataforma ou modelo de implantação.",
+      "w": [
+        "Security frameworks são importantes, mas nem todas organizações implementam frameworks formais em todos ambientes.",
+        "Incident response procedures são essenciais, mas o controle de acesso é mais fundamental e universal.",
+        "Hardware idêntico não é verdade; cada ambiente usa hardware diferente (ou nenhum, no caso serverless)."
+      ]
+    },
+    {
+      "t": "Hardening de SO",
+      "q": "What is the benefit of hardening the operating system in the context of system and network architecture?",
+      "opts": [
+        "To improve network bandwidth and internet speed",
+        "To make the system easier for users to administer without training",
+        "To increase the number of running services on the server",
+        "To decrease the risk of unauthorized access to sensitive data"
+      ],
+      "ans": 3,
+      "exp": "Hardening do sistema operacional é o processo de reduzir a superfície de ataque desabilitando serviços desnecessários, aplicando configurações seguras, removendo software não essencial e implementando controles como criptografia e最小ização de privilégios. O objetivo principal é diminuir o risco de acesso não autorizado a dados sensíveis.",
+      "w": [
+        "Hardening desabilita, não aumenta, serviços desnecessários.",
+        "Hardening pode tornar a administração mais complexa, não mais fácil.",
+        "Hardening não afeta largura de banda ou velocidade de internet."
+      ]
+    },
+    {
+      "t": "Sincronização de Tempo e Logs",
+      "q": "Which of the following are true about the importance of time synchronization, configuration file locations, and logging files in security operations? (Select the two best options.)",
+      "opts": [
+        "Logs are only useful for compliance, not for operational security.",
+        "Logging files can provide valuable information for identifying and investigating security incidents.",
+        "Time synchronization is crucial for ensuring consistency in event logs across systems.",
+        "Configuration file locations have no impact on security operations."
+      ],
+      "ans": 2,
+      "exp": "A sincronização de tempo (via NTP) é fundamental para a consistência dos logs: quando múltiplos sistemas geram eventos com timestamps sincronizados, os analistas podem reconstruir a linha do tempo de um ataque e correlacionar eventos entre sistemas. Sem sincronização, a cronologia fica comprometida.",
+      "w": [
+        "Logs fornecem evidências valiosas para investigação, mas a sincronização de tempo é o conceito mais fundamental.",
+        "Locais de arquivos de configuração são relevantes para hardening e baseline de configuração, sim.",
+        "Logs são essenciais tanto para segurança operacional quanto para compliance."
+      ]
+    },
+    {
+      "t": "PKI (Infraestrutura de Chave Pública)",
+      "q": "Which of the following concepts related to security operations involves the use of digital certificates to establish trust between entities and secure communication channels?",
+      "opts": [
+        "Intrusion prevention system (IPS)",
+        "Security information and event management (SIEM)",
+        "Virtual private network (VPN)",
+        "Public key infrastructure (PKI)"
+      ],
+      "ans": 3,
+      "exp": "PKI (Public Key Infrastructure) é o framework que gerencia certificados digitais, pares de chaves públicas/privadas e autoridades certificadoras (CAs). É usado para estabelecer confiança entre entidades, autenticar servidores/clientes e garantir confidencialidade e integridade em comunicações (ex: TLS/SSL).",
+      "w": [
+        "VPN usa criptografia, mas o conceito de estabelecimento de confiança via certificados é PKI.",
+        "IPS detecta/bloqueia tráfego, não estabelece confiança criptográfica.",
+        "SIEM coleta e analisa logs, não gerencia certificados ou confiança."
+      ]
+    },
+    {
+      "t": "Segmentação de Rede",
+      "q": "What are the benefits of network segmentation in security operations, specifically in relation to system and network architecture concepts and operating system (OS) concepts? (Select the two best options.)",
+      "opts": [
+        "Reducing the attack surface by limiting access to sensitive resources",
+        "Allowing for more effective monitoring of network traffic and detection of anomalous activity",
+        "Increasing the number of devices that can communicate without restrictions",
+        "Eliminating the need for firewalls and access control lists"
+      ],
+      "ans": 0,
+      "exp": "A segmentação de rede divide a rede em zonas isoladas (DMZ, interna, gestão, dados sensíveis), limitando o acesso a recursos críticos apenas a sistemas e usuários autorizados. Isso reduz a superfície de ataque porque um atacante que compromete uma zona não tem acesso automático às outras.",
+      "w": [
+        "Segmentação facilita o monitoramento ao reduzir ruído, mas o benefício primário é a contenção.",
+        "Firewalls e ACLs são necessários justamente para implementar a segmentação.",
+        "Segmentação restringe comunicação, não aumenta; o princípio é 'só o necessário'."
+      ]
+    },
+    {
+      "t": "Dados do Portador (CHD)",
+      "q": "Which of the following is an example of cardholder data (CHD)?",
+      "opts": [
+        "The IP address of the payment server",
+        "A customer's credit card number and expiration date",
+        "The merchant's tax identification number",
+        "A customer's name and email address"
+      ],
+      "ans": 1,
+      "exp": "Cardholder data (CHD) conforme definido pelo PCI DSS inclui o número completo do cartão (PAN), nome do titular, data de validade e código de serviço. O número do cartão e a data de validade juntos são exemplos clássicos de CHD que devem ser protegidos.",
+      "w": [
+        "Nome e e-mail são PII, não CHD (cardholder data).",
+        "Tax ID do comerciante é informação fiscal, não CHD.",
+        "IP do servidor é endereço de rede, não dado do titular do cartão."
+      ]
+    },
+    {
+      "t": "DLP (Data Loss Prevention)",
+      "q": "A company's security operations center has implemented a data loss prevention (DLP) solution to monitor and prevent sensitive data from being transmitted outside the organization. The security team also maintains strict controls over cardholder data (CHD) and personally identifiable information (PII) to comply with industry regulations and protect customer privacy. Which of the following is a potential benefit of implementing a DLP solution in a security operations environment?",
+      "opts": [
+        "DLP eliminates the need for data encryption across all systems.",
+        "DLP replaces the need for security awareness training for employees.",
+        "DLP automatically patches vulnerabilities in endpoint devices.",
+        "A DLP solution can help prevent sensitive data from being transmitted outside the organization, reducing the risk of data breaches and compliance violations."
+      ],
+      "ans": 3,
+      "exp": "DLP (Data Loss Prevention) monitora, detecta e bloqueia a transmissão não autorizada de dados sensíveis (CHD, PII, propriedade intelectual) para fora da organização, seja por e-mail, upload, USB, ou outros canais. Isso reduz diretamente o risco de violação de dados e ajuda na conformidade com regulamentações.",
+      "w": [
+        "DLP não substitui criptografia; ambos são controles complementares.",
+        "DLP não faz patch management; é um controle de prevenção de perda de dados.",
+        "DLP é tecnologia; treinamento de conscientização continua essencial para prevenir erro humano."
+      ]
+    },
+    {
+      "t": "Arquitetura Cloud e Segurança",
+      "q": "How are cloud system and network architecture concepts essential for securing hybrid and on-premises systems?",
+      "opts": [
+        "Cloud architecture is only useful for cloud-native applications, not for on-premises systems.",
+        "Hybrid environments require separate security tools for cloud and on-premises that cannot be integrated.",
+        "Cloud system and network architecture concepts enable organizations to consolidate and streamline their security operations, regardless of where their data resides.",
+        "Cloud concepts are irrelevant for on-premises security because on-premises systems use different protocols."
+      ],
+      "ans": 2,
+      "exp": "Conceitos de arquitetura cloud — como APIs unificadas, automação, infraestrutura como código (IaC), e logging centralizado — podem ser aplicados também a ambientes híbridos e on-premises, permitindo que organizações consolidem operações de segurança em uma plataforma única. Isso simplifica a gestão, reduz custos e melhora a visibilidade.",
+      "w": [
+        "Conceitos cloud se aplicam a todos ambientes; a abordagem de segurança é consistente.",
+        "Protocolos de segurança (TLS, IAM, logging) são similares em cloud e on-premises.",
+        "Ferramentas modernas de segurança (SIEM, SOAR, CASB) integram cloud e on-premises."
+      ]
+    },
+    {
+      "t": "Passwordless + SSO",
+      "q": "A large financial institution is considering passwordless authentication and SSO to improve security and streamline operations. Which of the following is true about passwordless authentication and SSO?",
+      "opts": [
+        "Passwordless authentication is less secure than traditional passwords.",
+        "SSO without passwordless authentication is not possible.",
+        "Passwordless authentication eliminates the need for multi-factor authentication.",
+        "Passwordless authentication and SSO can simplify user access while maintaining strong security."
+      ],
+      "ans": 3,
+      "exp": "Autenticação passwordless (usando biometria, smart cards, tokens FIDO2) combinada com SSO simplifica o acesso do usuário — ele se autentica uma vez com um método forte e acessa múltiplas aplicações. Isso mantém (ou aumenta) a segurança enquanto melhora a experiência do usuário, eliminando senhas fracas e reuso.",
+      "w": [
+        "Passwordless ainda pode (e deve) usar múltiplos fatores; não elimina MFA.",
+        "SSO existe com ou sem passwordless; são conceitos independentes.",
+        "Passwordless (ex: FIDO2, biometria) é geralmente mais seguro que senhas tradicionais."
+      ]
+    },
+    {
+      "t": "SDN e Virtualização — Segurança",
+      "q": "What are the security benefits of using software-defined networking (SDN) and virtualization in a network environment? (Select the two best options.)",
+      "opts": [
+        "Increased network agility for faster deployment of security controls",
+        "Simplified network segmentation and isolation for easier threat containment",
+        "Elimination of all network-based attacks through centralized control",
+        "Reduction of physical hardware eliminates the need for patch management"
+      ],
+      "ans": 0,
+      "exp": "SDN separa o plano de controle do plano de dados, permitindo que políticas de segurança sejam implementadas e atualizadas de forma centralizada e ágil. Novos controles de segurança (ACLs, segmentação, microsegmentação) podem ser implantados em minutos via software, sem reconfiguração manual de dispositivos.",
+      "w": [
+        "Segmentação simplificada é um benefício do SDN, mas a agilidade na implantação de controles é o principal.",
+        "SDN reduz alguns riscos mas não elimina todos os ataques de rede.",
+        "Hardware virtualizado ainda requer patches; virtualização não elimina gestão de patches."
+      ]
+    },
+    {
+      "t": "SDN — Benefício Principal",
+      "q": "What is the main benefit of using software-defined networking (SDN) in a virtualized environment?",
+      "opts": [
+        "Increased ease of management",
+        "Automatic blocking of all zero-day attacks",
+        "Replacement of all physical network equipment",
+        "Complete elimination of network latency"
+      ],
+      "ans": 0,
+      "exp": "O principal benefício do SDN em ambientes virtualizados é a facilidade de gerenciamento centralizado. Administradores podem configurar, monitorar e alterar políticas de rede de forma programática e centralizada, sem acessar cada dispositivo individualmente. Isso reduz a complexidade operacional e o tempo de provisionamento.",
+      "w": [
+        "SDN não elimina latência; pode até adicionar latência devido ao processamento do controlador.",
+        "SDN não bloqueia automaticamente zero-days; precisa de regras e políticas configuradas.",
+        "SDN não substitui todo hardware físico; ainda requer switches, roteadores e cabos."
+      ]
+    },
+    {
+      "t": "Hardening — Motivação",
+      "q": "Which of the following is the most important reason to implement system hardening measures in a networked environment?",
+      "opts": [
+        "To reduce the risk of data breaches",
+        "To make the system compatible with all legacy applications",
+        "To increase the number of software features available to users",
+        "To improve the aesthetic appearance of the server interface"
+      ],
+      "ans": 0,
+      "exp": "O hardening de sistemas é implementado primariamente para reduzir o risco de violações de dados (data breaches). Ao desabilitar serviços desnecessários, remover software não essencial, aplicar configurações seguras e minimizar privilégios, a organização reduz a superfície de ataque e as oportunidades de exploração.",
+      "w": [
+        "Hardening não afeta a aparência do sistema.",
+        "Hardening desabilita funcionalidades desnecessárias, não aumenta recursos.",
+        "Hardening pode quebrar compatibilidade com legados, não garantir."
+      ]
+    },
+    {
+      "t": "Sincronização de Tempo",
+      "q": "Which of the following is a reason why time synchronization is important in security operations?",
+      "opts": [
+        "To increase the processing speed of security appliances",
+        "To automatically patch vulnerabilities in network devices",
+        "To reduce bandwidth consumption on the network",
+        "To ensure accurate timestamps on security-related events"
+      ],
+      "ans": 3,
+      "exp": "A sincronização de tempo (usando NTP) garante que todos os dispositivos na rede tenham o mesmo horário. Isso é crítico para que os timestamps em logs de segurança (firewalls, servidores, IDS, SIEM) sejam consistentes e permitam a reconstrução precisa da linha do tempo de um incidente.",
+      "w": [
+        "Sincronização de tempo não afeta velocidade de processamento.",
+        "NTP consome largura de banda mínima; não é um fator de economia de banda.",
+        "Sincronização de tempo não faz patch management."
+      ]
+    },
+    {
+      "t": "Windows Event Viewer — Níveis de Log",
+      "q": "Which of the following logging levels is the highest and most verbose level of logging in Windows Event Viewer?",
+      "opts": [
+        "Warning",
+        "Critical",
+        "Debug",
+        "Verbose"
+      ],
+      "ans": 2,
+      "exp": "No Windows Event Viewer, o nível 'Debug' é o mais alto e verbose, registrando informações detalhadas sobre operações internas do sistema e aplicações. É usado principalmente para diagnóstico e resolução de problemas. Os níveis, em ordem crescente de severidade, são: Debug, Verbose, Information, Warning, Error, Critical.",
+      "w": [
+        "Verbose é um nível entre Debug e Information, não o mais alto.",
+        "Warning é um nível de aviso, menos detalhado que Debug.",
+        "Critical é o nível mais severo, mas não o mais verbose; Debug gera mais volume de dados."
+      ]
+    },
+    {
+      "t": "Proteção de CHD e PII",
+      "q": "Which of the following is a common method for protecting cardholder data and PII?",
+      "opts": [
+        "Disabling all firewall rules to improve performance",
+        "Encryption technology",
+        "Storing data in plain text for easy access",
+        "Sharing encryption keys publicly with authorized vendors"
+      ],
+      "ans": 1,
+      "exp": "Criptografia é o método mais comum e eficaz para proteger dados sensíveis como CHD e PII, tanto em repouso (dados armazenados) quanto em trânsito (dados sendo transmitidos). Padrões como PCI DSS e LGPD exigem criptografia como controle fundamental para proteger dados do titular.",
+      "w": [
+        "Armazenar em texto claro viola todos os padrões de segurança e regulamentações.",
+        "Desabilitar firewalls aumentaria o risco, não protegeria dados.",
+        "Chaves criptográficas devem ser mantidas em segredo, não compartilhadas publicamente."
+      ]
+    }
+  ],
+  "1.2": [
+    {
+      "t": "Indicadores de Host",
+      "q": "A security analyst for a corporation notices abnormal OS process behavior and unauthorized changes in the network environment. The analyst reviews the logs and identifies suspicious activities on a server. The analyst could have implemented which security operations practice to prevent the incident from happening in the first place?",
+      "opts": [
+        "Disabling all user accounts to prevent unauthorized access",
+        "Increasing the frequency of password changes for all users",
+        "Immediate shutdown of all servers to prevent further damage",
+        "Regular vulnerability assessments to identify and remediate vulnerabilities before attackers can exploit them"
+      ],
+      "ans": 3,
+      "exp": "Avaliações regulares de vulnerabilidade (vulnerability assessments) identificam proativamente vulnerabilidades em sistemas antes que atacantes as explorem. Se o analista tivesse realizado varreduras periódicas, as falhas que permitiram o comportamento anormal do SO e as alterações não autorizadas poderiam ter sido detectadas e remediadas preventivamente.",
+      "w": [
+        "Desligar servidores indiscriminadamente causa indisponibilidade e não resolve a causa raiz.",
+        "Desabilitar contas sem investigação é desproporcional e pode bloquear usuários legítimos.",
+        "Troca frequente de senhas não previne exploração de vulnerabilidades em sistemas."
+      ]
+    },
+    {
+      "t": "Indicadores de Rede",
+      "q": "A security analyst at a large financial institution has recently noticed an increase in unexpected outbound communication and is concerned about potential data exfiltration. Which of the following actions should the analyst take to address this? (Select the three best options.)",
+      "opts": [
+        "Check for any malware or malicious software on the organization's systems",
+        "Monitor network traffic for any suspicious outbound connections",
+        "Implement network segmentation to prevent lateral movement by attackers",
+        "Disable all outbound traffic permanently to block data leaving the network"
+      ],
+      "ans": 1,
+      "exp": "Monitorar o tráfego de rede para conexões de saída suspeitas é a ação mais imediata: permite identificar padrões de exfiltração, IPs de destino e volumes de dados. Isso dá visibilidade sobre o que está sendo enviado e para onde, permitindo bloquear a comunicação maliciosa.",
+      "w": [
+        "Segmentação de rede ajuda a conter movimento lateral, mas não aborda diretamente a exfiltração.",
+        "Verificar malware é importante, mas o monitoramento de tráfego é a ação mais imediata para exfiltração.",
+        "Desabilitar todo tráfego de saída permanentemente quebraria operações legítimas do negócio."
+      ]
+    },
+    {
+      "t": "Ameaças Internas (Insider)",
+      "q": "A company hires a new employee to work in their IT department. The new employee quickly gains the trust of the other coworkers. However, the company soon notices someone is accessing files without authorization and leaking sensitive information. Which of the following best describes the security threat presented in this scenario?",
+      "opts": [
+        "SQL injection attack",
+        "Man-in-the-middle (MITM) attack",
+        "Distributed denial-of-service (DDoS) attack",
+        "Insider threat"
+      ],
+      "ans": 3,
+      "exp": "Insider threat (ameaça interna) é quando um funcionário, contratado ou parceiro com acesso legítimo aos sistemas usa esse acesso de forma maliciosa ou negligente. O cenário descreve um funcionário que ganhou confiança e está vazando informações — clássico insider malicioso.",
+      "w": [
+        "DDoS é um ataque de negação de serviço externo, não envolve acesso interno autorizado.",
+        "MITM é interceptação de comunicação entre duas partes, não uso de acesso legítimo.",
+        "SQL injection é ataque a banco de dados via aplicação web, não ameaça interna."
+      ]
+    },
+    {
+      "t": "Análise de Logs — Application Log",
+      "q": "A company has recently upgraded to the latest version of the web application. During a review of the logs, the security analyst notices an unauthorized change made to the web application by an unknown user. Which of the following logs would most likely provide information about the unauthorized change?",
+      "opts": [
+        "Firewall log",
+        "DHCP log",
+        "Application log",
+        "DNS log"
+      ],
+      "ans": 2,
+      "exp": "O application log (log da aplicação) registra eventos específicos da aplicação web, incluindo alterações em configurações, acesso a funcionalidades administrativas e modificações de dados. Uma alteração não autorizada na aplicação web seria registrada no log da própria aplicação.",
+      "w": [
+        "Firewall log registra tráfego de rede bloqueado/permitido, não alterações em aplicações.",
+        "DNS log registra consultas de resolução de nomes, não ações dentro de aplicações.",
+        "DHCP log registra concessão de IPs, não atividades em aplicações."
+      ]
+    },
+    {
+      "t": "Detecção de Dispositivos Rogue",
+      "q": "A security team found an unidentified device linked to the company's network. The team believes that the device could be a rogue one, and they intend to perform scans and sweeps to identify and eliminate any unauthorized devices on the network. Which two options are the most effective methods of scans or sweeps used to detect rogue devices on a network? (Select the two best options.)",
+      "opts": [
+        "Active scanning — sending probes to discover active devices on the network",
+        "Vulnerability scanning — checking for known vulnerabilities on discovered devices",
+        "Port scanning only — scanning all 65535 ports on every possible IP address",
+        "Passive scanning — monitoring network traffic to identify devices without sending probes"
+      ],
+      "ans": 0,
+      "exp": "Active scanning (ex: Nmap, ARP scans, ping sweeps) envia sondas para descobrir dispositivos ativos na rede, revelando dispositivos não autorizados. É o método mais direto e completo para detectar rogue devices, pois descobre ativos que podem não estar gerando tráfego no momento.",
+      "w": [
+        "Passive scanning monitora tráfego existente, mas pode perder dispositivos que não estão se comunicando.",
+        "Vulnerability scanning avalia segurança de dispositivos já conhecidos, não descobre novos.",
+        "Port scanning focado apenas em portas pode perder dispositivos configurados com firewalls restritivos."
+      ]
+    },
+    {
+      "t": "Atividade Anômala de Rede",
+      "q": "While monitoring the network traffic of a large financial institution, a security analyst notices an unusual pattern of outgoing traffic occurring on an unexpected port. Which of the following actions should the analyst take in response to this anomalous activity? (Select the two best options.)",
+      "opts": [
+        "Ignore the traffic since unexpected ports are commonly used by legitimate applications",
+        "Immediately block all traffic on the unexpected port without investigation",
+        "Investigate the traffic to determine its source and destination",
+        "Alert the manager and other relevant parties about the anomalous activity"
+      ],
+      "ans": 2,
+      "exp": "Investigar o tráfego para determinar origem e destino é a primeira ação: quem está enviando, para onde, qual protocolo e qual volume de dados. Isso fornece o contexto necessário para classificar a atividade como legítima ou maliciosa antes de agir.",
+      "w": [
+        "Alertar a gerência é importante após a investigação, mas a investigação vem primeiro.",
+        "Bloquear sem investigação pode interromper tráfego legítimo de aplicações que usam portas não padronizadas.",
+        "Ignorar tráfego anômalo é negligência; portas inesperadas frequentemente indicam atividade maliciosa."
+      ]
+    },
+    {
+      "t": "Análise de Logs de Aplicação",
+      "q": "A security analyst analyzes application logs to identify any suspicious activities and notices that one of the company's recently resigned employees had downloaded a large amount of data just before leaving. What is the analyst's most appropriate next step based on the scenario?",
+      "opts": [
+        "Restore the downloaded data from backup immediately",
+        "Ignore the activity since the employee has already resigned",
+        "Check the company's firewall logs to identify any external connections made by the former employee",
+        "Send an email to the former employee asking for an explanation"
+      ],
+      "ans": 2,
+      "exp": "Após identificar um download suspeito no log da aplicação, o próximo passo lógico é verificar os logs do firewall para determinar se houve exfiltração: para quais IPs externos o funcionário se conectou, qual volume de dados foi transmitido e em qual horário. Isso completa o quadro da investigação.",
+      "w": [
+        "Ignorar atividade suspeita de ex-funcionário é negligência; dados da empresa podem estar em risco.",
+        "Restaurar backup não é relevante; o dado foi copiado, não deletado.",
+        "Contatar ex-funcionário pode alertá-lo e permitir destruição de evidências."
+      ]
+    },
+    {
+      "t": "Consumo de CPU e Processos Maliciosos",
+      "q": "A security analyst notices that the processor consumption on the organization's server is much higher than usual. After investigating, a process named 'malware.exe' was found running in the background. Which of the following best describes the relationship between processor consumption and malicious processes in this scenario?",
+      "opts": [
+        "Processor consumption is unrelated to malicious processes and should be ignored.",
+        "High processor consumption is always caused by legitimate software updates.",
+        "High processor consumption only occurs during normal business hours.",
+        "Malicious processes can cause high processor consumption."
+      ],
+      "ans": 3,
+      "exp": "Processos maliciosos frequentemente consomem CPU de forma anormal — seja por mineração de criptomoedas, varredura de rede, brute force, descriptografia ou execução de payloads. O aumento súbito de CPU sem causa legítima conhecida é um forte indicador de atividade maliciosa (host indicator).",
+      "w": [
+        "Alta de CPU pode ter causas legítimas, mas não é 'sempre' devido a updates.",
+        "Consumo de CPU é um indicador importante de host que deve ser investigado.",
+        "Processos maliciosos podem executar 24/7, inclusive fora do horário comercial."
+      ]
+    },
+    {
+      "t": "Tarefas Agendadas e Anomalias no SO",
+      "q": "A security analyst working for a financial institution notices abnormal behavior in a workstation's operating system (OS) and identifies multiple unauthorized scheduled tasks and file system anomalies on the affected workstation. Which of the following options is the most likely explanation for these issues?",
+      "opts": [
+        "The workstation is experiencing normal Windows update behavior.",
+        "The user has been installing too many legitimate software applications.",
+        "A virus has infected the workstation, allowing remote attackers to execute arbitrary code and run malicious tasks.",
+        "The hard drive is failing and causing file system corruption."
+      ],
+      "ans": 2,
+      "exp": "Tarefas agendadas não autorizadas no Windows (scheduled tasks) são uma técnica comum de persistência usada por malware e atacantes. Agendadores de tarefas permitem executar código malicioso em intervalos regulares ou em eventos específicos, mesmo após reboot. Combinado com anomalias no sistema de arquivos, é forte indicador de comprometimento.",
+      "w": [
+        "Windows Update não cria tarefas não autorizadas nem causa anomalias no sistema de arquivos.",
+        "Instalação de software legítimo não cria tarefas não autorizadas sem o conhecimento do usuário.",
+        "Falha de disco causa erros de leitura/escrita, não criação de tarefas agendadas."
+      ]
+    },
+    {
+      "t": "Indicadores de Rede — DDoS",
+      "q": "A cybersecurity analyst at a company notices an unusual spike in network traffic that leads to service interruptions. The analyst suspects that this may be due to a security breach. Why could these service interruptions be an indicator of a security breach?",
+      "opts": [
+        "Service interruption could indicate a scheduled maintenance window.",
+        "Service interruption could indicate a legitimate increase in customer traffic.",
+        "Service interruption could indicate the CEO is downloading a large presentation.",
+        "Service interruption could indicate an attacker using a denial-of-service attack to overload the network."
+      ],
+      "ans": 3,
+      "exp": "Picos súbitos de tráfego que causam interrupção de serviço são um forte indicador de ataque DDoS (Distributed Denial of Service). Atacantes sobrecarregam a rede ou servidor com tráfego volumoso, tornando os serviços indisponíveis para usuários legítimos. Esse padrão anômalo é um indicador de rede clássico.",
+      "w": [
+        "Manutenção programada é comunicada e planejada, não causa picos inesperados.",
+        "Download de executivo não causaria interrupção de serviço generalizada.",
+        "Aumento legítimo de tráfego não causa interrupção se a infraestrutura for adequada."
+      ]
+    },
+    {
+      "t": "Beaconing e Comunicação C2",
+      "q": "A security analyst monitoring a network for any irregularities notices a significant increase in beaconing and irregular peer-to-peer communication on one of the company's servers. Which of the following best describes the potential threat of this situation?",
+      "opts": [
+        "Legitimate software update checking for new versions",
+        "A user streaming video content on the server",
+        "Malware propagation and system compromise",
+        "Normal behavior of the server's backup routine"
+      ],
+      "ans": 2,
+      "exp": "Beaconing é uma técnica de C2 (Command and Control) onde malware se comunica periodicamente com um servidor externo para receber instruções ou exfiltrar dados. Combinado com comunicação peer-to-peer irregular entre sistemas, é forte indicador de propagação de malware e comprometimento ativo.",
+      "w": [
+        "Backup routines são regulares e não fazem beaconing para IPs externos.",
+        "Software updates verificam atualizações em servidores oficiais, não fazem beaconing suspeito.",
+        "Servidor não é usado para streaming de vídeo; esse comportamento seria anômalo e não justifica beaconing."
+      ]
+    },
+    {
+      "t": "Resposta a Incidentes — Isolamento",
+      "q": "An analyst is reviewing logs and notices unusual traffic spikes and activity on unexpected ports. Further investigation reveals that the traffic originates from a group of servers on the network. What is the best course of action for the analyst to take in response?",
+      "opts": [
+        "Isolate the affected servers from the network to prevent further malicious activity and initiate incident response procedures",
+        "Ignore the activity since the servers are still responding to legitimate requests",
+        "Reboot all affected servers to clear any potential malware",
+        "Increase logging level and continue monitoring without taking action"
+      ],
+      "ans": 0,
+      "exp": "Quando tráfego malicioso é confirmado originando-se de servidores, isolar os servidores afetados da rede é a ação de contenção mais imediata: remove a capacidade do atacante de se comunicar com C2, de se mover lateralmente e de exfiltrar dados. Em paralelo, inicia-se o processo de resposta a incidentes.",
+      "w": [
+        "Ignorar atividade confirmadamente suspeita é negligência e permite dano contínuo.",
+        "Reboot pode destruir evidências forenses (voláteis como memória RAM).",
+        "Apenas monitorar sem conter permite que o atacante continue agindo."
+      ]
+    },
+    {
+      "t": "Verificação de Logs de Sistema",
+      "q": "A security analyst for a large financial institution notices abnormal OS process behavior, unauthorized changes, and file system changes occurring on one of the company's servers. The analyst believes there may be a security breach. What is the best way to confirm the analyst's suspicions of a breach?",
+      "opts": [
+        "Run a full backup of the server before investigating",
+        "Check the system logs for unusual activity",
+        "Reinstall the operating system immediately",
+        "Disconnect the server and wait for user complaints"
+      ],
+      "ans": 1,
+      "exp": "Os logs do sistema (System logs, Security logs, Application logs no Windows Event Viewer) são a fonte primária para confirmar um comprometimento. Eles registram eventos de segurança, criação de processos, alterações de arquivos e logons, permitindo rastrear a atividade do atacante e confirmar a suspeita.",
+      "w": [
+        "Reinstalar o SO destrói evidências forenses cruciais antes da investigação.",
+        "Aguardar reclamações é reativo; o analista já tem indicadores fortes de comprometimento.",
+        "Backup pode preservar dados, mas não confirma ou investiga o comprometimento."
+      ]
+    },
+    {
+      "t": "Tarefas Agendadas Não Autorizadas",
+      "q": "An organization's security team is conducting routine system checks and discovers an unauthorized scheduled task on a critical server. Further investigation reveals that the task is set to run every hour, and the task is not part of any known system or application updates. What is the best course of action for the security team to take in response to the unauthorized scheduled task on the critical server?",
+      "opts": [
+        "Disable the task and monitor the server for any further suspicious activity",
+        "Reboot the server to automatically remove the scheduled task",
+        "Delete the task immediately and ignore any related alerts",
+        "Leave the task running to gather more information about its purpose"
+      ],
+      "ans": 0,
+      "exp": "Desabilitar a tarefa (não deletar) interrompe a execução maliciosa enquanto preserva a evidência para investigação forense. Monitorar o servidor permite detectar se o atacante tenta recriar a tarefa (indicando persistência ativa) ou se há outras atividades maliciosas no sistema.",
+      "w": [
+        "Deletar imediatamente perde a oportunidade de analisar o conteúdo e origem da tarefa.",
+        "Deixar a tarefa executando permite que o atacante continue agindo no ambiente.",
+        "Reboot não remove tarefas agendadas; elas persistem em disco e seriam reexecutadas."
+      ]
+    },
+    {
+      "t": "Engenharia Social e Links Ofuscados",
+      "q": "An IT security analyst is verifying a coworker's email containing a link to a new report. The email seems legitimate, but the analyst notices that the link is obfuscated, suggesting it may be part of a social engineering attack designed to compromise the organization's security. What is the role of obfuscated links in social engineering attacks, and how do they impact IT security operations? (Select the three best options.)",
+      "opts": [
+        "Social engineering attacks rely on human interaction to trick individuals into revealing sensitive information or performing actions that compromise network security.",
+        "Obfuscated links are used to improve website loading speed and user experience.",
+        "Social engineering attacks often use obfuscated links to redirect users to malicious websites that install malware or steal login credentials.",
+        "Obfuscated links are hyperlinks intentionally obscured to hide the true destination of the link, often used in phishing attacks."
+      ],
+      "ans": 0,
+      "exp": "Links ofuscados (obfuscated links) são hiperlinks intencionalmente obscurecidos usando técnicas como codificação de URL, encurtadores ou caracteres especiais para esconder o destino real. Em ataques de engenharia social e phishing, são usados para redirecionar vítimas a sites maliciosos sem que percebam, instalando malware ou roubando credenciais.",
+      "w": [
+        "Ofuscação de URL é uma técnica maliciosa, não relacionada a desempenho de sites.",
+        "Ataques de engenharia social exploram o fator humano, não são sobre ofuscação isoladamente.",
+        "Links ofuscados escondem destinos maliciosos, não melhoram experiência do usuário."
+      ]
+    },
+    {
+      "t": "Mitigação de DDoS",
+      "q": "A security analyst discovers that an attacker is attempting to launch a distributed denial-of-service (DDoS) attack on the company's network. What action should the security analyst take to prevent the DDoS attack from succeeding?",
+      "opts": [
+        "Install additional firewalls in series with the existing ones",
+        "Increase bandwidth to accommodate the additional traffic",
+        "Disable all external network connections permanently",
+        "Configure the router to limit the amount of traffic coming from external sources"
+      ],
+      "ans": 3,
+      "exp": "Configurar o roteador para limitar tráfego de fontes externas (rate limiting, traffic shaping, ACLs) é uma medida prática de mitigação de DDoS. Isso restringe o volume de tráfego que chega à rede, impedindo que o ataque sobrecarregue os servidores. Combinado com blackholing ou scrubbing, é uma defesa eficaz.",
+      "w": [
+        "Desabilitar conexões externas permanentemente impede operações legítimas do negócio.",
+        "Aumentar largura de banda apenas eleva o custo; atacantes podem escalar o ataque.",
+        "Firewalls em série adicionam latência mas não impedem DDoS volumétrico."
+      ]
+    },
+    {
+      "t": "Anomalias de Registry",
+      "q": "A cybersecurity analyst investigates a suspicious process running on a server. The analyst discovers unexpected output and registry anomalies. Which of the following are true regarding unexpected output and registry anomalies during security operations? (Select the two best options.)",
+      "opts": [
+        "Unexpected output can indicate malware activity.",
+        "Registry anomalies can be caused by legitimate software updates.",
+        "Unexpected output is always caused by hardware failures.",
+        "Registry anomalies are only caused by malware and never by legitimate software."
+      ],
+      "ans": 0,
+      "exp": "Saída inesperada de processos (unexpected output) — como mensagens de erro anômalas, saída em formato estranho ou dados sendo escritos em canais não padronizados — pode indicar atividade de malware, como keylogging, captura de tela ou comunicação C2. É um indicador de host importante.",
+      "w": [
+        "Alterações no registro (registry anomalies) podem sim ser causadas por updates legítimos de software.",
+        "Saída inesperada pode ter várias causas, incluindo malware e erros de software legítimo.",
+        "Registry anomalies podem ser causadas tanto por malware quanto por instalações/atualizações legítimas."
+      ]
+    },
+    {
+      "t": "Varreduras para Rogue Devices",
+      "q": "A company's security team recently discovered an unknown device connected to their network, and they suspect it could be a rogue device. The team wants to conduct scans and sweeps to locate and remove any unauthorized devices on the network. Which of the following are common types of scans or sweeps the team can use to locate rogue devices in the network? (Select the two best options.)",
+      "opts": [
+        "Active scanning — sending probes (ARP, ICMP) to discover responsive devices",
+        "Passive scanning — monitoring traffic to identify devices without sending probes",
+        "Web application scanning — testing web apps for vulnerabilities",
+        "Vulnerability scanning — checking for CVEs on discovered devices"
+      ],
+      "ans": 1,
+      "exp": "Passive scanning monitora o tráfego da rede para identificar dispositivos por seus endereços MAC, IP e tráfego gerado, sem enviar pacotes. É útil para detectar dispositivos que podem não responder a varreduras ativas (ex: configurados para ignorar ICMP).",
+      "w": [
+        "Active scanning é o outro método principal, mas passive scanning é igualmente válido.",
+        "Vulnerability scanning avalia segurança de dispositivos já conhecidos, não descobre rogue devices.",
+        "Web scanning foca em aplicações web, não em descoberta de dispositivos na rede."
+      ]
+    },
+    {
+      "t": "Revisão de Contas e Privilégios",
+      "q": "A security analyst discovers that unauthorized privileges have been granted to a new account that was created with high-level access, which was not authorized by the security team. Which of the following is the most effective way to identify and disable new accounts with unauthorized privileges in an organization's environment?",
+      "opts": [
+        "Rely solely on the antivirus software to detect privilege escalation",
+        "Regularly review and audit user accounts to identify and disable any unused or unneeded accounts",
+        "Disable all new accounts created in the last 30 days without investigation",
+        "Wait for users to report suspicious activity on their accounts"
+      ],
+      "ans": 1,
+      "exp": "Revisões e auditorias regulares de contas de usuário (user account reviews) são a forma mais eficaz de identificar contas não autorizadas ou com privilégios excessivos. Revisões periódicas, combinadas com ferramentas de Identity Governance and Administration (IGA), permitem detectar anomalias como criação de contas não aprovadas.",
+      "w": [
+        "Aguardar denúncias de usuários é reativo; contas maliciosas podem operar por meses sem denúncia.",
+        "Desabilitar todas as contas novas sem investigação pode bloquear contas legítimas.",
+        "Antivírus não detecta criação de contas administrativas não autorizadas."
+      ]
+    },
+    {
+      "t": "Evasão de Antivírus",
+      "q": "A security analyst discovers a malicious process running on one of the servers exfiltrating data to an external IP address. The process has not been detected by the antivirus software. Which of the following is the most likely reason that the malicious process was able to exfiltrate data undetected by the antivirus software?",
+      "opts": [
+        "The malicious process was disguised as a legitimate system file.",
+        "The antivirus software was not properly installed on the server.",
+        "The antivirus definitions were updated only one hour before the detection.",
+        "The malicious process was running from a USB drive instead of the hard disk."
+      ],
+      "ans": 0,
+      "exp": "Técnicas de evasão como disfarçar o processo malicioso como um arquivo legítimo do sistema (ex: svchost.exe, lsass.exe, explorer.exe) ou usar técnicas como process hollowing e DLL injection permitem que malware passe despercebido por antivírus baseados em assinatura, que confiam em processos legítimos.",
+      "w": [
+        "O problema é evasão, não falta de instalação; o antivírus está presente mas foi enganado.",
+        "Definições atualizadas há 1 hora são recentes; o malware usa ofuscação, não desatualização.",
+        "Executar de USB não impede detecção; a evasão está no disfarce do processo."
+      ]
+    },
+    {
+      "t": "Consumo de Disco e Malware",
+      "q": "A company's IT security team discovers that one of their servers is experiencing a significant increase in drive capacity consumption. Upon investigating, the team identifies several malicious processes running in the background. Which of the following best explains the relationship between drive capacity consumption and malicious processes in this scenario?",
+      "opts": [
+        "The malicious processes are causing the server to use up more drive capacity than usual, potentially for data exfiltration purposes.",
+        "The drive consumption increase is a coincidence and unrelated to the malicious processes.",
+        "The malicious processes are compressing data to free up disk space.",
+        "The increased drive consumption is caused by Windows updates running in parallel."
+      ],
+      "ans": 0,
+      "exp": "Processos maliciosos podem consumir capacidade de disco de várias formas: armazenando dados roubados antes da exfiltração, criando cópias de arquivos para exfiltração, baixando payloads adicionais, ou usando o disco para mineração de criptomoedas (temp files). O aumento anormal de consumo de disco é um indicador de host relevante.",
+      "w": [
+        "Windows Updates não causam aumento contínuo e progressivo de consumo de disco.",
+        "A correlação temporal entre processos maliciosos e aumento de disco sugere causalidade.",
+        "Malware geralmente consome mais disco, não libera; compressão é rara como efeito colateral."
+      ]
+    },
+    {
+      "t": "Tráfego em Porta Inesperada",
+      "q": "A security analyst at a large financial institution monitors network traffic for any unusual activity. The analyst notices an unusual spike in network traffic occurring on an unexpected port, indicating possible malicious activity. Which of the following actions should the analyst take in response to this anomalous activity? (Select the two best options.)",
+      "opts": [
+        "Block the unexpected port on all firewalls immediately",
+        "Alert the manager and other relevant parties about the anomalous activity",
+        "Investigate the traffic to determine its source and destination",
+        "Reboot the server generating the traffic to stop the activity"
+      ],
+      "ans": 2,
+      "exp": "Investigar a origem (IP/host de origem, processo responsável) e destino (IP externo, geolocalização, reputação) do tráfego é a primeira ação crítica. Isso determina se o tráfego é legítimo (ex: aplicação usando porta não padrão) ou malicioso (ex: backdoor, C2).",
+      "w": [
+        "Alertar a gerência é importante após a investigação, mas entender o tráfego vem primeiro.",
+        "Bloquear porta sem investigação pode quebrar aplicações legítimas configuradas em portas não padrão.",
+        "Reboot pode destruir evidências e não remove o acesso do atacante se ele tiver persistência."
+      ]
+    },
+    {
+      "t": "Beaconing e Processos Maliciosos",
+      "q": "A security analyst notices anomalous network activity on a system. A user's computer is communicating with a command and control (C2) server. Which of the following concepts are relevant to the security analyst's investigation into the compromised system? (Select the two best options.)",
+      "opts": [
+        "Beaconing — periodic communication between compromised host and C2 server",
+        "Malicious processes — processes on the host responsible for establishing C2 communication",
+        "Data at rest encryption — encrypting stored data to protect against theft",
+        "Patch management — ensuring all security updates are applied"
+      ],
+      "ans": 0,
+      "exp": "Beaconing é o mecanismo pelo qual malware se comunica periodicamente com o servidor C2, geralmente em intervalos regulares, para receber instruções ou exfiltrar dados. Identificar o padrão de beaconing (intervalos, dados transmitidos, protocolo) é crucial para a investigação.",
+      "w": [
+        "Processos maliciosos no host são responsáveis por iniciar e manter a comunicação C2, complementando a análise de beaconing.",
+        "Criptografia de dados em repouso não está relacionada à comunicação C2 ativa.",
+        "Patch management é importante, mas não ajuda a investigar C2 ativo no momento."
+      ]
+    },
+    {
+      "t": "Consumo de Memória",
+      "q": "A security analyst is conducting security operations for a company's network and notices that some users have complained about slow performance and high memory consumption on their devices. Which of the following is a potential cause of high memory consumption?",
+      "opts": [
+        "Using the latest version of the operating system",
+        "Running regular antivirus scans during business hours",
+        "Connecting the device to a wired network connection",
+        "Installing software from unverified sources"
+      ],
+      "ans": 3,
+      "exp": "Software de fontes não verificadas frequentemente contém malware, adware ou bloatware que consomem memória excessiva. Programas maliciosos podem executar processos em background (mineração, keylogging, C2) que aumentam significativamente o uso de memória, causando lentidão no dispositivo.",
+      "w": [
+        "Última versão do SO é otimizada e não causa consumo excessivo de memória.",
+        "Antivírus scans consomem recursos momentaneamente, mas não causam consumo alto persistente.",
+        "Conexão cabeada não afeta consumo de memória."
+      ]
+    }
+  ],
+  "1.3": [
+    {
+      "t": "Sandbox / Malware Analysis",
+      "q": "A security analyst is looking for the appropriate tools to detect and analyze malware in the organization's network. What tools allow the analyst to detect and analyze malware through virtualized environments? (Select the two best options.)",
+      "opts": [
+        "Cuckoo Sandbox — open-source automated malware analysis in isolated virtual environments",
+        "Nmap — network discovery and port scanning tool",
+        "Joe Sandbox — commercial deep malware analysis platform using sandboxing",
+        "Wireshark — network packet capture and analysis tool"
+      ],
+      "ans": 0,
+      "exp": "Cuckoo Sandbox é uma ferramenta open-source que executa arquivos suspeitos em ambiente virtualizado isolado, monitorando chamadas de sistema, tráfego de rede e modificações no sistema para detectar comportamento malicioso. É a ferramenta mais conhecida para análise automatizada de malware em sandbox.",
+      "w": [
+        "Joe Sandbox também faz análise em sandbox mas é comercial; Cuckoo é a referência open-source.",
+        "Nmap descobre dispositivos e serviços na rede, não analisa malware em ambiente virtualizado.",
+        "Wireshark captura pacotes de rede, não executa malware em sandbox para análise comportamental."
+      ]
+    },
+    {
+      "t": "Segurança de E-mail",
+      "q": "The IT team at a company wants to implement additional security measures to prevent recent phishing attempts against their employees. The team will use Domain-based Message Authentication, Reporting and Conformance (DMARC), Sender Policy Framework (SPF), and DomainKeys Identified Mail (DKIM) to secure the email system. Which of the following statements is true regarding DMARC, SPF, and DKIM in the context of email security operations?",
+      "opts": [
+        "DMARC alone is sufficient to block all phishing attacks without SPF or DKIM.",
+        "DMARC, SPF, and DKIM are all email security protocols that use digital signatures and domain verification to authenticate emails and prevent spoofing.",
+        "SPF and DKIM only work for outgoing emails and have no effect on incoming messages.",
+        "DMARC is a hashing algorithm used to encrypt email content in transit."
+      ],
+      "ans": 1,
+      "exp": "DMARC, SPF e DKIM são protocolos complementares de autenticação de e-mail. SPF verifica se o servidor remetente está autorizado a enviar e-mails para o domínio. DKIM adiciona uma assinatura digital que garante integridade da mensagem. DMARC utiliza ambos para definir políticas de tratamento quando a autenticação falha.",
+      "w": [
+        "DMARC depende de SPF e DKIM; não funciona sem eles.",
+        "SPF e DKIM protegem contra spoofing de domínio tanto em recebimento quanto envio.",
+        "DMARC não é um algoritmo de hash; é uma política de autenticação que usa SPF e DKIM."
+      ]
+    },
+    {
+      "t": "Atividade Anômala de Conta",
+      "q": "The system administrator of a large organization notices abnormal account activity and a high volume of outbound traffic to a suspicious IP address from a client machine. Which of the following best describes the abnormal account activity in this scenario?",
+      "opts": [
+        "The account was used to send a large number of internal emails",
+        "The account was locked out due to incorrect password attempts",
+        "The account password was changed multiple times in one day",
+        "Unusual user account behavior, such as logging in at unusual times or from unusual locations"
+      ],
+      "ans": 3,
+      "exp": "Atividade anômala de conta inclui logons em horários atípicos (madrugada, fins de semana), de localizações geográficas incomuns, ou de dispositivos não reconhecidos. Combinado com tráfego de saída suspeito, sugere fortemente comprometimento da conta (credenciais roubadas).",
+      "w": [
+        "Troca de senha múltipla pode ser legítima ou não, mas não é o melhor indicador de atividade anômala.",
+        "Lockout por senhas incorretas pode ser erro do usuário, não necessariamente anômalo.",
+        "Envio de e-mails internos em volume é mais sugestivo de malware ou spam interno, não de conta comprometida."
+      ]
+    },
+    {
+      "t": "SIEM — Indicadores Maliciosos",
+      "q": "An analyst is reviewing alerts in the security information and events manager (SIEM). Which of the following might lead them to suspect there has been malicious activity?",
+      "opts": [
+        "A user logging in during normal business hours from the office",
+        "A scheduled backup completing successfully",
+        "An antivirus signature update being downloaded",
+        "Reverse shell — a connection initiated from the target system back to the attacker"
+      ],
+      "ans": 3,
+      "exp": "Reverse shell é uma conexão estabelecida de um sistema comprometido de volta para o atacante, permitindo que ele execute comandos remotamente. É um forte indicador de comprometimento (backdoor/C2) e um alerta clássico em SIEMs quando detectado.",
+      "w": [
+        "Backup bem-sucedido é evento operacional normal, não malicioso.",
+        "Login em horário comercial do escritório é comportamento normal.",
+        "Atualização de assinatura de antivírus é atividade legítima de segurança."
+      ]
+    },
+    {
+      "t": "Honeypots / Deception",
+      "q": "A network engineer is gathering requirements from a security operations center (SOC) analyst. Which of the following requirements might lead the engineer to suggest deploying a honeypot? (Select the two best options.)",
+      "opts": [
+        "The organization needs to reduce power consumption in the data center.",
+        "The organization needs to regularly develop new indicators of compromise (IoCs) and indicators of attack (IoAs) based on the attacks they are experiencing.",
+        "Network defenders need the ability to observe attacks on the network in real time.",
+        "The organization needs to increase internet bandwidth for employees."
+      ],
+      "ans": 2,
+      "exp": "Honeypots são sistemas isca projetados para atrair atacantes e permitir que defensores observem táticas, técnicas e procedimentos (TTPs) em tempo real. Ao analisar como os atacantes interagem com o honeypot, a equipe de segurança coleta inteligência sobre novas ameaças.",
+      "w": [
+        "Honeypots geram novos IoCs e IoAs ao capturar atividades de atacantes reais, alimentando a inteligência.",
+        "Honeypots consomem recursos extras, não reduzem consumo de energia.",
+        "Honeypots não têm impacto na largura de banda da internet."
+      ]
+    },
+    {
+      "t": "Perícia Digital Forense",
+      "q": "A security analyst notices abnormal account activity in the company's system. Someone accessed the system with the CEO's credentials at 2:00 am from a location 500 miles away from the CEO's usual location. The analyst tracks the IP address, GPS address, and device that accessed the system. Which security operation technique did the analyst use to determine the location and device of the user who accessed the system?",
+      "opts": [
+        "Patch management — applying updates to fix security flaws",
+        "Penetration testing — simulating attacks to test defenses",
+        "Digital forensics — collecting and analyzing digital evidence to determine the source and method of access",
+        "Vulnerability scanning — identifying weaknesses in the system"
+      ],
+      "ans": 2,
+      "exp": "Perícia digital forense (digital forensics) envolve a coleta, preservação e análise de evidências digitais para investigar incidentes. Rastrear IP, geolocalização e dispositivo usado para acessar o sistema é uma atividade forense típica para determinar a origem e o método de acesso não autorizado.",
+      "w": [
+        "Vulnerability scanning identifica vulnerabilidades, não investiga acesso já ocorrido.",
+        "Penetration testing testa defesas proativamente, não investiga incidentes passados.",
+        "Patch management é preventivo, não investigativo."
+      ]
+    },
+    {
+      "t": "SIEM e EDR",
+      "q": "A cybersecurity analyst has noticed an increase in suspicious activity on the network. They consider implementing a security information and event management (SIEM) solution and endpoint detection and response (EDR) solution to help identify and respond to potential threats. What is a potential benefit of implementing both a SIEM and EDR solution in a security operations environment?",
+      "opts": [
+        "SIEM can monitor and correlate events across multiple systems to identify potential security incidents, while EDR can provide deep visibility into endpoint activity to detect and respond to advanced threats.",
+        "EDR can replace SIEM entirely since it monitors both network and endpoints.",
+        "SIEM replaces the need for EDR because it already collects endpoint logs.",
+        "SIEM and EDR are redundant; implementing both provides no additional benefit."
+      ],
+      "ans": 0,
+      "exp": "SIEM e EDR são complementares. O SIEM agrega e correlaciona logs de múltiplas fontes (firewalls, servidores, aplicações) para detecção em toda a rede. O EDR foca nos endpoints, monitorando processos, conexões, registros e arquivos em tempo real para detectar ameaças avançadas que o SIEM pode não ver.",
+      "w": [
+        "SIEM e EDR são complementares, não redundantes; cada um cobre uma camada diferente.",
+        "SIEM coleta logs, mas não tem a visibilidade profunda do endpoint que o EDR oferece.",
+        "EDR foca em endpoints, não substitui a correlação multi-sistema do SIEM."
+      ]
+    },
+    {
+      "t": "Packet Capture — Wireshark e tcpdump",
+      "q": "A company assigns a security analyst to monitor the network traffic and identify any potential security breaches. The analyst is debating between using Wireshark or tcpdump to analyze the network packets for unusual network activity. Which of the following statements about Wireshark and tcpdump is true?",
+      "opts": [
+        "Wireshark can only analyze packets in real time, while tcpdump works only with saved captures.",
+        "Wireshark is a graphical user interface tool, while tcpdump is a command-line tool.",
+        "tcpdump can only capture packets on Windows systems, while Wireshark works on all platforms.",
+        "tcpdump has a built-in intrusion detection system, while Wireshark does not."
+      ],
+      "ans": 1,
+      "exp": "Wireshark oferece interface gráfica (GUI) com análise visual de pacotes, filtros interativos e decodificação de protocolos. tcpdump é uma ferramenta de linha de comando (CLI) leve, ideal para captura remota ou em servidores sem interface gráfica. Ambos capturam e analisam pacotes.",
+      "w": [
+        "tcpdump funciona em Unix/Linux/macOS, não apenas Windows. Wireshark funciona em múltiplas plataformas.",
+        "Ambos podem capturar em tempo real e analisar capturas salvas.",
+        "Nenhum dos dois é IDS; são ferramentas de captura e análise de pacotes."
+      ]
+    },
+    {
+      "t": "Sandbox / Malware Analysis",
+      "q": "A security analyst needs to select an appropriate tool to detect and analyze malware in an organization's network. The analyst needs to decide which tool is best for detecting and analyzing malware through virtualized environments. Which of the following tools can be used to detect and analyze malware through virtualized environments?",
+      "opts": [
+        "tcpdump",
+        "Wireshark",
+        "Nmap",
+        "Cuckoo Sandbox"
+      ],
+      "ans": 3,
+      "exp": "Cuckoo Sandbox é a ferramenta mais conhecida para análise automatizada de malware em ambiente virtualizado. Ela executa arquivos suspeitos em uma VM isolada, monitora chamadas de API, tráfego de rede, modificações no sistema de arquivos e registro, e gera um relatório detalhado do comportamento.",
+      "w": [
+        "Nmap é ferramenta de descoberta de rede e varredura de portas, não de análise de malware.",
+        "Wireshark captura pacotes de rede, não executa malware em ambiente controlado.",
+        "tcpdump captura pacotes via CLI, não analisa comportamento de malware."
+      ]
+    },
+    {
+      "t": "SOAR vs SIEM",
+      "q": "An analyst working for a financial institution has implemented both security orchestration, automation, and response (SOAR) and security information and events manager (SIEM) solutions to enhance their security posture. The analyst receives an alert from the SIEM solution about a potential security threat, and the SOAR solution is triggered to respond to the incident. What is the key difference between SOAR and SIEM solutions in a security operations environment, as shown in the scenario above?",
+      "opts": [
+        "Both SIEM and SOAR perform the same functions and are interchangeable.",
+        "SIEM automates incident response, while SOAR collects and analyzes log data.",
+        "SOAR solutions are for automated incident response, while SIEM solutions are for collecting and analyzing security data.",
+        "SOAR replaces SIEM entirely by combining log collection and automated response in one tool."
+      ],
+      "ans": 2,
+      "exp": "SIEM (Security Information and Event Management) coleta, normaliza, correlaciona e analisa logs de múltiplas fontes para detectar ameaças. SOAR (Security Orchestration, Automation and Response) recebe alertas (do SIEM ou outras fontes) e executa playbooks automatizados de resposta, como isolamento de hosts, bloqueio de IPs e abertura de tickets.",
+      "w": [
+        "É o oposto: SIEM coleta/analisa, SOAR automatiza resposta.",
+        "São complementares, não intercambiáveis; cada um tem função distinta.",
+        "SOAR depende do SIEM para detecção; não o substitui."
+      ]
+    },
+    {
+      "t": "Segurança de E-mail — SPF e DKIM",
+      "q": "A cybersecurity analyst for a small company ensures the company's email security by configuring Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM). The analyst needs to explain to other employees how SPF and DKIM work together. Which of the following statements correctly explain the role of SPF and DKIM in securing email communications? (Select the two best options.)",
+      "opts": [
+        "SPF encrypts email messages while DKIM compresses them for faster delivery.",
+        "SPF and DKIM are only used for outgoing marketing emails, not for internal communications.",
+        "SPF verifies the source IP address of incoming messages while DKIM verifies the message content.",
+        "SPF and DKIM together prevent email spoofing and ensure message authenticity."
+      ],
+      "ans": 2,
+      "exp": "SPF (Sender Policy Framework) verifica se o servidor de envio está autorizado no DNS do domínio remetente, validando o IP de origem. DKIM (DomainKeys Identified Mail) adiciona uma assinatura digital ao cabeçalho, permitindo que o destinatário verifique se o conteúdo não foi alterado em trânsito (integridade).",
+      "w": [
+        "Juntos, SPF (valida origem) e DKIM (valida conteúdo) previnem spoofing de e-mail e garantem autenticidade.",
+        "Nem SPF nem DKIM criptografam ou comprimem mensagens; isso é função de TLS/SMTP.",
+        "SPF e DKIM se aplicam a todos os e-mails do domínio, não apenas marketing."
+      ]
+    },
+    {
+      "t": "Análise de E-mail — Hash",
+      "q": "During an investigation of a suspected phishing attack, a cybersecurity analyst finds an email that includes an attachment and a series of unfamiliar characters. What is the significance of this string of characters?",
+      "opts": [
+        "A hash value — a unique digital fingerprint of the attachment used to identify known malware samples",
+        "A serial number assigned by the email server",
+        "A password needed to open the attachment",
+        "An encryption key used to decode the attachment content"
+      ],
+      "ans": 0,
+      "exp": "O hash (MD5, SHA1, SHA256) é uma representação hexadecimal única do conteúdo do anexo. Analistas usam hashes para verificar se um arquivo é conhecido como malicioso, consultando bancos como VirusTotal. Mesmo que o nome do arquivo mude, o hash permanece o mesmo para conteúdo idêntico.",
+      "w": [
+        "Hash não é chave de criptografia; é uma impressão digital do conteúdo.",
+        "Hash não é senha; é um valor gerado por função hash unilateral.",
+        "Hash não é número de série; é calculado do conteúdo do arquivo."
+      ]
+    },
+    {
+      "t": "Packet Capture — tcpdump e Wireshark",
+      "q": "A security analyst investigates a suspected network attack on a company's server. The analyst needs to capture and analyze network traffic to identify the source and type of attack. The analyst decides to use tcpdump and Wireshark for the analysis. Which of the following statements is true about tcpdump and Wireshark when used for network traffic analysis in a security investigation?",
+      "opts": [
+        "tcpdump cannot save packet captures to files, while Wireshark saves captures automatically.",
+        "tcpdump is only used for wireless networks, while Wireshark is only for wired networks.",
+        "Tcpdump and Wireshark are both network traffic capture and analysis tools that identify the source and type of an attack.",
+        "Wireshark captures packets at layer 7 only, while tcpdump captures at layer 3."
+      ],
+      "ans": 2,
+      "exp": "Ambas são ferramentas de captura e análise de tráfego de rede. tcpdump captura pacotes via CLI e é ideal para servidores remotos. Wireshark oferece análise visual detalhada com decodificação de protocolos. Juntas, permitem identificar origem (IP, MAC) e tipo de ataque (DDoS, scanning, exploit).",
+      "w": [
+        "Ambas funcionam em redes cabeadas e sem fio igualmente.",
+        "Ambas capturam em múltiplas camadas (2 a 7 do modelo OSI).",
+        "Ambas salvam capturas em arquivos (pcap) para análise posterior."
+      ]
+    },
+    {
+      "t": "Segurança de E-mail — SPF",
+      "q": "A security analyst working for a large financial institution is implementing Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM) to improve email security for the company. The analyst's company has decided to implement SPF and DKIM to improve email security. Which of the following statements best describes SPF?",
+      "opts": [
+        "SPF is a replacement for TLS encryption in email transport.",
+        "SPF encrypts email messages end-to-end between sender and recipient.",
+        "SPF is an email authentication method that detects forged sender addresses in emails.",
+        "SPF compresses attachments to reduce email storage usage."
+      ],
+      "ans": 2,
+      "exp": "SPF (Sender Policy Framework) é um método de autenticação de e-mail que permite ao domínio remetente publicar uma lista de servidores autorizados a enviar e-mails em seu nome. O servidor de destino consulta o registro SPF no DNS para verificar se o IP de origem é legítimo, detectando tentativas de spoofing.",
+      "w": [
+        "SPF não criptografa mensagens; criptografia é função de TLS ou PGP.",
+        "SPF não comprime anexos; é um registro DNS de autenticação.",
+        "SPF não substitui TLS; são tecnologias diferentes e complementares."
+      ]
+    },
+    {
+      "t": "Ameaças de E-mail — Cousin Domain",
+      "q": "A user alerts the incident response team to an email that comes from a domain very similar to the company's legitimate domain. What appears to have been used in this attempted impersonation?",
+      "opts": [
+        "Spoofed header — forged email headers to impersonate the sender",
+        "Whaling — phishing attack specifically targeting senior executives",
+        "Spear phishing — targeted email attack using personal information about the victim",
+        "Cousin domain — a domain name that is visually similar to the legitimate domain and used for phishing"
+      ],
+      "ans": 3,
+      "exp": "Cousin domain (ou domínio primo) é uma técnica onde o atacante registra um domínio com nome muito similar ao legítimo (ex: cornpany.com em vez de company.com, ou usando typosquatting). O e-mail parece vir do domínio real, mas na verdade é de um domínio fraudulento.",
+      "w": [
+        "Spear phishing refere-se à segmentação personalizada, não ao uso de domínio similar.",
+        "Whaling é phishing direcionado a executivos, independente da técnica de domínio.",
+        "Spoofed header forja cabeçalhos existentes; cousin domain cria novo domínio similar."
+      ]
+    },
+    {
+      "t": "Segurança de E-mail — DMARC",
+      "q": "A cybersecurity analyst for a large financial services company reviews the company's email security controls and is concerned about the risk of phishing attacks. The analyst decides to implement Domain-based Message Authentication, Reporting, and Conformance (DMARC) to better protect the company's email domain. Which of the following best describes the correlation between embedded links and DMARC?",
+      "opts": [
+        "DMARC automatically blocks all emails containing embedded links.",
+        "DMARC verifies the authenticity of embedded links by checking the sender's domain against the DMARC record.",
+        "DMARC has no effect on embedded links; it only verifies the sender's domain.",
+        "DMARC replaces all embedded links with secure versions."
+      ],
+      "ans": 1,
+      "exp": "DMARC (Domain-based Message Authentication, Reporting & Conformance) utiliza SPF e DKIM para autenticar o domínio remetente. Quando um e-mail contém links, o DMARC verifica se o domínio do remetente está autenticado e, se falhar, aplica a política configurada (quarentena ou rejeição). Isso reduz phishing com links maliciosos.",
+      "w": [
+        "DMARC não bloqueia todos os e-mails com links; bloqueia e-mails não autenticados do domínio.",
+        "DMARC afeta links indiretamente ao autenticar o remetente; links em e-mails não autenticados são mais suspeitos.",
+        "DMARC não modifica links dentro de e-mails."
+      ]
+    },
+    {
+      "t": "Ferramentas de Script — Nmap",
+      "q": "An analyst needs to use Nmap to identify workstations with a specific service running on port 8080. What type of script would be best for automating this task?",
+      "opts": [
+        "PowerShell script — Windows-specific scripting language for system administration",
+        "Python script — a general-purpose programming language for complex automation",
+        "Shell script — a command-line script that can execute Nmap commands across multiple targets",
+        "JavaScript — a web programming language used for browser-based applications"
+      ],
+      "ans": 2,
+      "exp": "Shell script (bash/sh) é a forma mais direta e eficiente de automatizar comandos Nmap em sistemas Unix/Linux. Um simples loop em shell pode executar Nmap contra uma lista de IPs e extrair resultados. Embora Python ou PowerShell também funcionem, shell script é a escolha mais leve e nativa para automação de comandos.",
+      "w": [
+        "Python é mais adequado para automação complexa com parsing de resultados, mas shell script é mais simples para execução direta de Nmap.",
+        "PowerShell funciona no Windows, mas Nmap é mais comumente usado em Linux.",
+        "JavaScript não é usado para automação de shell/Nmap."
+      ]
+    },
+    {
+      "t": "Ferramentas de Investigação — WHOIS e AbuseIPDB",
+      "q": "A security analyst for a large financial institution investigates a suspicious IP address that their security system flagged. The analyst finds two useful resources, WHOIS and AbuseIPDB. Which of the following best describes the role of WHOIS and AbuseIPDB in security operations?",
+      "opts": [
+        "WHOIS scans the IP for vulnerabilities, while AbuseIPDB blocks the IP automatically.",
+        "WHOIS is a firewall rule database, while AbuseIPDB is a DNS service.",
+        "Both tools serve the same function: they identify the geographic location of an IP address.",
+        "WHOIS identifies the owner and registrar of an IP address or domain, while AbuseIPDB provides reputation data and abuse reports for IP addresses."
+      ],
+      "ans": 3,
+      "exp": "WHOIS consulta bases de registro para identificar o proprietário, provedor e data de criação de um IP ou domínio. AbuseIPDB é um banco colaborativo de reputação de IPs, onde analistas reportam e consultam atividades maliciosas associadas a cada endereço. Juntos ajudam a determinar se um IP é suspeito.",
+      "w": [
+        "Nenhum dos dois faz varredura de vulnerabilidades ou bloqueio automático.",
+        "WHOIS é banco de registro, AbuseIPDB é banco de reputação colaborativo.",
+        "WHOIS fornece dados de propriedade, não apenas geolocalização; AbuseIPDB fornece reputação, não localização."
+      ]
+    },
+    {
+      "t": "Python — Comando strings",
+      "q": "A security analyst at a large financial institution monitors the network for any suspicious activity and finds a log file that appears to have been tampered with. Using the strings command in Python, what will the analyst be able to extract?",
+      "opts": [
+        "Only the file metadata and timestamps",
+        "Only numerical data and IP addresses from the file",
+        "Both strings and binary data — the strings command extracts readable text sequences from binary files",
+        "Only encrypted content that has been decrypted automatically"
+      ],
+      "ans": 2,
+      "exp": "O comando `strings` (presente em Python via bibliotecas como `string` ou `binascii`) extrai sequências de caracteres legíveis (ASCII/Unicode) de arquivos binários. Isso é útil em forense para extrair URLs, IPs, nomes de arquivos e outras strings de executáveis, logs binários ou memória capturada.",
+      "w": [
+        "Strings extrai texto legível, não apenas números ou IPs.",
+        "Strings extrai conteúdo textual, não metadados ou timestamps (isso é função de outras ferramentas).",
+        "Strings não descriptografa conteúdo; extrai texto que já está legível no binário."
+      ]
+    },
+    {
+      "t": "Python — Expressões Regulares",
+      "q": "A security analyst is developing a Python script to analyze regular text from log files. The script will identify potential security incidents and generate alerts for further investigation. Which of the following best describes the security concept the analyst needs to implement in the Python script to detect obfuscated text? (Select the two best options.)",
+      "opts": [
+        "Regular expression — pattern matching to detect obfuscated text patterns in logs",
+        "Encryption algorithm — decrypting obfuscated text before analysis",
+        "Machine learning algorithm — training a model on historical attack data",
+        "String manipulation — modifying and analyzing text content programmatically"
+      ],
+      "ans": 0,
+      "exp": "Expressões regulares (regex) permitem definir padrões de busca para detectar texto ofuscado, como codificação hexadecimal, Base64, caracteres especiais ou padrões suspeitos em logs. Por exemplo, regex pode detectar strings como 'eval(base64_decode(...))' ou 'powershell -enc &lt;base64&gt;'.",
+      "w": [
+        "String manipulation complementa regex para processar o texto extraído.",
+        "Machine learning é desnecessário para detectar ofuscação conhecida; regex é mais direto.",
+        "Ofuscação não é criptografia; não requer decriptação, apenas reconhecimento de padrão."
+      ]
+    },
+    {
+      "t": "PowerShell vs Shell Script",
+      "q": "A security analyst needs to automate tasks efficiently in a mixed environment with both Windows and Unix-based systems. Given the broad applicability of scripting tools across different platforms, which of the following statements accurately highlights the critical distinctions between PowerShell and shell scripts that an analyst must consider when developing automation scripts?",
+      "opts": [
+        "PowerShell and shell scripts have identical syntax but different file extensions.",
+        "Both PowerShell and shell scripts are used for automation, but they differ in syntax and are not interchangeable.",
+        "Shell scripts can run on Windows without any modifications through Command Prompt.",
+        "PowerShell scripts can run on Linux without any modifications, exactly as on Windows."
+      ],
+      "ans": 1,
+      "exp": "PowerShell (Windows) e shell scripts (bash/sh no Linux/Unix) são ambas linguagens de script para automação, mas têm sintaxe, cmdlets e paradigmas diferentes. PowerShell usa cmdlets Verbo-Substantivo (Get-Process) e objetos .NET; shell scripts usam comandos Unix, pipes e texto. Não são intercambiáveis sem modificação.",
+      "w": [
+        "PowerShell Core roda no Linux mas scripts Windows podem precisar adaptações.",
+        "Shell scripts não rodam nativamente no Windows sem WSL ou Cygwin.",
+        "Sintaxes são completamente diferentes; PowerShell não usa #!/bin/bash."
+      ]
+    },
+    {
+      "t": "Hashing em Segurança",
+      "q": "A cybersecurity analyst is investigating a potential phishing attack against one of their clients and finds an email with an attachment and a long string of characters the analyst does not recognize. What is this long string of characters?",
+      "opts": [
+        "A hash value — a fixed-length string generated by a hashing algorithm that uniquely represents the attachment content",
+        "A digital signature created by the email server",
+        "The IP address of the sender encoded in hexadecimal",
+        "The encryption key used to encrypt the attachment"
+      ],
+      "ans": 0,
+      "exp": "O hash (ex: MD5: 3fc0a7acf087f549ac2b266baf94b8b1) é um valor de comprimento fixo gerado por uma função hash unidirecional. O analista pode usar este hash para consultar bases de inteligência (VirusTotal) e verificar se o anexo é um malware conhecido, sem precisar abrir o arquivo.",
+      "w": [
+        "Hash não é chave; funções hash são unidirecionais e não podem decriptar dados.",
+        "Hash não é assinatura digital; assinatura usa criptografia assimétrica.",
+        "Hash não é endereço IP; é uma representação do conteúdo."
+      ]
+    },
+    {
+      "t": "JSON vs XML",
+      "q": "A security analyst is writing a script to automate security operations. However, the analyst is confused about which data format to use for the script: JSON or XML. Which data format should the analyst use for the script?",
+      "opts": [
+        "XML — more verbose but provides schema validation and namespaces",
+        "JSON — lightweight, human-readable, and natively supported by most programming languages",
+        "Both JSON and XML are inappropriate for automation scripts",
+        "CSV — simpler than both JSON and XML for structured data"
+      ],
+      "ans": 1,
+      "exp": "JSON (JavaScript Object Notation) é o formato de dados mais recomendado para scripts de automação: é leve, legível, suporta tipos de dados nativos (strings, números, arrays, objetos) e é nativamente interpretado por Python, JavaScript e muitas outras linguagens sem bibliotecas adicionais.",
+      "w": [
+        "XML é mais verboso e requer parsing mais complexo, mas tem vantagens como validação XSD.",
+        "Ambos são apropriados; JSON é preferível para simplicidade e desempenho.",
+        "CSV é limitado para dados hierárquicos ou complexos comuns em segurança."
+      ]
+    },
+    {
+      "t": "PowerShell e XML",
+      "q": "A security analyst at a financial institution plans to use PowerShell and XML to secure an organization's servers. What is the primary purpose of using XML in this context, and how can PowerShell help in securing the servers?",
+      "opts": [
+        "XML is a scripting language for automating security tasks, while PowerShell is a data format.",
+        "XML is used to compile PowerShell scripts into executable binaries for faster execution.",
+        "XML replaces the need for PowerShell because it can directly execute system commands.",
+        "XML provides a common format for exchanging data between systems, while PowerShell helps automate server hardening and configuration tasks."
+      ],
+      "ans": 3,
+      "exp": "XML (eXtensible Markup Language) é um formato de dados estruturados usado para troca de configurações, políticas e relatórios entre sistemas. PowerShell pode ler, manipular e gerar XML para configurar servidores (ex: IIS configs, Group Policy), além de automatizar hardening (desabilitar serviços, aplicar baselines).",
+      "w": [
+        "XML é formato de dados; PowerShell é a linguagem de script que o processa.",
+        "XML não é compilador; PowerShell executa scripts .ps1 diretamente.",
+        "XML é passivo (dados), não executa comandos; PowerShell é o motor de automação."
+      ]
+    },
+    {
+      "t": "Hashing e Cabeçalhos",
+      "q": "A cybersecurity analyst develops a new security protocol that utilizes hashing and headers to enhance the security of the company's data transmissions. Which of the following correctly explains the role of hashing and headers in enhancing security operations?",
+      "opts": [
+        "Hashing and headers serve the same purpose: both verify the integrity of data packets.",
+        "Headers are used to store hashed passwords for user authentication.",
+        "Hashing encrypts data so only authorized parties can read it, while headers compress data for faster transmission.",
+        "Hashing generates unique digital representations of data, while headers add metadata to a message or data packet."
+      ],
+      "ans": 3,
+      "exp": "Hashing (SHA256, MD5) gera uma impressão digital única (hash) do conteúdo, permitindo verificar integridade: se o dado for alterado, o hash muda. Headers (cabeçalhos) adicionam metadados à transmissão (endereços IP, porta, protocolo, timestamp), essenciais para roteamento e contexto. São funções diferentes e complementares.",
+      "w": [
+        "Hashing não é criptografia; é unidirecional e não permite recuperar o dado original.",
+        "Headers contêm metadados de transmissão, não armazenam hashes de senhas (isso é função de banco de dados).",
+        "Hashing verifica integridade; headers fornecem metadados de roteamento — funções distintas."
+      ]
+    },
+    {
+      "t": "XML — Estrutura",
+      "q": "An analyst identifies a script on a compromised workstation. The analyst determines that the author has used meaningful opening and closing tags to identify data types. What scripting language is the analyst examining?",
+      "opts": [
+        "PowerShell — a Windows scripting language that uses cmdlets and pipelines",
+        "XML — eXtensible Markup Language uses custom opening and closing tags to structure data hierarchically",
+        "Python — a general-purpose programming language that uses indentation for code blocks",
+        "JSON — JavaScript Object Notation uses key-value pairs surrounded by curly braces"
+      ],
+      "ans": 1,
+      "exp": "XML é uma linguagem de marcação que usa tags de abertura e fechamento (&lt;tag&gt;...&lt;/tag&gt;) para estruturar dados de forma hierárquica. Os nomes das tags são significativos e descrevem o tipo de dado (&lt;usuario&gt;, &lt;ip&gt;, &lt;log&gt;). É comumente usado em configurações, logs estruturados e troca de dados entre sistemas.",
+      "w": [
+        "JSON usa chaves {} e colchetes [], não tags de abertura/fechamento.",
+        "Python não usa tags; usa indentação para blocos de código.",
+        "PowerShell não usa tags XML nativamente; usa cmdlets como Get-Process."
+      ]
+    }
+  ],
+  "1.4": [
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A malicious actor is combing through LinkedIn to find email addresses to target in an upcoming campaign. Which of the following terms describe this activity? (Select the three best options.)",
+      "opts": [
+        "OSINT collection — gathering publicly available information from open sources",
+        "Reconnaissance — the phase of gathering information about a target before launching an attack",
+        "Social media exploitation — using social media platforms to extract information about targets",
+        "Privilege escalation — gaining elevated access to systems and data"
+      ],
+      "ans": 1,
+      "exp": "Reconnaissance (reconhecimento) é a fase inicial de um ataque onde o ator coleta informações sobre o alvo para planejar os passos seguintes. Usar LinkedIn para encontrar e-mails é reconhecimento usando OSINT (Open-Source Intelligence) e exploração de mídias sociais (social media exploitation).",
+      "w": [
+        "OSINT collection é a técnica usada para coletar os dados abertos, mas reconhecimento é o termo mais amplo.",
+        "Social media exploitation descreve o uso específico de redes sociais para coleta.",
+        "Privilege escalation ocorre após o comprometimento inicial, não na fase de reconhecimento."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "Which of the following sources are potential sources of offensive open-source intelligence (OSINT)? (Select the three best options.)",
+      "opts": [
+        "HTML code — source code of websites that may contain comments, hidden fields, or developer notes",
+        "Metadata — hidden data in files (documents, images) that reveals authors, dates, and locations",
+        "Blogs and social media — publicly accessible platforms containing personal and professional information",
+        "Encrypted database — sensitive information protected by encryption and not publicly accessible"
+      ],
+      "ans": 2,
+      "exp": "Fontes ofensivas de OSINT incluem blogs e mídias sociais (informações públicas sobre pessoas e empresas), metadados de arquivos (metadados EXIF de fotos, metadados de documentos PDF/DOCX que revelam autores e versões) e código HTML (comentários, links ocultos, versões de software).",
+      "w": [
+        "Metadados são uma fonte rica de OSINT — fotos, documentos e PDFs contêm dados ocultos.",
+        "Código HTML de sites públicos é acessível e pode conter informações valiosas.",
+        "Bases de dados criptografadas não são acessíveis via OSINT."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "Which of the following provides cybersecurity information and services to the owners and operators of critical infrastructure?",
+      "opts": [
+        "ISACs (Information Sharing and Analysis Centers) — sector-specific organizations for threat intelligence sharing",
+        "CERT (Computer Emergency Response Team) — incident response team for handling cybersecurity emergencies",
+        "SOC (Security Operations Center) — internal team monitoring security events",
+        "CSIRT (Computer Security Incident Response Team) — internal team for incident response"
+      ],
+      "ans": 0,
+      "exp": "ISACs (Information Sharing and Analysis Centers) são organizações setoriais (financeiro, saúde, energia) que fornecem inteligência de ameaças, alertas e serviços para proprietários de infraestrutura crítica. Exemplos: FS-ISAC (financeiro), NH-ISAC (saúde), E-ISAC (energia).",
+      "w": [
+        "CERT é uma equipe de resposta a incidentes, não uma entidade de compartilhamento setorial.",
+        "CSIRT é a equipe interna de resposta, não é um ISAC.",
+        "SOC é o centro de operações de segurança interno."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A threat hunter is searching for malicious activity with information derived from the research of a third-party commercial entity. What kind of information is the threat hunter likely using?",
+      "opts": [
+        "Paid feed — commercially provided threat intelligence feed with curated indicators and analysis",
+        "Government bulletin — official cybersecurity alerts and directives from government agencies",
+        "ISAC feed — threat intelligence shared within a sector-specific information sharing group",
+        "OSINT feed — open-source intelligence collected from publicly available sources"
+      ],
+      "ans": 0,
+      "exp": "Paid feed (feed pago) é inteligência de ameaças fornecida por entidades comerciais terceiras (ex: Recorded Future, CrowdStrike, Mandiant) que investem em pesquisa, análise e curadoria de indicadores. Diferente de OSINT gratuito, feeds pagos oferecem dados analisados com contexto.",
+      "w": [
+        "OSINT feed é gratuito e de fontes abertas, não de pesquisa comercial paga.",
+        "ISAC feed é compartilhado entre membros de um setor, não de pesquisa comercial.",
+        "Government bulletin é emitido por agências governamentais, não por entidades comerciais."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A threat-hunting team is looking for unusual traffic and anomalous attempts to access the company's essential servers, databases, and applications. This is an example of what focus area?",
+      "opts": [
+        "Business-critical asset hunting — threat hunting focused on the organization's most valuable assets",
+        "Compliance hunting — hunting to meet regulatory or audit requirements",
+        "Threat intelligence hunting — hunting driven by external threat intelligence feeds",
+        "Hypothesis-driven hunting — hunting based on specific hypotheses about attacker behavior"
+      ],
+      "ans": 0,
+      "exp": "Business-critical asset hunting (caça a ativos críticos de negócio) foca em proteger os ativos mais valiosos: servidores essenciais, bancos de dados, aplicacoes core. O threat hunter prioriza esses ativos porque seu comprometimento teria maior impacto ao negocio.",
+      "w": [
+        "Threat intelligence hunting usa feeds externos, nao foco em ativos especificos.",
+        "Hypothesis-driven hunting parte de hipoteses sobre TTPs, nao de identificacao de ativos.",
+        "Compliance hunting visa atender requisitos normativos, nao proteger ativos criticos."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A security researcher identifies a financial fraud scheme targeting multiple pharmaceutical companies. What type of actor is most likely responsible for this activity?",
+      "opts": [
+        "Insider — employee or contractor with authorized access",
+        "Organized crime — criminal groups motivated by financial gain through fraud and extortion",
+        "Nation-state actor — state-sponsored group focused on espionage or geopolitical objectives",
+        "Hacktivist — actor motivated by political or social causes"
+      ],
+      "ans": 1,
+      "exp": "Crime organizado (organized crime) e a classificacao mais provavel para esquemas de fraude financeira: grupos criminosos motivados por lucro que atacam alvos com alto retorno financeiro. Empresas farmaceuticas sao alvos valiosos para fraude.",
+      "w": [
+        "Nation-state actors focam em espionagem e geopolitica, nao em fraude financeira.",
+        "Hacktivistas sao motivados por causas politicas/sociais, nao por lucro.",
+        "Insider teria acesso interno, mas o esquema visando multiplas empresas sugere grupo externo organizado."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A threat actor stole 1,000 credit card numbers from an online retailer. Where might the actor try to sell these records?",
+      "opts": [
+        "Public social media platforms — open platforms like Facebook or Twitter",
+        "The deep/dark web — anonymized networks where stolen data and illegal goods are traded",
+        "A legal e-commerce marketplace — legitimate platforms like Amazon or eBay",
+        "The company's official website — the retailer's own e-commerce platform"
+      ],
+      "ans": 1,
+      "exp": "A deep/dark web (acessivel via Tor, I2P) e o mercado clandestino onde dados roubados sao vendidos em foruns e marketplaces ilegais. O anonimato oferecido pela dark web protege a identidade dos criminosos durante a venda.",
+      "w": [
+        "Redes sociais publicas sao monitoradas por autoridades e nao sao usadas para venda aberta de dados roubados.",
+        "O site oficial da empresa e o alvo do roubo, nao o canal de venda.",
+        "Marketplaces legais bloqueiam e reportam venda de dados roubados."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "During a log review, an incident responder discovers that a network administrator sent a sensitive file containing company financial data to their personal email account on the same day they resigned. This is likely an example of what?",
+      "opts": [
+        "Compromised insider — an employee whose credentials have been stolen by an external attacker",
+        "Intentional insider — an employee who deliberately exfiltrates data for personal gain or malicious purposes",
+        "Accidental insider — an employee who unintentionally exposes data through negligence",
+        "Third-party insider — a contractor or vendor with authorized access to systems"
+      ],
+      "ans": 1,
+      "exp": "Intentional insider (insider intencional/malicioso) e um funcionario que deliberadamente viola politicas de seguranca. Enviar dados financeiros para e-mail pessoal no dia da demissao e um classico indicador de exfiltracao intencional, possivelmente para uso em nova empresa ou venda.",
+      "w": [
+        "Acidental seria sem intencao, como enviar para o destinatario errado.",
+        "Compromised insider teria credenciais roubadas; o funcionario agiu por conta propria.",
+        "Third-party insider e prestador de servico; o ator e funcionario direto."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "An organization's network defense team leverages a variety of offensive techniques as defensive measures to stop active attacks while continuing to gain an understanding of adversary behavior. What type of network defense are they engaging in?",
+      "opts": [
+        "Passive defense — relying solely on firewalls, IDS, and antivirus without interaction",
+        "Active defense — using offensive techniques like honeypots, threat hunting, and deception to defend the network",
+        "Perimeter defense — focusing exclusively on boundary protection",
+        "Reactive defense — responding only after an incident has been detected"
+      ],
+      "ans": 1,
+      "exp": "Active defense (defesa ativa) envolve o uso proativo de tecnicas ofensivas para defesa: honeypots para atrair atacantes, threat hunting para buscar ameacas, deception technology para enganar atacantes, e coleta de inteligencia sobre o comportamento do adversario.",
+      "w": [
+        "Passive defense usa firewalls e IDS apenas, sem interacao ativa.",
+        "Reactive defense atua apos deteccao, nao preventivamente.",
+        "Perimeter defense foca apenas no perimetro, nao em tecnicas ofensivas internas."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "An organization considers increasing threat intelligence sharing. Which parts of the organization are likely to experience direct benefits from this increased intelligence sharing? (Select the three best options.)",
+      "opts": [
+        "Security engineering — uses intelligence to design better security controls and architecture",
+        "Risk management — gains better visibility into threat landscape for risk assessment",
+        "Incident response — receives actionable IoCs and TTPs to accelerate detection and response",
+        "Human resources — manages employee records and payroll"
+      ],
+      "ans": 2,
+      "exp": "Incident response se beneficia diretamente: IoCs atualizados permitem deteccao mais rapida. Risk management usa inteligencia para avaliar probabilidade e impacto. Security engineering projeta controles baseados em TTPs reais observadas.",
+      "w": [
+        "Risk management usa inteligencia para priorizar riscos com base em ameacas reais.",
+        "Security engineering usa TTPs para desenhar controles mais eficazes.",
+        "RH nao consome inteligencia de ameacas no dia a dia."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "While analyzing log data, an incident responder observes a single IP address using multiple unsophisticated scanning tools against a public-facing website. What type of actor is most likely responsible for this activity?",
+      "opts": [
+        "Insider threat — an employee with authorized access to internal systems",
+        "Advanced persistent threat (APT) — a sophisticated, well-funded state-sponsored group",
+        "Organized crime — a professional criminal group motivated by financial gain",
+        "Script kiddie — an unskilled attacker using readily available tools without deep understanding of the underlying techniques"
+      ],
+      "ans": 3,
+      "exp": "Script kiddie e um atacante com baixa sofisticacao tecnica que usa ferramentas prontas e automatizadas sem entender profundamente como funcionam. A varredura de um unico IP com multiplas ferramentas simples e tipica de script kiddie.",
+      "w": [
+        "APTs usam tecnicas sofisticadas, stealth e ferramentas proprias.",
+        "Insider teria acesso interno e nao precisaria de scanners externos.",
+        "Crime organizado usaria ferramentas mais elaboradas e infraestrutura de C2."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A threat hunter is searching for malicious activity on a corporate network. Which of the following might they use to guide their efforts? (Select the two best options.)",
+      "opts": [
+        "IoAs (Indicators of Attack) — behavioral patterns indicating an attack in progress",
+        "SLAs (Service Level Agreements) — contractual performance metrics",
+        "IoCs (Indicators of Compromise) — specific artifacts like hashes, IPs, domains known to be associated with threats",
+        "KPIs (Key Performance Indicators) — metrics measuring operational efficiency"
+      ],
+      "ans": 2,
+      "exp": "IoCs (Indicators of Compromise) sao artefatos tecnicos conhecidos (hashes de malware, IPs maliciosos, dominios) que o threat hunter busca nos sistemas para identificar comprometimentos. Eles guiam a caca baseada em inteligencia conhecida.",
+      "w": [
+        "IoAs complementam IoCs ao focar em comportamento anomalo em tempo real.",
+        "SLAs sao contratuais, nao guiam busca por ameacas.",
+        "KPIs medem desempenho, nao orientam threat hunting."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "An analyst at a financial services company is conducting a review of several threat intelligence providers. If the analyst wants to ensure they can filter reports by industry, they are likely concerned about what attribute of threat intelligence?",
+      "opts": [
+        "Timeliness — how current and up-to-date the intelligence is",
+        "Actionability — whether the intelligence can be acted upon with available tools",
+        "Relevancy — the degree to which threat intelligence applies to the organization's specific sector and context",
+        "Accuracy — the correctness and reliability of the intelligence data"
+      ],
+      "ans": 2,
+      "exp": "Relevancy (relevancia) determina se a inteligencia se aplica ao setor, regiao e perfil da organizacao. Inteligencia relevante para o setor financeiro (fraudes, trojans bancarios) e mais util que inteligencia generica. Poder filtrar por industria garante pertinencia.",
+      "w": [
+        "Accuracy refere-se a veracidade, nao a aplicabilidade setorial.",
+        "Timeliness refere-se a atualidade, nao a pertinencia por industria.",
+        "Actionability refere-se a capacidade de agir, nao ao filtro por setor."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "Which of the following operations is characteristic of cyber criminal activity?",
+      "opts": [
+        "Defacing a government website to protest a political decision",
+        "Scanning a network as part of an authorized penetration test",
+        "Conducting espionage against a government agency for geopolitical advantage",
+        "Targeting multiple pharmaceutical companies with a financial fraud scheme"
+      ],
+      "ans": 3,
+      "exp": "Crime cibernetico (cyber criminal) e motivado por lucro financeiro. Esquemas de fraude financeira contra multiplas empresas farmaceuticas sao caracteristicos de grupos criminosos organizados.",
+      "w": [
+        "Espionagem governamental e caracteristica de nation-state actors ou APTs.",
+        "Defacement por motivacao politica e hacktivismo, nao crime cibernetico.",
+        "Teste de penetracao autorizado e atividade legitima de seguranca."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "Which of the following might help a company coordinate the response to a cyberterrorist attack? (Select the two best options.)",
+      "opts": [
+        "SOC (Security Operations Center) — monitors security events 24/7",
+        "CERT (Computer Emergency Response Team) — national or sectoral team that coordinates response to major cyber incidents",
+        "CSIRT (Computer Security Incident Response Team) — organization's internal team that handles incident response",
+        "HR department — manages human resources and personnel issues"
+      ],
+      "ans": 1,
+      "exp": "CERTs (ex: CERT.br, CERT/CC) sao equipes nacionais ou setoriais que coordenam resposta a incidentes de grande escala. CSIRT e a equipe interna da organizacao que executa a resposta tattica. Ambos sao cruciais em ataques de ciberterrorismo.",
+      "w": [
+        "CSIRT e a equipe interna de resposta, essencial para coordenar contencao e erradicacao.",
+        "SOC monitora e detecta, mas a coordenacao da resposta e funcao do CSIRT/CERT.",
+        "RH nao coordena resposta a incidentes ciberneticos."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A security organization is concerned about employees connecting rogue equipment to the network. What could they use to identify rogue devices?",
+      "opts": [
+        "Conduct a vulnerability scan — assess devices for known vulnerabilities",
+        "Review firewall logs — check firewall logs for blocked connections",
+        "Deploy a honeypot — a decoy system designed to attract attackers",
+        "Use a map scan — network mapping scan to discover all active devices on the network"
+      ],
+      "ans": 3,
+      "exp": "Map scan (varredura de mapeamento de rede) usando ferramentas como Nmap com ping sweep ou ARP scan descobre todos os dispositivos ativos na rede, incluindo equipamentos nao autorizados (rogue devices).",
+      "w": [
+        "Honeypot atrai atacantes, nao descobre rogue devices em geral.",
+        "Firewall logs mostram trafego, mas podem nao listar todos os dispositivos na rede.",
+        "Vulnerability scan avalia seguranca de dispositivos conhecidos, nao descobre novos."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A cybersecurity organization recently created a centralized repository for storing log data. This action is likely designed to improve analysis of what kind of information?",
+      "opts": [
+        "Dark web intelligence — information collected from anonymized networks",
+        "External sources — threat intelligence feeds from third-party providers",
+        "Open-source intelligence — publicly available information from the internet",
+        "Internal sources — logs generated by the organization's own systems, applications, and network devices"
+      ],
+      "ans": 3,
+      "exp": "Um repositorio centralizado de logs agrega dados de fontes internas: servidores, firewalls, aplicacoes, endpoints. Isso permite correlacao entre eventos de diferentes sistemas para detectar incidentes.",
+      "w": [
+        "External sources sao feeds externos, nao logs gerados internamente.",
+        "OSINT e coleta de fontes abertas, nao logs de sistemas internos.",
+        "Dark web intelligence e coletada de redes anonimas, nao de logs internos."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "While reviewing alerts, an analyst notices a new signature is generating a high volume of false positives. This appears to be the result of an error in the way the signature is written. This represents an issue with what attribute of threat intelligence?",
+      "opts": [
+        "Timeliness — whether the intelligence is current enough to be useful",
+        "Actionability — whether actionable response steps can be derived from the intelligence",
+        "Accuracy — the degree to which threat intelligence correctly identifies threats without generating false positives",
+        "Relevancy — whether the intelligence applies to the organization's context"
+      ],
+      "ans": 2,
+      "exp": "Accuracy (acurácia) mede a precisao da inteligencia: um signature mal escrito que gera muitos falsos positivos tem baixa acuracia. Falsos positivos consomem tempo da equipe e podem levar a fadiga de alertas.",
+      "w": [
+        "Relevancy diz respeito a pertinencia, nao a taxa de acerto.",
+        "Timeliness e sobre atualidade, nao sobre precisao.",
+        "Actionability e sobre capacidade de acao, nao sobre taxa de falso positivo."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "During a digital forensic analysis, an analyst may generate what kinds of useful information? (Select the three best options.)",
+      "opts": [
+        "Misconfigurations — configuration errors identified as contributing factors to the incident",
+        "New security policies — organizational policies written during the investigation",
+        "Vulnerabilities — weaknesses in systems discovered during the forensic examination",
+        "IoCs (Indicators of Compromise) — hashes, IPs, domains, file paths found during forensic analysis"
+      ],
+      "ans": 3,
+      "exp": "Analise forense digital gera IoCs a partir da evidencia coletada (hashes de malware, IPs de C2, dominios maliciosos). Tambem pode revelar vulnerabilidades exploradas e misconfiguracoes que permitiram o ataque.",
+      "w": [
+        "Vulnerabilidades sao identificadas durante analise de causa raiz.",
+        "Misconfiguracoes sao descobertas ao examinar como o ataque foi possivel.",
+        "Politicas de seguranca nao sao geradas durante analise forense."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "A company realizes that an attacker has persistent access to several internal servers. What team is best prepared to react to this?",
+      "opts": [
+        "DevOps team — development and operations team focused on software delivery",
+        "Audit team — internal or external auditors responsible for compliance review",
+        "Red team — offensive security team that simulates attacks to test defenses",
+        "CSIRT (Computer Security Incident Response Team) — the organization's dedicated incident response team"
+      ],
+      "ans": 3,
+      "exp": "CSIRT (Computer Security Incident Response Team) e a equipe especificamente treinada para responder a incidentes de seguranca, incluindo comprometimento persistente de servidores. Eles seguem playbooks de contencao, erradicacao e recuperacao.",
+      "w": [
+        "Red team simula ataques, nao responde a incidentes reais.",
+        "DevOps desenvolve e opera sistemas, nao responde a incidentes.",
+        "Audit team verifica conformidade, nao executa resposta a incidentes."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "An organization has chosen to automatically ingest indicators. This action is most likely intended to ensure what desired threat intelligence attribute?",
+      "opts": [
+        "Accuracy — verifying the correctness of indicators before use",
+        "Timeliness — ensuring indicators are consumed and operationalized as quickly as possible after publication",
+        "Relevancy — filtering indicators that are applicable to the organization",
+        "Completeness — ensuring all available indicators are ingested"
+      ],
+      "ans": 1,
+      "exp": "Timeliness (pontualidade/atualidade) e a velocidade com que a inteligencia e disponibilizada e consumida. Ingestao automatica reduz o atraso entre a publicacao de um IoC e sua aplicacao nas ferramentas de seguranca, minimizando a janela de exposicao.",
+      "w": [
+        "Accuracy requer validacao manual, nao apenas ingestao automatica.",
+        "Relevancy requer filtragem contextual, nao ingestao cega.",
+        "Completeness nao e garantida por ingestao automatica."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "While looking into malware discovered on several workstations, an incident responder realizes it all came from new USB drives the company had recently procured. This could be an example of what type of attack?",
+      "opts": [
+        "Watering hole attack — compromising a website frequently visited by the target",
+        "Supply chain attack — compromising a product or component before it reaches the end customer",
+        "Phishing attack — sending malicious emails to trick users",
+        "Insider threat — an employee intentionally introducing malware"
+      ],
+      "ans": 1,
+      "exp": "Supply chain attack (ataque a cadeia de suprimentos) ocorre quando um fornecedor ou produto e comprometido antes de chegar ao cliente final. USBs infectados fornecidos por um fabricante sao um vetor classico de ataque a cadeia de suprimentos.",
+      "w": [
+        "Insider threat seria um funcionario agindo intencionalmente.",
+        "Watering hole comprometeria sites visitados, nao hardware adquirido.",
+        "Phishing usa e-mail, nao hardware fisicamente comprometido."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "The Department of Homeland Security announces a binding operational directive for federal agencies. This is an example of what?",
+      "opts": [
+        "Commercial threat intelligence feed — intelligence from private cybersecurity vendors",
+        "Government bulletins — official directives, alerts, and guidance issued by government cybersecurity agencies",
+        "ISAC advisory — threat intelligence shared within a sector-specific ISAC",
+        "Open-source intelligence report — information collected from publicly available sources"
+      ],
+      "ans": 1,
+      "exp": "Government bulletins (boletins governamentais) sao comunicados oficiais de agencias governamentais (DHS/CISA, NSA, FBI) que estabelecem diretrizes operacionais vinculativas para agencias federais. Diferem de ISAC advisories (voluntarios) e feeds comerciais.",
+      "w": [
+        "ISAC advisory e compartilhamento voluntario, nao diretiva vinculativa.",
+        "Commercial feed e vendido por empresas privadas, nao emitido por governo.",
+        "OSINT report e baseado em fontes abertas, nao em diretivas governamentais."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "After discovering malicious activity on a network, what artifacts might a threat hunter analyze to identify additional indicators of compromise (IoCs)? (Select the three best options.)",
+      "opts": [
+        "Network traffic — packet captures showing communication patterns and data transfers",
+        "Memory dumps — captures of RAM contents that reveal running processes and network connections",
+        "Log files — records of system events, network traffic, and application activity",
+        "Physical access logs — records of who entered the building physically"
+      ],
+      "ans": 2,
+      "exp": "Log files sao a principal fonte: logs de firewall, proxy, DNS, sistema e aplicacao registram IPs, dominios e hashes. Memory dumps revelam processos e conexoes C2. Network traffic mostra comunicacao com servidores maliciosos.",
+      "w": [
+        "Memory dumps de RAM sao ricos em evidencias de processos e conexoes ativas.",
+        "Network traffic revela comunicacoes C2, exfiltracao e beaconing.",
+        "Physical access logs sao para seguranca fisica, nao para IoCs tecnicos."
+      ]
+    },
+    {
+      "t": "OSINT e Reconhecimento",
+      "q": "While investigating malicious activity against their organization, an analyst establishes that a malicious actor is using anti-forensic techniques to evade detection. What type of actor is most likely responsible for this activity?",
+      "opts": [
+        "Insider threat — employees with authorized access",
+        "Advanced persistent threat (APT) — sophisticated actors who use anti-forensic techniques to avoid detection and maintain persistence",
+        "Hacktivist — politically motivated attackers",
+        "Script kiddie — unskilled attackers using readily available tools"
+      ],
+      "ans": 1,
+      "exp": "APTs (Advanced Persistent Threats) sao atores sofisticados, patrocinados por estados, que empregam tecnicas anti-forenses avancadas: limpeza de logs, timestomping, memory-only malware, rootkits. O uso deliberado de anti-forense indica ator com recursos significativos.",
+      "w": [
+        "Script kiddies nao tem conhecimento para tecnicas anti-forenses sofisticadas.",
+        "Insiders podem apagar rastros, mas nao tem tecnicas anti-forenses avancadas.",
+        "Hacktivistas geralmente buscam visibilidade, nao anti-forense para permanecer ocultos."
+      ]
+    }
+  ],
+  "1.5": [
+    {
+      "t": "Webhooks e APIs",
+      "q": "Uma empresa quer integrar aplicações de terceiros ao seu sistema e busca automatizar o recebimento de atualizações em tempo real de sistemas externos, sem precisar fazer polling constante. Qual tecnologia atende melhor a essa necessidade?",
+      "opts": [
+        "Webhooks",
+        "Polling programado (cron jobs)",
+        "Consultas SQL diretas ao banco de dados externo",
+        "Firewall de aplicação web (WAF)"
+      ],
+      "ans": 0,
+      "exp": "Webhooks são chamadas HTTP disparadas automaticamente pelo sistema de origem sempre que um evento ocorre, entregando a atualização em tempo real ao destinatário sem a necessidade de consultas repetidas (polling).",
+      "w": [
+        "Polling programado exige que o sistema consulte repetidamente a origem em intervalos fixos, consumindo recursos e não sendo verdadeiramente em tempo real.",
+        "Consultas diretas ao banco de dados externo criam acoplamento forte e riscos de segurança, além de não resolverem o problema de notificação em tempo real.",
+        "Um WAF protege aplicações contra ataques web, mas não tem relação com integração ou notificação entre sistemas."
+      ]
+    },
+    {
+      "t": "Webhooks e APIs",
+      "q": "Um novo supervisor atribuiu a um analista de cibersegurança a tarefa de implementar uma solução que consiste em um conjunto de protocolos e ferramentas para construir aplicações de software, permitindo que elas se comuniquem com outras aplicações, plataformas ou serviços. Qual tarefa o supervisor atribuiu ao analista?",
+      "opts": [
+        "Implementar APIs (Application Programming Interfaces)",
+        "Configurar um proxy reverso",
+        "Implantar um sistema de arquivos distribuído",
+        "Criar uma VPN site-to-site"
+      ],
+      "ans": 0,
+      "exp": "APIs são conjuntos de protocolos, rotinas e ferramentas que definem como aplicações, plataformas ou serviços se comunicam entre si, permitindo integração e automação.",
+      "w": [
+        "Um proxy reverso encaminha e distribui requisições, mas não define o protocolo de comunicação entre aplicações.",
+        "Um sistema de arquivos distribuído resolve armazenamento compartilhado, não comunicação entre aplicações.",
+        "Uma VPN site-to-site cria conectividade de rede segura entre locais, mas não define como as aplicações se comunicam entre si."
+      ]
+    },
+    {
+      "t": "Plugins e Integrações",
+      "q": "Uma empresa quer estender as funcionalidades do seu site adicionando recursos como integração com redes sociais, uma loja online ou um chatbot de suporte, mas está preocupada com as implicações de segurança de adicionar novos recursos e quer garantir que a tecnologia usada não introduza novas vulnerabilidades. Qual tecnologia a empresa pode usar para atingir esse objetivo de forma segura?",
+      "opts": [
+        "Plugins validados e mantidos",
+        "Scripts inline copiados de fóruns públicos",
+        "Alterar diretamente o código-fonte core da aplicação",
+        "Desabilitar a autenticação para simplificar a integração"
+      ],
+      "ans": 0,
+      "exp": "Plugins desenvolvidos e mantidos por fornecedores confiáveis permitem estender funcionalidades de forma modular, sem alterar o núcleo da aplicação, facilitando atualizações de segurança e isolando o impacto de eventuais falhas.",
+      "w": [
+        "Copiar scripts de fóruns sem revisão introduz código não auditado, aumentando drasticamente o risco de vulnerabilidades.",
+        "Alterar diretamente o núcleo da aplicação dificulta atualizações futuras e aumenta o risco de introduzir falhas em toda a plataforma.",
+        "Desabilitar a autenticação para facilitar a integração cria uma vulnerabilidade grave e vai contra o objetivo de manter a segurança."
+      ]
+    },
+    {
+      "t": "Priorização de Automação",
+      "q": "Um gerente de SOC (Security Operations Center) quer aumentar o uso de automação. O que ele deve considerar ao priorizar tarefas para automatizar? (Selecione as três melhores opções.)",
+      "opts": [
+        "A frequência com que a tarefa é executada",
+        "O nível de esforço necessário para realizar a tarefa",
+        "Se a tarefa oferece suporte à segurança em áreas de alto risco",
+        "A preferência pessoal do analista mais recente da equipe"
+      ],
+      "ans": 0,
+      "exp": "Ao priorizar tarefas para automação, um gerente de SOC deve considerar a frequência com que a tarefa ocorre, o esforço necessário para executá-la manualmente e se ela oferece suporte à segurança em áreas de alto risco — quanto mais frequente, mais trabalhosa e mais crítica for a tarefa, maior o retorno da automação.",
+      "w": [
+        "O esforço necessário também é um critério válido de priorização, sendo, junto com frequência e áreas de alto risco, uma das três melhores opções.",
+        "O suporte a áreas de alto risco também é um dos três critérios corretos de priorização, junto com frequência e esforço.",
+        "Preferência pessoal de um analista não é um critério objetivo de priorização e pode levar a decisões inconsistentes de automação."
+      ]
+    },
+    {
+      "t": "Automação com SOAR",
+      "q": "Uma equipe de cibersegurança está planejando implementar automação em seu centro de operações de segurança. Em qual aspecto a equipe deve focar para garantir que consiga detectar e responder a ameaças rapidamente?",
+      "opts": [
+        "Avaliar o tempo até a detecção (time-to-detection)",
+        "Reduzir o número de licenças de software",
+        "Aumentar o número de reuniões semanais da equipe",
+        "Padronizar o layout dos relatórios em PDF"
+      ],
+      "ans": 0,
+      "exp": "Avaliar o time-to-detection permite medir a eficácia real da automação em identificar ameaças rapidamente, sendo uma métrica central para justificar e ajustar investimentos em automação no SOC.",
+      "w": [
+        "Reduzir licenças de software é uma decisão de custo, sem relação direta com a velocidade de detecção e resposta a ameaças.",
+        "Mais reuniões não aceleram a detecção técnica de ameaças; podem até reduzir o tempo disponível para análise.",
+        "Padronizar relatórios melhora comunicação, mas não impacta diretamente a velocidade de detecção de ameaças."
+      ]
+    },
+    {
+      "t": "Coordenação e Comunicação da Equipe",
+      "q": "A equipe de cibersegurança de uma empresa quer melhorar sua capacidade de inteligência contra ameaças, sendo responsável por proteger as informações sensíveis da organização contra ameaças cibernéticas. Qual das seguintes estratégias pode melhorar a efetividade da equipe?",
+      "opts": [
+        "Melhorar a coordenação e a comunicação da equipe",
+        "Reduzir o número de analistas para diminuir custos",
+        "Eliminar o uso de feeds de inteligência externos",
+        "Centralizar todas as decisões apenas no gerente do SOC"
+      ],
+      "ans": 0,
+      "exp": "Melhorar a coordenação e a comunicação entre os membros da equipe garante que a inteligência contra ameaças seja compartilhada, correlacionada e usada de forma consistente, aumentando a efetividade geral da resposta a ameaças.",
+      "w": [
+        "Reduzir a equipe para cortar custos tende a sobrecarregar analistas e piorar a capacidade de resposta e análise.",
+        "Eliminar feeds externos reduz a visibilidade sobre ameaças, indo contra o objetivo de melhorar a inteligência contra ameaças.",
+        "Centralizar decisões apenas no gerente cria um gargalo e reduz a agilidade e o compartilhamento de conhecimento da equipe."
+      ]
+    },
+    {
+      "t": "Orquestração de Inteligência de Ameaças",
+      "q": "Um SOC (Security Operations Center) percebe que sua visão sobre as capacidades do adversário fica incompleta às vezes, já que os analistas precisam consultar fontes de informação dispersas durante as investigações. A equipe quer melhorar sua compreensão das ameaças enfrentadas e sua capacidade de tomar medidas preventivas. O que eles deveriam considerar?",
+      "opts": [
+        "Orquestrar feeds de inteligência contra ameaças",
+        "Contratar mais analistas juniores",
+        "Reduzir o número de fontes de inteligência consultadas",
+        "Migrar todos os dados para planilhas manuais"
+      ],
+      "ans": 0,
+      "exp": "Orquestrar (consolidar e correlacionar automaticamente) os feeds de inteligência contra ameaças em uma única visão elimina a fragmentação de fontes dispersas, dando aos analistas uma imagem mais completa e atualizada das capacidades do adversário.",
+      "w": [
+        "Contratar mais analistas não resolve a fragmentação das fontes de dados; o problema é de integração, não de quantidade de pessoal.",
+        "Reduzir fontes de inteligência pioraria a visibilidade, tornando a análise ainda mais incompleta.",
+        "Planilhas manuais aumentam o esforço operacional e não escalam para correlacionar múltiplas fontes de inteligência em tempo real."
+      ]
+    },
+    {
+      "t": "Automação com SOAR",
+      "q": "O SOC (Security Operations Center) de uma empresa quer minimizar o envolvimento humano em seu processo de resposta a ameaças. Quais das seguintes tecnologias podem ajudar a atingir esse objetivo? (Selecione as duas melhores opções.)",
+      "opts": [
+        "SOAR (Security Orchestration, Automation, and Response)",
+        "SIEM (Security Information and Event Management)",
+        "Um sistema de bilhetagem (ticketing) manual em planilha",
+        "Reuniões diárias presenciais de triagem"
+      ],
+      "ans": 0,
+      "exp": "SOAR automatiza playbooks de resposta e o SIEM centraliza e correlaciona eventos de segurança; juntas, essas tecnologias reduzem a necessidade de intervenção manual constante dos analistas no processo de detecção e resposta.",
+      "w": [
+        "O SIEM também contribui para reduzir o envolvimento humano ao centralizar e correlacionar eventos automaticamente, sendo, junto com o SOAR, uma das duas melhores opções.",
+        "Um sistema de bilhetagem manual em planilha depende inteiramente de intervenção humana, sendo o oposto de uma solução automatizada.",
+        "Reuniões presenciais de triagem são um processo manual e não reduzem o envolvimento humano na resposta a incidentes."
+      ]
+    },
+    {
+      "t": "Automação com SOAR",
+      "q": "Uma nova equipe de cibersegurança busca uma solução que possa automatizar as operações de segurança, resposta a incidentes, inteligência contra ameaças e os sistemas de gerenciamento de vulnerabilidades da empresa. Qual dos seguintes termos descreve melhor essa solução?",
+      "opts": [
+        "SOAR (Security Orchestration, Automation, and Response)",
+        "EDR (Endpoint Detection and Response)",
+        "VPN (Virtual Private Network)",
+        "DLP (Data Loss Prevention)"
+      ],
+      "ans": 0,
+      "exp": "SOAR é a categoria de solução projetada justamente para orquestrar e automatizar operações de segurança, resposta a incidentes, inteligência contra ameaças e gerenciamento de vulnerabilidades em uma única plataforma.",
+      "w": [
+        "EDR foca na detecção e resposta em endpoints, não na orquestração ampla de operações de segurança, IR, threat intel e vulnerability management.",
+        "VPN fornece conectividade segura de rede, sem relação com automação de operações de segurança.",
+        "DLP foca em prevenir vazamento de dados sensíveis, não em orquestrar todo o conjunto de operações de segurança."
+      ]
+    },
+    {
+      "t": "Automação com SOAR",
+      "q": "Qual é um dos objetivos primários de um gerente de SOC (Security Operations Center) ao implementar uma solução de orquestração, automação e resposta de segurança (SOAR)?",
+      "opts": [
+        "Minimizar o envolvimento humano em tarefas repetitivas",
+        "Aumentar o número de alertas gerados pelo SIEM",
+        "Eliminar completamente a necessidade de analistas de segurança",
+        "Substituir o firewall perimetral"
+      ],
+      "ans": 0,
+      "exp": "Um dos principais objetivos do SOAR é minimizar o envolvimento humano em tarefas repetitivas e de baixo valor, automatizando playbooks de resposta para que os analistas foquem em investigações mais complexas.",
+      "w": [
+        "Aumentar o número de alertas não é um objetivo do SOAR; pelo contrário, o SOAR ajuda a reduzir o ruído e priorizar alertas relevantes.",
+        "O SOAR reduz o esforço manual, mas não elimina completamente a necessidade de analistas — decisões críticas ainda exigem supervisão humana.",
+        "SOAR não substitui controles de rede como firewalls; ele orquestra e automatiza processos de segurança entre ferramentas já existentes."
+      ]
+    },
+    {
+      "t": "Plugins e Integrações",
+      "q": "Ao levantar requisitos para um novo firewall, um engenheiro de segurança percebe que um dispositivo pronto de fábrica não atenderá a todas as necessidades da organização. No entanto, é possível cobrir todos os requisitos adquirindo recursos adicionais. Como essa funcionalidade estendida é chamada? (Selecione as duas melhores opções.)",
+      "opts": [
+        "Plugins",
+        "Apps (aplicativos adicionais do fabricante)",
+        "Firmware de fábrica",
+        "Licença de suporte básico (Basic Support)"
+      ],
+      "ans": 0,
+      "exp": "Fabricantes de firewall costumam oferecer funcionalidades estendidas na forma de plugins e apps adicionais, vendidos separadamente, que agregam recursos (como filtragem avançada, IPS ou integrações) sem exigir a troca do dispositivo.",
+      "w": [
+        "Apps adicionais do fabricante também representam essa funcionalidade estendida comprável, sendo, junto com plugins, uma das duas melhores opções.",
+        "O firmware de fábrica é o software básico que já acompanha o dispositivo, não a funcionalidade extra adquirida separadamente.",
+        "Uma licença de suporte básico cobre atendimento e atualizações, não novas funcionalidades técnicas do dispositivo."
+      ]
+    },
+    {
+      "t": "Orquestração de Inteligência de Ameaças",
+      "q": "Uma equipe de cibersegurança está no processo de correlacionar dados de ameaças provenientes de logs de rede, endpoints e feeds de inteligência. Qual das opções a seguir descreve melhor essa ação?",
+      "opts": [
+        "Combinação de feeds de inteligência contra ameaças (threat feed combination)",
+        "Varredura de vulnerabilidades (vulnerability scanning)",
+        "Hardening de endpoints",
+        "Gerenciamento de patches"
+      ],
+      "ans": 0,
+      "exp": "Correlacionar dados de múltiplas fontes — logs de rede, endpoints e feeds de inteligência — é a combinação/orquestração de feeds de inteligência contra ameaças, que enriquece a análise e melhora a detecção de padrões de ataque.",
+      "w": [
+        "Varredura de vulnerabilidades identifica falhas em sistemas, mas não é o processo de correlacionar múltiplas fontes de inteligência.",
+        "Hardening de endpoints é uma medida preventiva de configuração, não uma atividade de correlação de dados de ameaças.",
+        "Gerenciamento de patches trata da aplicação de correções de software, sem relação com a correlação de feeds de inteligência."
+      ]
+    },
+    {
+      "t": "Single Pane of Glass",
+      "q": "Um gerente de SOC (Security Operations Center) identifica que uma quantidade considerável de tempo está sendo desperdiçada com a troca entre diferentes consoles. Qual é uma forma de ajustar as operações para mitigar esse problema?",
+      "opts": [
+        "Criar um painel único (single pane of glass)",
+        "Aumentar o número de monitores de cada analista",
+        "Reduzir o número de ferramentas de segurança em uso, sem consolidação",
+        "Agendar treinamentos mensais sobre cada console"
+      ],
+      "ans": 0,
+      "exp": "Um single pane of glass consolida dados de múltiplas ferramentas em uma interface centralizada, eliminando a necessidade de alternar entre consoles diferentes e agilizando a análise.",
+      "w": [
+        "Mais monitores físicos não resolvem a fragmentação da informação entre sistemas diferentes; apenas exibem mais janelas lado a lado.",
+        "Reduzir ferramentas sem consolidar dados pode significar perda de visibilidade, sem resolver o problema de alternância entre consoles.",
+        "Treinamentos ajudam no uso de cada ferramenta, mas não eliminam a necessidade de alternar entre consoles distintos."
+      ]
+    },
+    {
+      "t": "Webhooks e APIs",
+      "q": "Um gerente de SOC está definindo os playbooks de uma nova solução de SOAR (Security Orchestration, Automation, and Response) e quer verificar URLs automaticamente no VirusTotal. Qual é uma forma eficiente e de baixo custo de automatizar essa função?",
+      "opts": [
+        "Integração via API (Application Programming Interface)",
+        "Copiar e colar manualmente cada URL no site do VirusTotal",
+        "Contratar um analista extra dedicado só a essa tarefa",
+        "Migrar todo o SOC para uma nova plataforma de SIEM"
+      ],
+      "ans": 0,
+      "exp": "Integrar o playbook do SOAR à API pública do VirusTotal permite consultar URLs automaticamente, de forma programática, rápida e de baixo custo, sem intervenção manual.",
+      "w": [
+        "Copiar e colar URLs manualmente é lento, sujeito a erro humano e não escala para um playbook automatizado.",
+        "Contratar um analista dedicado resolve o volume, mas tem custo alto e continua sendo um processo manual, não automatizado.",
+        "Trocar toda a plataforma de SIEM é uma medida desproporcional e cara apenas para automatizar uma consulta simples a uma API existente."
+      ]
+    },
+    {
+      "t": "Automação com SOAR",
+      "q": "Um gerente de SOC percebe que os analistas estão realizando um alto volume de tarefas repetitivas para resolver alertas de falso positivo no SIEM (Security Information and Event Management). O que poderia ser implementado para ajudar a reduzir essa carga de trabalho?",
+      "opts": [
+        "SOAR (Security Orchestration, Automation, and Response)",
+        "Aumentar o limite (threshold) de todos os alertas para o máximo",
+        "Desativar as regras de correlação do SIEM",
+        "Contratar mais analistas juniores para triagem manual"
+      ],
+      "ans": 0,
+      "exp": "O SOAR permite automatizar playbooks que classificam, enriquecem e até fecham automaticamente alertas conhecidos como falsos positivos, reduzindo a carga repetitiva sobre os analistas.",
+      "w": [
+        "Aumentar o limite de todos os alertas para o máximo pode ocultar incidentes reais junto com os falsos positivos, criando um risco maior.",
+        "Desativar regras de correlação reduz a visibilidade do SIEM como um todo, podendo deixar ameaças reais passarem despercebidas.",
+        "Contratar mais analistas aumenta o custo operacional sem resolver a causa raiz: a falta de automação no tratamento de falsos positivos."
+      ]
+    },
+    {
+      "t": "Benefícios da Automação",
+      "q": "Um gerente de SOC está construindo um business case para aumentar o uso de automação. Quais são alguns dos principais benefícios que o gerente poderia destacar? (Selecione as duas melhores opções.)",
+      "opts": [
+        "Prevenção de erro humano",
+        "Redução do trabalho manual",
+        "Eliminação total da necessidade de auditorias",
+        "Redução do número de logs gerados pelos sistemas"
+      ],
+      "ans": 0,
+      "exp": "A automação reduz a chance de erro humano em tarefas repetitivas e diminui a quantidade de trabalho manual exigido dos analistas, dois dos argumentos mais fortes em um business case para justificar investimento em automação.",
+      "w": [
+        "Reduzir o trabalho manual também é um benefício central da automação, sendo, junto com a prevenção de erro humano, uma das duas melhores opções.",
+        "Automação não elimina a necessidade de auditorias; processos automatizados também precisam ser auditados e validados.",
+        "O objetivo da automação não é gerar menos logs — pelo contrário, uma boa automação depende de logs completos para funcionar corretamente."
+      ]
+    },
+    {
+      "t": "Coordenação e Comunicação da Equipe",
+      "q": "Ao avaliar a efetividade do seu SOC, uma organização percebe que está com falta de coordenação efetiva da equipe. O que eles poderiam implementar para melhorar essa coordenação? (Selecione as duas melhores opções.)",
+      "opts": [
+        "Treinamento de habilidades de comunicação",
+        "SOPs (procedimentos operacionais padrão) de compartilhamento de informação",
+        "Redução do número de turnos de trabalho",
+        "Proibição de ferramentas de mensagem instantânea internas"
+      ],
+      "ans": 0,
+      "exp": "Treinar habilidades de comunicação e formalizar SOPs de compartilhamento de informação garantem que o conhecimento e as decisões fluam de forma consistente entre os membros do SOC, melhorando diretamente a coordenação da equipe.",
+      "w": [
+        "SOPs de compartilhamento de informação também melhoram diretamente a coordenação, sendo, junto com o treinamento de comunicação, uma das duas melhores opções.",
+        "Reduzir turnos de trabalho não melhora a coordenação; pode até sobrecarregar a equipe restante e piorar a comunicação.",
+        "Proibir ferramentas de mensagem instantânea tende a dificultar a comunicação rápida entre analistas, prejudicando a coordenação."
+      ]
+    },
+    {
+      "t": "Webhooks e APIs",
+      "q": "Toda vez que um evento específico ocorre, um arquiteto de segurança quer atualizar um banco de dados com as informações padrão geradas pelo alerta. Qual é um mecanismo automatizado eficaz para atingir esse objetivo?",
+      "opts": [
+        "Webhooks",
+        "Backup completo diário do banco de dados",
+        "Exportação manual de relatórios em CSV",
+        "Rotação de logs (log rotation)"
+      ],
+      "ans": 0,
+      "exp": "Um webhook dispara automaticamente uma chamada HTTP para atualizar o banco de dados no exato momento em que o evento/alerta ocorre, sem a necessidade de polling ou intervenção manual.",
+      "w": [
+        "Backup completo diário preserva o estado do banco, mas não atualiza o banco em tempo real a cada evento individual.",
+        "Exportação manual em CSV depende de intervenção humana repetida e não é um mecanismo automatizado.",
+        "Rotação de logs organiza e arquiva arquivos de log, mas não atualiza um banco de dados em resposta a um evento específico."
+      ]
+    },
+    {
+      "t": "Orquestração de Inteligência de Ameaças",
+      "q": "Uma nova equipe de cibersegurança está no processo de enriquecer dados brutos com informações adicionais para torná-los mais valiosos para análise e tomada de decisão, como adicionar contexto, metadados ou outros pontos de dados relevantes. Qual das opções a seguir descreve melhor essa ação?",
+      "opts": [
+        "Enriquecimento de dados (data enrichment)",
+        "Retenção de dados (data retention)",
+        "Mascaramento de dados (data masking)",
+        "Deduplicação de dados (data deduplication)"
+      ],
+      "ans": 0,
+      "exp": "Data enrichment é o processo de adicionar contexto, metadados e outras informações relevantes a dados brutos, tornando-os mais úteis para análise e tomada de decisão em investigações de segurança.",
+      "w": [
+        "Retenção de dados define por quanto tempo os dados são mantidos, sem relação com adicionar contexto ou metadados.",
+        "Mascaramento de dados oculta informações sensíveis, o oposto de agregar mais contexto para análise.",
+        "Deduplicação remove registros duplicados; não tem relação com adicionar contexto ou metadados aos dados."
+      ]
+    },
+    {
+      "t": "Single Pane of Glass",
+      "q": "A equipe de cibersegurança de uma nova empresa de manufatura busca uma solução para consolidar suas ferramentas de monitoramento de segurança em uma interface simplificada, devido ao grande volume de dados que precisam revisar. Qual termo descreve melhor essa abordagem?",
+      "opts": [
+        "Single pane of glass (painel único)",
+        "Segmentação de rede (network segmentation)",
+        "Zero Trust",
+        "Defesa em profundidade (defense in depth)"
+      ],
+      "ans": 0,
+      "exp": "Single pane of glass descreve a consolidação de múltiplas ferramentas de monitoramento em uma única interface simplificada, reduzindo a complexidade de revisar grandes volumes de dados espalhados em consoles distintos.",
+      "w": [
+        "Segmentação de rede isola segmentos da rede por segurança, mas não consolida ferramentas de monitoramento em uma interface única.",
+        "Zero Trust é um modelo de verificação contínua de acesso, não uma consolidação de ferramentas de monitoramento.",
+        "Defesa em profundidade é uma estratégia de camadas de controles de segurança, não uma interface consolidada de monitoramento."
+      ]
+    },
+    {
+      "t": "Priorização de Automação",
+      "q": "Um gerente de SOC identifica uma lista de tarefas frequentemente executadas. O que o gerente do SOC deveria considerar fazer com essas tarefas?",
+      "opts": [
+        "Automatizá-las",
+        "Documentá-las apenas em um wiki interno, sem mudanças no processo",
+        "Atribuí-las exclusivamente aos analistas mais juniores",
+        "Eliminá-las do processo de trabalho sem análise de impacto"
+      ],
+      "ans": 0,
+      "exp": "Tarefas frequentemente executadas e repetitivas são as melhores candidatas para automação, liberando os analistas para atividades de maior valor, como investigação e resposta a incidentes.",
+      "w": [
+        "Apenas documentar em um wiki não reduz o esforço manual recorrente; a tarefa continua sendo executada manualmente.",
+        "Atribuir apenas a analistas juniores não resolve o problema de repetição e ainda pode sobrecarregar a equipe menos experiente.",
+        "Eliminar tarefas sem analisar seu impacto pode remover controles de segurança importantes, criando lacunas na operação do SOC."
+      ]
+    },
+    {
+      "t": "Orquestração de Inteligência de Ameaças",
+      "q": "Um gerente de SOC quer aproveitar a orquestração para melhorar o consumo de inteligência contra ameaças em toda a organização. De que formas a orquestração pode melhorar o uso do consumo de inteligência contra ameaças?",
+      "opts": [
+        "Enriquecendo os dados de inteligência com contexto adicional (data enrichment)",
+        "Restringindo o acesso à inteligência apenas ao gerente do SOC",
+        "Convertendo todos os feeds de inteligência em arquivos PDF estáticos",
+        "Eliminando a integração entre ferramentas de SIEM e SOAR"
+      ],
+      "ans": 0,
+      "exp": "A orquestração melhora o consumo de inteligência contra ameaças ao automatizar o enriquecimento (data enrichment) dos dados brutos com contexto adicional, distribuindo essa inteligência de forma consistente entre as ferramentas e equipes.",
+      "w": [
+        "Restringir o acesso apenas ao gerente reduz o alcance da inteligência dentro da organização, indo contra o objetivo de melhorar seu consumo.",
+        "Converter feeds em PDFs estáticos elimina a possibilidade de correlação automática e atualização em tempo real.",
+        "Eliminar a integração entre SIEM e SOAR reduz justamente a orquestração que se busca aumentar, prejudicando o consumo de inteligência."
+      ]
+    }
+  ],
+  "2.1": [
+    {
+      "t": "SLOs — Operações",
+      "q": "A security operations center (SOC) analyst is preparing a meeting with an upset client. The client protests that the vulnerability scans did not implement according to their change management procedures, causing a severe interruption in their critical systems' performances. During the meeting, what process should the analyst focus on to ensure the service level objectives (SLOs) meet expectations?",
+      "opts": [
+        "Performance",
+        "Scheduling",
+        "Operations",
+        "Compliance"
+      ],
+      "ans": 2,
+      "exp": "Change management é diretamente ligado ao processo de \"Operations\" dentro das considerações especiais de scan de vulnerabilidade — garante que os scans sigam os procedimentos operacionais acordados (change management, janelas aprovadas) para não causar interrupções inesperadas nos sistemas críticos, alinhando-se aos SLOs do cliente.",
+      "w": [
+        "Performance trata de falsos positivos, velocidade do scan e identificação de sistemas — não do cumprimento de procedimentos de change management.",
+        "Scheduling define quando os scans rodam (ex: junto a atualizações de vendor), não como eles se alinham aos procedimentos de mudança já aprovados.",
+        "Compliance foca em atender requisitos regulatórios, não no processo operacional de aprovação de mudanças."
+      ]
+    },
+    {
+      "t": "SLOs — Performance",
+      "q": "A security analyst is scheduling a vulnerability scan on several company critical systems. What process should the analyst consider for false positives, scan speeds, and system identification?",
+      "opts": [
+        "Scheduling",
+        "Performance",
+        "Operations",
+        "Critical infrastructure"
+      ],
+      "ans": 1,
+      "exp": "Performance é a consideração que trata de falsos positivos, velocidade do scan (scan speed) e identificação de sistemas (system identification) — fatores que afetam diretamente o desempenho e a precisão do scan em sistemas críticos.",
+      "w": [
+        "Scheduling determina o momento em que os scans ocorrem, não questões de precisão/velocidade do próprio scan.",
+        "Operations trata do impacto do scan nos processos de negócio e change management, não de falsos positivos ou velocidade.",
+        "Critical infrastructure refere-se a sistemas ICS/SCADA/OT, não à consideração de performance do scan."
+      ]
+    },
+    {
+      "t": "SLOs — Scheduling",
+      "q": "The management information director is responsible for identifying and addressing any newly discovered vulnerabilities before attackers can exploit them. With implementing new software onto the network and constantly rolling out vendor updates, what should the director pay close attention to when running vulnerability scans in a timely manner?",
+      "opts": [
+        "Operations",
+        "Credentialed scanning",
+        "Scheduling",
+        "Security baseline"
+      ],
+      "ans": 2,
+      "exp": "Scheduling garante que os scans de vulnerabilidade sejam executados em coordenação com o rollout de novos softwares e atualizações de fornecedores, para identificar rapidamente vulnerabilidades recém-introduzidas antes que sejam exploradas.",
+      "w": [
+        "Operations foca no impacto operacional/change management do scan, não na frequência/momento de execução.",
+        "Credentialed scanning é um método de scan com credenciais, não uma prática de timing/frequência.",
+        "Security baseline compara configurações a um perfil de referência, não trata do momento de execução dos scans."
+      ]
+    },
+    {
+      "t": "Fatores de Performance do Scan",
+      "q": "A security analyst is scheduling a vulnerability scan on several company critical systems. Which of the following is NOT one of the performance considerations that could impact the scan?",
+      "opts": [
+        "False positives",
+        "Scan speed",
+        "System identification",
+        "Regulatory compliance"
+      ],
+      "ans": 3,
+      "exp": "Falsos positivos, velocidade do scan e identificação de sistemas são as três considerações de \"Performance\" que impactam diretamente a execução do scan. Compliance regulatório é uma consideração separada, ligada a frameworks e requisitos legais, não ao desempenho técnico do scan.",
+      "w": [
+        "Falsos positivos SÃO uma consideração de performance — resultados incorretos que consomem tempo de triagem.",
+        "Velocidade do scan É uma consideração de performance — impacta diretamente sistemas críticos durante a execução.",
+        "Identificação de sistemas É uma consideração de performance — necessária para adaptar o scan ao tipo de ativo."
+      ]
+    },
+    {
+      "t": "Credentialed vs Non-Credentialed",
+      "q": "A company is debating alternative methods for vulnerability scans due to the multiple attempts made on the company's network. The attempts have occurred over the previous year. Which of these methods will provide the most comprehensive evaluation of company devices?",
+      "opts": [
+        "Non-credentialed",
+        "Passive",
+        "Credentialed",
+        "Agentless"
+      ],
+      "ans": 2,
+      "exp": "O scan credenciado (credentialed) usa credenciais válidas para autenticar nos sistemas, permitindo uma avaliação muito mais completa e profunda (patches, configurações internas, softwares instalados) do que scans sem autenticação.",
+      "w": [
+        "Scans não credenciados enxergam o sistema de fora, sem autenticação, gerando uma visão superficial e mais falsos positivos.",
+        "Scans passivos apenas monitoram tráfego de rede, sem interagir ativamente com os dispositivos, oferecendo cobertura limitada.",
+        "Agentless descreve como os dados são coletados (sem agente instalado), não o nível de profundidade da avaliação — pode ou não ser credenciado."
+      ]
+    },
+    {
+      "t": "Agent-Based Scanning",
+      "q": "The company has contracted a managed security service provider (MSSP) to implement new vulnerability scanning methods across the company's endpoints. The reason for needing additional security efforts is due to testing, maintenance, deployment, and protection of the new attack vectors that this method has associated with it. Which vulnerability scanning method is the company in the process of incorporating?",
+      "opts": [
+        "Agentless",
+        "Agent",
+        "Passive",
+        "Non-credentialed"
+      ],
+      "ans": 1,
+      "exp": "O método baseado em agente (agent-based) requer a instalação, manutenção e atualização de um software local em cada endpoint, o que aumenta o esforço de teste, implantação e proteção — pois o próprio agente se torna um novo vetor de ataque a ser protegido.",
+      "w": [
+        "Agentless não requer instalação de software local, eliminando o vetor de ataque adicional descrito no cenário.",
+        "Scans passivos apenas observam tráfego, sem exigir implantação/manutenção de software em cada endpoint.",
+        "Non-credentialed descreve scans sem autenticação — não está relacionado à necessidade de instalar e manter um agente."
+      ]
+    },
+    {
+      "t": "Operational Technology (OT)",
+      "q": "The power plant's operational technology specialist routinely inspects all operational controls. Which of the following is NOT an example of operational technology (OT)?",
+      "opts": [
+        "ICSs",
+        "PLCs",
+        "SCADA systems",
+        "Enterprise resource planning (ERP) software"
+      ],
+      "ans": 3,
+      "exp": "ICSs, PLCs e sistemas SCADA são exemplos clássicos de tecnologia operacional (OT) — sistemas que controlam processos físicos/industriais. ERP é um software de TI corporativa (gestão de negócios), não tecnologia operacional.",
+      "w": [
+        "ICS (Industrial Control Systems) É um exemplo central de OT, usado para controlar processos industriais.",
+        "PLC (Programmable Logic Controller) É um componente físico clássico de OT, controlando equipamentos industriais.",
+        "SCADA É um sistema de OT usado para supervisionar e controlar infraestrutura distribuída geograficamente."
+      ]
+    },
+    {
+      "t": "Active Scanning",
+      "q": "A managed security service provider (MSSP) is deploying a sensor on a new client's network. The service level objectives (SLOs) discussed between the two parties would need to perform vulnerability scans that perform enumerating services and banner grabbing. These services directly interact with the devices/software to identify vulnerabilities. Which method of vulnerability scanning would BEST meet the goals arranged in the SLOs?",
+      "opts": [
+        "Passive",
+        "Static",
+        "Active",
+        "Agentless"
+      ],
+      "ans": 2,
+      "exp": "O scan ativo (active) interage diretamente com os dispositivos/software — enviando pacotes, enumerando serviços e realizando banner grabbing — para identificar vulnerabilidades, o que bate exatamente com os objetivos combinados no SLO.",
+      "w": [
+        "Scans passivos apenas monitoram o tráfego existente, sem interagir diretamente com o dispositivo (sem enumeração de serviços/banner grabbing).",
+        "Análise estática examina código/artefatos sem executá-los, não é um método de varredura de rede que interage com dispositivos.",
+        "Agentless descreve a ausência de agente instalado, não a interação direta via enumeração de serviços."
+      ]
+    },
+    {
+      "t": "Security Baseline Scanning",
+      "q": "A cyber security analyst has performed a scan of multiple target endpoints on the network. The scan assesses the target endpoints configurations and cross-references them to an appointed profile. This scan ensures that devices and software maintain compliance with security requirements continuously. What type of scanning is the specialist performing?",
+      "opts": [
+        "Static scanning",
+        "Security baseline",
+        "Passive scanning",
+        "Dynamic scanning"
+      ],
+      "ans": 1,
+      "exp": "O security baseline scanning compara a configuração atual dos endpoints a um perfil de referência (baseline) aprovado, garantindo conformidade contínua com os requisitos de segurança.",
+      "w": [
+        "Análise estática avalia código-fonte ou binários sem execução, não configurações de endpoints em produção.",
+        "Scans passivos monitoram tráfego de rede, não comparam configurações a um perfil de referência.",
+        "Análise dinâmica testa software em execução (ex: DAST), não é o mesmo que comparar configurações a uma baseline."
+      ]
+    },
+    {
+      "t": "Agentless Scanning",
+      "q": "After a recent audit demonstrated system vulnerabilities, an organization tasked a cyber security specialist with performing a vulnerability scan across their system. Which method should the specialist use for collecting data from endpoints across the network using SSH protocol?",
+      "opts": [
+        "Agent-based",
+        "Agentless",
+        "Passive",
+        "Static"
+      ],
+      "ans": 1,
+      "exp": "O método agentless coleta dados dos endpoints remotamente, sem precisar instalar um agente local, usando protocolos como SSH (Linux/Unix) ou WMI/WinRM (Windows) para autenticar e coletar informações.",
+      "w": [
+        "Agent-based exige instalar um software/agente em cada endpoint — o cenário descreve coleta remota via SSH, sem instalação local.",
+        "Scans passivos apenas observam o tráfego de rede, não coletam dados ativamente via SSH.",
+        "Análise estática não coleta dados de endpoints via protocolos de rede como SSH."
+      ]
+    },
+    {
+      "t": "PCI DSS",
+      "q": "A mid-sized company wants to incorporate e-commerce to improve sales. The company has decided to hire an information security consultant to assist in bolstering security measures in preparation for the company's new changes. The consultant focused on the potential risk associated with storing and processing bank information. What information security standard is the consultant concentrating efforts on?",
+      "opts": [
+        "HIPAA",
+        "SOX",
+        "Payment Card Industry Data Security Standard (PCI DSS)",
+        "GDPR"
+      ],
+      "ans": 2,
+      "exp": "O PCI DSS é o padrão específico voltado à proteção de dados de cartão de pagamento (CHD) — diretamente relevante para uma empresa que vai armazenar e processar informações bancárias no e-commerce.",
+      "w": [
+        "HIPAA regula a proteção de informações de saúde (PHI), não dados de cartão de pagamento.",
+        "SOX (Sarbanes-Oxley) foca em controles financeiros e relatórios contábeis de empresas de capital aberto, não especificamente em dados de cartão.",
+        "GDPR é uma regulação europeia de proteção de dados pessoais em geral, não um padrão específico para dados de cartão de pagamento."
+      ]
+    },
+    {
+      "t": "Regulatory Requirements",
+      "q": "An information security manager is creating a compliance report that will include data on policies and procedures, audit results, employee training, and gap analysis. What is the company promising to follow?",
+      "opts": [
+        "Industry frameworks",
+        "Regulatory requirements",
+        "Security baselines",
+        "Gap analysis"
+      ],
+      "ans": 1,
+      "exp": "Um relatório de conformidade com políticas, resultados de auditoria, treinamento de funcionários e análise de lacunas demonstra que a empresa está cumprindo os requisitos regulatórios (regulatory requirements) aos quais está legalmente obrigada.",
+      "w": [
+        "Frameworks da indústria (como CIS, OWASP) são guias voluntários de boas práticas, não obrigações legais que a empresa 'promete seguir'.",
+        "Security baselines são configurações de referência técnicas, não o compromisso formal de conformidade regulatória.",
+        "Gap analysis é apenas um dos componentes do relatório, não o conceito geral que a empresa está comprovando seguir."
+      ]
+    },
+    {
+      "t": "CIS Benchmarks",
+      "q": "The solutions architect is in charge of assembling the initial security configuration of various systems on the network, such as Mac, Windows, UNIX, and Linux. Where would the architect look for configuration guidelines to cover these different systems?",
+      "opts": [
+        "OWASP Top 10",
+        "Center for Internet Security (CIS) benchmarks",
+        "PCI DSS",
+        "NIST 800-53"
+      ],
+      "ans": 1,
+      "exp": "Os CIS Benchmarks fornecem guias de configuração segura (hardening) detalhados e específicos para diversos sistemas operacionais (Windows, macOS, Linux/UNIX), sendo a referência ideal para configurar múltiplas plataformas com segurança.",
+      "w": [
+        "OWASP Top 10 foca em vulnerabilidades de aplicações web, não em guias de hardening de sistemas operacionais.",
+        "PCI DSS é um padrão de conformidade para dados de cartão de pagamento, não um guia técnico de configuração de SO.",
+        "NIST 800-53 é um catálogo de controles de segurança para sistemas federais, mais amplo e menos prático como guia direto de hardening multiplataforma do que os CIS Benchmarks."
+      ]
+    },
+    {
+      "t": "Fingerprinting",
+      "q": "The security operations center (SOC) manager has ordered an analyst to fingerprint some of a new client's systems. Which of the following aligns most with performing fingerprinting as the SOC manager requested?",
+      "opts": [
+        "Compare the system's configuration against an approved security baseline",
+        "Perform a scan looking to focus attention on individual devices to better understand their purpose",
+        "Passively monitor network traffic to catalog every asset without direct interaction",
+        "Attempt to authenticate to each system using stored credentials to assess patch levels"
+      ],
+      "ans": 1,
+      "exp": "Fingerprinting é o processo de identificar informações detalhadas sobre um dispositivo específico (SO, serviços, versões, finalidade) através de scans direcionados — focando a atenção em ativos individuais para entender melhor seu papel na rede.",
+      "w": [
+        "Isso descreve um scan de security baseline, não o processo de fingerprinting de dispositivos individuais.",
+        "Isso descreve descoberta passiva de ativos, sem o foco de investigação detalhada individual característico do fingerprinting.",
+        "Isso descreve um scan credenciado, focado em autenticação, não especificamente na identificação e caracterização do dispositivo."
+      ]
+    },
+    {
+      "t": "Screened Subnet Firewall",
+      "q": "An analyst reviews an alert that is detecting a rogue backend server being deployed behind the company's load balancer. The analyst attempts multiple map scans in hopes of identifying the possible threat but fails to reach the destination. What problem is presented in this instance?",
+      "opts": [
+        "The rogue server has no open ports for the scanner to detect",
+        "The screened subnet firewall is blocking the scans.",
+        "The scanner is configured for passive scanning only",
+        "The load balancer is performing credentialed authentication"
+      ],
+      "ans": 1,
+      "exp": "Um firewall de subnet triada (screened subnet / DMZ) frequentemente bloqueia varreduras ativas vindas de fora do segmento protegido, impedindo que os pacotes do map scan alcancem o servidor rogue por trás do load balancer.",
+      "w": [
+        "Um servidor sem portas abertas ainda responderia de alguma forma (ex: host down/filtered), não explicaria a falha total em alcançar o destino do jeito descrito.",
+        "Scan passivo não 'tenta alcançar' o destino ativamente — o cenário descreve tentativas ativas de map scan falhando, indicando bloqueio, não configuração passiva.",
+        "Autenticação do load balancer não é a causa de scans de rede falharem em alcançar um host — isso aponta para um problema de rede/firewall."
+      ]
+    },
+    {
+      "t": "SCADA",
+      "q": "A large-scale business needs a system to control field devices with embedded PLCs on multiple sites spread over a large geographical area. What system should an information security program manager choose to best suit the coverage needed for this business?",
+      "opts": [
+        "ICS",
+        "SCADA",
+        "PLC",
+        "DCS"
+      ],
+      "ans": 1,
+      "exp": "SCADA (Supervisory Control and Data Acquisition) é projetado especificamente para monitorar e controlar dispositivos de campo (como PLCs) distribuídos em múltiplos locais geograficamente dispersos, sendo ideal para esse cenário.",
+      "w": [
+        "ICS é o termo genérico/guarda-chuva para sistemas de controle industrial — SCADA é a implementação mais específica para cobertura geográfica ampla.",
+        "PLC é o próprio dispositivo de campo controlado, não o sistema de supervisão de múltiplos sites.",
+        "DCS (Distributed Control System) é tipicamente usado para controle centralizado dentro de UMA planta/instalação, não espalhado por grandes áreas geográficas como o SCADA."
+      ]
+    },
+    {
+      "t": "Reverse Engineering",
+      "q": "What process evaluates the structure of hardware or software to reveal more about its unknown functions?",
+      "opts": [
+        "Fuzzing",
+        "Reverse engineering",
+        "Static analysis",
+        "Penetration testing"
+      ],
+      "ans": 1,
+      "exp": "A engenharia reversa (reverse engineering) desmonta a estrutura de um hardware ou software para entender como ele funciona internamente, revelando funcionalidades desconhecidas ou não documentadas.",
+      "w": [
+        "Fuzzing testa um sistema injetando dados malformados para encontrar falhas, não desmonta sua estrutura para entender seu funcionamento interno.",
+        "Análise estática examina código-fonte/binários em busca de vulnerabilidades específicas, sem necessariamente ter o objetivo amplo de revelar toda a funcionalidade desconhecida.",
+        "Pentest busca explorar vulnerabilidades para simular um ataque, não é o processo de desmontar a estrutura para entender funcionalidades."
+      ]
+    },
+    {
+      "t": "Passive Scanning",
+      "q": "The business's security operations center (SOC) is currently re-evaluating the yearly budget. They decided to use different alternatives, including reduced overhead spending and less intensive resources on the company's current systems. The SOC's final decision was to use a different scanning method that monitors and inspects the network traffic more thoroughly. What method of scanning best matches what the SOC has decided?",
+      "opts": [
+        "Active",
+        "Passive",
+        "Credentialed",
+        "Agent-based"
+      ],
+      "ans": 1,
+      "exp": "O scan passivo monitora e inspeciona o tráfego de rede sem interagir ativamente com os dispositivos, exigindo menos recursos/overhead — alinhado à decisão do SOC de reduzir gastos e usar recursos menos intensivos.",
+      "w": [
+        "Scans ativos interagem diretamente com os dispositivos, consumindo mais recursos — o oposto do que o SOC decidiu fazer para reduzir overhead.",
+        "Scans credenciados exigem autenticação ativa nos sistemas, não é definido pelo nível de overhead de rede.",
+        "Scans baseados em agente exigem instalar e manter software em cada endpoint, aumentando recursos usados, não reduzindo."
+      ]
+    },
+    {
+      "t": "Network Segmentation",
+      "q": "A network administrator is deploying a new layer 3 switch for the company. The manager mentioned that the traffic flow needed to be more predictable, easier to monitor, and simpler to filter. What should the administrator implement during the setup to include the security and performance benefits the manager requested?",
+      "opts": [
+        "Network segmentation",
+        "Agentless scanning",
+        "Passive monitoring",
+        "Credentialed access"
+      ],
+      "ans": 0,
+      "exp": "A segmentação de rede (network segmentation) usando VLANs em um switch de camada 3 torna o fluxo de tráfego mais previsível, fácil de monitorar e simples de filtrar, atendendo aos benefícios de segurança e performance solicitados.",
+      "w": [
+        "Scanning agentless é um método de coleta de dados de vulnerabilidade, não uma técnica de design de rede para tráfego mais previsível.",
+        "Monitoramento passivo observa tráfego, mas não o torna mais previsível ou fácil de filtrar — isso é resultado de segmentação.",
+        "Acesso credenciado trata de autenticação em scans, não da estrutura/segmentação do tráfego de rede."
+      ]
+    },
+    {
+      "t": "External Scanning",
+      "q": "The chief information officer (CIO) has scheduled the quarterly vulnerability scan with a well-trusted vendor for Payment Card Industry Data Security Standard (PCI DSS). What particular scan provides a view of the company's internet-facing systems?",
+      "opts": [
+        "Internal scanning",
+        "External scanning",
+        "Agent-based scanning",
+        "Static scanning"
+      ],
+      "ans": 1,
+      "exp": "O scan externo (external scanning) é realizado a partir de fora do perímetro da rede, fornecendo uma visão de como os sistemas voltados para a internet (internet-facing) aparecem para um atacante externo — requisito comum do PCI DSS.",
+      "w": [
+        "Scans internos avaliam a rede a partir de dentro do perímetro, não a exposição de sistemas voltados à internet.",
+        "Scan baseado em agente é definido pelo método de coleta (agente instalado), não pela perspectiva interna/externa do scan.",
+        "Análise estática examina código/artefatos, não a exposição de rede de sistemas internet-facing."
+      ]
+    },
+    {
+      "t": "Frameworks — ISO",
+      "q": "A company has increased the security operation center (SOC) budget to reassess its cybersecurity framework. The current company's framework revolves around the National Institute of Standards and Technology (NIST) guidelines. Which other organization frameworks could the SOC use its budget to achieve a better security posture?",
+      "opts": [
+        "ISO",
+        "OWASP",
+        "PCI DSS",
+        "HIPAA"
+      ],
+      "ans": 0,
+      "exp": "A ISO (International Organization for Standardization), com normas como a ISO/IEC 27001, é outro framework de segurança amplamente reconhecido que complementa o NIST, ajudando a fortalecer a postura de segurança da organização.",
+      "w": [
+        "OWASP foca especificamente em segurança de aplicações web, não é um framework geral de gestão de segurança da informação como o NIST.",
+        "PCI DSS é um padrão de conformidade específico para dados de cartão de pagamento, não um framework geral alternativo ao NIST.",
+        "HIPAA é uma lei/regulação de proteção de dados de saúde nos EUA, não um framework internacional de segurança da informação."
+      ]
+    },
+    {
+      "t": "OWASP",
+      "q": "A front-end developer must harden security for the company's new web application. The developer notices that some vulnerabilities include broken authentication, cross-site scripting, and structured query language (SQL) injection attacks. Which of the following could provide resources to solve the issues afflicting the company's website?",
+      "opts": [
+        "CIS Benchmarks",
+        "OWASP",
+        "PCI DSS",
+        "NIST CSF"
+      ],
+      "ans": 1,
+      "exp": "A OWASP (Open Worldwide Application Security Project) fornece recursos específicos — como o OWASP Top 10 — sobre vulnerabilidades de aplicações web, incluindo broken authentication, XSS e SQL injection.",
+      "w": [
+        "CIS Benchmarks oferecem guias de hardening de sistemas operacionais e infraestrutura, não são o recurso mais focado em vulnerabilidades específicas de aplicações web.",
+        "PCI DSS é um padrão de conformidade para dados de pagamento, não um recurso técnico específico sobre vulnerabilidades de aplicações web.",
+        "NIST CSF é um framework geral de gestão de risco de cibersegurança, não um recurso especializado nas vulnerabilidades web citadas."
+      ]
+    },
+    {
+      "t": "Fuzzing",
+      "q": "The company's login page needs testing after their cyber security engineer implemented hardening techniques. As a result, its penetration testing team assigned the website specialist to perform some tests to ensure the changes were stable. What specifically is the specialist attempting when using fuzzing tools to perform the tests?",
+      "opts": [
+        "Comparing the login page's configuration against an approved security baseline",
+        "Passively capturing traffic to and from the login page without direct interaction",
+        "Identifying problems and issues with the webpage by purposely inputting or injecting malformed data",
+        "Authenticating with valid credentials to assess the login page's patch level"
+      ],
+      "ans": 2,
+      "exp": "Fuzzing é uma técnica de teste que insere ou injeta deliberadamente dados malformados, inesperados ou aleatórios na aplicação para identificar falhas, travamentos ou comportamentos inesperados que indiquem vulnerabilidades.",
+      "w": [
+        "Isso descreve um scan de security baseline, não uma técnica de fuzzing baseada em injeção de dados malformados.",
+        "Isso descreve captura passiva de tráfego, sem a injeção ativa de dados malformados característica do fuzzing.",
+        "Isso descreve um scan credenciado, focado em autenticação — não a técnica de injetar dados malformados para achar falhas."
+      ]
+    },
+    {
+      "t": "Industrial Control Systems (ICS)",
+      "q": "A network reliability engineer for a commercial dairy company receives an alert from the sensor in refrigeration unit 7. It shows the cooler as 15 degrees higher than usual, and the backup refrigeration units are working at max capacity to control the increase in temperature. The engineer alerts the floor manager on shift to distribute inventory to nearby coolers and send a maintenance specialist to resolve the issue. What type of controls saved the company's inventory from a catastrophe?",
+      "opts": [
+        "Building automation system (BAS)",
+        "Industrial control systems (ICSs)",
+        "Supervisory workstation",
+        "Network intrusion detection system (NIDS)"
+      ],
+      "ans": 1,
+      "exp": "Os sensores de temperatura, os controles automatizados das unidades de refrigeração de backup e o alerta que aciona a resposta operacional são exemplos clássicos de sistemas de controle industrial (ICS), usados para monitorar e controlar processos físicos como refrigeração comercial.",
+      "w": [
+        "BAS foca tipicamente em sistemas prediais (HVAC, iluminação, acesso), não é o termo mais preciso para controle de processos industriais/refrigeração comercial dedicados.",
+        "Uma estação de trabalho supervisória é apenas um componente de interface dentro de um ICS/SCADA, não o sistema de controle completo descrito.",
+        "NIDS detecta intrusões em tráfego de rede, não controla fisicamente equipamentos de refrigeração."
+      ]
+    },
+    {
+      "t": "Sensitivity Levels",
+      "q": "An information architect is currently in the process of labeling data assets for inventory use. The data inventory contains intellectual property, customer data, and confidential corporate data. How does the architect catalog these data types into the inventory?",
+      "opts": [
+        "Sensitivity levels",
+        "Regulatory requirements",
+        "Industry frameworks",
+        "Scan schedules"
+      ],
+      "ans": 0,
+      "exp": "Ao catalogar ativos de dados como propriedade intelectual, dados de clientes e dados corporativos confidenciais, o arquiteto de informação os classifica por níveis de sensibilidade (sensitivity levels) — determinando quais controles de proteção cada categoria exige.",
+      "w": [
+        "Requisitos regulatórios determinam obrigações legais externas, não a forma como os dados são classificados internamente por sensibilidade.",
+        "Frameworks da indústria fornecem boas práticas gerais, não o esquema específico de classificação de dados por sensibilidade.",
+        "Cronogramas de scan definem quando as varreduras ocorrem, não têm relação com a catalogação/classificação de dados."
+      ]
+    }
+  ]
+}
