@@ -455,7 +455,7 @@
           <div class="home-card oficial" onclick="showView('oficial')">
             <div class="home-card-eyebrow">Banco Oficial CertMaster</div>
             <h3>Questões Oficiais CS0-003</h3>
-            <p>147 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (item 2.1).</p>
+            <p>172 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (itens 2.1 e 2.2).</p>
           </div>
         </div>
       </div>
@@ -1268,7 +1268,7 @@
       <div class="domain-header" style="border-left-color:#ab7fff">
         <div class="domain-eyebrow" style="color:#ab7fff">CertMaster Practice — CS0-003</div>
         <h2>Domínio 2.0 — Vulnerability Management</h2>
-        <p>Banco oficial do CertMaster Practice. Item 2.1 da ementa oficial do Domínio 2.</p>
+        <p>Banco oficial do CertMaster Practice. Itens 2.1 e 2.2 da ementa oficial do Domínio 2.</p>
       </div>
 
       <div class="objective" id="obj-2.1">
@@ -1315,6 +1315,48 @@
             <button class="btn-reset" onclick="resetSection('2.1')">Sortear Novas</button>
           </div>
           <div id="qlist-2.1"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-2.2">
+        <div class="obj-title" onclick="toggleObjective('obj-2.2')">
+          <span class="obj-num">2.2</span>
+          <h3>Análise de Saídas de Ferramentas de Avaliação de Vulnerabilidade</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">Network Scanning — Angry IP Scanner</span>
+              <span class="topic-pill">Network Scanning — Maltego</span>
+              <span class="topic-pill">Network Scanning — Nmap/Zenmap</span>
+              <span class="topic-pill">Web App Scanning — Burp Suite</span>
+              <span class="topic-pill">Web App Scanning — OWASP ZAP</span>
+              <span class="topic-pill">Web App Scanning — Arachni</span>
+              <span class="topic-pill">Web App Scanning — Nikto</span>
+              <span class="topic-pill">Vulnerability Scanning — Nessus</span>
+              <span class="topic-pill">Vulnerability Scanning — OpenVAS</span>
+              <span class="topic-pill">Vulnerability Scanning — OpenSCAP</span>
+              <span class="topic-pill">Debuggers — Disassembly</span>
+              <span class="topic-pill">Multipurpose — Metasploit Framework</span>
+              <span class="topic-pill">Multipurpose — Recon-ng</span>
+              <span class="topic-pill">Cloud — ScoutSuite</span>
+              <span class="topic-pill">Cloud — Prowler</span>
+              <span class="topic-pill">Cloud — Pacu</span>
+              <span class="topic-pill">Reverse Engineering</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 2.2 (<em>"Given a scenario, analyze the output from common vulnerability assessment tools"</em>): interpretação de resultados de ferramentas de scanning de rede (Angry IP Scanner, Maltego, Nmap/Zenmap), scanning de aplicações web (Burp Suite, OWASP ZAP, Arachni, Nikto), scanners de vulnerabilidade (Nessus, OpenVAS, OpenSCAP), debuggers e engenharia reversa (janelas de disassembly), frameworks multiuso de exploração (Metasploit Framework, Recon-ng) e ferramentas de avaliação de infraestrutura em nuvem (ScoutSuite, Prowler, Pacu) — sabendo onde, em cada interface, encontrar detalhes de risco, remediação e evidência técnica de cada achado.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 2.2 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-2.2">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-2.2"></div></div>
+            <button class="btn-reset" onclick="resetSection('2.2')">Sortear Novas</button>
+          </div>
+          <div id="qlist-2.2"></div>
         </div>
       </div>
 
@@ -1430,7 +1472,7 @@
 
       function initAllSections() {
         const courseTopics = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
-        const oficialTopics = ["1.1","1.2","1.3","1.4","1.5","2.1"];
+        const oficialTopics = ["1.1","1.2","1.3","1.4","1.5","2.1","2.2"];
         courseTopics.forEach((topic) => selectAndRenderSection(topic));
         oficialTopics.forEach((topic) => selectAndRenderSection(topic));
         selectAndRenderMaster("master", courseDb);

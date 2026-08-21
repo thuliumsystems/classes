@@ -2509,5 +2509,432 @@
         "Cronogramas de scan definem quando as varreduras ocorrem, não têm relação com a catalogação/classificação de dados."
       ]
     }
+  ],
+  "2.2": [
+    {
+      "t": "OWASP ZAP",
+      "q": "After performing an automated scan on the OWASP Zed Attack Proxy (ZAP) tool, where can a security analyst find detailed information about a vulnerability finding such as cross-site scripting and its associated risk level?",
+      "opts": [
+        "Alerts tab",
+        "Sites tab",
+        "History tab",
+        "Spider tab"
+      ],
+      "ans": 0,
+      "exp": "A Alerts tab do ZAP lista cada vulnerabilidade encontrada (ex: XSS) com nível de risco, descrição e detalhes técnicos.",
+      "w": [
+        "Sites tab mostra a árvore de URLs/estrutura do site alvo, não detalhes de vulnerabilidade.",
+        "History tab mostra o histórico de requisições/respostas HTTP capturadas, não uma análise de risco.",
+        "Spider tab mostra o progresso do crawler (spider) que descobre URLs, não achados de vulnerabilidade."
+      ]
+    },
+    {
+      "t": "Arachni",
+      "q": "When reviewing the issues on the Arachni web user interface (UI), how can a web administrator determine the way in which the system detected a cross-site scripting vulnerability on a targeted site?",
+      "opts": [
+        "Check the input section",
+        "Check the response headers section",
+        "Check the scan coverage section",
+        "Check the plugin results section"
+      ],
+      "ans": 0,
+      "exp": "A seção \"Input\" no relatório de issue do Arachni mostra o parâmetro/vetor de entrada e o payload usado, revelando exatamente como a vulnerabilidade foi detectada.",
+      "w": [
+        "Response headers section mostra os cabeçalhos HTTP retornados, não o vetor/payload usado na detecção.",
+        "Scan coverage section mostra quais páginas/URLs foram cobertas no scan, não os detalhes técnicos da detecção.",
+        "Plugin results section mostra resultados de plugins auxiliares (ex: fingerprinting), não o método de detecção da vulnerabilidade específica."
+      ]
+    },
+    {
+      "t": "OWASP ZAP",
+      "q": "Where would a network administrator find cross-domain misconfiguration in the Open Web Application Security Project (OWASP) Zed Attack Proxy (ZAP) application after an automated scan of the local web server?",
+      "opts": [
+        "Alerts tab",
+        "Break points tab",
+        "Scripts tab",
+        "Active Scan tab"
+      ],
+      "ans": 0,
+      "exp": "Assim como outras vulnerabilidades identificadas pelo ZAP, misconfigurações de CORS/cross-domain aparecem listadas na Alerts tab, com nível de risco e descrição.",
+      "w": [
+        "Break points tab é usada para pausar e modificar requisições/respostas em tempo real, não para listar achados.",
+        "Scripts tab é onde scripts customizados são gerenciados no ZAP, não onde os alertas aparecem.",
+        "Active Scan tab mostra o progresso do scan ativo em andamento, não os detalhes das vulnerabilidades encontradas."
+      ]
+    },
+    {
+      "t": "Cloud — Prowler",
+      "q": "A cloud administrator has to perform regulatory compliance checks on a legal office's cloud instances and evaluate the office's cloud infrastructure against the Center for Internet Security (CIS) Benchmarks for Amazon Web Services (AWS). Which of the following tools would the administrator most likely use to easily carry out the tasks?",
+      "opts": [
+        "Prowler",
+        "Nikto",
+        "Angry IP Scanner",
+        "Recon-ng"
+      ],
+      "ans": 0,
+      "exp": "Prowler é uma ferramenta open-source de auditoria de segurança para AWS (e outras clouds) que avalia a infraestrutura diretamente contra os CIS Benchmarks e outros frameworks de compliance.",
+      "w": [
+        "Nikto é um scanner de vulnerabilidades para servidores web, não uma ferramenta de auditoria de compliance em nuvem.",
+        "Angry IP Scanner é um scanner de rede rápido para descoberta de hosts/portas, sem recursos de compliance em nuvem.",
+        "Recon-ng é um framework de reconhecimento OSINT, não uma ferramenta de auditoria contra CIS Benchmarks."
+      ]
+    },
+    {
+      "t": "Nikto",
+      "q": "A web administrator reviews a scan report of a web server that suggests a site allows for directory listings remotely and that the organization should upgrade the server to version 2.5.3 or higher. The report also shares a few other PHP errors. Which of the following tools would provide this information via the command line only?",
+      "opts": [
+        "Nikto",
+        "Burp Suite",
+        "OWASP ZAP",
+        "Arachni"
+      ],
+      "ans": 0,
+      "exp": "Nikto é um scanner de vulnerabilidades web executado inteiramente via linha de comando, que identifica problemas como directory listing, versões de servidor desatualizadas e erros de configuração PHP.",
+      "w": [
+        "Burp Suite é primariamente uma ferramenta com interface gráfica (proxy/scanner interativo), não uma ferramenta somente de linha de comando.",
+        "OWASP ZAP também oferece GUI completa como sua interface principal, além de modo headless, mas não é \"somente linha de comando\" como o Nikto.",
+        "Arachni possui uma interface web (WebUI) para visualização dos resultados, não é restrito à linha de comando."
+      ]
+    },
+    {
+      "t": "Burp Suite",
+      "q": "After a quick scan of a target URL, a security analyst is looking for detailed information in the dashboard about a few issues found in the \"issue activity\" panel of the Burp Suite tool's integrated web browser. Where can the security analyst find help to resolve those same issues?",
+      "opts": [
+        "Advisory tab",
+        "Target tab",
+        "Intruder tab",
+        "Repeater tab"
+      ],
+      "ans": 0,
+      "exp": "A Advisory tab no painel de detalhes de um issue do Burp Suite traz a descrição da vulnerabilidade, seu impacto e recomendações de remediação.",
+      "w": [
+        "Target tab mostra a estrutura de site/escopo alvo, não orientações de remediação.",
+        "Intruder tab é usada para automatizar ataques customizados (ex: brute force, fuzzing), não para consultar recomendações.",
+        "Repeater tab permite reenviar e modificar requisições manualmente, não oferece orientação de correção."
+      ]
+    },
+    {
+      "t": "Arachni",
+      "q": "Where can a security analyst go on the Arachni web user interface (UI) to load balance the work on scanning multiple URL targets from remote machines?",
+      "opts": [
+        "Dispatcher's section",
+        "Plugins section",
+        "Reports section",
+        "Profiles section"
+      ],
+      "ans": 0,
+      "exp": "A seção Dispatcher do Arachni gerencia e distribui (load balance) o trabalho de scan entre múltiplas instâncias/máquinas remotas.",
+      "w": [
+        "Plugins section gerencia plugins auxiliares que estendem funcionalidades do scan, não a distribuição de carga entre máquinas.",
+        "Reports section é onde os relatórios gerados são visualizados/exportados, não onde se configura distribuição de scans.",
+        "Profiles section armazena perfis de configuração de scan salvos, não a orquestração entre máquinas remotas."
+      ]
+    },
+    {
+      "t": "Metasploit Framework",
+      "q": "Which of the following tools will allow a security analyst to run the module auxiliary/admin/networking/cisco_secure_acs_bypass to scan for vulnerabilities on a Cisco device?",
+      "opts": [
+        "Metasploit Framework",
+        "Pacu",
+        "Recon-ng",
+        "Angry IP Scanner"
+      ],
+      "ans": 0,
+      "exp": "Módulos no formato \"auxiliary/admin/...\" são a estrutura padrão de módulos do Metasploit Framework, usada para explorar/testar vulnerabilidades específicas, como no dispositivo Cisco Secure ACS.",
+      "w": [
+        "Pacu é um framework de exploração voltado especificamente para ambientes AWS, não usa módulos \"auxiliary\" no formato do Metasploit.",
+        "Recon-ng é um framework de reconhecimento OSINT baseado em módulos próprios, não executa módulos \"auxiliary\" do Metasploit.",
+        "Angry IP Scanner é apenas um scanner de rede simples, sem sistema de módulos de exploração."
+      ]
+    },
+    {
+      "t": "Cloud — ScoutSuite",
+      "q": "A security analyst has to review the Amazon Web Service (AWS) compute instances for an organization and report security findings. Where would the analyst find a list of all such findings when using the ScoutSuite auditing tool?",
+      "opts": [
+        "EC2 dashboard",
+        "IAM dashboard",
+        "S3 dashboard",
+        "VPC dashboard"
+      ],
+      "ans": 0,
+      "exp": "O ScoutSuite organiza seus achados por serviço da AWS; como instâncias de computação são fornecidas pelo EC2, os achados relacionados aparecem no EC2 dashboard do relatório.",
+      "w": [
+        "IAM dashboard reúne achados sobre identidades, permissões e políticas de acesso, não sobre instâncias de computação.",
+        "S3 dashboard reúne achados sobre buckets de armazenamento, não sobre instâncias de computação.",
+        "VPC dashboard reúne achados sobre configuração de rede virtual, não especificamente sobre as instâncias de computação em si."
+      ]
+    },
+    {
+      "t": "Cloud — Prowler",
+      "q": "The HTML report from the Prowler assessment tool confirmed that the Amazon Web Services (AWS) account does not currently support the virtual authenticator application on company smartphones for the root account. However, the root account can still access all services. When examining the report, what can a security administrator check to find out more information about this security finding?",
+      "opts": [
+        "Check status extended column",
+        "Check the compliance summary column",
+        "Check the region column",
+        "Check the severity column"
+      ],
+      "ans": 0,
+      "exp": "A coluna \"status extended\" no relatório do Prowler traz o detalhe textual explicando exatamente por que um check falhou ou passou, incluindo a causa específica do achado (ex: MFA não habilitada para o root).",
+      "w": [
+        "Compliance summary column resume o percentual geral de conformidade por framework, não o detalhe individual do achado.",
+        "Region column apenas indica em qual região da AWS o recurso avaliado está localizado.",
+        "Severity column mostra apenas o nível de criticidade do achado (ex: high/medium), não a explicação detalhada da causa."
+      ]
+    },
+    {
+      "t": "Cloud — AWS S3",
+      "q": "The network team is assessing the cloud infrastructure of an Amazon Web Services (AWS) account and needs to determine which groups have access to the cloud storage. Where should the network team search for the information in the HTML report?",
+      "opts": [
+        "S3 buckets config",
+        "IAM policy summary",
+        "CloudTrail logs section",
+        "EC2 security groups"
+      ],
+      "ans": 0,
+      "exp": "Permissões de acesso ao armazenamento em nuvem (buckets) ficam documentadas na seção de configuração dos S3 buckets do relatório, mostrando quais grupos/usuários têm acesso.",
+      "w": [
+        "IAM policy summary mostra políticas de permissão de forma geral, mas não é onde as configurações específicas de acesso aos buckets S3 aparecem detalhadas.",
+        "CloudTrail logs section registra eventos/chamadas de API já realizadas, não a configuração de acesso atual dos buckets.",
+        "EC2 security groups controlam tráfego de rede para instâncias EC2, não o acesso a buckets de armazenamento S3."
+      ]
+    },
+    {
+      "t": "Debuggers/Disassembly",
+      "q": "One of the debugging application's windows shows a light blue name, LoadLibraryA, in a single column. What is the purpose of these callouts, as displayed in the disassembly window of the application?",
+      "opts": [
+        "Program functions",
+        "Memory addresses",
+        "Register values",
+        "Breakpoint markers"
+      ],
+      "ans": 0,
+      "exp": "Nomes destacados como LoadLibraryA na janela de disassembly identificam chamadas a funções (ex: funções de API do Windows) referenciadas pelo código, facilitando a engenharia reversa.",
+      "w": [
+        "Memory addresses são exibidos como valores hexadecimais numéricos, não como nomes de função destacados.",
+        "Register values mostram o conteúdo dos registradores da CPU (ex: EAX, EBX), não nomes de funções chamadas.",
+        "Breakpoint markers indicam pontos onde a execução foi pausada intencionalmente, não identificam funções de API."
+      ]
+    },
+    {
+      "t": "Burp Suite",
+      "q": "The \"intruder\" feature of the Burp Suite can provide an output of vulnerable elements on a web page displayed on the suite's integrated browser. Using default settings, how can an administrator quickly identify which login page elements, for example, are potentially vulnerable?",
+      "opts": [
+        "Review items highlighted in green",
+        "Review items highlighted in red",
+        "Review items marked with a star",
+        "Review items sorted by length"
+      ],
+      "ans": 0,
+      "exp": "Por padrão, o Intruder do Burp Suite destaca em verde as respostas/elementos que indicam resultados potencialmente interessantes ou vulneráveis, facilitando a triagem rápida.",
+      "w": [
+        "O destaque em vermelho não é o padrão usado pelo Intruder para indicar elementos potencialmente vulneráveis.",
+        "Marcação com estrela não é um recurso padrão de destaque de vulnerabilidade no Intruder.",
+        "Ordenar por tamanho de resposta é uma técnica manual de análise, não o destaque automático padrão do Intruder."
+      ]
+    },
+    {
+      "t": "Cloud — Pacu",
+      "q": "When trying to exploit an Amazon Web Services (AWS) account using the Pacu exploitation tool, the security administrator receives the following line: Found role: arn:aws:iam::896747040350:role/Admin. Which of the following modules is the security administrator running at this time?",
+      "opts": [
+        "iam_enum_roles",
+        "iam_privesc_scan",
+        "s3_bucket_dump",
+        "ec2_enum"
+      ],
+      "ans": 0,
+      "exp": "O módulo iam_enum_roles do Pacu enumera roles do IAM disponíveis na conta AWS, retornando os ARNs encontrados como no exemplo mostrado.",
+      "w": [
+        "iam_privesc_scan busca caminhos de escalonamento de privilégio a partir de permissões existentes, não apenas enumera roles.",
+        "s3_bucket_dump extrai conteúdo de buckets S3, não enumera roles do IAM.",
+        "ec2_enum enumera instâncias e recursos EC2, não roles do IAM."
+      ]
+    },
+    {
+      "t": "Maltego",
+      "q": "A network security engineer provided a report to the operations manager with a large amount of public information that is accessible solely from the company's website. For example, the report shows email addresses and other company phone numbers on a graph that would otherwise be known internally. What tool did the network security engineer most likely use to gather this information with little effort?",
+      "opts": [
+        "Maltego",
+        "Nikto",
+        "Angry IP Scanner",
+        "Nmap"
+      ],
+      "ans": 0,
+      "exp": "Maltego é uma ferramenta OSINT que coleta e correlaciona informações públicas (ex: e-mails, telefones, domínios) e as apresenta visualmente em um grafo de relacionamentos, com pouco esforço manual.",
+      "w": [
+        "Nikto é um scanner de vulnerabilidades web, não uma ferramenta de coleta e visualização de OSINT.",
+        "Angry IP Scanner é um scanner de rede para descoberta de hosts, sem recursos de OSINT ou visualização em grafo.",
+        "Nmap é uma ferramenta de descoberta e mapeamento de rede, não de coleta de informações públicas em grafo."
+      ]
+    },
+    {
+      "t": "Recon-ng",
+      "q": "When performing reconnaissance on multiple websites, how would a security engineer organize information to keep all reconnaissance campaigns isolated from one another in recon-ng?",
+      "opts": [
+        "Create workspaces",
+        "Create separate modules",
+        "Create custom reports",
+        "Create new API keys"
+      ],
+      "ans": 0,
+      "exp": "No recon-ng, workspaces isolam completamente os dados coletados (hosts, domínios, credenciais etc.) de cada campanha de reconhecimento, permitindo organizar múltiplos alvos separadamente.",
+      "w": [
+        "Módulos no recon-ng são os componentes que executam tarefas específicas de coleta, não uma forma de isolar dados entre campanhas.",
+        "Relatórios customizados apenas apresentam os dados já coletados, não isolam ou organizam campanhas diferentes.",
+        "Chaves de API são credenciais para acessar serviços externos usados pelos módulos, não uma forma de segregar campanhas."
+      ]
+    },
+    {
+      "t": "Vulnerability Scanning",
+      "q": "An information security project manager of a large corporation suggests the security operations center (SOC) should replace the current vulnerability scanner with a more cost-efficient, open-source alternative that still retains strong scanning capabilities comparable to their current closed-source (proprietary) software. Which of the following tools should the project manager NOT propose as a suitable open-source alternative?",
+      "opts": [
+        "Nessus",
+        "OpenVAS",
+        "OpenSCAP",
+        "OWASP ZAP"
+      ],
+      "ans": 0,
+      "exp": "Nessus é um scanner de vulnerabilidades comercial/proprietário (closed-source) — ainda que ofereça uma versão gratuita limitada, não é a alternativa open-source que o gerente deveria propor; OpenVAS e OpenSCAP são as opções open-source corretas citadas no objetivo 2.2 da CompTIA.",
+      "w": [
+        "OpenVAS é de fato uma alternativa open-source robusta e amplamente reconhecida a scanners proprietários, sendo uma opção válida para a proposta.",
+        "OpenSCAP é de fato uma alternativa open-source válida, focada em compliance e configuração, sendo uma opção adequada para a proposta.",
+        "OWASP ZAP também é uma ferramenta open-source (embora focada em aplicações web), sendo uma alternativa gratuita válida em muitos contextos."
+      ]
+    },
+    {
+      "t": "Cloud — Prowler",
+      "q": "An administrator logged onto the Amazon Web Services (AWS) account and found that multi-factor authentication (MFA) was unnecessary to gain access. After running a quick scan using the Prowler assessment tool, the administrator discovered why MFA was not running. What part of the report confirmed the administrator's suspicions?",
+      "opts": [
+        "Check status extended column",
+        "Check the resource ID column",
+        "Check the timestamp column",
+        "Check the account alias column"
+      ],
+      "ans": 0,
+      "exp": "Assim como em outros achados do Prowler, a coluna \"status extended\" fornece o motivo detalhado por trás do resultado do check — nesse caso, por que a MFA não estava habilitada/aplicada.",
+      "w": [
+        "Resource ID column apenas identifica o recurso avaliado (ex: ID do usuário/conta), sem explicar a causa do achado.",
+        "Timestamp column mostra quando o check foi executado, não o motivo do achado.",
+        "Account alias column mostra apenas o nome/alias da conta AWS, não detalhes do achado de segurança."
+      ]
+    },
+    {
+      "t": "Maltego",
+      "q": "A security operations center (SOC) incident response analyst needs to know the entanglement of systems during an attack as quickly as possible. Therefore, the analyst needs a tool that can help quickly identify the relationships through visualization. Which tool could help the analyst investigate an emerging attack?",
+      "opts": [
+        "Maltego",
+        "Nikto",
+        "Metasploit Framework",
+        "Nmap"
+      ],
+      "ans": 0,
+      "exp": "Maltego é voltada para correlacionar e visualizar relacionamentos entre entidades (sistemas, IPs, domínios, contas) em forma de grafo, ajudando a entender rapidamente o \"entrelaçamento\" de sistemas durante um ataque.",
+      "w": [
+        "Nikto é um scanner de vulnerabilidades web, sem recursos de visualização de relacionamentos entre sistemas.",
+        "Metasploit Framework é uma ferramenta de exploração de vulnerabilidades, não de visualização/correlação de relacionamentos.",
+        "Nmap mapeia hosts e portas em uma rede, mas não oferece visualização de relacionamentos entre entidades como o Maltego."
+      ]
+    },
+    {
+      "t": "Angry IP Scanner",
+      "q": "When using the Angry IP Scanner, how would a network security officer determine if a number of devices on the network are accessible via TELNET?",
+      "opts": [
+        "Check for port 23",
+        "Check for port 21",
+        "Check for port 22",
+        "Check for port 25"
+      ],
+      "ans": 0,
+      "exp": "TELNET usa por padrão a porta 23; ao configurar o Angry IP Scanner para verificar essa porta, é possível identificar quais dispositivos estão acessíveis via TELNET.",
+      "w": [
+        "Porta 21 é a porta padrão do FTP, não do TELNET.",
+        "Porta 22 é a porta padrão do SSH, não do TELNET.",
+        "Porta 25 é a porta padrão do SMTP, não do TELNET."
+      ]
+    },
+    {
+      "t": "Metasploit Framework",
+      "q": "When using the Metasploit web interface for brute force exploits, what can a security administrator review to determine the number of compromised targets in the attack and whether the target shows a \"Failed\" or \"Succeeded\" result?",
+      "opts": [
+        "Statistics section",
+        "Sessions section",
+        "Credentials section",
+        "Modules section"
+      ],
+      "ans": 0,
+      "exp": "A seção Statistics da interface web do Metasploit exibe um resumo agregado dos resultados do ataque, incluindo quantos alvos tiveram sucesso (\"Succeeded\") ou falha (\"Failed\").",
+      "w": [
+        "Sessions section lista as sessões ativas já estabelecidas em alvos comprometidos, não o resumo estatístico de sucesso/falha do ataque.",
+        "Credentials section armazena as credenciais descobertas/testadas, não o resumo de resultados por alvo.",
+        "Modules section lista os módulos de exploração disponíveis no Metasploit, não os resultados do ataque em execução."
+      ]
+    },
+    {
+      "t": "Cloud — Pacu",
+      "q": "When using the Pacu tool to test the Amazon Web Services (AWS) account for open vulnerabilities, the external security team gained a session token and carried out other vulnerability tests on the AWS account. Although the security team could perform tests on the account for only an hour, what would be the most alarming conclusion about this test case?",
+      "opts": [
+        "Access was granted without knowing passwords.",
+        "The test took less than an hour to complete.",
+        "The security team used an external tool to test the account.",
+        "Only one session token was issued during the test."
+      ],
+      "ans": 0,
+      "exp": "O ponto mais alarmante é que a equipe conseguiu acesso e realizou testes de vulnerabilidade sem nunca precisar conhecer as senhas da conta — indicando uma falha grave de controle de acesso/autenticação.",
+      "w": [
+        "A duração curta do teste (uma hora) não é, por si só, um problema de segurança — pelo contrário, mostra escopo controlado.",
+        "Usar uma ferramenta externa (Pacu) é esperado e apropriado em um teste de penetração autorizado, não é motivo de alarme.",
+        "A quantidade de tokens emitidos durante o teste não é o ponto central de preocupação relatado no cenário."
+      ]
+    },
+    {
+      "t": "Burp Suite",
+      "q": "After scanning a website with the Burp Suite scanning tool, the web administrators ask for the web URL paths associated with the specific findings. Where can a security analyst find these URL paths in the tool?",
+      "opts": [
+        "Target section",
+        "Advisory section",
+        "Repeater section",
+        "Comparer section"
+      ],
+      "ans": 0,
+      "exp": "A Target section do Burp Suite organiza os achados por estrutura de URL/site, permitindo localizar exatamente quais caminhos (paths) estão associados a cada vulnerabilidade encontrada.",
+      "w": [
+        "Advisory section traz a descrição/recomendação de correção da vulnerabilidade, não a listagem de paths de URL.",
+        "Repeater section é usada para reenviar e ajustar requisições manualmente, não para listar URLs associadas a achados.",
+        "Comparer section é usada para comparar duas respostas/requisições lado a lado, não para listar paths de URL."
+      ]
+    },
+    {
+      "t": "Nmap/Zenmap",
+      "q": "Using the Zenmap Graphical User Interface (GUI), the security administrator can quickly scan a network and map its topology in concentric rings where each ring represents a hop from the central node. Which tool is the security administrator using in this case?",
+      "opts": [
+        "Nmap",
+        "Metasploit Framework",
+        "Wireshark",
+        "Angry IP Scanner"
+      ],
+      "ans": 0,
+      "exp": "Zenmap é a interface gráfica oficial do Nmap; o recurso descrito (mapa de topologia em anéis concêntricos por hop) é a visualização \"Topology\" do Zenmap/Nmap.",
+      "w": [
+        "Metasploit Framework é uma ferramenta de exploração, sem esse recurso de visualização de topologia em anéis.",
+        "Wireshark é um analisador de pacotes de rede, não oferece esse tipo de mapa de topologia em anéis concêntricos.",
+        "Angry IP Scanner é um scanner simples de IPs/portas, sem recursos de visualização gráfica de topologia."
+      ]
+    },
+    {
+      "t": "Nmap/Zenmap",
+      "q": "When checking the scan output from the Nmap tool, an administrator wants to determine the type of applications or services that are using an open port. Which of the following would NOT directly help the administrator identify this?",
+      "opts": [
+        "Check the traceroute hop count",
+        "Check service information",
+        "Check port information",
+        "Check the version detection output"
+      ],
+      "ans": 0,
+      "exp": "O número de saltos (hops) do traceroute mostra apenas a rota de rede até o alvo — não identifica quais aplicações ou serviços estão associados a uma porta aberta.",
+      "w": [
+        "A informação de serviço (service) do Nmap de fato identifica qual serviço está associado à porta aberta, sendo uma forma correta de determinar isso.",
+        "A informação de porta (port) do Nmap de fato mostra o estado e a associação típica de serviço da porta, sendo uma forma correta de determinar isso.",
+        "A saída de detecção de versão (-sV) do Nmap de fato identifica a aplicação e versão específica rodando na porta, sendo uma forma correta de determinar isso."
+      ]
+    }
   ]
 }
