@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NCO MOI Questions</title>
+    <style>
+      :root { --bg:#080d18; --panel:#111827; --panel2:#1a2332; --border:#293548; --gold:#fbbf24; --muted:#94a3b8; --text:#e5e7eb; --green:#34d399; --red:#fb7185; }
+      * { box-sizing:border-box; margin:0; padding:0; }
+      body { min-height:100vh; padding:24px; color:var(--text); background:linear-gradient(135deg,var(--bg),#111827 52%,#0c1728); font-family:Inter,system-ui,sans-serif; }
+      .wrap { width:min(100%,900px); margin:auto; }
+      a { color:var(--muted); text-decoration:none; }
+      a:hover { color:var(--gold); }
+      .back { display:inline-block; margin-bottom:28px; font-size:13px; font-weight:700; }
+      header { margin-bottom:24px; }
+      .eyebrow { color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+      h1 { margin-top:8px; color:#f8fafc; font-size:clamp(28px,5vw,44px); }
+      .intro { max-width:680px; margin-top:10px; color:var(--muted); line-height:1.6; }
+      .toolbar,.quiz,.result { padding:20px; background:rgba(17,24,39,.9); border:1px solid var(--border); border-radius:16px; }
+      .toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+      .progress { color:var(--muted); font-size:13px; font-weight:700; }
+      button { border:0; border-radius:9px; padding:11px 16px; color:#111827; background:var(--gold); font:inherit; font-size:13px; font-weight:800; cursor:pointer; }
+      button.secondary { color:var(--text); background:#334155; }
+      button:hover { filter:brightness(1.12); }
+      .category { color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+      h2 { margin-top:10px; font-size:clamp(20px,3vw,27px); line-height:1.3; }
+      .options { display:grid; gap:11px; margin-top:24px; }
+      .option { width:100%; padding:14px 16px; border:1px solid var(--border); border-radius:11px; color:var(--text); background:var(--panel2); text-align:left; font-weight:600; line-height:1.45; }
+      .option.selected { border-color:var(--gold); background:#3b2d0c; }
+      .option.correct { border-color:var(--green); background:#073b2d; }
+      .option.wrong { border-color:var(--red); background:#481d2c; }
+      .feedback { min-height:24px; margin-top:18px; color:var(--muted); line-height:1.5; }
+      .feedback.good { color:var(--green); } .feedback.bad { color:var(--red); }
+      .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:18px; }
+      .result { display:none; margin-top:18px; text-align:center; }
+      .result h2 { margin:0; color:var(--gold); }
+      .result p { margin:12px 0 18px; color:var(--muted); }
+      .source { margin-top:18px; color:#64748b; font-size:12px; line-height:1.5; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="../index.html">← NCO Study Hub</a>
+      <header>
+        <div class="eyebrow">Promotional Board Review</div>
+        <h1>MOI Questions</h1>
+        <p class="intro">Practice questions based on the Board MOI handout. Each session selects 15 questions and shuffles the answer choices.</p>
+      </header>
+      <section class="toolbar">
+        <span class="progress" id="progress">Question 1 of 15</span>
+        <div><button class="secondary" id="restart">New session</button></div>
+      </section>
+      <section class="quiz" id="quiz" aria-live="polite">
+        <div class="category" id="category"></div>
+        <h2 id="question"></h2>
+        <div class="options" id="options"></div>
+        <p class="feedback" id="feedback"></p>
+        <div class="actions"><button id="next" disabled>Check answer</button></div>
+      </section>
+      <section class="result" id="result">
+        <h2 id="score"></h2>
+        <p id="summary"></p>
+        <button id="again">Practice again</button>
+      </section>
+      <p class="source">Reference: <a href="../Board_MOI.pdf" target="_blank" rel="noopener">Board_MOI.pdf</a>. Verify current policy and regulation details against the latest official publications before a board.</p>
+    </main>
+    <script>
+      const bank = [
+        ['NCO Creed','What are an NCO’s two basic responsibilities?',['Accomplishment of the mission and welfare of Soldiers','Training and recruiting new officers','Maintaining vehicles and ordering supplies','Writing awards and conducting inspections'],0,'The creed identifies accomplishment of the mission and the welfare of Soldiers.'],
+        ['Army Values','Which Army Value means putting the welfare of the nation, the Army, subordinates, and others before self?',['Duty','Selfless Service','Honor','Loyalty'],1,'Selfless Service is service before self.'],
+        ['Map Reading','What is the rule of thumb for reading coordinates on a military map?',['Up then right','Right then up','North then south','Left then down'],1,'Read grid coordinates right, then up.'],
+        ['Map Reading','How close does a six-digit grid normally get you?',['Within 1 meter','Within 10 meters','Within 100 meters','Within 1 kilometer'],2,'A six-digit grid identifies a location within 100 meters.'],
+        ['Map Reading','What is an azimuth?',['A vertical angle measured from east','A horizontal angle measured clockwise from a north baseline','A map scale used for elevation','The distance between contour lines'],1,'An azimuth is a horizontal angle measured clockwise from a north baseline.'],
+        ['Weapons','What is the immediate action mnemonic for an M4 listed in the handout?',['SPORTS','C-SPORTS','C-SPOR-T-S','SLOP'],2,'The sequence is Confirm, Slap, Pull, Observe, Release, Tap, Squeeze.'],
+        ['Weapons','What is the maximum effective range of the M4A1 against a point target?',['300 meters','500 meters','600 meters','3,600 meters'],1,'The handout lists 500 meters for a point target.'],
+        ['Troop Leading Procedures','What is the first step of troop leading procedures?',['Issue the operation order','Receive the mission','Conduct reconnaissance','Initiate movement'],1,'TLPs begin with receiving the mission.'],
+        ['Leadership','What are the three Army leader attributes?',['Mission, enemy, terrain','Character, presence, intellect','Loyalty, duty, respect','Purpose, direction, motivation'],1,'ADP 6-22 identifies character, presence, and intellect.'],
+        ['Leadership','What are the three principal ways leaders develop others?',['Counseling, coaching, and mentoring','Training, testing, and grading','Planning, briefing, and rehearsing','Teaching, rewarding, and correcting'],0,'The three methods are counseling, coaching, and mentoring.'],
+        ['Army Command Policy','What are the two key elements of command?',['Mission and welfare','Authority and responsibility','Rank and position','Training and readiness'],1,'Command combines authority with responsibility.'],
+        ['Awards','What is the highest peacetime award for valor?',['Medal of Honor','Soldier’s Medal','Army Commendation Medal','Bronze Star Medal'],1,'The Soldier’s Medal is the highest peacetime award for valor.'],
+        ['Uniform','Which regulation covers the wear and appearance of the Army uniform?',['AR 600-20','AR 670-1','AR 600-8-19','AR 750-1'],1,'AR 670-1 covers wear and appearance.'],
+        ['PMCS','When is PMCS required?',['Only before dispatch','Before, during, and after operation, plus weekly and monthly intervals','Only after a fault is found','Once per quarter'],1,'Operators perform checks before, during, and after operation, with recurring intervals.'],
+        ['Drill','How many steps per minute is quick time?',['90','120','160','180'],1,'Quick time is 120 steps per minute.'],
+        ['Salutes','At what distance do you salute an officer outdoors?',['Three steps','Six steps','Nine steps','At 10 meters'],1,'The handout lists six steps.'],
+        ['H2F','What is the overarching goal of the H2F system?',['Maximize promotion points','Soldier readiness','Reduce field training','Replace unit physical training'],1,'H2F is intended to prepare Soldiers to train and operate in any environment.'],
+        ['H2F','How much sleep does the handout recommend for a Soldier?',['4-5 hours','5-6 hours','7-8 hours','9-10 hours'],2,'The handout recommends 7-8 hours.'],
+        ['Military Justice','What does UCMJ stand for?',['Uniform Code of Military Justice','United Military Command Jurisdiction','Uniform Command and Military Judgment','United Code for Military Justice'],0,'UCMJ means Uniform Code of Military Justice.'],
+        ['CBRN','What does MOPP stand for?',['Mission Oriented Protective Posture','Military Operations Protection Plan','Mission Operations Personnel Program','Mandatory Operational Personal Protection'],0,'MOPP means Mission Oriented Protective Posture.'],
+        ['Risk Management','What is the first step in the five-step risk management process?',['Assess the hazards','Implement controls','Identify the hazards','Supervise and evaluate'],2,'Risk management begins by identifying hazards.'],
+        ['Promotions','What does STEP stand for?',['Select, Train, Educate, Promote','Study, Test, Evaluate, Pass','Select, Track, Enlist, Promote','Supervise, Train, Execute, Prepare'],0,'STEP means Select, Train, Educate, Promote.'],
+        ['Supply','What is the purpose of supply economy?',['Use whatever is available','Stop haste, waste, and abuse by using only what is necessary','Reduce all supply requests','Avoid signing hand receipts'],1,'Supply economy prevents waste and abuse.'],
+        ['Supply','What form is used for a permanent hand receipt?',['DA Form 2062','DA Form 2977','DA Form 2166-8','DA Form 4856'],0,'The permanent hand receipt is DA Form 2062.'],
+        ['NCO Support Channel','What is the NCO support channel?',['A channel that replaces the chain of command','A channel of communication that supports the chain of command','A channel used only for awards','A channel for civilian employees'],1,'It supports the chain of command.'],
+        ['NCOER','How often should an NCO be counseled, according to the handout?',['At least monthly','At least quarterly','Twice per year','Only during evaluations'],1,'The handout lists counseling at least quarterly.'],
+        ['Sponsorship','How many days after notification does a sponsor have to contact an incoming Soldier?',['3 days','5 days','10 days','15 days'],2,'The handout lists 10 days.'],
+        ['SHARP','What does SHARP stand for?',['Sexual Harassment Assault Response Prevention','Soldier Health and Readiness Program','Service Honor and Respect Policy','Sexual Harm Assessment and Reporting Process'],0,'SHARP means Sexual Harassment Assault Response Prevention.'],
+        ['Army History','When was the Army founded?',['July 4, 1776','June 14, 1775','April 19, 1775','June 14, 1956'],1,'The Army’s birthday is June 14, 1775.']
+      ];
+      const total = 15; let session = [], index = 0, score = 0, answered = false;
+      const $ = (id) => document.getElementById(id);
+      function shuffle(items) { return items.map(x => [Math.random(), x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
+      function start() { session = shuffle(bank).slice(0,total); index=0; score=0; $('result').style.display='none'; $('quiz').style.display='block'; render(); }
+      function render() {
+        answered=false; const item=session[index]; $('progress').textContent=`Question ${index+1} of ${total}`; $('category').textContent=item[0]; $('question').textContent=item[1]; $('feedback').textContent=''; $('feedback').className='feedback'; $('next').textContent='Check answer'; $('next').disabled=true;
+        const choices = item[2].map((text,i)=>({text,correct:i===item[3]}));
+        $('options').innerHTML=''; shuffle(choices).forEach(choice=>{ const b=document.createElement('button'); b.className='option'; b.textContent=choice.text; b.dataset.correct=choice.correct; b.onclick=()=>choose(b); $('options').appendChild(b); });
+      }
+      function choose(button) { if(answered) return; answered=true; const correct=button.dataset.correct==='true'; document.querySelectorAll('.option').forEach(b=>{ b.disabled=true; if(b.dataset.correct==='true') b.classList.add('correct'); }); if(!correct) button.classList.add('wrong'); if(correct){score++; $('feedback').textContent='Correct. '+session[index][4]; $('feedback').className='feedback good';} else { $('feedback').textContent='Review: '+session[index][4]; $('feedback').className='feedback bad';} $('next').disabled=false; $('next').textContent=index===total-1?'See results':'Next question'; }
+      $('next').onclick=()=>{ if(!answered)return; if(index===total-1){ $('quiz').style.display='none'; $('result').style.display='block'; $('score').textContent=`${score} / ${total}`; $('summary').textContent=score>=12?'Strong board readiness. Keep reviewing the missed topics.':score>=9?'Good foundation. Review the explanations and try another session.':'Keep practicing and cross-check the current regulations.';} else {index++; render();} };
+      $('restart').onclick=start; $('again').onclick=start; start();
+    </script>
+  </body>
+</html>
