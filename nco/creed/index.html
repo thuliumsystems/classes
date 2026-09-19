@@ -220,6 +220,9 @@
 
       .result.visible { display: block; }
       .result strong { color: var(--gold); }
+      .mistakes { margin-top: 12px; padding-left: 20px; color: #fecdd3; text-align: left; }
+      .mistakes li { margin-top: 7px; }
+      .mistakes em { color: #cbd5e1; font-style: normal; }
 
       .footer {
         margin-top: 18px;
@@ -407,6 +410,7 @@
         if (!exerciseGenerated) renderPractice();
         const inputs = [...creedText.querySelectorAll('.answer-input')];
         let correct = 0;
+        const mistakes = [];
         inputs.forEach((input) => {
           const isCorrect = normalize(input.value) === normalize(input.dataset.answer);
           input.classList.toggle('correct', isCorrect);
@@ -415,6 +419,10 @@
           if (isCorrect) {
             correct += 1;
           } else {
+            mistakes.push({
+              typed: input.value.trim() || 'em branco',
+              expected: input.dataset.answer,
+            });
             const note = document.createElement('span');
             note.className = 'answer-note';
             note.textContent = `(${input.dataset.answer})`;
@@ -423,7 +431,10 @@
         });
 
         const percentage = inputs.length ? Math.round(correct / inputs.length * 100) : 0;
-        result.innerHTML = `<strong>${correct} de ${inputs.length} corretas (${percentage}%)</strong><br>${correct === inputs.length ? 'Excelente. Você completou esta variação corretamente.' : 'Revise as respostas destacadas e gere uma nova variação quando estiver pronto.'}`;
+        const mistakesHtml = mistakes.length
+          ? `<ul class="mistakes">${mistakes.map((mistake, index) => `<li><strong>${index + 1}.</strong> Você respondeu “${escapeHtml(mistake.typed)}”; resposta esperada: <em>${escapeHtml(mistake.expected)}</em>.</li>`).join('')}</ul>`
+          : '';
+        result.innerHTML = `<strong>${correct} de ${inputs.length} corretas (${percentage}%)</strong><br>${correct === inputs.length ? 'Excelente. Você completou esta variação corretamente.' : 'Confira abaixo exatamente o que precisa revisar:'}${mistakesHtml}`;
         result.classList.add('visible');
       }
 
