@@ -79,7 +79,7 @@
         <div class="write-result" id="write-result" hidden></div>
         <div class="actions"><button id="next">Next question</button></div>
       </section>
-      <p class="source">Verify current policy and regulation details against the latest official publications before a board.<br>Study Hub &copy; 2026 · v1.2.11 &mdash; 2026-09-19</p>
+      <p class="source">Verify current policy and regulation details against the latest official publications before a board.<br>Study Hub &copy; 2026 · v1.2.12 &mdash; 2026-09-19</p>
     </main>
     <script>
       const bank = [
@@ -236,7 +236,16 @@
       const $ = (id) => document.getElementById(id);
       function shuffle(items) { return items.map(x => [Math.random(), x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
       function clean(text) { return text.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9 ]/g,' '); }
-      function answerText(item) { return `${item[2][item[3]]}\n${item[4]}`; }
+      function answerText(item) {
+        const answer = item[2][item[3]];
+        const explanation = item[4];
+        const answerWords = new Set(clean(answer).split(' ').filter(word => word.length > 3));
+        const explanationWords = new Set(clean(explanation).split(' ').filter(word => word.length > 3));
+        const sharedWords = [...answerWords].filter(word => explanationWords.has(word)).length;
+        const overlap = answerWords.size ? sharedWords / answerWords.size : 0;
+        const redundant = overlap >= 0.5 || clean(explanation).includes(clean(answer));
+        return redundant ? answer : `${answer}\n${explanation}`;
+      }
       function start() { session = shuffle(bank).slice(0,total); index=0; score=0; renderMode(); }
       function renderMode() {
         $('study-list').style.display = mode === 'write' ? 'none' : 'grid'; $('quiz').style.display = mode === 'write' ? 'block' : 'none';
