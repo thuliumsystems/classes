@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NCO Creed — Study Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #080d18;
+        --surface: #111827;
+        --surface-2: #1a2332;
+        --border: #293548;
+        --gold: #fbbf24;
+        --gold-dark: #d97706;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --green: #34d399;
+        --red: #fb7185;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        min-height: 100vh;
+        padding: 24px;
+        color: var(--text);
+        background: linear-gradient(135deg, var(--bg), #111827 52%, #0c1728);
+        font-family: Inter, system-ui, sans-serif;
+      }
+
+      .container { width: min(100%, 980px); margin: 0 auto; }
+
+      .back {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 28px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .back:hover { color: var(--gold); }
+
+      header { margin-bottom: 24px; }
+
+      .eyebrow {
+        margin-bottom: 8px;
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        color: #f8fafc;
+        font-size: clamp(28px, 5vw, 44px);
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        max-width: 700px;
+        margin-top: 10px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .panel {
+        margin-bottom: 18px;
+        padding: 18px;
+        background: rgba(17, 24, 39, .86);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+
+      .mode-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      button, .button-link {
+        border: 0;
+        border-radius: 9px;
+        padding: 10px 15px;
+        color: #fff;
+        background: #334155;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        transition: filter .2s, transform .2s, background .2s;
+      }
+
+      button:hover, .button-link:hover { filter: brightness(1.15); }
+      button:active, .button-link:active { transform: translateY(1px); }
+      button.primary { background: var(--gold-dark); }
+      button.active { color: #111827; background: var(--gold); }
+
+      .settings {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px 28px;
+        align-items: end;
+      }
+
+      .setting { min-width: min(100%, 320px); }
+
+      .setting label {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 8px;
+        color: #cbd5e1;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      output { color: var(--gold); font-weight: 800; }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--gold);
+        cursor: pointer;
+      }
+
+      .hint {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .creed-card {
+        padding: clamp(20px, 4vw, 40px);
+        background: #f8fafc;
+        border-radius: 16px;
+        color: #172033;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, .2);
+      }
+
+      .creed-heading {
+        margin-bottom: 26px;
+        color: #8a5a00;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+      }
+
+      .creed-text p {
+        margin-bottom: 22px;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(17px, 2.2vw, 21px);
+        line-height: 1.8;
+      }
+
+      .creed-text p:last-child { margin-bottom: 0; }
+
+      .answer-input {
+        width: 8ch;
+        min-width: 4ch;
+        max-width: 15ch;
+        margin: 0 2px;
+        padding: 1px 4px 3px;
+        border: 0;
+        border-bottom: 2px solid #b7791f;
+        border-radius: 2px;
+        outline: 0;
+        color: #172033;
+        background: #fff7d6;
+        font: inherit;
+        font-size: .92em;
+        line-height: 1.25;
+        text-align: center;
+      }
+
+      .answer-input:focus {
+        border-bottom-color: #2563eb;
+        box-shadow: 0 2px 0 #2563eb;
+      }
+
+      .answer-input.correct {
+        border-bottom-color: #059669;
+        background: #d1fae5;
+      }
+
+      .answer-input.incorrect {
+        border-bottom-color: #e11d48;
+        background: #ffe4e6;
+      }
+
+      .answer-note {
+        display: inline-block;
+        margin-left: 4px;
+        color: #be123c;
+        font-family: Inter, system-ui, sans-serif;
+        font-size: .58em;
+        font-weight: 700;
+        vertical-align: middle;
+      }
+
+      .result {
+        display: none;
+        margin-top: 18px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #172033;
+        color: #e2e8f0;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .result.visible { display: block; }
+      .result strong { color: var(--gold); }
+
+      .footer {
+        margin-top: 18px;
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .footer a { color: #94a3b8; }
+
+      @media (max-width: 600px) {
+        body { padding: 16px; }
+        .settings { display: block; }
+        .setting { margin-bottom: 16px; }
+        .setting:last-child { margin-bottom: 0; }
+        .answer-input { max-width: 12ch; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <a class="back" href="../index.html">← NCO Study Hub</a>
+
+      <header>
+        <div class="eyebrow">NCO Creed</div>
+        <h1>Study, practice, repeat.</h1>
+        <p class="subtitle">
+          Leia o creed completo ou pratique com palavras ocultas. A porcentagem é aplicada em tempo real a uma nova variação do exercício.
+        </p>
+      </header>
+
+      <section class="panel" aria-label="Controles do exercício">
+        <div class="mode-bar">
+          <button id="completeBtn" class="active" type="button">Ver creed completo</button>
+          <button id="practiceBtn" type="button">Praticar preenchimento</button>
+        </div>
+
+        <div id="practiceControls" class="settings" hidden>
+          <div class="setting">
+            <label for="percentRange">
+              <span>Palavras ocultas</span>
+              <output id="percentOutput" for="percentRange">10%</output>
+            </label>
+            <input id="percentRange" type="range" min="5" max="50" step="5" value="10" />
+            <p class="hint">Escolha a porcentagem e gere uma nova variação quando quiser.</p>
+          </div>
+          <button id="generateBtn" class="primary" type="button">Gerar exercício</button>
+          <button id="checkBtn" type="button">Checar respostas</button>
+        </div>
+      </section>
+
+      <section class="creed-card" aria-live="polite">
+        <div class="creed-heading">Creed of the Noncommissioned Officer</div>
+        <div id="creedText" class="creed-text"></div>
+        <div id="result" class="result"></div>
+      </section>
+
+      <p class="footer">
+        Texto baseado no <a href="https://www.ncoworldwide.army.mil/Portals/76/ARN44634-TC_7-22_7-000-WEB-2.pdf" target="_blank" rel="noopener noreferrer">TC 7-22.7</a>, publicado pelo U.S. Army.
+      </p>
+    </main>
+
+    <script>
+      const CREED_PARAGRAPHS = [
+        'No one is more professional than I. I am a noncommissioned officer, a leader of Soldiers. As a noncommissioned officer, I realize that I am a member of a time honored corps, which is known as "The Backbone of the Army". I am proud of the Corps of noncommissioned officers and will at all times conduct myself so as to bring credit upon the Corps, the military service and my country regardless of the situation in which I find myself. I will not use my grade or position to attain pleasure, profit, or personal safety.',
+        'Competence is my watchword. My two basic responsibilities will always be uppermost in my mind—accomplishment of my mission and the welfare of my Soldiers. I will strive to remain technically and tactically proficient. I am aware of my role as a noncommissioned officer. I will fulfill my responsibilities inherent in that role. All Soldiers are entitled to outstanding leadership; I will provide that leadership. I know my Soldiers and I will always place their needs above my own. I will communicate consistently with my Soldiers and never leave them uninformed. I will be fair and impartial when recommending both rewards and punishment.',
+        'Officers of my unit will have maximum time to accomplish their duties; they will not have to accomplish mine. I will earn their respect and confidence as well as that of my Soldiers. I will be loyal to those with whom I serve; seniors, peers, and subordinates alike. I will exercise initiative by taking appropriate action in the absence of orders. I will not compromise my integrity, nor my moral courage. I will not forget, nor will I allow my comrades to forget that we are professionals, noncommissioned officers, leaders!'
+      ];
+
+      const creedText = document.getElementById('creedText');
+      const result = document.getElementById('result');
+      const completeBtn = document.getElementById('completeBtn');
+      const practiceBtn = document.getElementById('practiceBtn');
+      const practiceControls = document.getElementById('practiceControls');
+      const percentRange = document.getElementById('percentRange');
+      const percentOutput = document.getElementById('percentOutput');
+      const generateBtn = document.getElementById('generateBtn');
+      const checkBtn = document.getElementById('checkBtn');
+      let hiddenIndexes = new Set();
+      let exerciseGenerated = false;
+
+      function escapeHtml(value) {
+        return value.replace(/[&<>"']/g, (character) => ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[character]));
+      }
+
+      function normalize(value) {
+        return value
+          .toLowerCase()
+          .replace(/[’‘]/g, "'")
+          .replace(/[^a-z0-9']/g, '');
+      }
+
+      function getTokens() {
+        const tokens = [];
+        CREED_PARAGRAPHS.forEach((paragraph, paragraphIndex) => {
+          paragraph.split(/(\s+)/).forEach((raw, tokenIndex) => {
+            if (/^\s+$/.test(raw) || !raw) return;
+            const match = raw.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/);
+            if (!match || match[0].length < 3) return;
+            tokens.push({ paragraphIndex, tokenIndex, raw, word: match[0] });
+          });
+        });
+        return tokens;
+      }
+
+      function randomIndexes(total, amount) {
+        const indexes = Array.from({ length: total }, (_, index) => index);
+        for (let index = indexes.length - 1; index > 0; index -= 1) {
+          const swapIndex = Math.floor(Math.random() * (index + 1));
+          [indexes[index], indexes[swapIndex]] = [indexes[swapIndex], indexes[index]];
+        }
+        return new Set(indexes.slice(0, amount));
+      }
+
+      function renderComplete() {
+        creedText.innerHTML = CREED_PARAGRAPHS
+          .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+          .join('');
+        result.classList.remove('visible');
+        exerciseGenerated = false;
+      }
+
+      function renderPractice() {
+        const eligibleTokens = getTokens();
+        const percent = Number(percentRange.value);
+        const amount = Math.max(1, Math.round(eligibleTokens.length * percent / 100));
+        hiddenIndexes = randomIndexes(eligibleTokens.length, amount);
+        const hiddenByParagraph = new Map();
+
+        eligibleTokens.forEach((token, index) => {
+          if (!hiddenIndexes.has(index)) return;
+          if (!hiddenByParagraph.has(token.paragraphIndex)) hiddenByParagraph.set(token.paragraphIndex, []);
+          hiddenByParagraph.get(token.paragraphIndex).push(token);
+        });
+
+        const html = CREED_PARAGRAPHS.map((paragraph, paragraphIndex) => {
+          let eligibleIndex = 0;
+          const hiddenTokens = hiddenByParagraph.get(paragraphIndex) || [];
+          const hiddenSet = new Set(hiddenTokens.map((token) => token.tokenIndex));
+          return `<p>${paragraph.split(/(\s+)/).map((raw, tokenIndex) => {
+            if (/^\s+$/.test(raw) || !raw) return raw;
+            const match = raw.match(/[A-Za-z]+(?:['’\-][A-Za-z]+)*/);
+            if (!match || match[0].length < 3) return escapeHtml(raw);
+            const currentEligibleIndex = eligibleTokens.findIndex((token) =>
+              token.paragraphIndex === paragraphIndex && token.tokenIndex === tokenIndex
+            );
+            const isHidden = hiddenSet.has(tokenIndex);
+            if (!isHidden) return escapeHtml(raw);
+            const word = match[0];
+            const before = raw.slice(0, match.index);
+            const after = raw.slice((match.index || 0) + word.length);
+            const inputId = `answer-${currentEligibleIndex}`;
+            const width = Math.min(15, Math.max(5, word.length + 1));
+            eligibleIndex += 1;
+            return `${escapeHtml(before)}<input id="${inputId}" class="answer-input" style="width:${width}ch" data-answer="${escapeHtml(word)}" aria-label="Resposta ${currentEligibleIndex}" autocomplete="off" spellcheck="false">${escapeHtml(after)}`;
+          }).join('')}</p>`;
+        }).join('');
+
+        creedText.innerHTML = html;
+        result.classList.remove('visible');
+        exerciseGenerated = true;
+        creedText.querySelector('.answer-input')?.focus();
+      }
+
+      function setMode(mode) {
+        const isPractice = mode === 'practice';
+        completeBtn.classList.toggle('active', !isPractice);
+        practiceBtn.classList.toggle('active', isPractice);
+        practiceControls.hidden = !isPractice;
+        if (isPractice) {
+          if (!exerciseGenerated) renderPractice();
+        } else {
+          renderComplete();
+        }
+      }
+
+      function checkAnswers() {
+        if (!exerciseGenerated) renderPractice();
+        const inputs = [...creedText.querySelectorAll('.answer-input')];
+        let correct = 0;
+        inputs.forEach((input) => {
+          const isCorrect = normalize(input.value) === normalize(input.dataset.answer);
+          input.classList.toggle('correct', isCorrect);
+          input.classList.toggle('incorrect', !isCorrect);
+          input.parentElement.querySelectorAll('.answer-note').forEach((note) => note.remove());
+          if (isCorrect) {
+            correct += 1;
+          } else {
+            const note = document.createElement('span');
+            note.className = 'answer-note';
+            note.textContent = `(${input.dataset.answer})`;
+            input.insertAdjacentElement('afterend', note);
+          }
+        });
+
+        const percentage = inputs.length ? Math.round(correct / inputs.length * 100) : 0;
+        result.innerHTML = `<strong>${correct} de ${inputs.length} corretas (${percentage}%)</strong><br>${correct === inputs.length ? 'Excelente. Você completou esta variação corretamente.' : 'Revise as respostas destacadas e gere uma nova variação quando estiver pronto.'}`;
+        result.classList.add('visible');
+      }
+
+      percentRange.addEventListener('input', () => {
+        percentOutput.textContent = `${percentRange.value}%`;
+      });
+      completeBtn.addEventListener('click', () => setMode('complete'));
+      practiceBtn.addEventListener('click', () => setMode('practice'));
+      generateBtn.addEventListener('click', renderPractice);
+      checkBtn.addEventListener('click', checkAnswers);
+
+      renderComplete();
+    </script>
+  </body>
+</html>
