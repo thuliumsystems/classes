@@ -18,6 +18,9 @@
       .intro { max-width:680px; margin-top:10px; color:var(--muted); line-height:1.6; }
       .toolbar,.quiz,.result { padding:20px; background:rgba(17,24,39,.9); border:1px solid var(--border); border-radius:16px; }
       .toolbar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+      .modes { display:flex; flex-wrap:wrap; gap:8px; width:100%; }
+      .mode { color:var(--text); background:#334155; }
+      .mode.active { color:#111827; background:var(--gold); }
       .progress { color:var(--muted); font-size:13px; font-weight:700; }
       button { border:0; border-radius:9px; padding:11px 16px; color:#111827; background:var(--gold); font:inherit; font-size:13px; font-weight:800; cursor:pointer; }
       button.secondary { color:var(--text); background:#334155; }
@@ -36,6 +39,17 @@
       .result h2 { margin:0; color:var(--gold); }
       .result p { margin:12px 0 18px; color:var(--muted); }
       .source { margin-top:18px; color:#64748b; font-size:12px; line-height:1.5; }
+      .study-list { display:grid; gap:14px; }
+      .study-card { padding:18px; background:rgba(17,24,39,.9); border:1px solid var(--border); border-radius:14px; }
+      .study-card h2 { margin:6px 0 12px; font-size:18px; }
+      .answer { color:#cbd5e1; line-height:1.6; white-space:pre-line; }
+      .answer.hidden { color:#64748b; filter:blur(5px); user-select:none; cursor:pointer; }
+      .reveal { margin-top:12px; color:var(--gold); background:#334155; }
+      .write-box { display:flex; gap:10px; margin-top:20px; }
+      .write-box textarea { flex:1; min-height:100px; padding:12px; border:1px solid var(--border); border-radius:10px; color:var(--text); background:#0f172a; font:inherit; line-height:1.5; resize:vertical; }
+      .write-result { margin-top:14px; padding:14px; border-radius:10px; background:#172033; line-height:1.55; }
+      .write-result.good { color:var(--green); } .write-result.partial { color:var(--gold); }
+      .count { color:var(--muted); font-size:13px; }
     </style>
   </head>
   <body>
@@ -44,23 +58,26 @@
       <header>
         <div class="eyebrow">Promotional Board Review</div>
         <h1>MOI Questions</h1>
-        <p class="intro">Practice questions based on the Board MOI handout. Each session selects 15 questions and shuffles the answer choices.</p>
+        <p class="intro">Study the questions from the Board MOI handout in three ways: browse the answer key, reveal answers one at a time, or type your own answer and receive a direction check.</p>
       </header>
       <section class="toolbar">
-        <span class="progress" id="progress">Question 1 of 15</span>
-        <div><button class="secondary" id="restart">New session</button></div>
+        <div class="modes" aria-label="Study modes">
+          <button class="mode active" data-mode="all">Questions + answers</button>
+          <button class="mode" data-mode="reveal">Hide / reveal answers</button>
+          <button class="mode" data-mode="write">Type your answer</button>
+        </div>
+        <span class="progress" id="progress">30 questions</span>
+        <span class="count" id="mode-note">Answer key</span>
       </section>
-      <section class="quiz" id="quiz" aria-live="polite">
+      <section class="study-list" id="study-list"></section>
+      <section class="quiz" id="quiz" aria-live="polite" style="display:none">
         <div class="category" id="category"></div>
         <h2 id="question"></h2>
         <div class="options" id="options"></div>
         <p class="feedback" id="feedback"></p>
-        <div class="actions"><button id="next" disabled>Check answer</button></div>
-      </section>
-      <section class="result" id="result">
-        <h2 id="score"></h2>
-        <p id="summary"></p>
-        <button id="again">Practice again</button>
+        <div class="write-box"><textarea id="typed" placeholder="Type what you remember..."></textarea><button id="check-typed">Check</button></div>
+        <div class="write-result" id="write-result" hidden></div>
+        <div class="actions"><button id="next">Next question</button></div>
       </section>
       <p class="source">Reference: <a href="../Board_MOI.pdf" target="_blank" rel="noopener">Board_MOI.pdf</a>. Verify current policy and regulation details against the latest official publications before a board.</p>
     </main>
@@ -95,19 +112,55 @@
         ['Sponsorship','How many days after notification does a sponsor have to contact an incoming Soldier?',['3 days','5 days','10 days','15 days'],2,'The handout lists 10 days.'],
         ['SHARP','What does SHARP stand for?',['Sexual Harassment Assault Response Prevention','Soldier Health and Readiness Program','Service Honor and Respect Policy','Sexual Harm Assessment and Reporting Process'],0,'SHARP means Sexual Harassment Assault Response Prevention.'],
         ['Army History','When was the Army founded?',['July 4, 1776','June 14, 1775','April 19, 1775','June 14, 1956'],1,'The Army’s birthday is June 14, 1775.']
+        ,['Army Song','Who wrote the Army Song?',['First Lieutenant Edmund L. Gruber','General George Washington','Sergeant Major William Wooldridge','Baron von Steuben'],0,'The song was written by First Lieutenant Edmund L. Gruber.']
+        ,['General Orders','What is the First General Order?',['I will obey my special orders','I will guard everything within the limits of my post and quit only when properly relieved','I will report to the commander of the relief','I will never leave a fallen comrade'],1,'The First General Order concerns guarding everything within the limits of the post.']
+        ,['Terrain','Which set contains the five major terrain features?',['Hill, valley, ridge, saddle, depression','Draw, spur, cliff, cut, fill','Hill, draw, road, river, saddle','Ridge, cliff, swamp, valley, bridge'],0,'The five major features are hill, valley, ridge, saddle, and depression.']
+        ,['Map Reading','What are the three norths on a map?',['True, grid, and magnetic','North, south, and east','True, compass, and local','Grid, azimuth, and magnetic'],0,'The three norths are true north, grid north, and magnetic north.']
+        ,['Map Reading','What does blue normally identify on a military map?',['Vegetation','Man-made features','Water or hydrographic features','Relief and contour lines'],2,'Blue identifies lakes, swamps, rivers, and drainage.']
+        ,['Weapons','What is the M4A1 combat load listed in the handout?',['120 rounds','180 rounds','210 rounds in 7 magazines','240 rounds in 8 magazines'],2,'The listed combat load is 210 rounds, or 7 magazines.']
+        ,['Weapons','What is the M4A1 maximum range listed in the handout?',['500 meters','600 meters','1,000 meters','3,600 meters'],3,'The maximum range listed is 3,600 meters.']
+        ,['Reports','What does LACE stand for?',['Location, Activity, Command, Equipment','Liquid, Ammo, Casualty, Equipment','Leadership, Accountability, Combat, Evaluation','Light, Area, Contact, Enemy'],1,'LACE means Liquid, Ammo, Casualty, Equipment.']
+        ,['Reports','What does METT-TC include?',['Mission, Enemy, Terrain and weather, Time, Troops, Civilian considerations','Mission, Equipment, Training, Team, Command','Medical, Enemy, Terrain, Threat, Casualty','Movement, Evacuation, Time, Troops, Communications'],0,'METT-TC is Mission, Enemy, Terrain and weather, Time, Troops available, and Civilian considerations.']
+        ,['Escalation of Force','What is the sequence listed for escalation of force?',['Show, shout, shove, shoot','Shout, show, shove, shoot to kill','Shove, show, shout, shoot','Shoot, shout, show, shove'],1,'The sequence is shout, show, shove, then shoot to kill.']
+        ,['NCO Guide','What are the three primary support channels in the Army?',['Chain of command, NCO support channel, staff and technical','Command, medical, and supply','Unit, installation, and Army','Officer, NCO, and civilian'],0,'The three channels are chain of command, NCO support channel, and staff and technical.']
+        ,['NCO Guide','What do PCCs stand for?',['Pre Combat Checks','Personnel Command Channels','Post Combat Corrections','Primary Command Communications'],0,'PCCs are Pre Combat Checks.']
+        ,['NCOER','What form is used for an NCOER in the handout?',['DA Form 2062','DA Form 2166-8','DA Form 2977','DA Form 4856'],1,'The handout lists DA Form 2166-8.']
+        ,['Command','What is the chain of command?',['A list of awards and decorations','The order of commanders from superior to subordinate through which orders are transmitted','The NCO support channel only','A unit manning document'],1,'It is the order of commanders through which orders are transmitted.']
+        ,['Command','Who is the only civilian who can exercise command?',['The Secretary of the Army','The President of the United States as Commander-in-Chief','The Secretary of Defense','The installation commander'],1,'The handout identifies the President as Commander-in-Chief.']
+        ,['Awards','What is the highest award given by the Army in time of war?',['Soldier’s Medal','Bronze Star Medal','Medal of Honor','Army Achievement Medal'],2,'The Medal of Honor is the highest award given by the Army in time of war.']
+        ,['Uniform','Why is the flag worn on the right shoulder of the utility uniform?',['To identify the unit','To give the effect of the flag flying in the breeze as the wearer moves forward','To show rank','To make saluting easier'],1,'The reversed flag effect represents the flag flying forward as the Soldier moves.']
+        ,['Drill','What are the two parts of most drill commands?',['Warning and inspection','Preparatory command and command of execution','Command and response','Formation and movement'],1,'Most drill commands have a preparatory command and a command of execution.']
+        ,['Risk Management','What does DRAW stand for in risk management?',['Deliberate Risk Assessment Worksheet','Danger Review and Warning','Direct Risk Analysis Worksheet','Decision Rules and Warnings'],0,'DRAW means Deliberate Risk Assessment Worksheet.']
+        ,['H2F','What are the five H2F domains?',['Physical, nutritional, mental, spiritual, and sleep readiness','Medical, tactical, technical, mental, and social','Strength, speed, endurance, power, and agility','Physical, financial, family, unit, and sleep'],0,'The domains are physical, nutritional, mental, spiritual, and sleep readiness.']
+        ,['Military Justice','Can a Soldier refuse to accept Article 15 proceedings?',['No, never','Yes, the Soldier may demand trial by court-martial','Only with the commander’s permission','Only during deployment'],1,'A Soldier has the right to demand trial by court-martial.']
+        ,['CBRN','What are the five MOPP levels?',['0 through 4','1 through 5','A through E','Green through black'],0,'MOPP levels run from Level 0 through Level 4.']
+        ,['Promotions','What are the three levels of promotion?',['Unit level, semi-centralized, and DA centralized','Company, battalion, and brigade','Local, regional, and national','Temporary, permanent, and acting'],0,'The handout lists unit, semi-centralized, and DA centralized levels.']
+        ,['Supply','What does a signature on a hand receipt establish?',['Promotion eligibility','Direct responsibility for the equipment','Authority to change the property book','A supply request'],1,'The signature establishes direct responsibility for the equipment.']
+        ,['PMCS','Who is required to perform PMCS?',['The commander only','Every operator assigned a piece of equipment','The mechanic only','The supply sergeant only'],1,'Every assigned operator must perform PMCS.']
+        ,['Salutes','Where do you walk when walking with someone senior to you?',['On the right side','On the left side','Behind them','In front of them'],1,'The handout says to walk on the senior person’s left side.']
+        ,['SHARP','How long does a Soldier have to file a complaint from the alleged incident date?',['30 calendar days','45 calendar days','60 calendar days','90 calendar days'],2,'The handout lists 60 calendar days.']
       ];
-      const total = 15; let session = [], index = 0, score = 0, answered = false;
+      const total = bank.length; let session = [], index = 0, score = 0, answered = false, mode = 'all';
       const $ = (id) => document.getElementById(id);
       function shuffle(items) { return items.map(x => [Math.random(), x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
-      function start() { session = shuffle(bank).slice(0,total); index=0; score=0; $('result').style.display='none'; $('quiz').style.display='block'; render(); }
-      function render() {
-        answered=false; const item=session[index]; $('progress').textContent=`Question ${index+1} of ${total}`; $('category').textContent=item[0]; $('question').textContent=item[1]; $('feedback').textContent=''; $('feedback').className='feedback'; $('next').textContent='Check answer'; $('next').disabled=true;
-        const choices = item[2].map((text,i)=>({text,correct:i===item[3]}));
-        $('options').innerHTML=''; shuffle(choices).forEach(choice=>{ const b=document.createElement('button'); b.className='option'; b.textContent=choice.text; b.dataset.correct=choice.correct; b.onclick=()=>choose(b); $('options').appendChild(b); });
+      function clean(text) { return text.toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9 ]/g,' '); }
+      function answerText(item) { return `${item[2][item[3]]}\\n\\n${item[4]}`; }
+      function start() { session = shuffle(bank).slice(0,total); index=0; score=0; renderMode(); }
+      function renderMode() {
+        $('study-list').style.display = mode === 'write' ? 'none' : 'grid'; $('quiz').style.display = mode === 'write' ? 'block' : 'none';
+        $('progress').textContent = mode === 'write' ? `Question ${index+1} of ${total}` : `${bank.length} questions`;
+        $('mode-note').textContent = mode === 'all' ? 'Answer key' : mode === 'reveal' ? 'Click each answer to reveal' : 'Direction check, not an official grade';
+        document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode));
+        if(mode === 'write') render(); else renderCards();
       }
-      function choose(button) { if(answered) return; answered=true; const correct=button.dataset.correct==='true'; document.querySelectorAll('.option').forEach(b=>{ b.disabled=true; if(b.dataset.correct==='true') b.classList.add('correct'); }); if(!correct) button.classList.add('wrong'); if(correct){score++; $('feedback').textContent='Correct. '+session[index][4]; $('feedback').className='feedback good';} else { $('feedback').textContent='Review: '+session[index][4]; $('feedback').className='feedback bad';} $('next').disabled=false; $('next').textContent=index===total-1?'See results':'Next question'; }
-      $('next').onclick=()=>{ if(!answered)return; if(index===total-1){ $('quiz').style.display='none'; $('result').style.display='block'; $('score').textContent=`${score} / ${total}`; $('summary').textContent=score>=12?'Strong board readiness. Keep reviewing the missed topics.':score>=9?'Good foundation. Review the explanations and try another session.':'Keep practicing and cross-check the current regulations.';} else {index++; render();} };
-      $('restart').onclick=start; $('again').onclick=start; start();
+      function renderCards() {
+        const list = $('study-list'); list.innerHTML=''; bank.forEach((item,i)=>{ const card=document.createElement('article'); card.className='study-card'; const answer=mode==='reveal'?'Answer hidden - click to reveal':answerText(item); card.innerHTML=`<div class="category">${i+1}. ${item[0]}</div><h2>${item[1]}</h2><p class="answer ${mode==='reveal'?'hidden':''}">${answer}</p>${mode==='reveal'?'<button class="reveal">Show answer</button>':''}`; if(mode==='reveal'){ const a=card.querySelector('.answer'), b=card.querySelector('.reveal'); b.onclick=()=>{a.textContent=answerText(item);a.classList.remove('hidden');b.remove();}; } list.appendChild(card); }); }
+      function render() {
+        const item=session[index]; $('progress').textContent=`Question ${index+1} of ${total}`; $('category').textContent=item[0]; $('question').textContent=item[1]; $('typed').value=''; $('write-result').hidden=true; $('next').disabled=false;
+      }
+      $('check-typed').onclick=()=>{ const answer=clean($('typed').value), expected=clean(session[index][2][session[index][3]]), tokens=[...new Set(expected.split(' ').filter(x=>x.length>3))], hits=tokens.filter(t=>answer.includes(t)).length, ratio=tokens.length?hits/tokens.length:0, box=$('write-result'); box.hidden=false; box.className='write-result '+(ratio>=.55?'good':'partial'); box.innerHTML=ratio>=.75?'Good direction. Your answer contains the main ideas.':ratio>=.55?'Partially on track. Add more of the key details.':'Review the reference answer and try again.'+`<br><small>Reference: ${answerText(session[index])}</small>`; };
+      $('next').onclick=()=>{ if(index===total-1){index=0; start();} else {index++; render();} };
+      document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{ mode=b.dataset.mode; if(mode==='write') start(); else renderMode(); }); start();
     </script>
   </body>
 </html>
