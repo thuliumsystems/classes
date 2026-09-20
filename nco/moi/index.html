@@ -84,7 +84,7 @@
       <p class="source">
         Verify current policy and regulation details against the latest official publications before a board.<br>
         Reference: <a href="https://h2f.army.mil/Portals/141/pdfs/physical/ATP%207-22.02.pdf?ver=edqjMofTESZNXpNZ8H-pug%3D%3D" target="_blank" rel="noopener noreferrer">official ATP 7-22.02</a> for the Preparation Drill sequence and the <a href="https://www.ncoworldwide.army.mil/Academics/Basic-Leader-Course/BLC-Course-Map/" target="_blank" rel="noopener noreferrer">official BLC Course Map</a> for general BLC content.<br>
-        Study Hub &copy; 2026 · v2.0.1 &mdash; 2026-09-20
+        Study Hub &copy; 2026 · v2.0.2 &mdash; 2026-09-20
       </p>
     </main>
     <script>
@@ -237,18 +237,6 @@
         ,['Medical Company','Which publication governs the Medical Company (Role 2)?',['ATP 4-02.6','ATP 4-02.2','TC 4-02.1','FM 7-22'],0,'Medical Company (Role 2) - ATP 4-02.6.']
         ,['Medical Company','What is the primary mission of a Medical Company Area Support?',['Provide Role 2 health service support including advanced trauma management, emergency treatment, limited hospitalization, laboratory, pharmacy, dental, radiology, preventive medicine, patient holding, and evacuation support','Provide only first aid at the point of injury','Conduct infantry operations','Manage Army awards'],0,'MCAS provides the listed Role 2 health-service capabilities to units in its area.']
         ,['Medical Company','What capabilities does Role 2 provide that are not available at Role 1?',['Advanced trauma management, x-ray, laboratory, pharmacy, dental care, patient holding, and limited medical evacuation coordination','Only individual first aid kits','Only a combat medic with no additional capability','Only transportation without treatment'],0,'Role 2 adds advanced trauma, diagnostic, pharmacy, dental, patient holding, and evacuation coordination capabilities.']
-        ,['BLC','What is the Basic Leader Course (BLC)?',['The first institutional step in the NCO Professional Development System that builds basic leader and trainer skills','A weapons qualification course','A medical evacuation course','A course only for officers'],0,'BLC is the first institutional step in the NCO Professional Development System and builds basic leader and trainer skills.']
-        ,['BLC','What are the six NCO Common Core Competencies emphasized in BLC?',['Readiness, Leadership, Training Management, Communications, Operations, and Program Management','Loyalty, Duty, Respect, Selfless Service, Honor, and Integrity','Map Reading, Marksmanship, First Aid, Supply, Drill, and Awards','Planning, Shooting, Moving, Communicating, Treating, and Recovering'],0,'The six NCO Common Core Competencies are Readiness, Leadership, Training Management, Communications, Operations, and Program Management.']
-        ,['BLC','Which BLC subjects are directly related to physical training and drill?',['Physical Training and Drill and Ceremonies','Only written communication','Only financial readiness','Only medical evacuation'],0,'The BLC course map includes Physical Training and Drill and Ceremonies.']
-        ,['Preparation Drill','What is the purpose of the Preparation Drill?',['To reduce the likelihood of musculoskeletal injury before more rigorous physical training such as the ACFT','To replace the ACFT','To test marksmanship','To conduct recovery after training'],0,'The Preparation Drill prepares Soldiers for more vigorous physical training and helps reduce injury risk.']
-        ,['Preparation Drill','How many exercises are in the Preparation Drill?',['8','10','12','15'],1,'The Preparation Drill is composed of 10 exercises.']
-        ,['Preparation Drill','What is the correct sequence of the 10 Preparation Drill exercises?',['Bend and Reach; Rear Lunge; High Jumper; Rower; Squat Bender; Windmill; Forward Lunge; Prone Row; Bent-Leg Body Twist; Push-Up','Bend and Reach; Push-Up; Rear Lunge; Rower; Windmill; High Jumper; Squat Bender; Prone Row; Forward Lunge; Sit-Up','Rear Lunge; Bend and Reach; Rower; High Jumper; Windmill; Push-Up; Squat Bender; Forward Lunge; Prone Row; Plank','High Jumper; Rower; Squat Bender; Windmill; Push-Up; Bend and Reach; Rear Lunge; Forward Lunge; Prone Row; Sprint'],0,'The current sequence is Bend and Reach, Rear Lunge, High Jumper, Rower, Squat Bender, Windmill, Forward Lunge, Prone Row, Bent-Leg Body Twist, and Push-Up.']
-        ,['Preparation Drill','Which exercise is first in the Preparation Drill?',['Bend and Reach','Rear Lunge','High Jumper','Rower'],0,'Bend and Reach is the first exercise.']
-        ,['Preparation Drill','Which exercise is second in the Preparation Drill?',['Rear Lunge','Bend and Reach','Forward Lunge','Windmill'],0,'Rear Lunge is the second exercise.']
-        ,['Preparation Drill','Which exercise is the final exercise in the Preparation Drill?',['Push-Up','Prone Row','Bent-Leg Body Twist','High Jumper'],0,'Push-Up is the tenth and final exercise.']
-        ,['PRT Drills','Which drills are listed with the BLC physical training performance steps after the Preparation Drill?',['Four for the Core, Conditioning Drill 1, and Conditioning Drill 2','Only the Recovery Drill','Only the ACFT events','The 4 for the Core and the Army Song'],0,'The BLC performance checklist references Four for the Core, Conditioning Drill 1, and Conditioning Drill 2.']
-        ,['PRT Drills','What is the purpose of a Recovery Drill?',['To gradually return the body toward its pre-exercise state after physical training','To replace the Preparation Drill before exercise','To conduct weapons clearing','To evaluate land navigation'],0,'The Recovery Drill follows training and helps the body return toward its pre-exercise state.']
-        ,['BLC Drill and Ceremony','What does BLC require leaders to practice during drill and ceremonies?',['Assembling and marching a formation and demonstrating commands with confidence','Only saluting indoors','Only memorizing Army Values','Only inspecting weapons'],0,'BLC includes assembling and marching formations and developing confidence while speaking to a formation.']
       ];
       const GROUPS = {
         heritage: { label: '1. Army Heritage, Creed & Customs', categories: ['NCO Creed','Army Values','Army Song','Army History','History','General Orders','Customs and Courtesies','Salutes','WAMC','WAMC History'] },
@@ -259,7 +247,6 @@
         health: { label: '6. Medical, Health & Readiness', categories: ['First Aid','Medical Evacuation','Medical Company','H2F','ABCP','PMCS'] },
         support: { label: '7. Logistics, Supply & Soldier Support', categories: ['Supply','ACS','Soldier Support','Army Training Network','BOSS'] },
         standards: { label: '8. Standards, Justice & Equal Treatment', categories: ['Uniform','Awards','Military Justice','SHARP','Equal Opportunity','SUDCC','Drill','Drill and Ceremony'] },
-        blc: { label: '9. BLC & Physical Training', categories: ['BLC','Preparation Drill','PRT Drills','BLC Drill and Ceremony'] },
       };
       let selectedGroup = 'all';
       let session = [], index = 0, score = 0, answered = false, mode = 'all';
