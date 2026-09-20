@@ -251,11 +251,11 @@
         <div class="eyebrow">NCO Creed</div>
         <h1>Study, practice, repeat.</h1>
         <p class="subtitle">
-          Leia o creed completo ou pratique com palavras ocultas. A porcentagem é aplicada em tempo real a uma nova variação do exercício.
+          Read the complete creed or practice with hidden words. The percentage is applied in real time to a new exercise variation.
         </p>
       </header>
 
-      <section class="panel" aria-label="Controles do exercício">
+      <section class="panel" aria-label="Exercise controls">
         <div class="mode-bar">
           <button id="completeBtn" class="active" type="button">Ver creed completo</button>
           <button id="practiceBtn" type="button">Praticar preenchimento</button>
@@ -268,10 +268,10 @@
               <output id="percentOutput" for="percentRange">10%</output>
             </label>
             <input id="percentRange" type="range" min="5" max="50" step="5" value="10" />
-            <p class="hint">Escolha a porcentagem e gere uma nova variação quando quiser.</p>
+            <p class="hint">Choose the percentage and generate a new variation whenever you want.</p>
           </div>
-          <button id="generateBtn" class="primary" type="button">Gerar exercício</button>
-          <button id="checkBtn" type="button">Checar respostas</button>
+          <button id="generateBtn" class="primary" type="button">Generate exercise</button>
+          <button id="checkBtn" type="button">Check answers</button>
         </div>
       </section>
 
@@ -283,7 +283,7 @@
 
       <p class="footer">
         Texto baseado no <a href="https://www.ncoworldwide.army.mil/Portals/76/ARN44634-TC_7-22_7-000-WEB-2.pdf" target="_blank" rel="noopener noreferrer">TC 7-22.7</a>, publicado pelo U.S. Army.
-        <br>Study Hub &copy; 2026 · v1.2.13 &mdash; 2026-09-20
+        <br>Study Hub &copy; 2026 · v1.2.14 &mdash; 2026-09-20
       </p>
     </main>
 
@@ -421,7 +421,7 @@
             correct += 1;
           } else {
             mistakes.push({
-              typed: input.value.trim() || 'em branco',
+              typed: input.value.trim() || 'blank',
               expected: input.dataset.answer,
             });
             const note = document.createElement('span');
@@ -433,9 +433,9 @@
 
         const percentage = inputs.length ? Math.round(correct / inputs.length * 100) : 0;
         const mistakesHtml = mistakes.length
-          ? `<ul class="mistakes">${mistakes.map((mistake, index) => `<li><strong>${index + 1}.</strong> Você respondeu “${escapeHtml(mistake.typed)}”; resposta esperada: <em>${escapeHtml(mistake.expected)}</em>.</li>`).join('')}</ul>`
+          ? `<ul class="mistakes">${mistakes.map((mistake, index) => `<li><strong>${index + 1}.</strong> You answered “${escapeHtml(mistake.typed)}”; expected answer: <em>${escapeHtml(mistake.expected)}</em>.</li>`).join('')}</ul>`
           : '';
-        result.innerHTML = `<strong>${correct} de ${inputs.length} corretas (${percentage}%)</strong><br>${correct === inputs.length ? 'Excelente. Você completou esta variação corretamente.' : 'Confira abaixo exatamente o que precisa revisar:'}${mistakesHtml}`;
+        result.innerHTML = `<strong>${correct} of ${inputs.length} correct (${percentage}%)</strong><br>${correct === inputs.length ? 'Excellent. You completed this variation correctly.' : 'Review the specific items below:'}${mistakesHtml}`;
         result.classList.add('visible');
       }
 
