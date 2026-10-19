@@ -2936,5 +2936,347 @@
         "A saída de detecção de versão (-sV) do Nmap de fato identifica a aplicação e versão específica rodando na porta, sendo uma forma correta de determinar isso."
       ]
     }
+  ],
+  "2.3": [
+    {
+      "t": "CVSS — Exploitability Metrics",
+      "q": "A cyber security analyst is reviewing a vulnerability assessment report. The analyst focuses on the weaponization metrics considering the ease with which an attacker can produce a usable exploit. The analyst will pay close attention to which exploitability metrics?",
+      "opts": [
+        "Attack vector, scope, and integrity impact",
+        "Attack vector, attack complexity, and user interaction",
+        "Confidentiality impact, integrity impact, and availability impact",
+        "Scope, attack complexity, and availability impact"
+      ],
+      "ans": 1,
+      "exp": "As métricas de explorabilidade (exploitability) do CVSS medem quão fácil é explorar a vulnerabilidade — e, portanto, produzir um exploit utilizável (weaponization): Attack Vector (de onde o ataque parte: rede, adjacente, local ou físico), Attack Complexity (condições fora do controle do atacante) e User Interaction (se depende de uma ação da vítima). Privileges Required também é métrica de explorabilidade, mas o gabarito oficial destaca esses três.",
+      "w": [
+        "Attack Vector é de explorabilidade, mas Scope indica se o impacto ultrapassa o componente vulnerável e Integrity é métrica de impacto — nenhum dos dois mede a facilidade de produzir um exploit.",
+        "Confidentiality, Integrity e Availability são métricas de impacto (consequência da exploração), não de explorabilidade.",
+        "Attack Complexity é de explorabilidade, mas Scope e Availability Impact não medem a facilidade de produzir um exploit."
+      ]
+    },
+    {
+      "t": "Context Awareness — Isolated",
+      "q": "An electrical transmission substation operator observes a computer malfunction. Shortly thereafter, the terminal loses power, including the facility and the surrounding community. A subsequent investigation discovered that even though the system had an air-gapped network, an insider threat installed specially-designed malware on a key control system software. What type of network vulnerability has the insider threat exploited?",
+      "opts": [
+        "Internal",
+        "External",
+        "Isolated",
+        "Adjacent"
+      ],
+      "ans": 2,
+      "exp": "Sistemas isolados (air-gapped) não têm conexão com a internet nem com redes externas — algo comum em ICS/SCADA de infraestrutura crítica. A vulnerabilidade é classificada como isolated: para explorá-la, o atacante precisa de acesso físico ou de um insider (ex.: mídia removível, como no Stuxnet). O isolamento reduz a probabilidade de exploração, mas não a elimina.",
+      "w": [
+        "Internal se refere a hosts da rede interna conectada da organização, alcançáveis a partir de outros hosts internos; um ambiente air-gapped é classificado à parte, como isolated.",
+        "External se refere a ativos expostos à internet ou a redes externas (ex.: screened subnet/DMZ); um sistema air-gapped não tem essa exposição.",
+        "Adjacent é um valor de Attack Vector do CVSS (mesmo segmento de rede), não uma das categorias de contexto de rede (internal, external, isolated)."
+      ]
+    },
+    {
+      "t": "CVSS — Scope",
+      "q": "EternalBlue, also known as CVE-2017-0148, has a CVSS score of 9.3. It is an exploit that allows remote attackers to execute arbitrary code via crafted packets and applies to many Windows operating systems prior to recent versions of Windows 10, an extremely popular and ubiquitous operating system. Which CVSS metric is likely the most influential factor in generating such a high CVSS score?",
+      "opts": [
+        "User interaction",
+        "Scope",
+        "Privileges required",
+        "Availability impact"
+      ],
+      "ans": 1,
+      "exp": "Pelo gabarito oficial, Scope é o fator que mais pesa: quando a exploração pode afetar recursos além do componente vulnerável (Scope: Changed), o CVSS eleva a pontuação de forma significativa. O enunciado reforça isso ao destacar o alcance do exploit — execução remota de código em muitas versões de um sistema operacional onipresente.",
+      "w": [
+        "O EternalBlue não exige interação do usuário, o que contribui para a nota, mas o enunciado enfatiza o alcance do exploit sobre muitos sistemas — característica capturada pelo Scope.",
+        "O EternalBlue não exige privilégios prévios, o que contribui para a nota, mas não é o fator destacado pelo cenário, que enfatiza o alcance do exploit.",
+        "Availability é apenas uma das três métricas de impacto; sozinha, não explica uma pontuação tão alta quanto o alcance descrito no cenário."
+      ]
+    },
+    {
+      "t": "CVSS — Attack Complexity",
+      "q": "A security researcher performs a scan on an isolated network not connected to the internet or any other external network. What is the CVSS score for this vulnerability in terms of Attack Complexity?",
+      "opts": [
+        "Low",
+        "High",
+        "Not applicable",
+        "None"
+      ],
+      "ans": 2,
+      "exp": "Pelo gabarito oficial, o cenário descreve apenas o scan de uma rede isolada (sem conexão com a internet ou redes externas), e não um ataque específico: sem um caminho de ataque definido para avaliar, a métrica Attack Complexity é tratada como não aplicável (Not applicable). Quando há um ataque concreto a avaliar, Attack Complexity assume Low ou High.",
+      "w": [
+        "Low indica que o ataque pode ser repetido sem condições especiais — pressupõe um ataque concreto a avaliar, o que o cenário não descreve.",
+        "High indica que o sucesso depende de condições fora do controle do atacante; também pressupõe um ataque concreto a avaliar.",
+        "None não é um valor de Attack Complexity; ele aparece em métricas como Privileges Required e User Interaction."
+      ]
+    },
+    {
+      "t": "Zero-day",
+      "q": "A penetration tester completed a credentialed vulnerability scan against a cloud-based software application used by their client company. The penetration tester discovered multiple vulnerabilities through the scan; however, none matched an available tool. What exploitable vulnerabilities would the penetration tester NOT discover through a credentialed vulnerability scan?",
+      "opts": [
+        "Missing patches",
+        "Insecure configurations",
+        "Outdated software versions",
+        "Zero-day"
+      ],
+      "ans": 3,
+      "exp": "Scanners de vulnerabilidade — credenciados ou não — comparam o que encontram com bancos de assinaturas/plugins de vulnerabilidades conhecidas (CVEs). Uma vulnerabilidade zero-day ainda não é conhecida publicamente nem pelo fornecedor, então não existe assinatura para detectá-la: nenhum scan, por mais profundo, a identifica.",
+      "w": [
+        "Scans credenciados verificam o nível de patch do sistema por dentro e identificam facilmente atualizações ausentes.",
+        "Com credenciais, o scanner lê configurações locais (registro, arquivos de configuração, políticas) e detecta configurações inseguras.",
+        "O inventário de software instalado é exatamente o que um scan credenciado coleta e compara com versões vulneráveis conhecidas."
+      ]
+    },
+    {
+      "t": "Validation — False Negative",
+      "q": "An IPS permits a connection between a Domain Controller and a user device in the domain on port 445. A domain-enabled account then authenticates to the user device, accesses sensitive data, and transmits it over a Wide Area Network (WAN). What is the type of error in this situation?",
+      "opts": [
+        "False positive",
+        "True positive",
+        "False negative",
+        "True negative"
+      ],
+      "ans": 2,
+      "exp": "Falso negativo ocorre quando uma atividade maliciosa real não é detectada. O IPS permitiu a conexão e não alertou, mas a sequência — autenticação, acesso a dados sensíveis e transmissão pela WAN — caracteriza exfiltração. O sistema deixou passar um ataque real, o tipo de erro mais perigoso, porque gera uma falsa sensação de segurança.",
+      "w": [
+        "Falso positivo seria o IPS alertar ou bloquear uma atividade legítima; aqui ele não alertou sobre uma atividade maliciosa.",
+        "Verdadeiro positivo exigiria que o IPS detectasse o ataque, o que não aconteceu — e não seria um erro.",
+        "Verdadeiro negativo é não alertar sobre atividade realmente benigna; exfiltrar dados sensíveis não é benigno, e verdadeiro negativo não é um erro."
+      ]
+    },
+    {
+      "t": "Asset Value",
+      "q": "A security engineer is assessing vulnerabilities in the organization's SSO solution. The engineer has found multiple vulnerabilities and discovered that, despite the exploit vectors and results being substantively similar, the CVSS scores differ significantly between the SSO and the NTP server. What is the most reasonable explanation for this phenomenon?",
+      "opts": [
+        "SSO is a more valuable asset than an NTP server.",
+        "The SSO solution has more open ports than the NTP server.",
+        "NTP is not considered a network service under CVSS.",
+        "The scanner generated a false positive on the SSO solution."
+      ],
+      "ans": 0,
+      "exp": "Quando o vetor e o resultado da exploração são praticamente iguais, a diferença de pontuação vem do contexto: o valor do ativo. O SSO concentra a autenticação da organização — comprometê-lo abre acesso a todos os sistemas integrados —, enquanto um servidor NTP tem impacto de negócio bem menor. No CVSS, isso é refletido pelas métricas ambientais (Security Requirements de confidencialidade, integridade e disponibilidade), que ajustam a nota base conforme a importância do ativo.",
+      "w": [
+        "O enunciado diz que os vetores de exploração são essencialmente iguais; a quantidade de portas não explica a diferença de pontuação.",
+        "Isso é falso: NTP é um serviço de rede comum e é pontuado normalmente pelo CVSS.",
+        "Um falso positivo não alteraria a pontuação CVSS da vulnerabilidade; a diferença se deve ao valor do ativo."
+      ]
+    },
+    {
+      "t": "Exploitability/Weaponization",
+      "q": "An unauthorized hacker has discovered a publicly known vulnerability in a retail store's cloud-based supply chain management software. The exposure has a CVSS score of 9.3 and a high impact to confidentiality. Fortunately, there is no appropriate proof of concept or publicly available exploit for this vulnerability. What is the biggest hurdle to the hacker gaining access to the retail store's supply chain management software?",
+      "opts": [
+        "Attack complexity",
+        "Privileges required",
+        "Weaponization",
+        "Confidentiality impact"
+      ],
+      "ans": 2,
+      "exp": "Weaponization é o processo de transformar uma vulnerabilidade conhecida em um exploit funcional. Sem prova de conceito (PoC) nem exploit público, o hacker precisa desenvolver o próprio exploit — o que exige conhecimento, tempo e recursos. Por isso a disponibilidade de exploits pesa na priorização: uma vulnerabilidade com CVSS alto, mas sem exploit disponível, tende a ser menos explorada no curto prazo.",
+      "w": [
+        "Attack Complexity mede condições fora do controle do atacante no momento da exploração; o cenário destaca a falta de um exploit pronto, não condições especiais.",
+        "Nada no cenário indica que privilégios sejam exigidos; o obstáculo descrito é a ausência de PoC/exploit.",
+        "O alto impacto em confidencialidade é uma consequência da exploração, não um obstáculo para o atacante."
+      ]
+    },
+    {
+      "t": "CVSS — Attack Vector (Physical)",
+      "q": "Nation-state actors successfully breached another country's government agency and stole some hard drives. The stolen hard drives hosted only a single virtual appliance replicating to another remote location. A scan of the remaining systems showed that data was easily accessible through physical means. How can the system administrators improve their security for data at rest?",
+      "opts": [
+        "Disable replication to the remote location",
+        "Encrypt the virtual server",
+        "Enable TLS on the replication channel",
+        "Implement multi-factor authentication on the appliance"
+      ],
+      "ans": 1,
+      "exp": "Dados em repouso (data at rest) são protegidos por criptografia de armazenamento. Criptografar o servidor virtual (discos e volumes virtuais) garante que, mesmo com o roubo físico dos discos, os dados permaneçam ilegíveis sem as chaves. O cenário indica Attack Vector físico, e a criptografia é o controle que neutraliza esse vetor para dados armazenados.",
+      "w": [
+        "Desativar a replicação afeta a continuidade do serviço, mas não protege os dados que já estão nos discos roubados.",
+        "TLS protege dados em trânsito (a replicação), não os dados armazenados nos discos.",
+        "MFA protege o acesso lógico ao appliance; quem tem os discos em mãos lê os dados diretamente, sem passar pela autenticação."
+      ]
+    },
+    {
+      "t": "CVSS — Attack Complexity",
+      "q": "A hacker launches an attack that requires specialized knowledge and tools, including significant time and resources. What is the Attack Complexity score for this attack as part of the CVSS framework?",
+      "opts": [
+        "Low",
+        "None",
+        "Required",
+        "High"
+      ],
+      "ans": 3,
+      "exp": "Attack Complexity (AC) é High quando o sucesso do ataque depende de condições fora do controle do atacante, exigindo preparação significativa: conhecimento especializado, ferramentas específicas, tempo e recursos. AC Low indica que o ataque pode ser repetido com sucesso sem condições especiais.",
+      "w": [
+        "Low seria um ataque simples e repetível, sem preparação especial — o oposto do cenário.",
+        "None não é um valor de Attack Complexity; aparece em Privileges Required e User Interaction.",
+        "Required é um valor de User Interaction (exige ação da vítima), não de Attack Complexity."
+      ]
+    },
+    {
+      "t": "Context Awareness — Internal",
+      "q": "A security analyst encounters multiple vulnerabilities relating to a file server on the 192.168.52.0/26 network. However, due to firewall rules, the file server is only exploitable on port 445 by specially crafted packets coming from the 192.168.52.5 host. What type of network vulnerability has the security analyst discovered?",
+      "opts": [
+        "External",
+        "Internal",
+        "Isolated",
+        "Perimeter"
+      ],
+      "ans": 1,
+      "exp": "A vulnerabilidade só é explorável a partir de outro host da mesma rede privada (192.168.52.5, dentro de 192.168.52.0/26), pois as regras de firewall bloqueiam o acesso externo. Isso a caracteriza como internal: o atacante precisa primeiro ganhar acesso à rede interna (ou comprometer aquele host específico) para explorá-la — o que costuma reduzir sua prioridade frente a vulnerabilidades externas.",
+      "w": [
+        "External seria um ativo exposto à internet ou a redes externas; aqui só um host interno alcança a porta 445.",
+        "Isolated se aplica a redes air-gapped, sem conexão com outras redes; o servidor está numa rede interna conectada, alcançável por outro host.",
+        "Perimeter não é uma das categorias de contexto (internal, external, isolated); além disso, o servidor não está na borda da rede."
+      ]
+    },
+    {
+      "t": "CVSS — Impact (Confidentiality)",
+      "q": "A network administrator assesses multiple attack vectors revealed from a recent vulnerability scan of the organization's cloud-based software. Which of these CVSS scores presents the greatest threat to Confidentiality?",
+      "opts": [
+        "CVSS:9.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+        "CVSS:7.6/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:H",
+        "CVSS:3.5/AV:A/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N",
+        "CVSS:3.2/AV:L/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+      ],
+      "ans": 3,
+      "exp": "Para avaliar a ameaça à confidencialidade, olhe a métrica de impacto C (Confidentiality) no vetor CVSS. Só esta opção tem C:H (High) — perda total de confidencialidade, com o atacante podendo ler todos os dados do componente afetado. As outras têm nota geral maior ou parecida, mas C:N ou C:L: a nota global não indica qual pilar da tríade CIA é o mais afetado.",
+      "w": [
+        "Apesar da nota geral alta (vetor de rede, sem privilégios), C:N indica que não há impacto em confidencialidade — o impacto é em integridade e disponibilidade.",
+        "C:L indica perda limitada de confidencialidade; o impacto maior aqui é em disponibilidade (A:H).",
+        "C:L indica acesso a apenas parte das informações, sem controle sobre o que é obtido — menos grave que C:H."
+      ]
+    },
+    {
+      "t": "Validation — Exemptions",
+      "q": "An Information Systems Security Officer (ISSO) received a report about secure shell (SSH) access to a network device and quickly reported it up the chain of command. SSH is normally prohibited since a central networking management application manages the network devices. However, the next day, the operations manager addressed the case as a false-positive and confirmed the network team's tasks with an official end date. Why did the operations manager conclude that the security event was false-positive?",
+      "opts": [
+        "The SSH access was performed over an encrypted channel.",
+        "The network device's logs had incorrect timestamps.",
+        "The network team has a temporary exemption.",
+        "The ISSO lacked the authority to report network device events."
+      ],
+      "ans": 2,
+      "exp": "Uma exceção (exemption) temporária e formalmente aprovada — com data de término — autoriza a equipe de rede a usar SSH durante suas tarefas, mesmo com a política normalmente proibindo. Como a atividade estava autorizada, o alerta não indica uma ameaça real: é um falso positivo. Ao validar achados, verifique exceções e controles compensatórios documentados antes de tratar um evento como incidente.",
+      "w": [
+        "Criptografia não torna uma conexão legítima; um acesso SSH proibido continuaria sendo uma violação mesmo criptografado.",
+        "Nada no cenário indica problema de horário nos logs; o gerente confirmou as tarefas da equipe com uma data oficial de término.",
+        "Reportar eventos pela cadeia de comando é exatamente o papel do ISSO; isso não torna o evento um falso positivo."
+      ]
+    },
+    {
+      "t": "CVSS — Privileges Required",
+      "q": "The Common Vulnerability Scoring System (CVSS) scoring for a newly deployed virtual appliance has reached 9.4. The attack vectors in the report included physical and network paths. Some of the other metrics in the report included: Privileges Required (PR) with a value of 'N' and User Interaction (UI) with a value of 'N.' After reviewing the details of the CVSS report, which response would a systems security officer provide to the appliance administrators to resolve most of the issues immediately?",
+      "opts": [
+        "Disable all network interfaces on the appliance",
+        "Move the appliance to a locked server room",
+        "Train users to identify phishing attempts",
+        "Use only Active Directory (AD) groups and/or configure roles"
+      ],
+      "ans": 3,
+      "exp": "PR:N (Privileges Required: None) indica que o atacante não precisa de nenhuma conta ou privilégio para explorar o appliance — um dos fatores que levam a nota a 9.4. Restringir o acesso a grupos do Active Directory e/ou configurar papéis (RBAC) passa a exigir autenticação e autorização, elevando o requisito de privilégios e resolvendo de imediato a maior parte da exposição, tanto pelo vetor de rede quanto pelo físico.",
+      "w": [
+        "Desativar todas as interfaces de rede tornaria o appliance inútil para seu propósito; não é uma resposta viável.",
+        "Restringir o acesso físico trata só o vetor físico; o vetor de rede, sem exigência de privilégios, continuaria exposto.",
+        "UI:N indica que a exploração não depende de interação do usuário, então treinamento contra phishing não reduz esse risco."
+      ]
+    },
+    {
+      "t": "CVSS — Impact (Availability)",
+      "q": "A network administrator assesses multiple attack vectors revealed from a recent vulnerability scan of the system's cloud-based software. Which of these CVSS scores presents the greatest threat to Availability Impact?",
+      "opts": [
+        "CVSS:9.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+        "CVSS:5.6/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "CVSS:8.3/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:L",
+        "CVSS:4.4/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N"
+      ],
+      "ans": 1,
+      "exp": "Para avaliar a ameaça à disponibilidade, olhe a métrica A (Availability Impact). Só esta opção tem A:H — o atacante pode negar totalmente o acesso ao recurso afetado (ex.: derrubar o serviço). As outras têm nota geral parecida ou maior, mas A:N ou A:L: a nota global não indica qual pilar da tríade CIA é o mais afetado.",
+      "w": [
+        "A nota geral é alta por causa de C:H e I:H, mas A:N indica nenhum impacto em disponibilidade.",
+        "A:L indica degradação parcial ou intermitente do serviço, menos grave que A:H.",
+        "A:N indica ausência de impacto em disponibilidade; o vetor local e os impactos baixos completam um quadro de baixo risco."
+      ]
+    },
+    {
+      "t": "CVSS — User Interaction",
+      "q": "An employee downloads a file attachment from a supposed coworker. The file, in reality, was a virus that required it to execute first to initiate the attack. Which exploitability metrics would score high when on a vulnerability assessment of the employee's workstation?",
+      "opts": [
+        "Attack complexity",
+        "Privileges required",
+        "User interaction",
+        "Scope"
+      ],
+      "ans": 2,
+      "exp": "User Interaction (UI) indica se a exploração depende de uma ação de alguém além do atacante. O vírus só é ativado quando o funcionário baixa e executa o anexo, então UI = Required — é a métrica que se destaca na avaliação dessa estação de trabalho e o motivo pelo qual a conscientização do usuário é um controle importante aqui.",
+      "w": [
+        "Attack Complexity trata de condições fora do controle do atacante; o fator determinante aqui é a vítima executar o arquivo.",
+        "Privileges Required trata dos privilégios que o atacante precisa ter antes do ataque; o cenário destaca a necessidade de o usuário executar o arquivo.",
+        "Scope indica se o impacto ultrapassa o componente vulnerável; não descreve a dependência de uma ação do usuário."
+      ]
+    },
+    {
+      "t": "Validation — False Positive",
+      "q": "A security information and event management (SIEM) system flags a failed remote secure shell (SSH) attempt as suspicious and alerts the security team. Upon investigation, the team determines that the SSH attempt is from a legitimate source. What is the type of error in this situation?",
+      "opts": [
+        "False positive",
+        "False negative",
+        "True positive",
+        "True negative"
+      ],
+      "ans": 0,
+      "exp": "Falso positivo ocorre quando o sistema sinaliza como maliciosa uma atividade que, após investigação, se mostra legítima. A tentativa de SSH que falhou veio de uma fonte legítima (ex.: um administrador que errou a senha). Falsos positivos em excesso geram fadiga de alertas, por isso é importante ajustar as regras do SIEM.",
+      "w": [
+        "Falso negativo é deixar de detectar uma atividade maliciosa real; aqui houve alerta para uma atividade legítima.",
+        "Verdadeiro positivo seria um alerta para atividade realmente maliciosa; a investigação mostrou que a fonte era legítima.",
+        "Verdadeiro negativo é não alertar sobre atividade benigna; o SIEM alertou."
+      ]
+    },
+    {
+      "t": "Context Awareness — External",
+      "q": "A security analyst encounters a vulnerability relating to a web server at IPv4 address 42.32.59.252. This web server is inside the network's screened subnet, and the vulnerability pertains to an outdated version of a service running on port 443. What type of network vulnerability has the security analyst discovered?",
+      "opts": [
+        "Internal",
+        "Isolated",
+        "Local",
+        "External"
+      ],
+      "ans": 3,
+      "exp": "O servidor web está na screened subnet (DMZ), com endereço IPv4 público (42.32.59.252) e um serviço HTTPS (porta 443) exposto à internet. Qualquer pessoa na internet pode alcançá-lo, então a vulnerabilidade é external — normalmente a de maior prioridade, porque não exige acesso prévio à rede interna.",
+      "w": [
+        "Internal seria alcançável apenas a partir da rede interna; um servidor na DMZ com IP público está exposto à internet.",
+        "Isolated se aplica a sistemas air-gapped, sem conexão com outras redes — o oposto de um servidor web público.",
+        "Local é um valor de Attack Vector do CVSS (exige acesso local ao sistema), não uma categoria de contexto de rede."
+      ]
+    },
+    {
+      "t": "CVSS — Impact (Integrity)",
+      "q": "A database engineer notices altered database records. The engineer first notifies the correct parties and reports the compromise immediately. Which of these would best identify the type of impact metric the engineer encountered?",
+      "opts": [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "Scope"
+      ],
+      "ans": 1,
+      "exp": "A métrica de impacto Integrity (I) mede a perda de confiabilidade e veracidade das informações — ou seja, a modificação não autorizada de dados. Registros alterados no banco de dados são um impacto direto em integridade.",
+      "w": [
+        "Confidentiality trata da divulgação não autorizada de dados; o cenário descreve alteração, não vazamento.",
+        "Availability trata da perda de acesso ao recurso; os registros continuam acessíveis, só que alterados.",
+        "Scope não é métrica de impacto: indica se a exploração afeta componentes além do vulnerável."
+      ]
+    },
+    {
+      "t": "CVSS — Privileges Required",
+      "q": "A penetration tester has gained user-level access through a credential-stuffing attack against a Windows host in the target network. The Windows host's security logging policy will show multiple failed login attempts. To avoid detection, the penetration tester needs to modify the security logs to conceal their presence. What is the biggest obstacle the penetration tester will face in attempting this?",
+      "opts": [
+        "Attack vector",
+        "User interaction",
+        "Attack complexity",
+        "Privileges required"
+      ],
+      "ans": 3,
+      "exp": "No Windows, limpar ou modificar o log de Segurança exige privilégios administrativos (ex.: o direito \"Manage auditing and security log\"). Com acesso apenas de usuário comum, o maior obstáculo é obter privilégios elevados — exatamente o que a métrica Privileges Required (PR) do CVSS descreve: o nível de privilégio necessário para realizar a ação.",
+      "w": [
+        "O atacante já tem acesso ao host; o problema não é alcançar o alvo (Attack Vector), mas ter permissão para alterar os logs.",
+        "Nenhuma ação de outro usuário é necessária para alterar os logs; o obstáculo é a falta de privilégios.",
+        "Attack Complexity trata de condições fora do controle do atacante; o obstáculo aqui é o nível de privilégio da conta comprometida."
+      ]
+    }
   ]
 }

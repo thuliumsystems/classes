@@ -455,7 +455,7 @@
           <div class="home-card oficial" onclick="showView('oficial')">
             <div class="home-card-eyebrow">Banco Oficial CertMaster</div>
             <h3>Questões Oficiais CS0-003</h3>
-            <p>172 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (itens 2.1 e 2.2).</p>
+            <p>192 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (itens 2.1 a 2.3).</p>
           </div>
         </div>
       </div>
@@ -1268,7 +1268,7 @@
       <div class="domain-header" style="border-left-color:#ab7fff">
         <div class="domain-eyebrow" style="color:#ab7fff">CertMaster Practice — CS0-003</div>
         <h2>Domínio 2.0 — Vulnerability Management</h2>
-        <p>Banco oficial do CertMaster Practice. Itens 2.1 e 2.2 da ementa oficial do Domínio 2.</p>
+        <p>Banco oficial do CertMaster Practice. Itens 2.1 a 2.3 da ementa oficial do Domínio 2.</p>
       </div>
 
       <div class="objective" id="obj-2.1">
@@ -1357,6 +1357,46 @@
             <button class="btn-reset" onclick="resetSection('2.2')">Sortear Novas</button>
           </div>
           <div id="qlist-2.2"></div>
+        </div>
+      </div>
+
+      <div class="objective" id="obj-2.3">
+        <div class="obj-title" onclick="toggleObjective('obj-2.3')">
+          <span class="obj-num">2.3</span>
+          <h3>Análise de Dados para Priorizar Vulnerabilidades</h3>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="obj-body">
+          <div class="topics-covered">
+            <div class="topics-covered-title">Tópicos</div>
+            <div class="topic-pills">
+              <span class="topic-pill">CVSS — Exploitability Metrics</span>
+              <span class="topic-pill">CVSS — Attack Vector</span>
+              <span class="topic-pill">CVSS — Attack Complexity</span>
+              <span class="topic-pill">CVSS — Privileges Required</span>
+              <span class="topic-pill">CVSS — User Interaction</span>
+              <span class="topic-pill">CVSS — Scope</span>
+              <span class="topic-pill">CVSS — Impact (C/I/A)</span>
+              <span class="topic-pill">Validation — False Positive/Negative</span>
+              <span class="topic-pill">Validation — Exemptions</span>
+              <span class="topic-pill">Context Awareness — Internal</span>
+              <span class="topic-pill">Context Awareness — External</span>
+              <span class="topic-pill">Context Awareness — Isolated</span>
+              <span class="topic-pill">Exploitability/Weaponization</span>
+              <span class="topic-pill">Asset Value</span>
+              <span class="topic-pill">Zero-day</span>
+            </div>
+          </div>
+          <div class="explanation">
+            <p>Item 2.3 (<em>"Given a scenario, analyze data to prioritize vulnerabilities"</em>): interpretação do CVSS — métricas de explorabilidade (Attack Vector, Attack Complexity, Privileges Required, User Interaction), Scope e métricas de impacto (Confidentiality, Integrity, Availability) —, validação de achados (verdadeiros/falsos positivos e negativos, exceções aprovadas), consciência de contexto (vulnerabilidades internal, external e isolated) e fatores de priorização como explorabilidade/weaponization, valor do ativo e zero-days.</p>
+          </div>
+          <div class="section-label">Mini-Simulado 2.3 (10 Questões)</div>
+          <div class="score-bar">
+            <div class="score-display" id="score-2.3">0 <span>/ 10</span></div>
+            <div class="progress-wrap"><div class="progress-fill" id="prog-2.3"></div></div>
+            <button class="btn-reset" onclick="resetSection('2.3')">Sortear Novas</button>
+          </div>
+          <div id="qlist-2.3"></div>
         </div>
       </div>
 
@@ -1472,7 +1512,7 @@
 
       function initAllSections() {
         const courseTopics = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14"];
-        const oficialTopics = ["1.1","1.2","1.3","1.4","1.5","2.1","2.2"];
+        const oficialTopics = ["1.1","1.2","1.3","1.4","1.5","2.1","2.2","2.3"];
         courseTopics.forEach((topic) => selectAndRenderSection(topic));
         oficialTopics.forEach((topic) => selectAndRenderSection(topic));
         selectAndRenderMaster("master", courseDb);
