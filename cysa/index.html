@@ -563,6 +563,11 @@
             <h3>Resumos do Curso</h3>
             <p>Resumo de cada módulo do CertMaster Study, organizado por módulo, submódulo e tópico — para revisar antes de praticar as questões.</p>
           </div>
+          <div class="home-card" onclick="showView('resumoLearn')">
+            <div class="home-card-eyebrow">CertMaster Learn (CS0-004)</div>
+            <h3>Resumos do CertMaster Learn</h3>
+            <p>Resumo em português de cada lição do CertMaster Learn, versão nova do exame (CS0-004), organizado por lição, sub-lição e tópico.</p>
+          </div>
         </div>
       </div>
 
@@ -1548,12 +1553,22 @@
         <div id="resumo-list"></div>
       </div>
 
+      <div id="view-resumo-learn" class="hidden">
+        <div class="domain-header">
+          <div class="domain-eyebrow">CertMaster Learn — CS0-004</div>
+          <h2>Resumos do CertMaster Learn</h2>
+          <p>Curso da versão nova do exame (CS0-004). Abra uma lição para ver a ideia central e, dentro dela, cada sub-lição com os pontos-chave dos tópicos. Vídeos, labs e questionários do curso não entram no resumo.</p>
+        </div>
+        <div id="resumo-learn-list"></div>
+      </div>
+
     </div>
     <script src="js/shuffle.js"></script>
     <script>
       let courseDb = {};
       let oficialDb = {};
       let resumosDb = {};
+      let resumosLearnDb = {};
       let activeSelection = {};
 
       function getDbForTopic(topic) {
@@ -1566,6 +1581,7 @@
           course: "view-course",
           oficial: "view-oficial",
           resumo: "view-resumo",
+          resumoLearn: "view-resumo-learn",
         };
         Object.values(containerIds).forEach((id) => {
           document.getElementById(id).classList.add("hidden");
@@ -1623,6 +1639,13 @@
         } catch (error) {
           console.error("Erro ao ler resumos.json:", error);
           failures.push("resumos.json");
+        }
+        try {
+          const res = await fetch("resumos_learn.json");
+          resumosLearnDb = await res.json();
+        } catch (error) {
+          console.error("Erro ao ler resumos_learn.json:", error);
+          failures.push("resumos_learn.json");
         }
         initAllSections();
         renderResumos();
@@ -1789,14 +1812,19 @@
       }
 
       function renderResumos() {
-        const list = document.getElementById("resumo-list");
+        renderResumoList(resumosDb, "resumo-list", "res-", true);
+        renderResumoList(resumosLearnDb, "resumo-learn-list", "rl-", false);
+      }
+
+      function renderResumoList(db, listId, prefix, linkToQuestions) {
+        const list = document.getElementById(listId);
         list.innerHTML = "";
-        Object.keys(resumosDb).forEach((mod) => {
-          const m = resumosDb[mod];
+        Object.keys(db).forEach((mod) => {
+          const m = db[mod];
           const subsHtml = m.subs
             .map(
               (s) => `
-            <div class="res-sub collapsed" id="res-${s.id}">
+            <div class="res-sub collapsed" id="${prefix}${s.id}">
               <button class="res-sub-title" onclick="this.parentElement.classList.toggle('collapsed')">
                 <span class="obj-num">${s.id}</span>
                 <span>${s.titulo}</span>
@@ -1818,9 +1846,9 @@
             .join("");
           const block = document.createElement("div");
           block.className = "objective collapsed";
-          block.id = "res-" + mod;
+          block.id = prefix + mod;
           block.innerHTML = `
-            <div class="obj-title" onclick="toggleObjective('res-${mod}')">
+            <div class="obj-title" onclick="toggleObjective('${prefix}${mod}')">
               <span class="obj-num">${mod}</span>
               <h3>${m.titulo}</h3>
               <span class="toggle-icon">▼</span>
@@ -1832,9 +1860,10 @@
                 <ul>${m.pontos.map((p) => `<li>${p}</li>`).join("")}</ul>
               </div>
               ${subsHtml}
-              <span class="res-link" onclick="goToQuestions('${mod}')">← Praticar as questões da Unidade ${mod}</span>
+              ${linkToQuestions ? `<span class="res-link" onclick="goToQuestions('${mod}')">← Praticar as questões da Unidade ${mod}</span>` : ""}
             </div>`;
           list.appendChild(block);
+          if (!linkToQuestions) return;
 
           const unitBody = document.querySelector(`#obj-${mod} .obj-body`);
           if (unitBody && !unitBody.querySelector(".res-link")) {
