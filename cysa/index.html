@@ -573,11 +573,6 @@
             <h3>Pontos-chave do CertMaster Practice</h3>
             <p>Notas de estudo com os pontos-chave e pegadinhas que o CertMaster Practice cobra, por objetivo do edital — Domínio 1 (1.1 a 1.5) e Domínio 2 (2.1 a 2.3). Companheiro do Banco Oficial.</p>
           </div>
-          <div class="home-card" onclick="showView('labs')">
-            <div class="home-card-eyebrow">CertMaster Labs (CS0-003)</div>
-            <h3>Roteiro de Labs Práticos</h3>
-            <p>Checklist do que o CySA+ espera que você saiba fazer na prática: as 14 unidades do CertMaster Labs e seus 34 laboratórios hands-on (SQLi, XSS, CSRF, forense, hardening, threat hunting e mais).</p>
-          </div>
         </div>
       </div>
 
@@ -1581,15 +1576,6 @@
         <div id="resumo-practice-list"></div>
       </div>
 
-      <div id="view-labs" class="hidden">
-        <div class="domain-header">
-          <div class="domain-eyebrow">CertMaster Labs — CS0-003</div>
-          <h2>Roteiro de Labs Práticos</h2>
-          <p>Mapa das habilidades práticas (hands-on) do CySA+: as 14 unidades do CertMaster Labs e seus 34 laboratórios. É um guia do que saber fazer — descrito com minhas palavras —, não o passo a passo dos labs em si.</p>
-        </div>
-        <div id="labs-list"></div>
-      </div>
-
     </div>
     <script src="js/shuffle.js"></script>
     <script>
@@ -1598,7 +1584,6 @@
       let resumosDb = {};
       let resumosLearnDb = {};
       let resumosPracticeDb = {};
-      let labsDb = {};
       let activeSelection = {};
 
       function getDbForTopic(topic) {
@@ -1613,7 +1598,6 @@
           resumo: "view-resumo",
           resumoLearn: "view-resumo-learn",
           resumoPractice: "view-resumo-practice",
-          labs: "view-labs",
         };
         Object.values(containerIds).forEach((id) => {
           document.getElementById(id).classList.add("hidden");
@@ -1685,13 +1669,6 @@
         } catch (error) {
           console.error("Erro ao ler resumos_practice.json:", error);
           failures.push("resumos_practice.json");
-        }
-        try {
-          const res = await fetch("labs_roteiro.json");
-          labsDb = await res.json();
-        } catch (error) {
-          console.error("Erro ao ler labs_roteiro.json:", error);
-          failures.push("labs_roteiro.json");
         }
         initAllSections();
         renderResumos();
@@ -1861,63 +1838,6 @@
         renderResumoList(resumosDb, "resumo-list", "res-", true);
         renderResumoList(resumosLearnDb, "resumo-learn-list", "rl-", false);
         renderPracticeList(resumosPracticeDb, "resumo-practice-list", "rp-");
-        renderLabsList(labsDb, "labs-list", "lab-");
-      }
-
-      function renderLabsList(db, listId, prefix) {
-        const list = document.getElementById(listId);
-        if (!list) return;
-        list.innerHTML = "";
-        Object.keys(db).forEach((unit) => {
-          const u = db[unit];
-          const labs = u.labs || [];
-          const labsHtml = labs.length
-            ? labs
-                .map((l) => {
-                  const ferramentas = (l.ferramentas || [])
-                    .map((f) => `<code>${f}</code>`)
-                    .join(" ");
-                  const passos = (l.passos || [])
-                    .map((p) => `<li>${p}</li>`)
-                    .join("");
-                  return `
-                <div class="res-sub collapsed" id="${prefix}lab-${l.id}">
-                  <button class="res-sub-title" onclick="this.parentElement.classList.toggle('collapsed')">
-                    <span class="obj-num">${l.id}</span>
-                    <span>${l.titulo}</span>
-                    <span class="toggle-icon">▼</span>
-                  </button>
-                  <div class="res-sub-body">
-                    <div class="res-topic">
-                      ${l.objetivo ? `<p><strong>Objetivo:</strong> ${l.objetivo}</p>` : ""}
-                      ${ferramentas ? `<p><strong>Ferramentas:</strong> ${ferramentas}</p>` : ""}
-                      ${passos ? `<p><strong>Roteiro:</strong></p><ol>${passos}</ol>` : ""}
-                      ${l.deteccao ? `<p><strong>Como detectar:</strong> ${l.deteccao}</p>` : ""}
-                      ${l.mitigacao ? `<p><strong>Como mitigar:</strong> ${l.mitigacao}</p>` : ""}
-                    </div>
-                  </div>
-                </div>`;
-                })
-                .join("")
-            : `<div class="res-topic"><p>Unidade só de leitura — sem laboratório prático.</p></div>`;
-          const block = document.createElement("div");
-          block.className = "objective collapsed";
-          block.id = prefix + unit;
-          block.innerHTML = `
-            <div class="obj-title" onclick="toggleObjective('${prefix}${unit}')">
-              <span class="obj-num">${unit}.0</span>
-              <h3>${u.titulo}</h3>
-              <span class="toggle-icon">▼</span>
-            </div>
-            <div class="obj-body">
-              <div class="module-summary">
-                <div class="topics-covered-title">${labs.length} laboratório(s) prático(s)</div>
-                <p>Cada lab abre com o roteiro prático (objetivo, ferramentas e passos). Guias escritos com minhas palavras, não o script original do curso.</p>
-              </div>
-              ${labsHtml}
-            </div>`;
-          list.appendChild(block);
-        });
       }
 
       function renderPracticeList(db, listId, prefix) {
