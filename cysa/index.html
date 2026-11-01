@@ -98,6 +98,7 @@
         border-radius: var(--radius);
         margin-bottom: 24px;
         overflow: hidden;
+        scroll-margin-top: 84px;
       }
       .obj-title {
         display: flex;
@@ -168,6 +169,106 @@
       }
       .explanation li {
         margin-bottom: 6px;
+      }
+      .module-summary {
+        margin: 0 0 18px;
+        padding: 12px 16px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 6px;
+      }
+      .module-summary p {
+        margin-bottom: 8px;
+        color: #e6edf3;
+        font-size: 14px;
+      }
+      .module-summary ul {
+        margin: 0 0 0 18px;
+        color: #cbd5e1;
+        font-size: 13.5px;
+      }
+      .module-summary li {
+        margin-bottom: 4px;
+      }
+      .res-link {
+        display: inline-block;
+        margin-bottom: 16px;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: var(--accent);
+        background: rgba(88, 166, 255, 0.08);
+        border: 1px solid rgba(88, 166, 255, 0.25);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .res-link:hover {
+        background: rgba(88, 166, 255, 0.16);
+      }
+      .res-sub {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+      .res-sub-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 14px;
+        background: var(--surface2);
+        border: none;
+        color: var(--text);
+        font: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+      }
+      .res-sub-title:hover {
+        background: #212c3d;
+      }
+      .res-sub-title .obj-num {
+        font-size: 11px;
+      }
+      .res-sub-title span:nth-child(2) {
+        flex: 1;
+      }
+      .res-sub.collapsed .toggle-icon {
+        transform: rotate(-90deg);
+      }
+      .res-sub.collapsed .res-sub-body {
+        display: none;
+      }
+      .res-sub-body {
+        padding: 6px 14px 4px;
+      }
+      .res-topic {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .res-topic:last-child {
+        border-bottom: none;
+      }
+      .res-topic h4 {
+        font-size: 13.5px;
+        margin-bottom: 6px;
+        color: var(--accent);
+      }
+      .res-topic h4 span {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--muted);
+        margin-right: 6px;
+      }
+      .res-topic ul {
+        margin-left: 18px;
+        color: #cbd5e1;
+        font-size: 13.5px;
+      }
+      .res-topic li {
+        margin-bottom: 4px;
       }
       .topics-covered {
         margin: 12px 0 18px;
@@ -456,6 +557,11 @@
             <div class="home-card-eyebrow">Banco Oficial CertMaster</div>
             <h3>Questões Oficiais CS0-003</h3>
             <p>192 questões reais do banco oficial do CertMaster Practice, cobrindo o Domínio 1 — Security Operations (itens 1.1 a 1.5) e o Domínio 2 — Vulnerability Management (itens 2.1 a 2.3).</p>
+          </div>
+          <div class="home-card" onclick="showView('resumo')">
+            <div class="home-card-eyebrow">CertMaster Study (PT-BR)</div>
+            <h3>Resumos do Curso</h3>
+            <p>Resumo de cada módulo do CertMaster Study, organizado por módulo, submódulo e tópico — para revisar antes de praticar as questões.</p>
           </div>
         </div>
       </div>
@@ -1433,11 +1539,21 @@
 
       </div>
 
+      <div id="view-resumo" class="hidden">
+        <div class="domain-header">
+          <div class="domain-eyebrow">CertMaster Study — Versão em Português</div>
+          <h2>Resumos do Curso</h2>
+          <p>Abra um módulo para ver a ideia central e, dentro dele, cada submódulo com os pontos-chave dos tópicos.</p>
+        </div>
+        <div id="resumo-list"></div>
+      </div>
+
     </div>
     <script src="js/shuffle.js"></script>
     <script>
       let courseDb = {};
       let oficialDb = {};
+      let resumosDb = {};
       let activeSelection = {};
 
       function getDbForTopic(topic) {
@@ -1449,6 +1565,7 @@
           home: "view-home",
           course: "view-course",
           oficial: "view-oficial",
+          resumo: "view-resumo",
         };
         Object.values(containerIds).forEach((id) => {
           document.getElementById(id).classList.add("hidden");
@@ -1500,7 +1617,15 @@
           console.error("Erro ao ler practice_questions.json:", error);
           failures.push("practice_questions.json");
         }
+        try {
+          const res = await fetch("resumos.json");
+          resumosDb = await res.json();
+        } catch (error) {
+          console.error("Erro ao ler resumos.json:", error);
+          failures.push("resumos.json");
+        }
         initAllSections();
+        renderResumos();
         if (failures.length > 0) {
           alert(
             "Erro ao carregar " +
@@ -1661,6 +1786,79 @@
         } else {
           selectAndRenderSection(sec);
         }
+      }
+
+      function renderResumos() {
+        const list = document.getElementById("resumo-list");
+        list.innerHTML = "";
+        Object.keys(resumosDb).forEach((mod) => {
+          const m = resumosDb[mod];
+          const subsHtml = m.subs
+            .map(
+              (s) => `
+            <div class="res-sub collapsed" id="res-${s.id}">
+              <button class="res-sub-title" onclick="this.parentElement.classList.toggle('collapsed')">
+                <span class="obj-num">${s.id}</span>
+                <span>${s.titulo}</span>
+                <span class="toggle-icon">▼</span>
+              </button>
+              <div class="res-sub-body">
+                ${s.topicos
+                  .map(
+                    (t) => `
+                <div class="res-topic">
+                  <h4><span>${t.id}</span>${t.titulo}</h4>
+                  <ul>${t.pontos.map((p) => `<li>${p}</li>`).join("")}</ul>
+                </div>`,
+                  )
+                  .join("")}
+              </div>
+            </div>`,
+            )
+            .join("");
+          const block = document.createElement("div");
+          block.className = "objective collapsed";
+          block.id = "res-" + mod;
+          block.innerHTML = `
+            <div class="obj-title" onclick="toggleObjective('res-${mod}')">
+              <span class="obj-num">${mod}</span>
+              <h3>${m.titulo}</h3>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="obj-body">
+              <div class="module-summary">
+                <div class="topics-covered-title">Resumo do Módulo</div>
+                <p><strong>Ideia central:</strong> ${m.ideia}</p>
+                <ul>${m.pontos.map((p) => `<li>${p}</li>`).join("")}</ul>
+              </div>
+              ${subsHtml}
+              <span class="res-link" onclick="goToQuestions('${mod}')">← Praticar as questões da Unidade ${mod}</span>
+            </div>`;
+          list.appendChild(block);
+
+          const unitBody = document.querySelector(`#obj-${mod} .obj-body`);
+          if (unitBody && !unitBody.querySelector(".res-link")) {
+            const link = document.createElement("span");
+            link.className = "res-link";
+            link.textContent = "📖 Ver resumo do módulo " + mod + " →";
+            link.onclick = () => openResumo(mod);
+            unitBody.prepend(link);
+          }
+        });
+      }
+
+      function openResumo(mod) {
+        showView("resumo");
+        const block = document.getElementById("res-" + mod);
+        block.classList.remove("collapsed");
+        block.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function goToQuestions(mod) {
+        showView("course");
+        const unit = document.getElementById("obj-" + mod);
+        unit.classList.remove("collapsed");
+        unit.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
       window.addEventListener("DOMContentLoaded", loadQuestions);

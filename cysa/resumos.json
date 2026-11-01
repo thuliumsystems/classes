@@ -1,0 +1,1728 @@
+{
+  "1": {
+    "titulo": "Entender a resposta, o manuseio e o gerenciamento de vulnerabilidades",
+    "ideia": "A liderança de segurança organiza o trabalho do SOC com governança, gestão de riscos e manutenção contínua dos endpoints.",
+    "pontos": [
+      "Governança define as políticas; procedimentos e controles colocam essas políticas em prática no dia a dia.",
+      "Gestão de riscos é uma função especializada que orienta as decisões da governança.",
+      "A superfície de ataque muda o tempo todo, por isso exige monitoramento contínuo.",
+      "Patches e configurações padronizadas (baselines) são a base da proteção dos endpoints."
+    ],
+    "subs": [
+      {
+        "id": "1.1",
+        "titulo": "Entender os conceitos de liderança em cibersegurança",
+        "topicos": [
+          {
+            "id": "1.1.1",
+            "titulo": "Política e governança",
+            "pontos": [
+              "Tecnologia sozinha não melhora a postura de segurança: projetos feitos às pressas, sem planejamento e gestão, não dão resultado.",
+              "<strong>GRC</strong>: a <strong>governança</strong> define a direção e as políticas, os <strong>gerentes de risco</strong> informam as decisões e o <strong>compliance</strong> verifica se a prática segue as regras.",
+              "Políticas e procedimentos são o roteiro do SOC: reduzem o improviso sob pressão e garantem respostas consistentes.",
+              "<strong>SLOs</strong> de segurança medem o desempenho — ex.: <strong>MTTD</strong> (tempo médio para detectar), <strong>MTTR</strong> (tempo médio para recuperar) e tempo para aplicar patch.",
+              "Ciclo típico: compliance mede → risco aponta a tendência → governança atualiza a política (ex.: exigir dupla aprovação para adiar patches)."
+            ]
+          },
+          {
+            "id": "1.1.2",
+            "titulo": "Princípios do gerenciamento de riscos",
+            "pontos": [
+              "Objetivo: reduzir a probabilidade ou o impacto dos riscos — eliminar todo risco é impossível.",
+              "<strong>Evitar</strong>: encerrar a atividade arriscada (ex.: desativar um app cheio de vulnerabilidades graves).",
+              "<strong>Aceitar</strong>: seguir sem mudanças, dentro de limites acordados com a governança.",
+              "<strong>Mitigar</strong>: aplicar controles até o risco cair a um nível aceitável.",
+              "<strong>Transferir</strong> (compartilhar): passar o risco financeiro a terceiros, normalmente via seguro.",
+              "<strong>Exceção de risco</strong>: último recurso quando nenhuma resposta é viável — exige justificativa documentada, datas e assinaturas."
+            ]
+          },
+          {
+            "id": "1.1.3",
+            "titulo": "Modelagem de ameaças",
+            "pontos": [
+              "Comece entendendo quais atores realmente miram a organização: adversários avançados focam governo, militares, big techs e finanças; a maioria das empresas precisa de capacidades básicas.",
+              "<strong>Threat modeling</strong> avalia o sistema pela ótica do atacante e do defensor para achar os principais riscos e <strong>TTPs</strong>.",
+              "Pergunta central: as defesas aguentam um adversário com determinado nível de capacidade?",
+              "Os resultados viram casos de uso para monitoramento e detecção.",
+              "É colaborativo: segurança, usuários, clientes e áreas como finanças, marketing e jurídico. Ferramenta citada: Microsoft Threat Modeling Tool."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1.2",
+        "titulo": "Explorar tipos e métodos de controle",
+        "topicos": [
+          {
+            "id": "1.2.1",
+            "titulo": "Categorias (classes) de controle de segurança",
+            "pontos": [
+              "Controles isolados e reativos (só firewall + antivírus) não bastam mais: é preciso defesa em camadas, de forma estruturada.",
+              "Referências: <strong>NIST SP 800-53</strong>, <strong>NIST SP 800-171</strong>, <strong>ISO 27001</strong> e <strong>CIS Controls</strong>.",
+              "<strong>Técnico</strong> (lógico): implementado por sistema — firewall, antivírus, ACL do SO.",
+              "<strong>Operacional</strong>: executado por pessoas — guardas, treinamento.",
+              "<strong>Gerencial</strong>: supervisiona o sistema — avaliação de riscos, seleção de controles.",
+              "Meta: ter controles de cada função (preventivo, detectivo etc.) nas três classes."
+            ]
+          },
+          {
+            "id": "1.2.2",
+            "titulo": "Tipos funcionais de controle",
+            "pontos": [
+              "<strong>Preventivo</strong> (antes do ataque): ACLs, antimalware, SOPs; patch aplicado proativamente.",
+              "<strong>Detectivo</strong> (durante): identifica e registra a tentativa — o exemplo clássico são os logs.",
+              "<strong>Corretivo</strong> (depois): reduz o impacto — ex.: backup que restaura dados.",
+              "<strong>Compensatório</strong>: substitui o controle recomendado com proteção igual ou melhor, por outro método.",
+              "<strong>Responsivo</strong>: guia as ações após o incidente confirmado — normalmente em <strong>playbooks</strong> do SOC.",
+              "Matriz de <strong>Curso de Ação (CoA)</strong>: mapeia controles contra táticas e ferramentas dos adversários. Vulnerabilidades graves devem ser priorizadas e escaladas às partes interessadas."
+            ]
+          },
+          {
+            "id": "1.2.3",
+            "titulo": "Gerenciar superfícies de ataque",
+            "pontos": [
+              "Superfície de ataque = todos os caminhos de acesso não autorizado: cada software, serviço e protocolo habilitado, além de nuvem, SaaS e redes externas conectadas.",
+              "Configurações padrão priorizam compatibilidade — faça hardening com <strong>CIS Benchmarks</strong> e <strong>DoD STIGs</strong>.",
+              "<strong>Attack surface management</strong>: monitoramento contínuo para achar TI sombra, senhas fracas/padrão, configurações erradas e patches ausentes. Usa <strong>descoberta passiva</strong> (ex.: captura de pacotes) e <strong>descoberta de borda</strong> (tudo que alcança a internet, inclusive usuários via phishing).",
+              "Validação dos controles: <strong>pentest</strong> (fraquezas em geral), <strong>emulação adversária</strong> (imita as TTPs de um grupo específico, com base no MITRE ATT&amp;CK) e <strong>bug bounty</strong> (Bugcrowd, HackerOne).",
+              "Como reduzir: inventário de ativos, controle de acesso/MFA, patching, segmentação de rede, remoção do que é desnecessário e treinamento."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "1.3",
+        "titulo": "Explicar conceitos de gerenciamento de patches",
+        "topicos": [
+          {
+            "id": "1.3.1",
+            "titulo": "Patches de software e proteções de host",
+            "pontos": [
+              "O volume de patches exige gestão centralizada; a automação é essencial, mas às vezes precisa de ajustes manuais (scripts).",
+              "Estratégia baseada em risco: sistemas de missão crítica com mais cuidado (disponibilidade); desktops corrigidos rápido após um teste curto.",
+              "Boas práticas: acompanhar boletins dos fornecedores, classificar updates (urgente/importante/não crítico), ambiente de teste, logs detalhados, avaliar firmware antes, push imediato dos críticos e calendário para os demais.",
+              "Teste de patch: em sistema isolado ou ambiente espelho — verificar se não quebra nada e se corrige de fato; depois, novo scan para confirmar."
+            ]
+          },
+          {
+            "id": "1.3.2",
+            "titulo": "Gerenciamento de configurações",
+            "pontos": [
+              "Um servidor central define a configuração e a envia automaticamente aos endpoints.",
+              "Benefícios: <strong>consistência</strong>, <strong>imposição</strong> (o servidor sobrescreve mudanças locais) e <strong>visibilidade</strong> quase em tempo real — qualquer desvio gera alerta.",
+              "Essencial em IaC, CI/CD e DevOps, mas também em ambientes tradicionais.",
+              "Ferramentas: <strong>Chef</strong>, <strong>Puppet</strong>, <strong>Ansible</strong>, <strong>Terraform</strong>."
+            ]
+          },
+          {
+            "id": "1.3.3",
+            "titulo": "Janelas de manutenção",
+            "pontos": [
+              "Períodos pré-definidos para manutenção preventiva e patches não críticos, sempre seguindo o <strong>change management</strong>.",
+              "Manutenção <strong>proativa</strong> cabe na janela; a <strong>reativa</strong> (resposta a falha) normalmente não pode esperar.",
+              "O monitoramento deve correlacionar eventos com a janela para ajustar a severidade dos alertas — atacantes podem se esconder no ruído da manutenção.",
+              "A janela precisa comportar o <strong>rollback</strong> se a mudança der problema; depois, monitore logs e desempenho contra a baseline."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "2": {
+    "titulo": "Explorar conceitos de inteligência contra ameaças e busca de ameaças",
+    "ideia": "Detectar ameaças ativas exige juntar os dados coletados no próprio ambiente com inteligência externa sobre quem ataca e como.",
+    "pontos": [
+      "Atores de ameaça variam em motivação, recursos e nível de habilidade.",
+      "TTPs descrevem o modo de operar de cada grupo e ajudam a atribuir ataques.",
+      "OSINT e feeds de inteligência revelam planos, motivações e indicadores dos atacantes.",
+      "Threat hunting procura ativamente sinais de que o adversário já está dentro do ambiente."
+    ],
+    "subs": [
+      {
+        "id": "2.1",
+        "titulo": "Explorar conceitos de atores de ameaças",
+        "topicos": [
+          {
+            "id": "2.1.1",
+            "titulo": "Tipos de atores de ameaças",
+            "pontos": [
+              "Inteligência de ameaças vai além de assinaturas: estuda o comportamento, os recursos e o financiamento de cada grupo adversário.",
+              "Ataques <strong>oportunistas</strong> (ferramentas prontas, pouca sofisticação) vs. <strong>direcionados</strong> (ferramentas sofisticadas, orçamento e equipe dedicada).",
+              "<strong>Estado-nação</strong>: espionagem e vantagem estratégica (energia, eleições); alguns, como a Coreia do Norte, também buscam lucro. Referência histórica: relatório APT1 da Mandiant.",
+              "<strong>Crime organizado</strong>: lucro via fraude financeira e chantagem, muitas vezes de outra jurisdição. <strong>Hacktivistas</strong> (Anonymous, LulzSec): agenda política — vazamentos, DoS, defacement.",
+              "<strong>Ameaça interna</strong>: permanente (funcionário) ou temporária (fornecedor, visitante); intencional ou não intencional (negligência, phishing, TI sombra). <strong>Script kiddie</strong>: usa ferramentas sem entendê-las, em busca de atenção.",
+              "<strong>Supply chain</strong>: invadir um fornecedor de software, um MSP ou um fabricante de hardware para chegar ao alvo final."
+            ]
+          },
+          {
+            "id": "2.1.2",
+            "titulo": "Ameaça persistente avançada (APT)",
+            "pontos": [
+              "APT descreve adversários avançados (estado-nação, crime organizado) e, por extensão, as ferramentas que eles usam.",
+              "Características: muito dinheiro e pessoal, exploits personalizados, longa coleta de informações sobre o alvo e campanhas que duram meses.",
+              "Objetivo principal: <strong>persistência</strong> (manter o acesso) com furtividade; usam <strong>antiforense</strong> para apagar rastros.",
+              "Para detectar, vá além das assinaturas: procure software de <strong>C2</strong> e tráfego de rede incomum.",
+              "Alvos típicos: finanças, saúde e quem guarda muita PII, além de governos (eleições, espionagem). Cada fornecedor dá códigos e nomes diferentes ao mesmo grupo (ex.: APT41 no MITRE ATT&amp;CK)."
+            ]
+          },
+          {
+            "id": "2.1.3",
+            "titulo": "Táticas, técnicas e procedimentos (TTPs)",
+            "pontos": [
+              "TTPs descrevem como o atacante opera; documentá-las cria uma espécie de impressão digital do grupo.",
+              "Servem para atribuir ataques, relacionar grupos entre si e priorizar defesas contra os métodos mais usados.",
+              "<strong>MITRE ATT&amp;CK</strong>: matriz que cataloga táticas (o objetivo) e técnicas (como alcançá-lo).",
+              "Ferramentas <strong>UEBA</strong> combinam TTPs do ATT&amp;CK com análise comportamental para separar o normal do anormal."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2.2",
+        "titulo": "Identificar ameaças ativas",
+        "topicos": [
+          {
+            "id": "2.2.1",
+            "titulo": "Inteligência de fonte aberta (OSINT)",
+            "pontos": [
+              "O reconhecimento costuma preceder o ataque; aplicar OSINT na própria empresa mostra o que você expõe sem querer.",
+              "Fontes: dados públicos (WHOIS, DNS, faixas de IP, registros da SEC), redes sociais, código HTML do site (servidores, versões, caminhos, nomes) e <strong>metadados</strong> de documentos (ferramenta <strong>FOCA</strong>).",
+              "Uso ofensivo: chantagem, engenharia social, entrega de um dispositivo comprometido ou ataque baseado na rotina do alvo.",
+              "<strong>OSINT defensiva</strong>: boletins do governo (DHS/CISA), <strong>CERT</strong>, <strong>CSIRT</strong>, monitoramento da deep/dark web e fontes internas (logs)."
+            ]
+          },
+          {
+            "id": "2.2.2",
+            "titulo": "Fontes proprietárias / de fonte fechada",
+            "pontos": [
+              "Inteligência <strong>estratégica</strong> (visão geral e tendências) vs. <strong>operacional</strong> (IoCs, análise de malware, forense de rede).",
+              "Atributos de qualidade: <strong>pontualidade</strong>, <strong>relevância</strong> e <strong>precisão</strong>.",
+              "Feeds comerciais (pagos) vendem dados de <strong>fonte fechada</strong> — honeynets próprias, telemetria anonimizada de clientes — e muitas vezes uma plataforma. Ex.: CrowdStrike Falcon, IBM X-Force Exchange, Mandiant/FireEye, Recorded Future.",
+              "<strong>ISACs</strong> (CCAIs) atendem a infraestrutura crítica, trocando inteligência entre os setores público e privado."
+            ]
+          },
+          {
+            "id": "2.2.3",
+            "titulo": "Centros de Compartilhamento e Análise de Informações (ISACs)",
+            "pontos": [
+              "Um ISAC por setor crítico; os dados vêm dos próprios membros, por isso são muito específicos do setor. Nos EUA, a troca é protegida pelo programa <strong>PCII</strong> do DHS (no Reino Unido, a CiSP).",
+              "Benefícios do compartilhamento: resposta a incidentes, gestão de vulnerabilidades, gestão de riscos e engenharia de segurança.",
+              "O DHS define <strong>16 setores</strong> de infraestrutura crítica, com foco em sistemas embarcados e ICS.",
+              "Exemplos: MS-ISAC e EI-ISAC (governo e eleições), Health-ISAC, FS-ISAC (financeiro), A-ISAC (aviação — GPS e radar sujeitos a spoofing)."
+            ]
+          },
+          {
+            "id": "2.2.4",
+            "titulo": "Compartilhamento de inteligência contra ameaças",
+            "pontos": [
+              "Compartilhar IoCs, grupos rastreados e estratégias reduz o tempo de detecção de todo o setor — ex.: <strong>Cyber Threat Alliance</strong>.",
+              "<strong>AIS</strong> (Automated Indicator Sharing), mantido pela CISA, troca indicadores legíveis por máquina.",
+              "Padrões: <strong>STIX</strong> (formato da informação) e <strong>TAXII</strong> (transporte e troca das mensagens).",
+              "<strong>Níveis de confiança</strong> ajudam a priorizar; a plataforma <strong>MISP</strong> usa taxonomias como Admiralty Scale e Estimative Language."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2.3",
+        "titulo": "Explorar conceitos de busca de ameaças",
+        "topicos": [
+          {
+            "id": "2.3.1",
+            "titulo": "Conceitos de busca de ameaças (threat hunting)",
+            "pontos": [
+              "Mentalidade de <strong>\"assumir violação\"</strong>: procurar de forma sistemática a atividade maliciosa que escapou dos controles.",
+              "Processo principalmente <strong>manual</strong>: o hunter cria hipóteses a partir da inteligência e das TTPs e as valida com dados (ex.: achou acesso indevido → procure movimento lateral).",
+              "Insumos: TTPs, <strong>IoCs</strong>, <strong>IoAs</strong> e níveis de confiança. Buscas orientadas por entidade usam TTPs vistas recentemente pela comunidade.",
+              "Sem equipe dedicada, a saída é contratar um <strong>MSSP</strong>.",
+              "Focos de busca: configurações incorretas, redes isoladas (air-gapped, via acesso físico ou sistemas conectados) e ativos ou processos críticos (criação de usuários, transferências, aprovações de acesso)."
+            ]
+          },
+          {
+            "id": "2.3.2",
+            "titulo": "Indicadores de comprometimento (IoC)",
+            "pontos": [
+              "IoC é um dado forense que sugere um possível incidente — não prova o ataque; precisa ser validado (falso positivo, monitorar ou responder).",
+              "Aparecem em logs, monitoramento de rede, EDR e SIEM. A <strong>forense digital</strong> (logs, memória, tráfego, sistema de arquivos) os identifica e alimenta IDS e SIEM.",
+              "<strong>IoC</strong> olha para o que já aconteceu; <strong>IoA</strong> identifica o ataque enquanto ele ocorre.",
+              "Exemplos: tráfego de saída incomum (muito DNS), login de geografia inesperada, conta privilegiada suspeita, mudanças em logs e arquivos de sistema, protocolos de C2, IPs/URLs maliciosos, DDoS.",
+              "Serviços como <strong>Uncoder.io</strong> traduzem regras de detecção para vários SIEM/EDR (ex.: Splunk)."
+            ]
+          },
+          {
+            "id": "2.3.3",
+            "titulo": "Métodos e conceitos de chamariz (deception)",
+            "pontos": [
+              "<strong>Defesa ativa</strong>: usar táticas ofensivas para dificultar o ataque, induzir erros do invasor e aprender seus métodos.",
+              "<strong>Honeypot</strong>: sistema-isca que desvia o tráfego malicioso da produção, alerta cedo e coleta técnicas. De pesquisa: observa ataques reais na internet. De <strong>alta interação</strong>: SO completo, mais difícil de identificar.",
+              "<strong>Active decoys</strong>: informações falsas nos endpoints apontam para servidores falsos; soluções de deception redirecionam o tráfego automaticamente.",
+              "Diferente do IDS, honeypots não dependem de assinaturas; são caros e exigem especialistas para operar com segurança."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "3": {
+    "titulo": "Explicar conceitos importantes de arquitetura de sistema e rede",
+    "ideia": "A arquitetura de sistemas e de rede define como os controles trabalham juntos — e é ela que dá ao SOC visibilidade, controle e proteção.",
+    "pontos": [
+      "A nuvem traz uma flexibilidade enorme, mas muda onde e como os controles são aplicados.",
+      "Hardening de sistemas operacionais e software reduz a superfície de ataque.",
+      "O IAM é quem impõe os controles de acesso.",
+      "Logs enriquecidos e centralizados dão visibilidade quase em tempo real da rede."
+    ],
+    "subs": [
+      {
+        "id": "3.1",
+        "titulo": "Revisar conceitos de arquitetura de sistemas e de rede",
+        "topicos": [
+          {
+            "id": "3.1.1",
+            "titulo": "Conceitos do sistema operacional",
+            "pontos": [
+              "<strong>Hardening</strong>: desativar serviços desnecessários, limitar privilégios, aplicar patches e restringir áreas sensíveis (arquivos do SO, registro, configs, logs). Guias: DoD STIGs e CIS Benchmarks.",
+              "<strong>Registro do Windows</strong>: chaves raiz como <strong>HKLM</strong> (sistema todo), <strong>HKU</strong> (perfis) e <strong>HKCU</strong> (usuário logado). Fica em <strong>hives</strong> em C:\\Windows\\System32\\Config (SAM, SECURITY, SOFTWARE, SYSTEM, DEFAULT); o de cada usuário é o NTUSER.DAT.",
+              "<strong>Linux</strong> não tem registro: as configurações ficam em arquivos de texto, principalmente em <strong>/etc</strong> (também /usr, /opt, /var).",
+              "Formatos de configuração: <strong>INI</strong> (chave=valor), <strong>XML</strong> (tags), <strong>YAML</strong> (\":\" e indentação), <strong>JSON</strong> (chaves e colchetes).",
+              "Processos do sistema rodam em segundo plano (kernel, serviços). Arquiteturas: <strong>x86</strong> (desktops e servidores) e <strong>ARM</strong> (celulares, Raspberry Pi) — software de uma não roda na outra sem emulador."
+            ]
+          },
+          {
+            "id": "3.1.2",
+            "titulo": "Virtualização, contêineres e emulação",
+            "pontos": [
+              "O <strong>hipervisor</strong> abstrai o hardware: as VMs rodam em qualquer host, migram entre servidores (alta disponibilidade) e têm hardware virtual ajustado por software.",
+              "<strong>Tipo I</strong> (bare metal): roda direto no hardware, enxuto, uso corporativo, gerenciado remotamente. <strong>Tipo II</strong> (hosted): roda sobre um SO, ótimo para laboratórios e testes.",
+              "<strong>Virtualização de aplicativos</strong>: o app roda no servidor e é transmitido ao cliente (Citrix XenApp, Microsoft App-V, VMware ThinApp), muitas vezes via navegador.",
+              "<strong>Contêineres</strong> (ex.: Docker): isolamento no nível do SO, compartilhando o kernel, sem hipervisor — não dá para rodar um SO de outro tipo (Windows num host Linux). São a base de microsserviços e serverless."
+            ]
+          },
+          {
+            "id": "3.1.3",
+            "titulo": "Modelos de implantação em nuvem",
+            "pontos": [
+              "A virtualização é a base de toda nuvem; o modelo de implantação define onde ficam dados, apps e recursos.",
+              "<strong>Pública</strong>: infraestrutura de terceiros acessada pela internet (AWS, Azure, Google Cloud, Oracle, IBM).",
+              "<strong>Privada</strong>: construída e gerida pela organização — mais controle, porém mais custo inicial e manutenção.",
+              "<strong>Híbrida</strong>: combina local/privada com pública — dados sensíveis na privada, cargas comuns na pública; facilita escalar e recuperar desastres."
+            ]
+          },
+          {
+            "id": "3.1.4",
+            "titulo": "Impactos da computação serverless",
+            "pontos": [
+              "<strong>Serverless</strong>: apps viram funções e microsserviços; a nuvem sobe um contêiner por requisição, executa e o destrói. A cobrança é por tempo de execução. Ex.: AWS Lambda, Google Cloud Functions, Azure Functions.",
+              "Pouco ou nenhum trabalho com servidores, patches e redundância — o provedor cuida da base.",
+              "Foco de segurança: proteger os clientes e, principalmente, as contas e estações dos desenvolvedores que publicam o código.",
+              "Riscos: tecnologia nova (boas práticas ainda amadurecendo) e dependência forte do provedor, com poucas opções de recuperação de desastres.",
+              "Arquitetura orientada a eventos (autenticar, criar sessão, autorizar, gravar log…), diferente das aplicações monolíticas."
+            ]
+          },
+          {
+            "id": "3.1.5",
+            "titulo": "Redes definidas por software (SDN)",
+            "pontos": [
+              "<strong>Segmentação</strong> divide a rede para conter ameaças e controlar acesso: <strong>física</strong> (switches e cabos separados), <strong>virtual</strong> (redes criadas pela plataforma de virtualização/nuvem) e <strong>lógica</strong> (<strong>VLANs</strong>).",
+              "<strong>SDN</strong> troca a configuração dispositivo a dispositivo por um controlador central que programa a rede por políticas — base da automação e orquestração.",
+              "Planos: <strong>controle</strong> (decide caminho e prioridade do tráfego), <strong>dados</strong> (encaminha e aplica ACLs) e <strong>gerenciamento</strong> (monitora).",
+              "APIs: <strong>northbound</strong> (aplicações ↔ controlador) e <strong>southbound</strong> (controlador ↔ dispositivos). Ex.: Cisco Meraki."
+            ]
+          },
+          {
+            "id": "3.1.6",
+            "titulo": "Desperimetrização e Zero Trust",
+            "pontos": [
+              "O perímetro sumiu: nuvem, trabalho remoto, celulares, terceirizados e Wi-Fi inseguro apagaram a fronteira entre interno e externo.",
+              "<strong>Zero Trust</strong>: nada é confiável por padrão — todo usuário, dispositivo e app é autenticado e verificado continuamente. Referência: <strong>NIST SP 800-207</strong>.",
+              "Benefícios: mais segurança, controle de acesso mais rígido, melhor governança e acesso granular (só o necessário, quando necessário).",
+              "Componentes: segurança de rede e endpoint, IAM, imposição por políticas, segurança em nuvem, visibilidade, (micro)segmentação, proteção de dados e detecção de ameaças.",
+              "<strong>SASE</strong>: junta WAN e serviços de segurança (CASB, FWaaS, Zero Trust, gateways web, IAM) em um serviço entregue pela nuvem, sem hardware dedicado."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3.2",
+        "titulo": "Explorar o gerenciador de identidade e acesso (IAM)",
+        "topicos": [
+          {
+            "id": "3.2.1",
+            "titulo": "Mecanismos de autenticação",
+            "pontos": [
+              "Fatores: algo que você <strong>sabe</strong> (senha, PIN), <strong>tem</strong> (cartão, token) e <strong>é</strong> (biometria). <strong>MFA</strong> = pelo menos dois fatores diferentes; pode somar atributos como geolocalização.",
+              "<strong>Verificação em 2 etapas</strong> (out-of-band): código por SMS, ligação, push ou email — quem interceptar o código consegue usá-lo. <strong>In-band</strong>: fatores no mesmo sistema que pede a autenticação.",
+              "<strong>Passwordless</strong>: biometria ou código único — não dá para compartilhar e não precisa decorar.",
+              "<strong>SSO</strong>: um login para vários sistemas — prático, mas uma credencial roubada abre tudo; combine com MFA.",
+              "<strong>PAM</strong>: cofre e controle das contas privilegiadas, com autenticação extra e registro de quem usou o quê (BeyondTrust, Centrify, CyberArk)."
+            ]
+          },
+          {
+            "id": "3.2.2",
+            "titulo": "Métodos de confiança federada",
+            "pontos": [
+              "<strong>Federação</strong>: confiar em contas criadas e gerenciadas por outra rede (parceiros, clientes) — ex.: entrar num site com a conta Google.",
+              "<strong>OpenID</strong>: autenticação única para sites participantes; o <strong>OpenID Connect</strong> adiciona autenticação sobre o <strong>OAuth 2.0</strong>.",
+              "<strong>SAML</strong>: asserções em <strong>XML</strong>, via HTTP/HTTPS e SOAP, assinadas digitalmente para que o provedor de serviço confie no provedor de identidade (ex.: AWS como provedor SAML).",
+              "<strong>Shibboleth</strong>: federação baseada em SAML, comum em universidades e serviços públicos.",
+              "<strong>Confiança transitiva</strong>: se A confia em B e B confia em C, então A confia em C (ex.: domínios do Active Directory)."
+            ]
+          },
+          {
+            "id": "3.2.3",
+            "titulo": "Corretor de segurança de acesso à nuvem (CASB)",
+            "pontos": [
+              "O <strong>CASB</strong> media o acesso dos usuários aos serviços em nuvem: SSO e controle de acesso, detecção de malware e de dispositivos não conformes, monitoramento e auditoria, e bloqueio de nuvem não autorizada (contra exfiltração).",
+              "<strong>Proxy de encaminhamento</strong>: na borda do cliente; inspeciona tudo, mas exige agente ou configuração e pode ser contornado ou virar gargalo.",
+              "<strong>Proxy reverso</strong>: na borda da nuvem; não exige configurar os dispositivos, mas o app precisa suportar.",
+              "<strong>API</strong>: conecta direto ao serviço em nuvem (ex.: desativa a conta lá quando ela é desativada localmente). Na prática, combinam-se proxy e API."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3.3",
+        "titulo": "Manutenção da visibilidade operacional",
+        "topicos": [
+          {
+            "id": "3.3.1",
+            "titulo": "Prevenção de perda de dados (DLP)",
+            "pontos": [
+              "<strong>DLP</strong> descobre e classifica dados automaticamente e impede que sejam vistos ou transferidos sem autorização.",
+              "Componentes: <strong>servidor de políticas</strong>, <strong>agentes de endpoint</strong> (funcionam até fora da rede) e <strong>agentes de rede</strong> (na borda, integrados a email e web). Cobre dados estruturados e não estruturados e chega à nuvem via proxy ou API.",
+              "Remediação: <strong>somente alerta</strong>, <strong>bloqueio</strong> (não copia, mas mantém o acesso), <strong>quarentena</strong> (nega o acesso) e <strong>tombstone</strong> (quarentena + arquivo explicando a violação).",
+              "Cenários: bloquear USB, impressão, copiar/colar via RDP e área de transferência; DLP em VDI; bloqueio por classificação do dado."
+            ]
+          },
+          {
+            "id": "3.3.2",
+            "titulo": "Tipos de dados",
+            "pontos": [
+              "<strong>PII</strong>: identifica uma pessoa direta ou indiretamente; <strong>PII sensível</strong> (SSN, biometria, registros financeiros e médicos) exige proteção maior.",
+              "<strong>PHI</strong>: informações de saúde ligadas a um indivíduo, inclusive pagamentos.",
+              "<strong>PIFI</strong>: dados que o consumidor fornece à instituição financeira (conta, cartão, contato).",
+              "<strong>CHD</strong> (dados do titular do cartão): nome, número, validade, endereço de cobrança e CVV — protegidos por PCI DSS, GDPR e GLBA.",
+              "<strong>Propriedade intelectual</strong>: protegida por direitos autorais, patentes, marcas e segredos comerciais."
+            ]
+          },
+          {
+            "id": "3.3.3",
+            "titulo": "Infraestrutura de chave pública (PKI)",
+            "pontos": [
+              "<strong>PKI</strong> gerencia pares de chaves e certificados: integridade (assinatura digital), autenticação e <strong>não repúdio</strong>, centralizando os padrões de criptografia.",
+              "Os certificados são emitidos por uma <strong>CA</strong> confiável, já registrada nos repositórios do SO, dos navegadores e de hardware — é a base do HTTPS.",
+              "<strong>Inspeção SSL/TLS</strong>: descriptografa, inspeciona e recriptografa o HTTPS (com certificado instalado nos endpoints) para achar ameaças escondidas, validar certificados, evitar ataques on-path e aplicar políticas. Feita por proxies, balanceadores e NGFWs."
+            ]
+          },
+          {
+            "id": "3.3.4",
+            "titulo": "Conceitos de registro em log",
+            "pontos": [
+              "<strong>Ingestão de logs</strong>: centralizar logs de várias fontes (bancos, autenticação, apps, web) para análise — ex.: Splunk, Logstash, Elastic.",
+              "<strong>Sincronização de tempo</strong> (NTP, relógio atômico, GPS) é essencial para ordenar os eventos.",
+              "Níveis comuns: DEBUG, INFO, WARNING, ERROR, CRITICAL — e TRACE para detalhe extremo, evitado em produção.",
+              "<strong>Syslog</strong>: 0 Emergency, 1 Alert, 2 Critical, 3 Error, 4 Warning, 5 Notice, 6 Informational, 7 Debug (0 é o mais grave). Dá para criar níveis próprios (ex.: SECURITY)."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "4": {
+    "titulo": "Compreendendo a melhoria de processos em operações de segurança",
+    "ideia": "A automação dá às operações de segurança mais visibilidade, controle e agilidade — e libera a equipe para o que realmente importa.",
+    "pontos": [
+      "A automação é essencial na gestão de segurança: detecta mais rápido e aplica os processos de forma consistente.",
+      "SIEM e SOAR são peças centrais das operações de segurança.",
+      "Automatizar reduz o tempo entre a detecção e a resposta.",
+      "As ferramentas exigem bastante personalização para render valor em cada organização."
+    ],
+    "subs": [
+      {
+        "id": "4.1",
+        "titulo": "Explorar a liderança em operações de segurança",
+        "topicos": [
+          {
+            "id": "4.1.1",
+            "titulo": "Maximizar as operações de segurança com automação",
+            "pontos": [
+              "A automação torna as operações mais eficientes, consistentes e baratas, reduzindo erro humano e a fadiga do operador.",
+              "Boas práticas: nem tudo deve ser automatizado; teste antes de implantar, revise periodicamente, rastreie mudanças e proteja os scripts contra alteração não autorizada.",
+              "<strong>SIEM</strong>: automatiza coleta, correlação e alertas sobre logs — mas, conforme amadurece, gera muitos falsos positivos.",
+              "<strong>SOAR</strong>: recebe o alerta do SIEM e executa <strong>playbooks</strong> (scripts e APIs) — resolve sozinho os eventos bem definidos e enriquece os complexos para o analista. Também provisiona (contas, VMs) e usa CTI e UEBA. Ex.: Palo Alto XSOAR.",
+              "Boas candidatas à automação: tarefas repetitivas, que atrasam a detecção, de áreas de alto risco, muito frequentes ou que ganham em precisão e velocidade.",
+              "A coordenação da equipe do SOC (engenheiros, analistas, responders) e procedimentos claros continuam essenciais."
+            ]
+          },
+          {
+            "id": "4.1.2",
+            "titulo": "Orquestrar dados de inteligência contra ameaças",
+            "pontos": [
+              "<strong>Enriquecimento de dados</strong>: combinar feeds diferentes e correlacioná-los com logs de rede e endpoint para ver o quadro completo (atores, ferramentas, táticas).",
+              "Resultado: priorizar ameaças e agir preventivamente. Ex.: enriquecimento na plataforma <strong>MISP</strong>.",
+              "Monitorar feeds continuamente detecta novos IoCs em tempo real e melhora resposta, threat hunting e alocação de recursos."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "4.2",
+        "titulo": "Entender a tecnologia para operações de segurança",
+        "topicos": [
+          {
+            "id": "4.2.1",
+            "titulo": "Painel único (single pane of glass)",
+            "pontos": [
+              "<strong>Single pane of glass</strong>: uma interface unificada para monitorar, configurar e controlar todos os sistemas e serviços de segurança.",
+              "Menos troca entre consoles → resposta mais rápida, fluxos automatizados e visibilidade em tempo real dos incidentes. Ex.: TheHive."
+            ]
+          },
+          {
+            "id": "4.2.2",
+            "titulo": "Recursos de personalização",
+            "pontos": [
+              "<strong>API</strong>: permite que as ferramentas conversem sem intervenção humana — ex.: o SOAR consulta uma URL na API do <strong>VirusTotal</strong>.",
+              "<strong>Webhooks</strong>: mensagens automáticas enviadas quando um evento acontece, disparando ações (enviar email, atualizar um banco).",
+              "<strong>Plugins e apps</strong>: estendem a ferramenta para encaixar na infraestrutura de cada organização (alguns gratuitos, muitos licenciados)."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "5": {
+    "titulo": "Implementar métodos de varredura de vulnerabilidade",
+    "ideia": "A varredura de vulnerabilidades é o processo automatizado que encontra fraquezas exploráveis antes do atacante — e precisa ser planejada para não atrapalhar o negócio.",
+    "pontos": [
+      "Regulamentações do setor costumam exigir um programa de varredura.",
+      "Há vários tipos de ferramenta: rede, portas, aplicações web e vulnerabilidades.",
+      "As configurações dos dispositivos são comparadas com baselines de segurança.",
+      "Varreduras precisam de cuidado para não interromper o negócio — principalmente em OT, que é muito sensível."
+    ],
+    "subs": [
+      {
+        "id": "5.1",
+        "titulo": "Explicar os requisitos de conformidade",
+        "topicos": [
+          {
+            "id": "5.1.1",
+            "titulo": "Organizações de padrões do setor (NIST e ISO)",
+            "pontos": [
+              "Regulamentações dizem o que é obrigatório; os padrões detalham como cumprir, de forma prescritiva.",
+              "Ex.: a lei <strong>FISMA</strong> (agências federais dos EUA) referencia o NIST <strong>SP 800-53</strong> e o <strong>FIPS 199</strong> (categorização de sistemas).",
+              "<strong>NIST</strong>: agência não reguladora dos EUA; publicações SP 800, Risk Management Framework (RMF) e Cybersecurity Framework (CSF) — gratuitas.",
+              "<strong>ISO 27k</strong>: família de padrões — 27001 (gestão de segurança da informação, pago), 27002 (controles), 27017/27018 (nuvem), 27701 (privacidade)."
+            ]
+          },
+          {
+            "id": "5.1.2",
+            "titulo": "Regulamentações e padrões",
+            "pontos": [
+              "Algumas leis trazem os requisitos no próprio texto: <strong>GDPR</strong> e <strong>COPPA</strong> (privacidade de menores de 13 anos nos EUA).",
+              "Contratos podem exigir conformidade com padrões: <strong>PCI DSS</strong>, <strong>CMMI</strong>, <strong>CSA STAR</strong>.",
+              "<strong>CMMI</strong>: 5 níveis de maturidade — 1 Inicial (reativo), 2 Gerenciado, 3 Definido (proativo), 4 Gerenciado quantitativamente (medido), 5 Otimizado (melhoria contínua).",
+              "<strong>CSA STAR</strong>: registro público que avalia provedores de nuvem contra a <strong>Cloud Controls Matrix (CCM)</strong>.",
+              "<strong>GDPR</strong>: vale para quem atende ou coleta dados de pessoas na UE, onde quer que esteja; multas altíssimas. 7 princípios: legalidade/transparência, limitação de finalidade, minimização, precisão, limitação de armazenamento, integridade/confidencialidade e prestação de contas."
+            ]
+          },
+          {
+            "id": "5.1.3",
+            "titulo": "OWASP",
+            "pontos": [
+              "Fundação sem fins lucrativos com ferramentas, guias e treinamentos gratuitos para software seguro (ex.: ZAP, Guia de Testes).",
+              "<strong>OWASP Top 10 (2021)</strong>: 1 Quebra de controle de acesso, 2 Falhas criptográficas, 3 Injeção, 4 Design inseguro, 5 Configuração incorreta, 6 Componentes vulneráveis/desatualizados, 7 Falhas de identificação e autenticação, 8 Falhas de integridade de software e dados, 9 Falhas de log e monitoramento, 10 SSRF.",
+              "Outros projetos: <strong>ESAPI</strong> (API de controles de segurança), <strong>ModSecurity</strong> (WAF) e OCAP (auditoria de criptografia)."
+            ]
+          },
+          {
+            "id": "5.1.4",
+            "titulo": "CIS Benchmarks",
+            "pontos": [
+              "Guias de configuração segura criados por consenso de especialistas (desde 2003), gratuitos e atualizados continuamente — \"documentos vivos\".",
+              "Cobrem SOs (Windows, UNIX, Linux), apps e dispositivos, com versões por porte e setor (corporativo, SOHO/SMB, infraestrutura crítica, saúde, educação, varejo, governo…).",
+              "Como usar: escolha os benchmarks do seu setor e arquitetura, compare com suas configurações e ajuste. Scanners como o Nessus (licenciado) verificam a conformidade."
+            ]
+          },
+          {
+            "id": "5.1.5",
+            "titulo": "PCI DSS",
+            "pontos": [
+              "Padrão do PCI SSC obrigatório para quem aceita, processa ou armazena dados de cartão.",
+              "<strong>12 requisitos</strong>, entre eles: firewall, não usar senhas padrão do fornecedor, antimalware, apps seguros, monitorar e testar redes, senhas fortes e política de conformidade.",
+              "Implementação em 4 fases: <strong>avaliar → planejar → executar → manter</strong>.",
+              "Auditoria regular (anual a trimestral, conforme o risco). O <strong>AoC</strong> (Atestado de Conformidade) é preenchido por um <strong>QSA</strong> ou pelo banco processador; quem é auditado paga a auditoria."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "5.2",
+        "titulo": "Entender os métodos de varredura de vulnerabilidade",
+        "topicos": [
+          {
+            "id": "5.2.1",
+            "titulo": "Escopo da avaliação",
+            "pontos": [
+              "<strong>Externa</strong> (visão da internet — exige resposta rápida) vs. <strong>interna</strong> (visão de dentro — mais detalhada, protege contra insiders e dá defesa em camadas).",
+              "Scanner de infraestrutura verifica patches, configurações, compartilhamentos, contas sem uso, senhas fracas e dispositivos rogue. Há também scanners web (ex.: Nikto) e de nuvem.",
+              "<strong>Credenciado</strong> (mais completo; use conta dedicada com privilégio mínimo, nunca root/Domain Admin) vs. <strong>não credenciado</strong> (simples, menos impacto, mostra a visão de quem só tem acesso à rede).",
+              "<strong>Com agente</strong> (dados melhores, atravessa firewalls, mas é mais um software para manter e um novo vetor) vs. <strong>sem agente</strong> (via SSH, WMI, SNMP).",
+              "<strong>Ativo</strong> (interage: scanner, banner grabbing, Burp/ZAP) vs. <strong>passivo</strong> (só observa o tráfego: captura de pacotes).",
+              "<strong>Escopo</strong> = hosts e sub-redes de uma tarefa de varredura; em redes grandes, divida e agende em horários diferentes. Notas de criticidade ajudam, mas precisam de contexto."
+            ]
+          },
+          {
+            "id": "5.2.2",
+            "titulo": "Métodos de análise de vulnerabilidade",
+            "pontos": [
+              "<strong>Varredura de mapa/descoberta</strong>: encontra os dispositivos da rede (inclusive rogue e IoT). <strong>Fingerprinting</strong>: detalha um dispositivo (fabricante, versões, configuração).",
+              "<strong>Análise estática</strong>: revisar código, diagramas e arquivos de configuração sem executar — ex.: a lógica deve <strong>falhar de forma segura</strong> (negar por padrão).",
+              "<strong>Análise dinâmica</strong>: testar o sistema em execução — scanners, pentest, Burp Suite manipulando o tráfego.",
+              "<strong>Fuzzing</strong>: injetar dados malformados automaticamente (teste de ambiente desconhecido, antigo caixa-preta).",
+              "<strong>Engenharia reversa</strong>: desmontar software ou hardware para entender como funciona (analisar malware, descobrir o que um patch corrige, detectar adulteração).",
+              "Scanners e SIEMs podem usar <strong>modelos de conformidade</strong> (ex.: verificação PCI DSS no Nessus)."
+            ]
+          },
+          {
+            "id": "5.2.3",
+            "titulo": "Opções de hardening de dispositivos",
+            "pontos": [
+              "Hardening = deixar o sistema numa configuração segura, equilibrando com a usabilidade; salve como template/baseline e aplique automaticamente.",
+              "Desative interfaces, serviços e portas não usados; criptografe o armazenamento; revise e remova contas desnecessárias.",
+              "Mantenha um ciclo de manutenção e elimine equipamentos e softwares <strong>EoL/EoS</strong> (que não recebem mais patches).",
+              "Fontes: <strong>DoD STIGs</strong> (com o <strong>SCAP Compliance Checker</strong> gratuito e GPOs prontos) e <strong>CIS Benchmarks</strong> (ferramenta CIS-CAT, Nessus Pro e imagens endurecidas na AWS/Azure)."
+            ]
+          },
+          {
+            "id": "5.2.4",
+            "titulo": "Linhas de base de configuração",
+            "pontos": [
+              "<strong>Baseline</strong> = requisitos mínimos de configuração para um dispositivo ser considerado seguro; quanto maior o risco, mais detalhada.",
+              "Configurações seguras costumam ser alteradas depois (ex.: desligar antimalware ou firewall no troubleshooting e esquecer) — scanners comparam o endpoint com a baseline.",
+              "<strong>CIS Critical Security Controls v8</strong>: 18 controles, de inventário de ativos e software até resposta a incidentes e pentest.",
+              "<strong>DISA STIG</strong> classifica achados por gravidade: <strong>CAT I</strong> (mais grave, violação imediata de CIA), <strong>CAT II</strong> (perda de CIA, pode levar a CAT I) e <strong>CAT III</strong> (degrada os controles)."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "5.3",
+        "titulo": "Explorar considerações especiais sobre varreduras",
+        "topicos": [
+          {
+            "id": "5.3.1",
+            "titulo": "Considerações especiais para varredura",
+            "pontos": [
+              "<strong>Segmentação</strong>: o scanner precisa alcançar sub-redes e VLANs através de firewalls — ou use nós de varredura em cada segmento e agentes reportando a um servidor central.",
+              "<strong>Desempenho</strong>: scans pesam na rede e nos hosts — agende por grupos e horários e limite a banda. Fatores: identificação do SO, intervalo e velocidade da varredura, base de vulnerabilidades atualizada, tipo de scan, autenticação e falsos positivos.",
+              "<strong>Agendamento</strong> regular (às vezes exigido por regulamentação) e <strong>operações</strong>: seguir o change management para avisar os afetados.",
+              "IDS/IPS, firewalls e antimalware podem bloquear o scanner e gerar <strong>falsos negativos</strong> — configure exceções ou scanners dentro do segmento, e libere as URLs de atualização.",
+              "<strong>Inventário (mapa) de dados</strong> e níveis de confidencialidade: saber onde estão e quão sensíveis são os dados é o primeiro passo para protegê-los."
+            ]
+          },
+          {
+            "id": "5.3.2",
+            "titulo": "Sistemas de computação industrial (OT/ICS)",
+            "pontos": [
+              "<strong>OT</strong> controla o mundo físico (ICS, robôs, sensores, PLCs, SCADA); prioriza disponibilidade, usa equipamentos com décadas de uso, e falhas podem causar explosões, desastres e mortes.",
+              "<strong>ICS</strong>: automação de processos em infraestrutura crítica; em um único local, chama-se <strong>DCS</strong>. Componentes: <strong>PLCs</strong>, atuadores, sensores, <strong>HMI</strong> (interface homem-máquina) e <strong>historiador de dados</strong>.",
+              "<strong>SCADA</strong>: servidor de controle de ICS grandes e multi-site, ligado aos dispositivos de campo por WAN (celular, satélite).",
+              "<strong>PLC</strong>: computador industrial que liga sensores e atuadores ao mundo digital, programado em <strong>Ladder Logic</strong>."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "6": {
+    "titulo": "Realizar análises de vulnerabilidade",
+    "ideia": "Analisar vulnerabilidades é identificar, priorizar e tratar fraquezas antes que sejam exploradas — e a priorização precisa refletir o contexto de cada organização.",
+    "pontos": [
+      "Ferramentas automatizadas encontram vulnerabilidades rapidamente.",
+      "O CVSS padroniza a medida de gravidade.",
+      "A nota pode (e deve) ser ajustada à realidade da organização.",
+      "Respostas possíveis: patch, novos controles, mudança na infraestrutura — ou aceitar o risco com um plano de resposta."
+    ],
+    "subs": [
+      {
+        "id": "6.1",
+        "titulo": "Entender os conceitos de pontuação de vulnerabilidade",
+        "topicos": [
+          {
+            "id": "6.1.1",
+            "titulo": "Protocolo de automação de conteúdo de segurança (SCAP)",
+            "pontos": [
+              "<strong>SCAP</strong>: conjunto de especificações do NIST que padroniza nomes e formatos para identificar e relatar vulnerabilidades e configurações incorretas.",
+              "Linguagens: <strong>OVAL</strong> (descreve informações do sistema, estado e relatórios), <strong>ARF</strong> (formato padronizado de relatório de ativos) e <strong>XCCDF</strong> (benchmarks e checklists de configuração, em XML).",
+              "Identificadores: <strong>CPE</strong> (nomeia sistemas e softwares, sintaxe parecida com URI), <strong>CVE</strong> (vulnerabilidades públicas: CVE-ANO-NÚMERO) e <strong>CCE</strong> (problemas de configuração)."
+            ]
+          },
+          {
+            "id": "6.1.2",
+            "titulo": "Sistema de pontuação de vulnerabilidade comum (CVSS)",
+            "pontos": [
+              "O <strong>CVSS</strong>, mantido pelo <strong>FIRST</strong>, é o padrão do setor para medir a gravidade das vulnerabilidades e priorizar a correção.",
+              "Não mede explorabilidade nem custo de correção — mede o impacto potencial caso a vulnerabilidade seja explorada.",
+              "A <strong>string de vetor</strong> mostra as métricas usadas no cálculo e dá contexto à nota.",
+              "Desafios: pode levar a corrigir itens de risco irrelevante, e a metodologia muda entre versões (v3.1 e v4.0, lançada em nov/2023).",
+              "Ferramentas que trazem CVSS: Nessus, OpenSCAP, Qualys, OpenVAS, SecurityScorecard; há calculadoras do NIST e do FIRST."
+            ]
+          },
+          {
+            "id": "6.1.3",
+            "titulo": "Métricas do CVSS",
+            "pontos": [
+              "Faixas: 0 Nenhuma · 0,1–3,9 <strong>Baixa</strong> · 4,0–6,9 <strong>Média</strong> · 7,0–8,9 <strong>Alta</strong> · 9,0–10 <strong>Crítica</strong>. Grupos de métricas: base, temporal e ambiental.",
+              "<strong>AV</strong> (Attack Vector): Physical, Local, Adjacent (mesmo domínio de broadcast) ou Network.",
+              "<strong>AC</strong> (Attack Complexity): Low ou High. <strong>PR</strong> (Privileges Required): None, Low ou High. <strong>UI</strong> (User Interaction): None ou Required.",
+              "<strong>S</strong> (Scope): Unchanged ou Changed — afeta além do componente vulnerável (ex.: fuga de VM para o hipervisor).",
+              "<strong>C/I/A</strong>: impacto em confidencialidade, integridade e disponibilidade — High, Low ou None.",
+              "<strong>CVSS 4.0</strong>: nova métrica Attack Requirements (AT); S/C/I/A viram VC/VI/VA (sistema vulnerável) e SC/SI/SA (sistemas subsequentes); novos grupos Threat, Environmental e Supplemental."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "6.2",
+        "titulo": "Explorar as considerações sobre o contexto de vulnerabilidade",
+        "topicos": [
+          {
+            "id": "6.2.1",
+            "titulo": "Validação de vulnerabilidades",
+            "pontos": [
+              "Guarde os relatórios de varredura para medir tendências e a eficácia do programa.",
+              "Trate o relatório como orientação, não como verdade absoluta: valide cada item (ex.: software \"vulnerável\" que nem está instalado).",
+              "Contexto do scan: <strong>externo</strong> (alta chance de exploração — muitas vezes \"patch primeiro, testa depois\") vs. <strong>interno</strong> (correção mais cautelosa e planejada; anomalias internas aparecem com mais facilidade).",
+              "Resultados: <strong>verdadeiro positivo</strong>, <strong>falso positivo</strong> (aponta o que não existe — perde tempo), <strong>verdadeiro negativo</strong> e <strong>falso negativo</strong> (não aponta o que existe — o mais perigoso; reduza usando mais de uma ferramenta).",
+              "CVSS sozinho engana: combine com tipo de vulnerabilidade, probabilidade de ataque, função do sistema e criticidade para o negócio (ex.: \"crítica\" num host isolado vs. \"alta\" exposta na rede)."
+            ]
+          },
+          {
+            "id": "6.2.2",
+            "titulo": "Considerações sobre pontuações do CVSS",
+            "pontos": [
+              "As notas não são estáticas: ajuste conforme <strong>disponibilidade de patch</strong>, <strong>impacto</strong>, <strong>sofisticação do atacante</strong> e <strong>valor do ativo</strong>.",
+              "<strong>Weaponization</strong> (armamento): chance de a vulnerabilidade virar um exploit funcional — depende de AV e AC; exploits prontos circulam com facilidade.",
+              "<strong>Explorabilidade</strong>: depende de AC, das ferramentas disponíveis e dos controles existentes; baixa explorabilidade não significa pouca gravidade.",
+              "<strong>Zero-day</strong>: vulnerabilidade explorável sem patch (ou desconhecida do fornecedor) — scanners não detectam, pois dependem de uma base de vulnerabilidades conhecidas.",
+              "Exemplos de ajuste: RCE nota 10 que só roda em sistema isolado → reduzir; achado \"informativo\" de app web facilmente explorável → elevar."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "7": {
+    "titulo": "Comunicar informações de vulnerabilidade",
+    "ideia": "Gerenciar vulnerabilidades também é comunicar: riscos, progresso da correção e novos problemas precisam chegar às pessoas certas.",
+    "pontos": [
+      "A avaliação de vulnerabilidades pode ser feita de várias formas.",
+      "Relatórios trazem os detalhes das vulnerabilidades e as correções recomendadas.",
+      "KPIs medem a eficácia do programa de segurança.",
+      "Planos de ação alinham as expectativas da liderança — e vários processos de negócio dificultam a correção."
+    ],
+    "subs": [
+      {
+        "id": "7.1",
+        "titulo": "Explicar conceitos de comunicação eficazes",
+        "topicos": [
+          {
+            "id": "7.1.1",
+            "titulo": "Relatórios de gerenciamento de vulnerabilidades",
+            "pontos": [
+              "Benefícios: mais consciência dos riscos, resposta mais rápida, métricas para acompanhar a postura de segurança e apoio à conformidade.",
+              "Tipos: <strong>painel</strong> (visão em tempo real, com gráficos), <strong>relatório resumo</strong> (alto nível, para liderança e compliance) e <strong>relatório detalhado</strong> (por sistema, com passos de remediação).",
+              "Fontes: plataformas de varredura, auditorias, avaliações de terceiros e análises manuais.",
+              "Formatos: <strong>texto</strong> (fácil de pesquisar na linha de comando), <strong>CSV/XML</strong> (para compartilhar e importar em outras ferramentas), <strong>HTML</strong> (visual, no navegador) e <strong>PDF</strong> (imprimir e distribuir)."
+            ]
+          },
+          {
+            "id": "7.1.2",
+            "titulo": "Práticas recomendadas para relatórios de vulnerabilidades",
+            "pontos": [
+              "Use as ferramentas certas, mantenha um cronograma regular, formato e cores consistentes, foco no que é crítico — e automatize.",
+              "Conteúdo: tipo de vulnerabilidade, número de instâncias, sistemas afetados, nível de risco e recomendações.",
+              "Vulnerabilidades antigas que \"voltam\" costumam vir de <strong>inventário de ativos incompleto</strong> ou de <strong>scan mal configurado</strong> (credenciais inválidas, IPs errados).",
+              "A <strong>pontuação de risco</strong> prioriza o trabalho: críticas exploradas ativamente e <strong>zero-days</strong> merecem painel próprio e plano de resposta pronto. Também permite comparar com o setor.",
+              "<strong>Mitigações</strong>: patch ou workaround temporário até a correção definitiva (ex.: Citrix CVE-2019-19781). Listas <strong>Top N</strong> destacam tendências.",
+              "<strong>Relatórios de conformidade</strong>: regulatórios (exigidos por lei ou contrato) e internos (baselines, procedimentos, fornecedores, mudanças, contas)."
+            ]
+          },
+          {
+            "id": "7.1.3",
+            "titulo": "KPIs (indicadores-chave de desempenho)",
+            "pontos": [
+              "<strong>KPIs</strong> medem o progresso e a eficácia do programa em prevenção, detecção e resposta, e permitem comparar com o setor.",
+              "Exemplos: número de incidentes, <strong>tempo de detecção</strong>, IoCs, ameaças conhecidas, resultado da avaliação de risco e alocação de recursos.",
+              "Medição manual ou automatizada (dados do SIEM, scanners, patch management, monitoramento de rede).",
+              "Desafios: classificação subjetiva de incidentes, falsos positivos, dados imprecisos ou irrelevantes e análise complexa.",
+              "<strong>SLOs</strong>: metas mensuráveis, alcançáveis e realistas, que se ajustam com o tempo."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "7.2",
+        "titulo": "Entender os resultados dos relatórios e os planos de ação",
+        "topicos": [
+          {
+            "id": "7.2.1",
+            "titulo": "Planos de ação",
+            "pontos": [
+              "Plano de ação = resultado desejado + etapas, recursos, prazos e metas mensuráveis; a liderança acompanha e ajusta.",
+              "É a resposta natural a um relatório de vulnerabilidades: novas ferramentas, mudanças de configuração, políticas atualizadas — e <strong>treinamento</strong>.",
+              "Problemas mais comuns: software sem patch, senhas fracas, SOs desatualizados/legados, infraestrutura mal protegida e configurações erradas (padrão ou desativadas no troubleshooting).",
+              "Temas de resposta: testar os sistemas regularmente (inclusive os de fornecedores), limitar acessos e monitorar."
+            ]
+          },
+          {
+            "id": "7.2.2",
+            "titulo": "Resultados de um plano de ação comum",
+            "pontos": [
+              "<strong>Políticas e procedimentos</strong> documentados deixam claro o que se espera (senhas, acesso, mudanças, contas, patches, IR) e permitem cobrar.",
+              "<strong>Treinamento</strong> de conscientização e sobre as políticas — e testar se foi absorvido.",
+              "<strong>Patches</strong>: automático (rápido), manual (mais controle) ou central; teste antes de implantar.",
+              "<strong>Controles compensatórios</strong>: quando o controle ideal não é viável (legado, custo, impacto no negócio) — ex.: 2FA no lugar de biometria. Avalie e revise como qualquer outro controle.",
+              "<strong>Gerenciamento de configuração</strong> mantém os sistemas consistentes e conformes. Liderança e segurança precisam andar juntas (ex.: fusões e aquisições, novos parceiros com regras rígidas)."
+            ]
+          },
+          {
+            "id": "7.2.3",
+            "titulo": "Inibidores da remediação de vulnerabilidades",
+            "pontos": [
+              "<strong>MoU</strong> (memorando de entendimento): acordo de boa-fé entre as partes que pode fixar uptime, acesso e tempos de resposta conflitantes com a correção.",
+              "<strong>SLA</strong>: contrato com força legal e multas — a liderança costuma barrar mitigações que arrisquem descumpri-lo.",
+              "<strong>Governança organizacional</strong>: diretoria, acionistas e reguladores podem frear iniciativas caras ou que atrasem a operação.",
+              "<strong>Interrupção de processos de negócio</strong>: o medo de parar (ex.: caso Southwest Airlines) faz adiar mudanças — e adiar para sempre também acaba causando paradas.",
+              "<strong>Funcionalidade degradada</strong>: patches podem reduzir o desempenho (ex.: correções do Spectre/Meltdown).",
+              "<strong>Sistemas legados</strong> (sem patches, difíceis de migrar) e <strong>sistemas proprietários</strong> (dependem dos desenvolvedores internos e da arquitetura original)."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "8": {
+    "titulo": "Explicar as atividades de resposta a incidentes",
+    "ideia": "Toda organização vai enfrentar incidentes — ataques, malware, falhas, desastres naturais — e só responde bem quem planejou e praticou antes.",
+    "pontos": [
+      "O sucesso da resposta a incidentes depende de planejamento cuidadoso.",
+      "As ações de resposta são delimitadas por requisitos legais e de negócio.",
+      "Treinamento e prática são parte crítica da preparação."
+    ],
+    "subs": [
+      {
+        "id": "8.1",
+        "titulo": "Explorar o planejamento de resposta a incidentes",
+        "topicos": [
+          {
+            "id": "8.1.1",
+            "titulo": "Processos de planejamento de resposta a incidentes",
+            "pontos": [
+              "Planejamento de IR = tudo que prepara a organização para responder: modelagem de ameaças, análise de risco, políticas, processos, testes e simulações.",
+              "<strong>Incidente</strong> (NIST): violação — ou tentativa de violação — de uma política de segurança explícita ou implícita.",
+              "Ciclo de vida do <strong>NIST SP 800-61</strong>: <strong>Preparação</strong> → <strong>Detecção e análise</strong> → <strong>Contenção</strong> → <strong>Erradicação e recuperação</strong> → <strong>Atividade pós-incidente</strong> (lições aprendidas), que realimenta a preparação.",
+              "Detecção, contenção e erradicação podem se repetir em ciclos até a resolução completa."
+            ]
+          },
+          {
+            "id": "8.1.2",
+            "titulo": "Componentes comuns do plano de resposta",
+            "pontos": [
+              "<strong>Políticas de IR</strong>: que incidentes reportar, etapas, papéis, comunicação e prazos.",
+              "<strong>Playbooks por cenário</strong>: <strong>ransomware</strong> (isolar desconectando da rede, sem desligar — preserva a memória e possíveis chaves), <strong>exfiltração</strong> (forense para saber o que vazou e notificações; apagar dados no sistema do atacante é hack-back, provavelmente ilegal) e <strong>engenharia social</strong> (alertar usuários, buscar o email em todas as caixas, analisar anexos e links em sandbox, bloquear IoCs, trocar senhas).",
+              "Ferramentas: SIEM, IDS, scanners de vulnerabilidade, analisadores de NetFlow, monitoramento de infraestrutura, proxies e gateways.",
+              "Também: identificar ameaças, avaliar impactos, criar planos claros (fluxogramas) e testá-los — <strong>tabletop</strong>, incidentes simulados e simulações completas."
+            ]
+          },
+          {
+            "id": "8.1.3",
+            "titulo": "Detecção e análise de incidentes",
+            "pontos": [
+              "O <strong>SIEM</strong> coleta e correlaciona logs de várias fontes, alerta em tempo real, mostra tendências e permite análise histórica. SIEM e IDS são a base da detecção.",
+              "A detecção também vem de usuários, de anomalias em aplicações e de threat hunting; ataques inéditos são difíceis de pegar.",
+              "Na análise, separe <strong>falsos positivos</strong> dos indicadores reais — nem todo evento adverso é um incidente.",
+              "Fontes de IoC: antimalware, NIDS/NIPS (port scan), HIDS/HIPS (hash de arquivo alterado), logs de sistema e de rede, SIEM, NetFlow (DoS), pessoas de dentro e de fora, e CTI."
+            ]
+          },
+          {
+            "id": "8.1.4",
+            "titulo": "Triagem e resposta a incidentes",
+            "pontos": [
+              "<strong>Triagem</strong>: definir o escopo do incidente e montar a linha do tempo (o quê, onde, como, quando) — exige forense, análise de memória e de malware.",
+              "Um plano de <strong>pré-escalonamento</strong> com limites e notificações claros evita que o incidente fique preso numa fila de chamados.",
+              "<strong>Playbooks</strong>: passos, papéis e comunicação por tipo de incidente; muitas vezes em papel, para estar disponível e não ser exfiltrado.",
+              "<strong>Plano de comunicação</strong>: canais <strong>out-of-band</strong> (criptografados e fora da infraestrutura atacada), ponto único de contato, need-to-know e lista de chamadas — sem alertar o atacante nem vazar para imprensa ou redes sociais."
+            ]
+          },
+          {
+            "id": "8.1.5",
+            "titulo": "Treinamento e testes de resposta a incidentes",
+            "pontos": [
+              "Treinamento em detecção e notificação, inclusive entre departamentos; as lições aprendidas revelam novas necessidades de conscientização.",
+              "Treine também comunicação e trabalho em equipe — incidentes são estressantes.",
+              "<strong>Exercício tabletop</strong>: um facilitador narra um cenário (ex.: ransomware) e adiciona reviravoltas para testar decisões e coordenação.",
+              "O teste mais preciso é o <strong>pentest</strong> num cenário vindo da modelagem de ameaças, com ou sem aviso aos respondedores."
+            ]
+          },
+          {
+            "id": "8.1.6",
+            "titulo": "Atividades pós-incidente",
+            "pontos": [
+              "A <strong>forense</strong> reconstrói a sequência detalhada dos eventos.",
+              "<strong>Lições aprendidas</strong>: reunião sem caça aos culpados, com <strong>análise de causa raiz</strong> (perguntar \"por quê?\" repetidamente).",
+              "Perguntas-chave: quem, por quê, quando (ocorreu, foi detectado, foi contido), onde, como (TTPs, ATT&amp;CK) e quais controles teriam ajudado.",
+              "Resultado: <strong>LLR</strong> (relatório de lições aprendidas) ou <strong>AAR</strong> (relatório pós-ação), que atualiza o plano de IR, os treinamentos e os testes."
+            ]
+          },
+          {
+            "id": "8.1.7",
+            "titulo": "Conceitos de BCDR",
+            "pontos": [
+              "Um incidente vira <strong>desastre</strong> quando cruza um limite definido pela liderança, geralmente pelo escopo do impacto (ex.: malware em 2 desktops vs. em todos).",
+              "<strong>Continuidade de negócios (BC)</strong>: manter a organização funcionando durante e depois do desastre até voltar ao normal — inclui questões legais, seguros, comunicação e causa raiz.",
+              "<strong>Recuperação de desastres (DR)</strong>: parte do BC, focada no imediato — trazer os sistemas críticos de volta a um estado seguro (ex.: após ransomware em larga escala)."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "8.2",
+        "titulo": "Executar atividades de resposta a incidentes",
+        "topicos": [
+          {
+            "id": "8.2.1",
+            "titulo": "Procedimentos de resposta a incidentes",
+            "pontos": [
+              "Detectar IoCs é o primeiro passo — quanto mais cedo, melhor. Fontes principais: logs e relatos de usuários; o SIEM transforma o volume de dados em algo acionável.",
+              "Trate os alertas por <strong>prioridade/gravidade</strong>, não por ordem de chegada (ex.: regra Suricata de prioridade 1).",
+              "IoCs comuns: tráfego atípico, conta privilegiada usada de forma inesperada, muitas senhas erradas, picos de tráfego DNS ou de banco, mudanças no registro e em arquivos de sistema, arquivos compactados em locais estranhos, tráfego de países sem negócios, processos, serviços ou tarefas agendadas desconhecidos, criptografia inesperada e acesso remoto não previsto.",
+              "Automação: de tarefas agendadas (ex.: regex procurando PII) até o <strong>SOAR</strong> executando <strong>runbooks</strong> integrados ao SIEM — de horas para minutos; o que ele não resolve vai para o analista."
+            ]
+          },
+          {
+            "id": "8.2.2",
+            "titulo": "Conceitos de forense digital",
+            "pontos": [
+              "Investigações servem a processos <strong>legais</strong> ou <strong>internos</strong> (que podem virar legais); casos legais exigem investigadores qualificados.",
+              "4 fases: <strong>Identificação</strong> (segurança das pessoas primeiro, proteger a cena, definir escopo) → <strong>Coleta</strong> (autorização, integridade, embalagem à prova de violação) → <strong>Análise</strong> (trabalhar numa cópia verificada por hash, com ferramentas confiáveis e repetíveis — lista do NIST CFTT) → <strong>Relatório</strong>.",
+              "Aquisição: imagem de disco e dump de memória; em dispositivos de terceiros ou BYOD, atenção à legalidade da apreensão.",
+              "<strong>Ordem de volatilidade</strong> (RFC 3227): registradores e cache da CPU → RAM (tabela de rotas, cache ARP, processos) → arquivos temporários/swap → disco → logs remotos → topologia física → mídia de arquivo."
+            ]
+          },
+          {
+            "id": "8.2.3",
+            "titulo": "Requisitos do processo legal",
+            "pontos": [
+              "Evidências físicas: identificadas e guardadas em sacos <strong>antiestáticos</strong> com <strong>evidência de violação</strong>, num local seguro e climatizado.",
+              "O <strong>hash</strong> feito antes da análise e repetido periodicamente prova que a cópia é idêntica e que nada mudou.",
+              "<strong>Cadeia de custódia</strong>: registro de quem coletou, manuseou e armazenou cada evidência, da coleta até o tribunal.",
+              "Use metadados e nomenclatura consistente (ex.: aaaa-mm-dd:hh:mm + número do caso + tipo).",
+              "<strong>Retenção legal (legal hold)</strong>: ordem para preservar ESI e documentos relevantes a um processo — supera as políticas de retenção normais. <strong>e-Discovery</strong>: identificar, coletar e entregar essas informações."
+            ]
+          },
+          {
+            "id": "8.2.4",
+            "titulo": "Análise de impacto",
+            "pontos": [
+              "Danos possíveis: integridade, alterações não autorizadas, roubo, divulgação de dados e indisponibilidade.",
+              "Classificação por <strong>taxonomia</strong> (tipo: worm, phishing, DDoS, abuso interno…) ou por <strong>impacto</strong> (emergência, significativo, moderado, baixo).",
+              "<strong>Localizado</strong> (um departamento, poucos sistemas) vs. <strong>organizacional</strong> (afeta funções essenciais). Reavalie conforme surgem fatos — muitos sistemas afetados nem sempre é o mais prioritário.",
+              "<strong>Imediato</strong> (inatividade, danos, multas) vs. <strong>total</strong> (inclui reputação e marca). Avaliações de risco e BIA anteriores ajudam."
+            ]
+          },
+          {
+            "id": "8.2.5",
+            "titulo": "Contenção e recuperação",
+            "pontos": [
+              "<strong>Contenção por isolamento</strong>: tirar o servidor da rede, desligar uma interface do roteador, desativar conta ou serviço — pesando forense, SLAs e o risco de não agir; documente e registre a hora de cada ação.",
+              "Prioridades: segurança das pessoas → evitar mais danos → descobrir se é ataque isolado ou parte de uma campanha → não alertar o invasor → preservar evidências.",
+              "<strong>Reimaginar</strong> com imagem ou backup limpo (baseline, patches, sem malware) — não confie no antimalware para \"limpar\"; cuidado com backups já comprometidos.",
+              "<strong>Recuperação</strong>: restaurar serviços (backups, religar servidores aos poucos após um DDoS) e garantir que o mesmo vetor não funcione de novo.",
+              "<strong>Remediação</strong>: correção permanente guiada pela causa raiz (não só \"fazer funcionar\"). <strong>Controle compensatório</strong> (PCI DSS): mesma proteção por outro método, aprovado e documentado pela liderança."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "9": {
+    "titulo": "Demonstrar comunicação de resposta a incidentes",
+    "ideia": "Resposta a incidentes é um processo coordenado de detectar, investigar e responder — e comunicar bem, durante e depois, faz parte dele.",
+    "pontos": [
+      "A comunicação com as partes interessadas é essencial na resposta a incidentes.",
+      "Os relatórios de IR devem ajudar a liderança a tomar decisões.",
+      "Muitas comunicações são obrigatórias por lei.",
+      "A melhoria contínua depende de feedback e da análise do desempenho da equipe."
+    ],
+    "subs": [
+      {
+        "id": "9.1",
+        "titulo": "Entender a comunicação de resposta a incidentes",
+        "topicos": [
+          {
+            "id": "9.1.1",
+            "titulo": "Comunicação com as partes interessadas",
+            "pontos": [
+              "Parte interessada = quem afeta, é afetado ou se sente afetado pelo incidente. Identifique, analise e priorize, adaptando canal e mensagem a cada uma.",
+              "Comunicação regular mantém as expectativas alinhadas e costuma revelar informações úteis (processos alternativos, impactos, relações comerciais).",
+              "Típicas: liderança sênior, jurídico, polícia, reguladores, RH, <strong>RP</strong> (cuida da comunicação externa, com \"apenas o suficiente\"), operações, fabricação, fornecedores e funcionários.",
+              "<strong>Declaração</strong> do incidente: confirmar que o evento é um incidente, documentar a gravidade e acionar o <strong>escalonamento</strong> certo (ex.: violação de dados → executivos; tentativa de intrusão → TI/SOC)."
+            ]
+          },
+          {
+            "id": "9.1.2",
+            "titulo": "Requisitos de relatórios",
+            "pontos": [
+              "Tipos de violação: <strong>exfiltração</strong> (até a suspeita já exige notificação), <strong>exfiltração interna</strong> (insider), <strong>roubo/perda de dispositivo</strong> (tratar como suspeita, mesmo com criptografia), <strong>violação acidental</strong> (erro ou configuração, comum em nuvem) e ataques à <strong>integridade/disponibilidade</strong>.",
+              "Leis e regulamentos definem quem notificar: reguladores, polícia, indivíduos e terceiros afetados.",
+              "<strong>HIPAA</strong>: notificar os indivíduos, o HHS e, acima de <strong>500 pessoas</strong>, a imprensa. <strong>GDPR</strong>: notificar em até <strong>72 horas</strong>.",
+              "A notificação descreve os dados violados, o ponto de contato, as consequências esperadas e as medidas tomadas."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9.2",
+        "titulo": "Analisar as atividades de resposta a incidentes",
+        "topicos": [
+          {
+            "id": "9.2.1",
+            "titulo": "Importância dos relatórios de IR",
+            "pontos": [
+              "A liderança gerencia o risco da organização inteira (TI incluída) e precisa de informação precisa e rápida para decidir.",
+              "<strong>Resumo executivo</strong>: curto, claro, imparcial e adaptado ao público — propósito, pontos principais e conclusão, compreensível sem ler o resto.",
+              "O relatório responde <strong>quem, o quê, quando, onde e por quê</strong>, com uma <strong>linha do tempo</strong> dos eventos (ex.: ferramenta Autopsy).",
+              "Elementos: <strong>impacto</strong>, <strong>escopo</strong>, <strong>evidências</strong> e <strong>recomendações</strong> específicas e mensuráveis (MFA, redefinir senhas, trocar computadores antigos, mais treinamento, mudar a política de patches…)."
+            ]
+          },
+          {
+            "id": "9.2.2",
+            "titulo": "Atividades de melhoria contínua",
+            "pontos": [
+              "<strong>Análise de causa raiz</strong>: ir além do sintoma (malware no PC) até o porquê (falta de conscientização, filtro de conteúdo fraco, patches atrasados, contas mal provisionadas).",
+              "Métricas do SOC: <strong>MTTD</strong> (tempo médio para detectar), <strong>tempo médio para responder</strong> e <strong>MTTR</strong> (tempo médio para remediar). O volume de alertas ajuda a enxergar tendências.",
+              "<strong>Lições aprendidas</strong>: registrar e analisar o que funcionou e o que falhou para criar uma cultura de melhoria contínua e resiliência."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "10": {
+    "titulo": "Aplicar ferramentas para identificar atividades maliciosas",
+    "ideia": "Uso malicioso deixa rastros: monitorar o ambiente e analisar eventos suspeitos é como se identifica atividade maliciosa a tempo.",
+    "pontos": [
+      "Ferramentas de captura de pacotes ajudam a identificar atividade suspeita.",
+      "Domínios e endereços IP ajudam a reconhecer tráfego e emails maliciosos.",
+      "Sequências e padrões de eventos separam a atividade normal da maliciosa.",
+      "Estruturas de ataque (Kill Chain, ATT&amp;CK, Diamante) ajudam a organizar a identificação e a resposta."
+    ],
+    "subs": [
+      {
+        "id": "10.1",
+        "titulo": "Identificar atividades maliciosas",
+        "topicos": [
+          {
+            "id": "10.1.1",
+            "titulo": "Ferramentas de captura de pacotes",
+            "pontos": [
+              "<strong>Wireshark</strong>: captura gráfica e open source; mostra quadros, campos decodificados e hex/ASCII, entende centenas de protocolos. Tem filtros de exibição avançados, regras de cor e <strong>Follow TCP Stream</strong> para remontar uma sessão. Versão de linha de comando: <strong>tshark</strong>.",
+              "<strong>tcpdump</strong>: captura em linha de comando (no Windows, windump) — ideal para scripts e servidores sem interface gráfica. Ex.: <code>tcpdump -i eth0 -w captura.pcap</code>.",
+              "Opções úteis: <code>-n</code>/<code>-nn</code> (não resolver nomes/portas), <code>-e</code> (cabeçalho Ethernet), <code>-v</code> (mais detalhes), <code>-X</code> (conteúdo em hex e ASCII), <code>-s 0</code> (pacote inteiro), <code>-w</code> (gravar) e <code>-r</code> (ler arquivo).",
+              "Filtros: <code>host</code>, <code>src</code>/<code>dst</code>, <code>net</code>, <code>port</code>, <code>proto</code>, combináveis com <code>&amp;&amp;</code>, <code>||</code>, <code>!</code> e parênteses.",
+              "Formatos: <strong>PCAP</strong> e o mais novo <strong>PCAPNG</strong> (padrão do Wireshark); outros analisadores: NetworkMiner, NetWitness."
+            ]
+          },
+          {
+            "id": "10.1.2",
+            "titulo": "Endpoint Detection and Response (EDR)",
+            "pontos": [
+              "<strong>EDR</strong> combina proteção de endpoint com análise avançada: visibilidade em tempo real e histórica, contenção do malware no host e apoio à remediação — responde \"o que aconteceu?\", indo além do antivírus.",
+              "Componentes: <strong>plataforma central</strong> de monitoramento, <strong>pontos de aquisição</strong> (os endpoints) e <strong>mecanismo de análise</strong>.",
+              "Vantagens: detecção de atividade maliciosa, resposta automatizada, prevenção proativa, avaliação de risco e investigação da causa raiz.",
+              "Recursos: detecção de malware por comportamento, filtro de URL, honeypots, monitoramento, orquestração com outras ferramentas e detecção de ameaças novas (zero-day).",
+              "EDRs modernos são gerenciados pela nuvem e usam IA/ML (UEBA), alinhados ao NIST CSF: proteger, detectar, responder e recuperar."
+            ]
+          },
+          {
+            "id": "10.1.3",
+            "titulo": "Ferramentas de análise comuns",
+            "pontos": [
+              "<strong>WHOIS</strong>: dados de registro de domínio/IP (dono, contato) — domínio recém-criado é sinal clássico de campanha maliciosa. Também disponível no ICANN Lookup.",
+              "<strong>AbuseIPDB</strong>: histórico e denúncias sobre um IP; tem API para o SOAR (ex.: o runbook consulta o IP do alerta e atualiza IDS ou firewall).",
+              "<strong>strings</strong>: extrai o texto legível de um binário — revela URLs, IPs e sequências únicas para criar assinaturas.",
+              "<strong>VirusTotal</strong>: analisa arquivos e URLs com mais de 70 antimalwares e listas de bloqueio; mostra hashes, nomes, relações com domínios e IPs e comportamento — e compartilha as amostras com os fornecedores."
+            ]
+          },
+          {
+            "id": "10.1.4",
+            "titulo": "Análise de malware em sandbox",
+            "pontos": [
+              "Malware moderno escapa de assinaturas; a análise manual gera IoCs, assinaturas, regras de IDS e regras comportamentais para o EDR.",
+              "<strong>Sandbox</strong>: ambiente isolado onde o arquivo é executado para observar o comportamento real, revelando o que a análise estática não mostra.",
+              "Deve monitorar: mudanças no sistema, processos e serviços, conexões de rede (C2 via DNS), chamadas de sistema e de API, criação/exclusão de arquivos, além de tirar snapshots e dumps de memória.",
+              "Host dedicado e isolado (física ou logicamente); cuidado com exploits de fuga de VM/hipervisor.",
+              "Opções: <strong>Joe Sandbox</strong> e <strong>Hybrid Analysis</strong> (CrowdStrike) na nuvem — os resultados podem ser compartilhados, o que preocupa ambientes sigilosos — e <strong>Cuckoo Sandbox</strong> (open source, roda localmente)."
+            ]
+          },
+          {
+            "id": "10.1.5",
+            "titulo": "SIEM",
+            "pontos": [
+              "<strong>SIEM</strong>: análise quase em tempo real de alertas de sistemas, apps e rede, coletando e correlacionando eventos de toda a empresa.",
+              "Evita analisar sistema por sistema: o analista aprende a pesquisar no SIEM, não em cada SO ou dispositivo (ex.: demo do Elastic Security).",
+              "Recursos: <strong>agregação</strong>, <strong>correlação</strong>, <strong>alertas</strong>, <strong>visibilidade</strong> (painéis), <strong>conformidade</strong> (relatórios de auditoria) e <strong>retenção</strong> de dados históricos (forense)."
+            ]
+          },
+          {
+            "id": "10.1.6",
+            "titulo": "SOAR",
+            "pontos": [
+              "<strong>SOAR</strong> automatiza tarefas rotineiras de resposta, integrando sistemas por APIs (nuvem, SDN), orquestração, feeds de CTI, assinaturas automáticas e UEBA; também provisiona contas e VMs.",
+              "<strong>Playbook</strong>: checklist de ações para um tipo de evento (com assinaturas, consultas e requisitos de notificação). <strong>Runbook</strong>: playbook altamente automatizado, com pontos definidos de decisão humana.",
+              "Ex.: runbook que analisa emails em 3 caminhos — arquivo (reputação + detonação em sandbox), domínio/URL (reputação + WHOIS) e IP (reputação, WHOIS, geolocalização); se o VirusTotal marcar o anexo como malicioso, gera assinatura no antimalware.",
+              "Inclui <strong>gestão de casos</strong> (parecida com um sistema de chamados) para documentar e filtrar eventos por gravidade. Ex.: Splunk SOAR."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "10.2",
+        "titulo": "Explicar estruturas de metodologia de ataque",
+        "topicos": [
+          {
+            "id": "10.2.1",
+            "titulo": "Conceitos de Kill Chain",
+            "pontos": [
+              "<strong>Cyber Kill Chain</strong> (Lockheed Martin) — 7 etapas: <strong>Reconhecimento</strong> → <strong>Armamento</strong> → <strong>Entrega</strong> → <strong>Exploração</strong> → <strong>Instalação</strong> (persistência) → <strong>Comando e controle (C2)</strong> → <strong>Ações nos objetivos</strong> (ex.: exfiltração).",
+              "Saber em que etapa o ataque está ajuda a escolher a defesa certa — quanto antes for interrompido, melhor."
+            ]
+          },
+          {
+            "id": "10.2.2",
+            "titulo": "Estrutura MITRE ATT&CK",
+            "pontos": [
+              "A Kill Chain original foi criticada por focar demais no perímetro; versões modificadas (AlienVault, Sean Malone) acrescentam reconhecimento interno, movimento lateral, escalada de privilégio e coleta de dados — e o atacante pode persistir ou apagar rastros (antiforense).",
+              "<strong>MITRE ATT&amp;CK</strong>: base gratuita de TTPs; cada técnica tem um ID único e pertence a uma ou mais táticas (acesso inicial, persistência, movimento lateral, C2…).",
+              "As táticas não seguem uma ordem fixa — o analista monta o ciclo do ataque a partir das evidências locais.",
+              "Permite comparar as TTPs de grupos diferentes (ex.: ATT&amp;CK Navigator mostrando o APT29)."
+            ]
+          },
+          {
+            "id": "10.2.3",
+            "titulo": "Modelo diamante de análise de invasão",
+            "pontos": [
+              "Cada evento de invasão é analisado por quatro vértices: <strong>adversário</strong>, <strong>capacidade</strong> (habilidades e ferramentas técnicas), <strong>infraestrutura</strong> (malware, kits de exploit, servidores C2) e <strong>vítima</strong>.",
+              "Cada característica recebe um <strong>nível de confiança</strong>; metacaracterísticas incluem data/hora, fase da Kill Chain e resultado.",
+              "O diferencial é <strong>pivotar</strong> entre os vértices para correlacionar IoCs; eventos se ligam em gráficos de ataque, threads de atividade e grupos (campanhas).",
+              "Difícil de aplicar à mão, mas é a base de mecanismos automatizados de análise de inteligência integrados a SIEMs."
+            ]
+          },
+          {
+            "id": "10.2.4",
+            "titulo": "OSSTMM",
+            "pontos": [
+              "<strong>OSSTMM</strong> (Open Source Security Testing Methodology Manual), do <strong>ISECOM</strong>: metodologia padronizada e gratuita (Creative Commons) para testes de segurança.",
+              "Cobre testes operacionais, físicos, humanos, wireless, de telecomunicações e de redes de dados, além de métricas, análise de confiança e conformidade.",
+              "Ajuda a criar testes consistentes e replicáveis; os resultados são reportados no <strong>STAR</strong> (Security Test Audit Report)."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "10.3",
+        "titulo": "Explicar técnicas de identificação de atividades maliciosas",
+        "topicos": [
+          {
+            "id": "10.3.1",
+            "titulo": "Análise do cabeçalho de email",
+            "pontos": [
+              "Caminho do email: <strong>MUA</strong> (cliente) → <strong>MDA</strong> (verifica se o remetente pode enviar pelo domínio) → um ou mais <strong>MTAs</strong> (encontrados via DNS), e cada um acrescenta informações ao cabeçalho.",
+              "Três campos de remetente: <strong>Display From</strong> (RFC5322.From, o que o usuário vê — fácil de falsificar com um nome \"amigável\"), <strong>Envelope From</strong> (RFC5321.MailFrom / Return-Path, para devoluções, oculto) e <strong>Received from/by</strong> (lista de MTAs, que costuma revelar a verdadeira origem).",
+              "Sinais de alerta: domínio do servidor de origem diferente do remetente, relays em listas de bloqueio, SPF/DKIM/DMARC ausentes e remetente se passando por outra marca.",
+              "Cabeçalhos <strong>X-</strong> são personalizados pelo servidor (ex.: notas de spam). Ferramentas como o Microsoft Message Analyzer organizam os saltos."
+            ]
+          },
+          {
+            "id": "10.3.2",
+            "titulo": "Conteúdo malicioso em emails",
+            "pontos": [
+              "O corpo do email usa <strong>MIME</strong> (HTML, RTF, anexos); binários viram texto em <strong>Base64</strong>. Campanhas de phishing simuladas medem a taxa de cliques.",
+              "Payload malicioso: <strong>exploit</strong> (scripts ou objetos que atacam o cliente de email — às vezes só pela pré-visualização; mantenha o cliente atualizado) ou <strong>anexo</strong> (disfarçado com extensão dupla, ex.: arquivo.pdf.exe).",
+              "<strong>Links incorporados</strong>: texto amigável escondendo a URL real — o ideal é nunca clicar e acessar o site digitando o endereço.",
+              "<strong>Bloco de assinatura</strong> ausente ou malformado é indício de phishing (mas o spear phishing pode copiar um verdadeiro).",
+              "Para anexos, gere o <strong>hash</strong>: compare com hashes maliciosos conhecidos e use em regras para achar o arquivo em outras caixas de correio."
+            ]
+          },
+          {
+            "id": "10.3.3",
+            "titulo": "Segurança do servidor de email",
+            "pontos": [
+              "<strong>SPF</strong>: registro DNS TXT com os servidores autorizados a enviar pelo domínio; ação para os demais: <strong>-all</strong> (rejeitar), <strong>~all</strong> (sinalizar), <strong>+all</strong> (aceitar). Na prática, o resultado (pass / not pass) aparece no cabeçalho e serve mais como pista.",
+              "<strong>DKIM</strong>: o MTA assina um hash dos cabeçalhos (e, opcionalmente, do corpo) com a chave privada; o receptor valida com a chave pública publicada no DNS.",
+              "<strong>DMARC</strong>: política no DNS que exige <strong>alinhamento</strong> do domínio do From com SPF e/ou DKIM, define o que fazer nas falhas (sinalizar, quarentena, rejeitar) e envia relatórios agregados e forenses ao remetente.",
+              "Nenhum dos três resolve <strong>domínios parecidos</strong> (ex.: reelcompany em vez de realcompany).",
+              "Ferramentas: <code>dig</code> para consultar os registros TXT; MXToolbox para analisar cabeçalhos."
+            ]
+          },
+          {
+            "id": "10.3.4",
+            "titulo": "Interpretar comandos suspeitos",
+            "pontos": [
+              "Comandos administrativos legítimos também são usados por atacantes — o uso não prova ataque, mas exige entender o porquê. Ative o log de comandos (não vem por padrão) e colete no SIEM.",
+              "<strong>Linux</strong>: ssh, wget, curl, telnet, ftp, arp/ss, ip/ifconfig, <strong>whoami</strong> (checar privilégios logo após ganhar shell) e netstat.",
+              "<strong>Windows</strong>: netstat, ping (pode carregar dados), ipconfig, nslookup, tasklist, net, netsh e wmic.",
+              "<strong>PowerShell</strong>: Invoke-Command, Invoke-WebRequest, <strong>DownloadString()</strong> (baixar payload), Start-Process, Get-WMIObject e Get-Process.",
+              "<strong>Reverse shell</strong> (a vítima conecta no atacante, passando pelo firewall) — ex.: <code>nc -lvnp</code>, <code>bash -i &gt;&amp; /dev/tcp/…</code>, Python com socket — praticamente nunca é atividade normal."
+            ]
+          },
+          {
+            "id": "10.3.5",
+            "titulo": "Atividade anormal",
+            "pontos": [
+              "Contas: uso fora do horário, conta de desktop usada em servidor, contas criadas ou adicionadas a grupos sem autorização e <strong>viagem impossível</strong> (login em Nova York e, 15 minutos depois, em Bruxelas — atenção a VPNs).",
+              "Padrões: comunicação com domínios/IPs maliciosos, beaconing (conexão criptografada a cada 2 minutos), gigabytes de DNS, pings sem resposta ou com tamanho estranho, portas de C2 e a sequência email → link → executável → conexão externa.",
+              "<strong>UEBA</strong>: compara o comportamento de usuários e entidades (máquinas, servidores, IoT) com uma baseline usando IA/ML; integra-se ao SIEM; é difícil definir a baseline e reduzir falsos positivos. Ex.: Microsoft ATA, Splunk UEBA."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "11": {
+    "titulo": "Analisar atividades potencialmente maliciosas",
+    "ideia": "Diante de atividade suspeita, identifique o tipo, investigue a origem, avalie o impacto e só então aja — o indicador inicial pode ser só a ponta de uma campanha maior.",
+    "pontos": [
+      "Ataques miram redes, sistemas operacionais, software e pessoas.",
+      "Na rede: picos de tráfego, consumo anormal de banda e uso irregular de protocolos.",
+      "No host: uso não autorizado de contas, problemas de desempenho e software não autorizado.",
+      "Os SOs têm ferramentas nativas de análise, e ferramentas de terceiros permitem ir mais fundo."
+    ],
+    "subs": [
+      {
+        "id": "11.1",
+        "titulo": "Explorar indicadores de ataque de rede",
+        "topicos": [
+          {
+            "id": "11.1.1",
+            "titulo": "Picos de tráfego e DDoS",
+            "pontos": [
+              "<strong>DDoS</strong> usa botnets (muitas vezes roteadores e câmeras IP, e até alugadas) para gerar volume massivo de tráfego — atacantes pouco técnicos conseguem lançar ataques grandes.",
+              "<strong>Pico de tráfego</strong>: aumento súbito no volume para um servidor, roteador ou balanceador — fácil de notar com uma baseline; pode ser DoS ou exfiltração. Hosts internos também podem virar bots atacando terceiros.",
+              "<strong>Consumo de banda</strong> alto e prolongado: às vezes legítimo (backup, replicação, campanha de marketing); suspeito em casos como worms, <strong>reflexão/amplificação</strong> (IP da vítima falsificado), <strong>amplificação DNS</strong> e o comando <strong>monlist do NTP</strong> (pequena consulta, resposta enorme).",
+              "DoS/DDoS pode ser uma <strong>cortina de fumaça</strong> para esconder outro ataque.",
+              "Mitigação: análise de logs em tempo real com envio ao <strong>sinkhole/blackhole</strong>, geolocalização e reputação de IP, e proteção na nuvem (Cloudflare, Imperva) com DNS apontando para o provedor e firewall aceitando só o tráfego vindo dele."
+            ]
+          },
+          {
+            "id": "11.1.2",
+            "titulo": "IoCs de sinalização (beaconing) e C&amp;C",
+            "pontos": [
+              "<strong>C&amp;C</strong>: infraestrutura que comanda os bots; <strong>beaconing</strong> é o \"sinal de vida\" periódico do bot para o servidor — às vezes com intervalos aleatórios para despistar.",
+              "Difícil de bloquear porque muda de nome e IP com <strong>DGA</strong> (algoritmo de geração de domínios) e <strong>fast flux DNS</strong>. Indicadores: destino com má reputação, frequência e horário das conexões e tamanho das respostas (lembrando que NTP e atualizações também sinalizam).",
+              "Canais: <strong>IRC</strong> (fácil de detectar e bloquear), <strong>HTTP/HTTPS</strong> (difícil de separar do legítimo — inspeção TLS, reputação, DNS blackhole, certificados autoassinados), <strong>DNS</strong> (consultas longas e repetidas; ferramentas iodine e dnscat2), <strong>redes sociais</strong> e <strong>metadados de arquivos de mídia</strong>."
+            ]
+          },
+          {
+            "id": "11.1.3",
+            "titulo": "Padrões de comunicação irregulares",
+            "pontos": [
+              "Mapas de tráfego normal servem de baseline e expõem anomalias: cliente falando com cliente (P2P), com hosts estranhos da internet, protocolos incomuns ou horários estranhos.",
+              "Além do volume, acompanhe o tamanho médio dos pacotes e a proporção de cada protocolo.",
+              "Exemplo no Wireshark: download legítimo de driver do servidor de impressão (SMB na 445) vs. host desconhecido chamando <strong>NetPathCanonicalize</strong> (MS08-067/Conficker) e enviando um binário (assinatura <strong>MZ</strong>, 4d 5a) por portas não padrão.",
+              "<strong>ARP spoofing/poisoning</strong>: inundar o cache ARP com respostas falsas para desviar o tráfego (ataque on-path). Detectado por IDS (Snort, Suricata) pelo excesso de ARP; verificação manual com <code>arp -a</code> (MACs repetidos)."
+            ]
+          },
+          {
+            "id": "11.1.4",
+            "titulo": "Dispositivos rogue e varreduras de descoberta",
+            "pontos": [
+              "<strong>Dispositivo rogue</strong>: qualquer equipamento não autorizado — USB, adaptador Wi-Fi, celular pessoal, <strong>network TAP</strong> (só achado por inspeção física), <strong>WAP falso</strong> (ex.: Wi-Fi Pineapple), servidor-isca, servidores DHCP/DNS maliciosos, VMs e dispositivos inteligentes (impressoras, webcams, VoIP, TVs).",
+              "Detecção: inspeção visual (procure Raspberry Pi escondido), mapeamento de rede e logs de DHCP, monitoramento wireless (SSIDs desconhecidos), análise de tráfego, NAC e IDS.",
+              "Prevenção: controle de acesso por porta e <strong>802.1X</strong>.",
+              "<strong>Varreduras</strong>: <em>scan</em> = portas de um host (fingerprinting); <em>sweep</em> = faixa de IPs (descoberta). Só podem partir de dispositivos autorizados — investigue as demais; varreduras na borda exposta são comuns e de menor prioridade."
+            ]
+          },
+          {
+            "id": "11.1.5",
+            "titulo": "Protocolos e uso de portas",
+            "pontos": [
+              "IANA: portas <strong>conhecidas</strong> (0–1023), <strong>registradas</strong> (1024–49151) e <strong>dinâmicas/privadas</strong> (49152–65535). Porta dinâmica aberta de forma constante num host é suspeita.",
+              "Malware usa portas não padrão ou protocolo diferente numa porta padrão — o IoC de <strong>porta/aplicação incompatível</strong>. Consulte portas suspeitas (ex.: speedguide.net).",
+              "Mitigação: firewall liberando só as portas permitidas (entrada e saída) e regras de detecção baseadas na documentação de portas de cada servidor.",
+              "<strong>Shell</strong>: atacante conecta numa porta aberta na vítima. <strong>Reverse shell</strong>: a vítima conecta no atacante — explora a falta de filtro de saída. Normalmente via <strong>RAT</strong>.",
+              "<strong>Netcat</strong>: <code>nc -lvnp 8080</code> (escuta), <code>nc IP 8080</code> (conecta) e também transfere arquivos. Alternativas: ncat, Cryptcat (canal criptografado), Socat, Pupy."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "11.2",
+        "titulo": "Explorar indicadores de ataque ao host",
+        "topicos": [
+          {
+            "id": "11.2.1",
+            "titulo": "Consumo de memória e processador",
+            "pontos": [
+              "Uso alto de CPU e memória é um indicador, mas não prova malware — antivírus, atualizadores, planilhas grandes e OCR também consomem muito.",
+              "<strong>Windows</strong>: Gerenciador de Tarefas e Monitor de Desempenho mostram o uso por processo; o uso total de memória sozinho não diz muito (o Windows usa toda a RAM que pode).",
+              "<strong>Linux</strong>: <code>free</code> (resumo de memória, a partir de /proc/meminfo) e <code>top</code> (processos em tempo real; ordene com Shift+P CPU, Shift+M memória, Shift+T tempo, Shift+N PID). O <strong>htop</strong> é mais amigável."
+            ]
+          },
+          {
+            "id": "11.2.2",
+            "titulo": "Uso de disco e sistema de arquivos",
+            "pontos": [
+              "Metadados do sistema de arquivos (criação, acesso, modificação) ajudam a montar a linha do tempo.",
+              "<strong>Áreas de preparação (staging)</strong> antes da exfiltração: pastas temporárias, perfis de usuário, dados disfarçados de log, <strong>ADS</strong> (fluxos de dados alternativos) e até a Lixeira; arquivos RAR/gzip incomuns ou na raiz/pastas do sistema são suspeitos.",
+              "Windows <code>dir</code>: <code>/AH</code> (ocultos), <code>/Q</code> (dono do arquivo), <code>/R</code> (mostra ADS). Ferramenta ADS Spy.",
+              "Consumo de disco anormal pode indicar malware preparando dados ou gerando logs de varredura — use ferramentas de uso de disco (mapa em árvore, listagem por tamanho, escrita em tempo real).",
+              "Linux: <code>lsof</code> (arquivos abertos com PID, dono, tamanho, endereço de rede, estado TCP), <code>df</code> (uso por sistema de arquivos) e <code>du</code> (uso por diretório, ex.: <code>du /var/log</code>). Em discos criptografados, a chave pode estar na memória de um sistema ligado."
+            ]
+          },
+          {
+            "id": "11.2.3",
+            "titulo": "Software não autorizado",
+            "pontos": [
+              "Malware conhecido (worm, vírus, trojan) é o IoC mais óbvio; ferramentas de ataque também — mas admins usam várias delas legitimamente.",
+              "Servidores web, DNS ou de virtualização instalados numa estação de trabalho provavelmente não são autorizados.",
+              "<strong>Tarefas agendadas</strong> são usadas por malware para persistência (C2, reverse shell no boot). Eventos <strong>4698</strong> (tarefa criada/modificada) e <strong>4700</strong> (habilitada/desabilitada).",
+              "Alterações suspeitas: arquivos e pastas em locais ou com nomes estranhos, arquivos alterados, limpeza de temporários e logs (apagando rastros), chaves de registro de segurança alteradas e mudanças em contas/grupos (no Linux, /etc/passwd e /etc/group)."
+            ]
+          },
+          {
+            "id": "11.2.4",
+            "titulo": "Processos maliciosos",
+            "pontos": [
+              "Ferramentas Windows: <strong>Process Explorer</strong> e <strong>Process Monitor</strong> (Sysinternals), <code>tasklist</code>/<code>taskkill</code> e PE Explorer (DLLs e APIs que um executável usa).",
+              "Processos críticos e sua hierarquia normal: <strong>System</strong> (PID 4) → <strong>smss.exe</strong> → <strong>csrss.exe</strong>; <strong>wininit.exe</strong> → <strong>services.exe</strong> e <strong>lsass.exe</strong> (políticas, logons, tokens).",
+              "Sinais de infecção: cópias duplicadas desses processos, execução fora de System32, pai errado ou assinatura inválida — o Process Explorer verifica assinatura e envia ao VirusTotal.",
+              "Linux: daemons terminam em \"d\"; o init (<strong>systemd</strong>) é o <strong>PID 1</strong>. Use <code>pstree</code> (árvore pai/filho) e <code>ps</code> (<code>-A</code>/<code>-e</code> para todos; ex.: <code>ps -C cron</code>)."
+            ]
+          },
+          {
+            "id": "11.2.5",
+            "titulo": "Alterações não autorizadas",
+            "pontos": [
+              "O atacante muda o comportamento do sistema para criar vetores: abre portas, inicia serviços, adiciona exclusões no antivírus.",
+              "Monitore USB: pendrives com firmware alterado podem se passar por <strong>teclado</strong> e digitar comandos (deixam rastros no registro e em arquivos).",
+              "<strong>Escalada de privilégio</strong>: explorar falha ou configuração errada para virar admin/root — um dos primeiros objetivos após o acesso inicial.",
+              "IoCs de contas: sessões não autorizadas (ex.: usuário comum no Controlador de Domínio), muitas falhas de logon seguidas (principalmente admin/root), contas novas, uso de conta de convidado e uso fora do expediente.",
+              "Monitore desvios de política em relação à baseline; ferramentas AccessChk e AccessEnum ajudam a revisar privilégios."
+            ]
+          },
+          {
+            "id": "11.2.6",
+            "titulo": "Métodos de exfiltração de dados",
+            "pontos": [
+              "Exfiltração = transferência não autorizada de dados para fora — por email, transferência de arquivos, redes sociais, pendrive ou malware com tunelamento.",
+              "<strong>HTTP/HTTPS</strong> para sites de compartilhamento (OneDrive, Dropbox, Google Drive) — bloquear o acesso facilita a detecção.",
+              "<strong>Injeção SQL</strong> em serviços com banco: picos de requisições a PHP e respostas HTTP enormes; o WAF ajuda a detectar.",
+              "<strong>DNS</strong>: estações pedindo registros TXT, MX, CNAME ou NULL, ou DNS sobre TCP, são suspeitas (o normal é A/AAAA via UDP).",
+              "Também: FTP, mensageiros, P2P, webmail (Gmail, Outlook.com) e túneis SSH/VPN. Mitigação: controle de acesso, criptografia, segmentação, monitoramento e treinamento."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "11.3",
+        "titulo": "Explorar ferramentas de avaliação de vulnerabilidade",
+        "topicos": [
+          {
+            "id": "11.3.1",
+            "titulo": "Scanner de vulnerabilidades Nessus",
+            "pontos": [
+              "<strong>Nessus</strong> (Tenable): scanner comercial muito conhecido — Nessus Professional (redes menores, varredura remota), Nessus Manager (local) e Tenable Cloud (com agentes). Gratuito para uso doméstico.",
+              "Usa <strong>plug-ins</strong> dos feeds de assinatura; plug-ins próprios são escritos em <strong>NASL</strong>.",
+              "Leitura do relatório: veja as métricas CVSS e o campo <strong>\"Exploitable with\"</strong> (pesquise se já existe exploit). No exemplo, quase tudo vinha da falta de patches e de SO/.NET sem suporte.",
+              "Ciclo: corrigir (Windows Update, agendar atualizações, migrar sistemas legados) → <strong>escanear de novo</strong> → tratar o que restou."
+            ]
+          },
+          {
+            "id": "11.3.2",
+            "titulo": "Scanners OpenVAS e Qualys",
+            "pontos": [
+              "<strong>OpenVAS</strong> (Greenbone): open source, derivado do código do Nessus antes de ele virar comercial; roda em Linux e também tem versão paga.",
+              "<strong>Qualys</strong>: plataforma em nuvem; <strong>sensores</strong> (agente no host, appliance dedicado, VM, sensor passivo, out-of-band para hosts air-gapped, nuvem e contêineres) enviam dados para análise. Também faz varredura de aplicações web.",
+              "Avaliações de mercado (ex.: Gartner) ajudam a escolher a ferramenta."
+            ]
+          },
+          {
+            "id": "11.3.3",
+            "titulo": "Opções de varredura do Nmap (descoberta)",
+            "pontos": [
+              "<strong>Nmap</strong>: open source e multiplataforma; <code>-sn</code> faz só a descoberta de hosts (sem varrer portas). Masscan é mais rápido, porém menos preciso.",
+              "Tipos de scan: <code>-sS</code> <strong>SYN</strong> (meio aberto, rápido, exige privilégio), <code>-sT</code> <strong>connect</strong> (conexão completa, menos furtivo), <code>-sN</code>/<code>-sF</code>/<code>-sX</code> (<strong>Null, FIN, Xmas</strong> — flags incomuns), <code>-sU</code> <strong>UDP</strong> (lento) e <code>-p</code> para o intervalo de portas (padrão: 1.000 mais comuns).",
+              "Estados: <strong>open</strong>, <strong>closed</strong> (responde com RST), <strong>filtered</strong> (firewall descarta), <strong>unfiltered</strong> (scan ACK, testa regras de firewall), <strong>open|filtered</strong> e <strong>closed|filtered</strong>.",
+              "Saídas: <code>-oN</code> (normal), <code>-oX</code> (XML) e <code>-oG</code> (grepável).",
+              "Útil para defesa: achar servidores web não autorizados (portas 80/443) ou checar vulnerabilidades com scripts. Um IDS bem configurado detecta a maioria dos scans."
+            ]
+          },
+          {
+            "id": "11.3.4",
+            "titulo": "Fingerprinting com Nmap",
+            "pontos": [
+              "<strong>Fingerprinting</strong>: cada software responde às sondas de um jeito, o que permite deduzir nome e versão sem acesso privilegiado.",
+              "<code>-sV</code> (versão do serviço), <code>-O</code> (sistema operacional) e <code>-A</code> (SO + versão + scripts) revelam protocolo real, aplicação e versão, SO, hostname e tipo de dispositivo.",
+              "Exemplo: Apache na 8080 aparece com nome e versão; já <strong>tcpwrapped</strong> sem versão na mesma porta era um listener netcat — muito suspeito.",
+              "Assinaturas classificadas em <strong>CPE</strong>. <strong>NSE</strong> (scripts em Lua): <code>-sC</code> ou <code>-A</code> para os padrão e <code>--script</code> para escolher — detecção de SO, contas Windows, usuário logado, vulnerabilidades, apps web e geolocalização no traceroute."
+            ]
+          },
+          {
+            "id": "11.3.5",
+            "titulo": "Medir vulnerabilidades de engenharia social",
+            "pontos": [
+              "Pessoas são a maior vulnerabilidade: o Verizon DBIR 2022 mostrou que 82% das violações envolveram o fator humano — senha forte não adianta se o usuário a entrega.",
+              "Ataques comuns: <strong>pretexting</strong> (história falsa, ex.: \"sou da TI\"), <strong>baiting</strong> (isca — pendrive ou documento com macro tipo \"bônus executivos\") e <strong>phishing</strong> (links e anexos maliciosos). A IA deixa esses ataques mais convincentes e personalizados.",
+              "Para medir, simule o atacante com <strong>campanhas</strong> (tema, dificuldade e período definidos), comparando antes e depois do treinamento de conscientização.",
+              "Ferramentas: <strong>Social-Engineer Toolkit (SET)</strong> (páginas e anexos falsos) e <strong>Gophish</strong> (interface para gerenciar campanhas), além de plataformas comerciais na nuvem."
+            ]
+          },
+          {
+            "id": "11.3.6",
+            "titulo": "Técnicas de ofuscação de URL",
+            "pontos": [
+              "<strong>Encurtadores</strong>: escondem o destino e driblam filtros de URL; também coletam dados e podem quebrar (\"deterioração de links\"). Revele o destino sem clicar (unshorten.me, VirusTotal).",
+              "<strong>QR codes</strong>: práticos e \"divertidos\" — por isso eficazes para atacantes.",
+              "<strong>Doppelganger</strong> (falta o ponto: wwwgoogle.com) e <strong>troca de caracteres</strong> parecidos, difíceis de notar dependendo da fonte.",
+              "<strong>Codificação</strong>: <code>%3A</code> = <code>:</code> e <code>%2F</code> = <code>/</code>, URL inteira em hexadecimal ou em <strong>Base64</strong> (<code>data:text/html;base64,…</code>).",
+              "<strong>Redirecionamento aberto</strong>: site confiável com <code>redirect.php?url=</code> mal protegido manda a vítima para qualquer lugar — combinado com codificação, é muito eficaz."
+            ]
+          },
+          {
+            "id": "11.3.7",
+            "titulo": "Outras ferramentas de avaliação",
+            "pontos": [
+              "<strong>Angry IP Scanner</strong>: varredura gráfica rápida da rede, mostrando dispositivos, configurações e versões.",
+              "<strong>Maltego</strong>: visualiza relações entre entidades (pessoas, domínios, malware) e usa <strong>transforms</strong> para puxar inteligência automaticamente.",
+              "<strong>Metasploit Framework</strong>: módulos de exploit que facilitam o acesso indevido; para o analista, serve para <strong>validar</strong> o risco real de uma vulnerabilidade (a versão Pro tem interface web). Antimalwares modernos detectam muitas de suas ferramentas.",
+              "<strong>Recon-ng</strong>: automatiza a coleta de informações sobre hosts e domínios (IPs, subdomínios, versões) — revela a pegada externa da organização, para atacantes e defensores."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "12": {
+    "titulo": "Entender a avaliação de vulnerabilidades de aplicativos",
+    "ideia": "Aplicações exigem avaliação própria: scanners web, debuggers e ferramentas de nuvem, usados juntos, encontram falhas e mostram como o software funciona por dentro.",
+    "pontos": [
+      "Scanners especializados acham problemas em aplicações que scanners genéricos não pegam.",
+      "Scanners web conseguem automatizar ataques e enumeração.",
+      "Ferramentas de nuvem avaliam a plataforma e as cargas de trabalho que rodam nela.",
+      "Debuggers são essenciais para a engenharia reversa de malware."
+    ],
+    "subs": [
+      {
+        "id": "12.1",
+        "titulo": "Analisar vulnerabilidades da Web",
+        "topicos": [
+          {
+            "id": "12.1.1",
+            "titulo": "Burp Suite",
+            "pontos": [
+              "<strong>Proxy de interceptação</strong>: fica entre o navegador e a aplicação, permitindo ver e alterar requisições e respostas — base da análise dinâmica e do pentest web.",
+              "<strong>Burp Suite</strong> (PortSwigger): proxy + descoberta de conteúdo, fuzzing, ataques de senha e de injeção, varredura de vulnerabilidades. Versão Community (limitada) e Professional (paga, mais automação).",
+              "Tem navegador embutido; a aba <strong>Proxy &gt; Intercept</strong> segura cada requisição para editar cookies, parâmetros e tipo de conteúdo.",
+              "O <strong>Intruder</strong> automatiza ataques aos pontos vulneráveis (ex.: modo <strong>Sniper</strong>). Estudo gratuito: PortSwigger Web Security Academy."
+            ]
+          },
+          {
+            "id": "12.1.2",
+            "titulo": "OWASP Zed Attack Proxy (ZAP)",
+            "pontos": [
+              "<strong>OWASP ZAP</strong>: alternativa <strong>open source</strong> ao Burp — proxy de interceptação, <strong>scanner ativo</strong> (SQLi, XSS), testes de API e navegador pré-configurado.",
+              "Extensível por <strong>add-ons</strong> e scripts da comunidade; gera relatórios e alertas para priorizar os problemas."
+            ]
+          },
+          {
+            "id": "12.1.3",
+            "titulo": "Outros scanners de aplicações web",
+            "pontos": [
+              "<strong>Nikto</strong>: linha de comando (<code>nikto -h &lt;alvo&gt;</code>); identifica o servidor HTTP e as aplicações, software desatualizado e erros de configuração (indexação de diretórios, arquivos padrão).",
+              "<strong>Arachni</strong>: open source, com CLI e interface web; audita formulários, JSON, XML e links, testando injeção de código, SQLi, XSS, CSRF, inclusão de arquivos, fixação de sessão, directory traversal e backdoors.",
+              "O Arachni classifica os achados (alto, médio, baixo, informativo), mostra onde e com qual entrada explorou (inclusive a requisição e a resposta HTTP), referencia o <strong>CWE</strong> e tem gestão de casos."
+            ]
+          },
+          {
+            "id": "12.1.4",
+            "titulo": "Debuggers de aplicativos",
+            "pontos": [
+              "Debuggers revelam a estrutura interna e o comportamento do malware (o que ele faz e de que recursos externos depende).",
+              "<strong>Immunity Debugger</strong>: engenharia reversa e análise de malware — memória, breakpoints, patch em tempo de execução, suporte a x86/x64/ARM e scripts em Python.",
+              "<strong>GDB</strong> (GNU Debugger): open source; depura C, C++ e Fortran em espaço de usuário e de kernel, inspeciona memória e pilha e rastreia o código; roda em Linux, macOS e Windows."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "12.2",
+        "titulo": "Analisar vulnerabilidades na nuvem",
+        "topicos": [
+          {
+            "id": "12.2.1",
+            "titulo": "Ferramentas de avaliação de infraestrutura de nuvem",
+            "pontos": [
+              "Na nuvem, a gestão de vulnerabilidades depende do provedor — defina bem a divisão de responsabilidades entre provedor e cliente.",
+              "<strong>ScoutSuite</strong> (NCC Group): auditoria open source multinuvem (AWS, Azure, GCP) via API; inventaria VMs, storage, contas IAM e ACLs e classifica por gravidade.",
+              "<strong>Prowler</strong>: auditoria open source para <strong>AWS</strong> — configurações erradas, senhas fracas, falta de patches, CIS Benchmarks e conformidade.",
+              "<strong>Pacu</strong> (Rhino Security Labs): framework de <strong>exploração</strong> da AWS — usa credenciais para enumerar contas e permissões e buscar acesso. Laboratório vulnerável para treinar: CloudGoat.",
+              "Leia a política de uso do provedor antes de testar: ScoutSuite e Prowler usam a API (sem autorização prévia); o Pacu provavelmente exige aprovação."
+            ]
+          },
+          {
+            "id": "12.2.2",
+            "titulo": "Análise da saída do ScoutSuite",
+            "pontos": [
+              "Crie um usuário de varredura com <strong>chave de API</strong> no IAM e política de <strong>privilégio mínimo</strong> (o ScoutSuite fornece uma pronta).",
+              "Com o AWS CLI configurado para essa conta, um único comando roda a auditoria.",
+              "O resultado sai num relatório <strong>HTML</strong>: painel com os achados por serviço e detalhes navegáveis (ex.: alertas de política do IAM)."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "13": {
+    "titulo": "Explorar ferramentas de script e conceitos de análise",
+    "ideia": "Scripts automatizam o trabalho repetitivo do analista, e técnicas de análise — com a ajuda do SIEM — transformam montanhas de log em padrões suspeitos fáceis de enxergar.",
+    "pontos": [
+      "Linguagens de script são ferramentas poderosas para automatizar tarefas complexas ou repetitivas.",
+      "Bash, PowerShell e Python são as mais populares.",
+      "Scripts servem a administradores e analistas — e também a atacantes.",
+      "O SIEM revela padrões de ataque mais facilmente que a análise manual, e a análise manual confirma o que o SIEM aponta."
+    ],
+    "subs": [
+      {
+        "id": "13.1",
+        "titulo": "Compreender linguagens de script",
+        "topicos": [
+          {
+            "id": "13.1.1",
+            "titulo": "Comandos essenciais de shell",
+            "pontos": [
+              "Scripts de shell automatizam tarefas repetitivas ou complexas (backups, atualizações, instalações, manutenção); analistas os usam para varrer logs e encadear ferramentas (ex.: Nmap nas portas 80/443 e depois mais coleta) — e atacantes, para enumerar e explorar.",
+              "Shells: <strong>sh</strong> (Bourne), <strong>bash</strong> (Bourne Again, o mais comum), <strong>ksh</strong> (Korn, UNIX/AIX), <strong>csh</strong>/<strong>tcsh</strong> (C Shell) e <strong>zsh</strong> (estende o bash, com plugins).",
+              "Comandos comuns: cat, head/tail (10 primeiras/últimas linhas), touch, mkdir, cp, mv, rm, file, ls, locate (usa banco de dados), find (varre o disco), wget e curl.",
+              "Administrativos — monitore o uso: vi/vim, <strong>su</strong>, <strong>sudo</strong>, useradd, usermod, <strong>chmod</strong> (permissões), chown (dono) e mkfifo (pipe nomeado). O editor nano é mais amigável que o vi."
+            ]
+          },
+          {
+            "id": "13.1.2",
+            "titulo": "Variáveis e loops no Bash",
+            "pontos": [
+              "Variáveis: <code>export SERVER=10.0.2.26</code> e <code>$SERVER</code> para ler o valor (leia \"$\" como \"o valor de\"). <code>read</code> captura a entrada do usuário.",
+              "Script começa com o <strong>shebang</strong> (<code>#!/bin/bash</code>) e precisa de <code>chmod +x</code> para executar.",
+              "Aritmética com <code>expr</code> entre crases; operadores <code>+ - * / %</code>.",
+              "Comparações: <code>==</code>, <code>!=</code>, <code>-eq</code>, <code>-ne</code>, <code>-gt</code>, <code>-lt</code>, <code>-ge</code>, <code>-le</code> (cuidado: <code>=</code> atribui).",
+              "<strong>if/elif/else</strong> com colchetes e espaços (<code>[ $a -gt 100 ]</code>) e <strong>while … do … done</strong> para repetir até uma condição (ou Ctrl+C)."
+            ]
+          },
+          {
+            "id": "13.1.3",
+            "titulo": "Metacaracteres, aspas e redirecionamento",
+            "pontos": [
+              "<strong>Metacaracteres</strong> têm significado especial: espaço, tab, nova linha e <code>* ? [ ] ' \" \\ $ ; &amp; ( ) | ^ &lt; &gt;</code>.",
+              "<code>\\</code> escapa um caractere; <strong>aspas simples</strong> tratam tudo como texto literal; <strong>aspas duplas</strong> mantêm o efeito dos metacaracteres (ex.: <code>$</code>); <strong>crases</strong> executam o comando e inserem o resultado (substituição de comando).",
+              "Variáveis também podem guardar comandos.",
+              "<strong>Redirecionamento</strong>: <code>&gt;</code> grava a saída num arquivo (sobrescreve) e <code>&gt;&gt;</code> acrescenta ao final; <code>|</code> envia a saída para outro programa."
+            ]
+          },
+          {
+            "id": "13.1.4",
+            "titulo": "Windows PowerShell",
+            "pontos": [
+              "Sucessor do cmd.exe, muito mais poderoso para scripts; cmdlets no formato <strong>Verbo-Substantivo</strong> (Get-Help, Invoke-Command, New-Item, Set-Content); scripts em <strong>.ps1</strong>.",
+              "Também redireciona saídas — ex.: <code>Get-EventLog</code> filtrando o evento <strong>4625</strong> (logon com falha) para um arquivo.",
+              "Variáveis com <code>$</code> e tipos explícitos (<code>[int]</code>); o <strong>PowerShell ISE</strong> ajuda a escrever scripts.",
+              "O Windows bloqueia scripts por padrão; <strong>Set-ExecutionPolicy</strong> libera — todo uso dele deve ser monitorado."
+            ]
+          },
+          {
+            "id": "13.1.5",
+            "titulo": "Outras ferramentas de script (WMIC, Python, regex)",
+            "pontos": [
+              "<strong>WMIC</strong>: linha de comando do WMI para consultar e gerenciar SO, hardware e serviços, inclusive remotamente — atacantes usam <code>process call create</code> para executar comandos em outro host (ex.: desligar o firewall).",
+              "<strong>Python</strong>: linguagem interpretada (.py) com milhares de bibliotecas; serve a todo o ciclo de ataque (reconhecimento, exploração, persistência, limpeza) e à defesa (logs, tráfego, malware, serviços).",
+              "<strong>Regex</strong>: encontra padrões quando o valor exato é desconhecido (telefones, cartões de crédito em lugar indevido). Elementos: <code>[ABC]</code>, <code>[A-Z]</code>, <code>\\w</code>, <code>\\d</code>, <code>\\s</code>, <code>^</code> (início), <code>$</code> (fim), <code>?</code> (opcional), <code>{1,3}</code> (quantidade). Pratique em regex101.com."
+            ]
+          },
+          {
+            "id": "13.1.6",
+            "titulo": "JavaScript Object Notation (JSON)",
+            "pontos": [
+              "<strong>JSON</strong>: formato derivado do JavaScript para trocar dados; mais enxuto que o XML — não é linguagem de marcação e não usa tags de abertura e fechamento.",
+              "Estrutura em pares <strong>chave: valor</strong> dentro de <code>{ }</code>; valores podem ser string, número, objeto, <strong>array</strong> (<code>[ ]</code>, itens separados por vírgula), booleano ou null.",
+              "Interfaces de dados em JSON/XML costumam carregar credenciais e PII e são esquecidas nas avaliações — sujeitas a injeção e escuta; proteja com <strong>validação de entrada</strong> e <strong>criptografia em trânsito</strong>."
+            ]
+          },
+          {
+            "id": "13.1.7",
+            "titulo": "Extensible Markup Language (XML)",
+            "pontos": [
+              "<strong>XML</strong>: linguagem de marcação (derivada do SGML) com tags de abertura e fechamento, como o HTML — mas feita para <strong>transportar</strong> dados, não para exibi-los.",
+              "O autor <strong>cria as próprias tags</strong> (ex.: <code>&lt;produto&gt;&lt;nome&gt;…&lt;/nome&gt;&lt;/produto&gt;</code>), deixando claro o que cada campo representa.",
+              "O analista não precisa escrever XML, mas precisa reconhecer a sintaxe (aparece em SAML, APIs e relatórios de ferramentas)."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "13.2",
+        "titulo": "Identificar atividades maliciosas por meio de análise",
+        "topicos": [
+          {
+            "id": "13.2.1",
+            "titulo": "Usar análises para identificar atividade maliciosa",
+            "pontos": [
+              "A análise combina tráfego de rede, análise de malware, logs e comportamento para detectar e conter atividade maliciosa.",
+              "Atividade <strong>anormal</strong> nem sempre é maliciosa (falha de hardware, bug, erro humano) — a <strong>baseline</strong> (logs, tráfego e usuários ao longo do tempo, com IDS e SIEM) é o que permite diferenciar.",
+              "Sinais: tráfego incomum, uso anormal de CPU/memória, comportamento suspeito de usuários e eventos de sistema estranhos (erros, travamentos, desligamentos).",
+              "<strong>Novas contas</strong>: podem ser backdoor, escalada de privilégio ou insider (contas \"fantasma\") — avalie o contexto, pois contratar gente também cria contas.",
+              "<strong>Comunicação de saída inesperada</strong>: IPs ou domínios suspeitos/recém-registrados, protocolos incomuns, grandes transferências, horários estranhos, tráfego criptografado ou ofuscado e arquivos/processos desconhecidos.",
+              "<strong>Interrupção de serviço</strong> (DoS, ransomware, exploração, insider) e <strong>logs de aplicação</strong> (acessos indevidos e credential stuffing, mudanças de configuração, comportamento anômalo, origem do incidente e auditoria de usuários)."
+            ]
+          },
+          {
+            "id": "13.2.2",
+            "titulo": "Exemplo: identificando atividade anormal",
+            "pontos": [
+              "No SIEM (<strong>Wazuh</strong>): muitas falhas de autenticação, pico no gráfico de tendência e alertas de nível 12 ou mais.",
+              "Confirmar no host: <code>cat /var/log/auth.log | grep -i \"failed password\"</code> → ataque de senha contra o usuário tux.",
+              "O SIEM mostra a sequência ligada a técnicas do MITRE ATT&amp;CK: senha descoberta → login → criação de usuário (<code>grep \"new user\"</code> revela <strong>hax0r</strong>).",
+              "Backdoor: porta <strong>4444</strong> (associada ao Metasploit) aberta; <code>netstat</code>/<code>ss</code> mostra que é um <strong>netcat</strong>.",
+              "Lição: o SIEM dá a visão da sequência e a linha de comando confirma. Padrão clássico: força bruta → conta privilegiada → nova conta → backdoor para manter o acesso."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "14": {
+    "titulo": "Entender as práticas recomendadas de segurança de aplicativos e mitigação de ataques",
+    "ideia": "Ataques a aplicações exploram falhas no código; a defesa combina desenvolvimento seguro, controles como validação de entrada, controle de acesso e criptografia, e testes contínuos.",
+    "pontos": [
+      "Frameworks de desenvolvimento seguro orientam o trabalho dos desenvolvedores.",
+      "Muitos ataques de injeção são evitados com validação de entrada.",
+      "Testes e avaliações regulares são indispensáveis.",
+      "A variedade de ataques a aplicações web é grande e cresce rápido."
+    ],
+    "subs": [
+      {
+        "id": "14.1",
+        "titulo": "Explorar práticas seguras de desenvolvimento de software",
+        "topicos": [
+          {
+            "id": "14.1.1",
+            "titulo": "Práticas seguras de desenvolvimento de software",
+            "pontos": [
+              "<strong>SSDLC</strong> (ciclo de vida de desenvolvimento seguro): segurança em todas as etapas, do projeto ao teste e à implantação — o SDLC tradicional foca em requisitos funcionais e entrega software que funciona, mas não necessariamente seguro.",
+              "Referências: NIST SSDF, Microsoft SDL e materiais de Synopsys e Palo Alto.",
+              "<strong>OWASP Testing Guide</strong> (v4.2; v5 em desenvolvimento): roteiro estruturado de testes web — coleta de informações, configuração e implantação, identidade, validação de entrada, tratamento de erros e logs, criptografia, lógica de negócio, lado do cliente, web services e mobile."
+            ]
+          },
+          {
+            "id": "14.1.2",
+            "titulo": "Ataques de autenticação e boas práticas",
+            "pontos": [
+              "<strong>On-path</strong> (antigo man-in-the-middle): interceptar a comunicação entre dois pontos, via ARP ou DNS spoofing; defesa: criptografia (HTTPS, VPN).",
+              "Ataques de senha online são \"barulhentos\": muitas falhas seguidas de um sucesso indicam ataque bem-sucedido. <strong>Password spraying</strong>: poucas senhas comuns contra muitas contas. <strong>Credential stuffing</strong>: credenciais vazadas testadas em outros serviços (reuso de senha). Defesas: senhas fortes, bloqueio de conta e MFA.",
+              "<strong>Autenticação quebrada</strong>: falta de exigência de senha forte, reset de senha vulnerável, credenciais expostas (fixas no código, em texto claro, criptografia fraca, armazenamento ruim) e sessões sequestráveis. Referência: OWASP Authentication Cheat Sheet."
+            ]
+          },
+          {
+            "id": "14.1.3",
+            "titulo": "Práticas recomendadas de codificação segura",
+            "pontos": [
+              "<strong>Validação de entrada</strong> sempre no <strong>servidor</strong> (a do cliente é fácil de burlar), com <strong>normalização/sanitização</strong> — atacantes ofuscam a entrada (ex.: <code>../</code> virando <code>%2e%2e%2f</code>).",
+              "<strong>Codificação de saída</strong>: converter caracteres perigosos em entidades HTML para que a entrada seja exibida como texto, não executada — mitiga XSS e injeção.",
+              "<strong>Consultas parametrizadas</strong>: placeholders com valores vinculados à parte, então uma aspa vira caractere literal — principal defesa contra SQL injection.",
+              "Proteção de dados: criptografia, autenticação e autorização fortes, tratamento de erros, armazenamento seguro e testes regulares.",
+              "<strong>Sessões</strong>: IDs aleatórios e longos, cookies com Secure/HTTPS e sem dados sensíveis, timeout por inatividade, senhas fortes, MFA, controle de acesso e proteção contra sequestro e fixação de sessão."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "14.2",
+        "titulo": "Recomendar controles para mitigar ataques a aplicativos",
+        "topicos": [
+          {
+            "id": "14.2.1",
+            "titulo": "Ataques de estouro (overflow)",
+            "pontos": [
+              "Entradas não validadas podem levar a execução remota de código.",
+              "<strong>Buffer overflow</strong>: gravar mais dados do que o buffer comporta, invadindo a memória vizinha — trava o programa ou executa código do atacante. <strong>Stack overflow</strong>: o estouro sobrescreve o quadro da pilha, inclusive o endereço de retorno.",
+              "<strong>Heap overflow</strong>: estoura a área de memória dinâmica (ex.: falha no processamento de JPEG da GDI+); não liberar memória causa vazamento (memory leak).",
+              "<strong>Integer overflow</strong>: valor maior do que o tipo comporta \"dá a volta\" e vira um número inesperado — perigoso em cálculos e verificações de segurança.",
+              "<strong>Heartbleed</strong> (OpenSSL, extensão heartbeat do TLS): requisição malformada vazava até 64 KB de memória (chaves privadas, senhas). Correção: atualizar, reemitir certificados e trocar senhas.",
+              "Mitigações: evitar funções inseguras do C/C++ (ex.: <code>strcpy</code>), preferir linguagens que checam limites (Java, Python), privilégio mínimo e <strong>ASLR</strong> (randomiza os endereços de memória)."
+            ]
+          },
+          {
+            "id": "14.2.2",
+            "titulo": "Injeção XML e SQL",
+            "pontos": [
+              "<strong>SQL injection</strong>: inserir código em entradas (parâmetros de URL, formulários, cookies, POST, cabeçalhos) para alterar SELECT/INSERT/UPDATE/DELETE. Teste clássico: um apóstrofo gera erro; dois apóstrofos não.",
+              "Exemplo: <code>' or 1=1--</code> no campo de usuário torna a condição sempre verdadeira e comenta o resto da consulta, retornando todas as linhas.",
+              "<strong>Prompt injection</strong>: entradas maliciosas manipulam modelos de linguagem e chatbots (respostas nocivas, vazamento de dados, viés) — ex.: chatbot Tay, da Microsoft, em 2016.",
+              "<strong>Referência direta de objeto insegura (IDOR)</strong>: trocar <code>acctname=bob</code> por <code>acctname=alice</code> e acessar outra conta porque a aplicação não verifica a autorização.",
+              "<strong>Ataques XML</strong>: dados sem criptografia ou validação ficam sujeitos a spoofing e injeção; <strong>bomba XML (Billion Laughs)</strong> expande entidades até esgotar a memória; <strong>XXE</strong> (entidade externa) faz o servidor ler arquivos locais, como o de senhas."
+            ]
+          },
+          {
+            "id": "14.2.3",
+            "titulo": "Ataques a aplicações web",
+            "pontos": [
+              "<strong>Directory traversal</strong>: manipular o caminho (<code>../../../etc/passwd</code>) para ler ou gravar arquivos do servidor (Linux /var/www; Windows C:\\inetpub\\wwwroot). Pode vir codificado (<code>%2E%2E%2F</code>) e com <strong>byte nulo</strong> (<code>%00</code>) para driblar o filtro de extensão.",
+              "Mitigação: aceitar só extensões permitidas, bloquear sequências de travessia e, idealmente, nunca usar a entrada do usuário diretamente como caminho.",
+              "<strong>XSS</strong>: o site vulnerável entrega um script malicioso ao navegador da vítima, que o executa com o acesso dela (roubar dados e credenciais, agir em seu nome). <strong>Refletido</strong>: vem num link (<code>?message=&lt;script…&gt;</code>). <strong>Persistente/armazenado</strong>: fica gravado no banco e atinge todo visitante — mais perigoso.",
+              "<strong>Inclusão de arquivo</strong>: <strong>RFI</strong> (o parâmetro aponta para um arquivo malicioso externo) e <strong>LFI</strong> (executa um arquivo que já existe no servidor, geralmente via traversal e <code>%00</code>)."
+            ]
+          },
+          {
+            "id": "14.2.4",
+            "titulo": "Sequestro de sessão",
+            "pontos": [
+              "HTTP não guarda estado; <strong>cookies</strong> mantêm a sessão — de sessão (na memória, somem ao fechar o navegador) ou persistentes (até expirar). Dados sensíveis no cookie devem ser criptografados (o TLS só protege em trânsito).",
+              "<strong>Sequestro de sessão</strong>: roubar ou fixar o ID de sessão (fixation, XSS, sniffing em Wi-Fi público). Defesa: criptografar cookies, apagá-los ao sair e emitir um cookie novo a cada sessão.",
+              "<strong>Previsão de sessão</strong>: tokens previsíveis permitem adivinhar sessões futuras — gere tokens aleatórios, sem dados do cliente, com vida útil limitada e reautenticação.",
+              "<strong>CSRF/XSRF</strong> (\"confused deputy\"): o navegador autenticado da vítima envia uma requisição forjada (ex.: trocar a senha), às vezes só por uma tag de imagem. Defesa: <strong>token anti-CSRF</strong> aleatório e oculto em cada formulário.",
+              "<strong>Cookie poisoning</strong>: alterar o cookie depois de emitido; defesa: validá-lo como qualquer entrada, criptografar e apagar ao fim da sessão."
+            ]
+          },
+          {
+            "id": "14.2.5",
+            "titulo": "Vulnerabilidades de aplicativos e mitigações",
+            "pontos": [
+              "<strong>Quebra de controle de acesso</strong>: o sistema não limita cada usuário ao que ele pode acessar (papéis como admin e cliente) — ex.: credenciais roubadas ou referência direta de objeto alterada na URL. Implemente e teste os controles regularmente.",
+              "<strong>SSRF</strong>: forçar a aplicação a fazer requisições para sistemas internos ou externos (acessar bancos e arquivos internos, varrer portas, atacar terceiros) — ex.: violação da Capital One (2019).",
+              "Defesas contra SSRF: validar entradas, <strong>lista de hosts permitidos</strong> (bloquear o resto por padrão), segmentação com firewall e codificação segura.",
+              "<strong>Envenenamento de dados</strong>: corromper os dados de treinamento de modelos de IA/ML para gerar resultados errados ou enviesados (exemplos: reconhecimento facial, Google Maps, filtros de spam). Mitigação: validar e diversificar os dados, detectar anomalias, modelos robustos e auditorias regulares."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "14.3",
+        "titulo": "Implementar controles para prevenir ataques",
+        "topicos": [
+          {
+            "id": "14.3.1",
+            "titulo": "Checklists de mitigação de ataques a aplicativos",
+            "pontos": [
+              "No curso, este tópico é uma ilustração com checklists por risco; abaixo, um checklist que consolida os controles vistos no módulo.",
+              "<strong>Injeção (SQL, XML, comandos)</strong>: validação de entrada no servidor, consultas parametrizadas e desativar entidades externas no parser XML.",
+              "<strong>XSS</strong>: validar/sanitizar a entrada e aplicar codificação de saída.",
+              "<strong>Autenticação e sessão</strong>: senhas fortes, bloqueio de conta, MFA, IDs de sessão aleatórios, cookies seguros, timeout e tokens anti-CSRF.",
+              "<strong>Controle de acesso</strong>: negar por padrão, checar a autorização em cada requisição (evita IDOR) e privilégio mínimo.",
+              "<strong>Estouros de memória</strong>: checagem de limites, funções seguras, linguagens gerenciadas e ASLR.",
+              "<strong>Arquivos e requisições</strong>: extensões permitidas e bloqueio de <code>../</code> contra traversal/LFI; lista de hosts permitidos contra SSRF/RFI."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
