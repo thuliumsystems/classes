@@ -1873,13 +1873,31 @@
           const labs = u.labs || [];
           const labsHtml = labs.length
             ? labs
-                .map(
-                  (l) => `
-                <div class="res-topic">
-                  <h4><span>${l.id}</span>${l.titulo}</h4>
-                  <p>${l.skill}</p>
-                </div>`,
-                )
+                .map((l) => {
+                  const ferramentas = (l.ferramentas || [])
+                    .map((f) => `<code>${f}</code>`)
+                    .join(" ");
+                  const passos = (l.passos || [])
+                    .map((p) => `<li>${p}</li>`)
+                    .join("");
+                  return `
+                <div class="res-sub collapsed" id="${prefix}lab-${l.id}">
+                  <button class="res-sub-title" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <span class="obj-num">${l.id}</span>
+                    <span>${l.titulo}</span>
+                    <span class="toggle-icon">▼</span>
+                  </button>
+                  <div class="res-sub-body">
+                    <div class="res-topic">
+                      ${l.objetivo ? `<p><strong>Objetivo:</strong> ${l.objetivo}</p>` : ""}
+                      ${ferramentas ? `<p><strong>Ferramentas:</strong> ${ferramentas}</p>` : ""}
+                      ${passos ? `<p><strong>Roteiro:</strong></p><ol>${passos}</ol>` : ""}
+                      ${l.deteccao ? `<p><strong>Como detectar:</strong> ${l.deteccao}</p>` : ""}
+                      ${l.mitigacao ? `<p><strong>Como mitigar:</strong> ${l.mitigacao}</p>` : ""}
+                    </div>
+                  </div>
+                </div>`;
+                })
                 .join("")
             : `<div class="res-topic"><p>Unidade só de leitura — sem laboratório prático.</p></div>`;
           const block = document.createElement("div");
@@ -1894,6 +1912,7 @@
             <div class="obj-body">
               <div class="module-summary">
                 <div class="topics-covered-title">${labs.length} laboratório(s) prático(s)</div>
+                <p>Cada lab abre com o roteiro prático (objetivo, ferramentas e passos). Guias escritos com minhas palavras, não o script original do curso.</p>
               </div>
               ${labsHtml}
             </div>`;

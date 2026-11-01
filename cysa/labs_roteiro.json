@@ -2,87 +2,373 @@
   "1": {
     "titulo": "Resposta, tratamento e gestão de vulnerabilidades",
     "labs": [
-      {"id": "1.1.1", "titulo": "Explorar o ambiente de laboratório", "skill": "Familiarizar-se com a VM e as ferramentas usadas nos laboratórios."},
-      {"id": "1.2.1", "titulo": "Configurar controles de segurança", "skill": "Aplicar e ajustar controles (tipos e métodos) para tratar riscos."}
+      {
+        "id": "1.1.1",
+        "titulo": "Explorar o ambiente de laboratório",
+        "objetivo": "Conhecer a topologia da VM, credenciais e ferramentas antes de começar — base para todos os labs seguintes.",
+        "ferramentas": ["Terminal Linux", "Navegador", "Gerenciador de arquivos"],
+        "passos": [
+          "Faça login na VM com as credenciais fornecidas e identifique seu papel (analista/atacante/alvo).",
+          "Mapeie a rede do lab: liste interfaces (<code>ip a</code>), gateway e hosts-alvo.",
+          "Teste conectividade com os alvos (<code>ping</code>, <code>nc -vz</code>).",
+          "Localize as ferramentas instaladas e anote caminhos/credenciais que serão reutilizados."
+        ]
+      },
+      {
+        "id": "1.2.1",
+        "titulo": "Configurar controles de segurança",
+        "objetivo": "Aplicar e validar controles classificando-os por tipo (preventivo, detectivo, corretivo) e categoria (técnico, administrativo, físico).",
+        "ferramentas": ["Firewall de host (ufw/iptables ou Windows Firewall)", "Políticas/GPO"],
+        "passos": [
+          "Classifique o controle desejado pela função e pela categoria.",
+          "Implemente (ex.: regra de firewall, política de senha, bloqueio de serviço).",
+          "Teste se o controle realmente bloqueia ou gera alerta.",
+          "Se o controle ideal for inviável, defina um <strong>controle compensatório</strong> equivalente e documente."
+        ]
+      }
     ]
   },
   "2": {
     "titulo": "Inteligência de ameaças e caça a ameaças",
     "labs": [
-      {"id": "2.1.1", "titulo": "Revisar IoCs e fontes de inteligência de ameaças", "skill": "Consultar e avaliar feeds e indicadores de comprometimento."},
-      {"id": "2.2.1", "titulo": "Executar caça a ameaças (threat hunting)", "skill": "Procurar atividade maliciosa de forma proativa, guiado por hipóteses, IoCs e IoAs."}
+      {
+        "id": "2.1.1",
+        "titulo": "Revisar IoCs e fontes de inteligência de ameaças",
+        "objetivo": "Coletar indicadores de feeds e julgar relevância, precisão e oportunidade (timeliness).",
+        "ferramentas": ["Feeds STIX/TAXII", "MISP", "VirusTotal", "AbuseIPDB"],
+        "passos": [
+          "Reúna IoCs (hashes, IPs, domínios, URLs) das fontes.",
+          "Correlacione com os logs internos para ver se já apareceram no ambiente.",
+          "Avalie a confiabilidade da fonte e a relevância para o seu setor; marque falsos positivos.",
+          "Ingira os indicadores válidos no SIEM/EDR para detecção contínua."
+        ]
+      },
+      {
+        "id": "2.2.1",
+        "titulo": "Executar caça a ameaças (threat hunting)",
+        "objetivo": "Procurar ameaças de forma proativa a partir de uma hipótese baseada em TTPs/IoAs, sem esperar o alerta.",
+        "ferramentas": ["SIEM (consultas KQL/SPL)", "EDR", "MITRE ATT&CK"],
+        "passos": [
+          "Formule uma hipótese (ex.: \"há beaconing para C2\" ou \"uso de PowerShell codificado\").",
+          "Monte consultas buscando o padrão (conexões periódicas, portas incomuns, processos anômalos).",
+          "Pivote nos achados (host → usuário → processo → rede).",
+          "Confirme com análise de host/rede, gere novos IoCs/IoAs e documente."
+        ]
+      }
     ]
   },
   "3": {
     "titulo": "Arquitetura de sistemas e redes",
     "labs": [
-      {"id": "3.1.1", "titulo": "Fazer hardening de sistema", "skill": "Reduzir a superfície de ataque endurecendo a configuração do SO."},
-      {"id": "3.2.1", "titulo": "Configurar logging centralizado", "skill": "Centralizar a coleta de logs para análise e correlação de eventos."},
-      {"id": "3.3.1", "titulo": "Avaliar erros de sincronização de tempo", "skill": "Identificar e corrigir dessincronização (NTP) que prejudica a correlação de logs."}
+      {
+        "id": "3.1.1",
+        "titulo": "Fazer hardening de sistema",
+        "objetivo": "Reduzir a superfície de ataque endurecendo a configuração do SO.",
+        "ferramentas": ["CIS Benchmarks", "Gerenciador de serviços", "Políticas de conta"],
+        "passos": [
+          "Desative serviços e portas não utilizados e remova software desnecessário.",
+          "Aplique patches e reforce políticas de senha/MFA.",
+          "Imponha privilégio mínimo nas contas.",
+          "Valide a configuração contra um CIS Benchmark."
+        ]
+      },
+      {
+        "id": "3.2.1",
+        "titulo": "Configurar logging centralizado",
+        "objetivo": "Centralizar a coleta de logs para correlação e detecção.",
+        "ferramentas": ["rsyslog/syslog", "Windows Event Forwarding", "SIEM (Splunk/ELK)"],
+        "passos": [
+          "Configure as fontes para enviar logs ao coletor central.",
+          "Padronize formato e horário (NTP) para permitir correlação.",
+          "Defina retenção e rotação de logs.",
+          "Crie regras de correlação/alertas e valide o recebimento."
+        ]
+      },
+      {
+        "id": "3.3.1",
+        "titulo": "Avaliar erros de sincronização de tempo",
+        "objetivo": "Detectar e corrigir desvio de relógio que inviabiliza a correlação de eventos.",
+        "ferramentas": ["NTP (ntpq/chrony/w32tm)"],
+        "passos": [
+          "Compare timestamps do mesmo evento entre hosts e logs.",
+          "Meça o offset e identifique a fonte NTP ausente ou incorreta.",
+          "Corrija a configuração de NTP e sincronize.",
+          "Revalide a correlação de eventos após o ajuste."
+        ]
+      }
     ]
   },
   "4": {
     "titulo": "Melhoria de processos em SecOps",
     "labs": [
-      {"id": "4.1.1", "titulo": "Configurar automação", "skill": "Automatizar tarefas repetitivas de operações de segurança."}
+      {
+        "id": "4.1.1",
+        "titulo": "Configurar automação",
+        "objetivo": "Automatizar tarefas repetitivas de operações de segurança para ganhar velocidade e reduzir erro humano.",
+        "ferramentas": ["SOAR", "Scripts (Python/Bash/PowerShell)", "APIs e webhooks"],
+        "passos": [
+          "Escolha uma tarefa repetitiva (ex.: enriquecer alerta, checar URL no VirusTotal).",
+          "Monte o playbook ou script e integre via API/webhook.",
+          "Teste o fluxo com casos reais e trate exceções.",
+          "Meça o ganho (ex.: redução do time-to-detection/response)."
+        ]
+      }
     ]
   },
   "5": {
     "titulo": "Métodos de varredura de vulnerabilidades",
     "labs": [
-      {"id": "5.1.1", "titulo": "Descoberta de ativos (asset discovery)", "skill": "Mapear hosts e ativos presentes na rede."},
-      {"id": "5.1.2", "titulo": "Varredura passiva", "skill": "Identificar ativos e falhas inspecionando o tráfego, sem sondar os alvos."},
-      {"id": "5.2.1", "titulo": "Varredura de vulnerabilidades", "skill": "Executar um scan ativo e interpretar os achados."}
+      {
+        "id": "5.1.1",
+        "titulo": "Descoberta de ativos (asset discovery)",
+        "objetivo": "Inventariar hosts e serviços presentes na rede.",
+        "ferramentas": ["Nmap/Zenmap", "Angry IP Scanner"],
+        "passos": [
+          "Faça um ping sweep para listar hosts ativos (<code>nmap -sn</code>).",
+          "Enumere portas e versões de serviço (<code>-sV</code>) e tente identificar o SO (<code>-O</code>).",
+          "Registre o inventário resultante.",
+          "Sinalize dispositivos desconhecidos (possíveis rogue)."
+        ]
+      },
+      {
+        "id": "5.1.2",
+        "titulo": "Varredura passiva",
+        "objetivo": "Identificar ativos e falhas apenas inspecionando o tráfego, sem sondar os alvos (menos ruído e sem impacto).",
+        "ferramentas": ["Wireshark/tcpdump", "Zeek", "p0f"],
+        "passos": [
+          "Capture tráfego num ponto de espelhamento (SPAN/TAP).",
+          "Identifique hosts, serviços e versões a partir dos pacotes.",
+          "Detecte protocolos inseguros e comunicações suspeitas.",
+          "Compare com a varredura ativa para entender o trade-off de cobertura × ruído."
+        ]
+      },
+      {
+        "id": "5.2.1",
+        "titulo": "Varredura de vulnerabilidades",
+        "objetivo": "Executar um scan ativo e interpretar os achados.",
+        "ferramentas": ["OpenVAS/Nessus", "Nikto"],
+        "passos": [
+          "Defina escopo e, de preferência, use scan <strong>credenciado</strong> para mais cobertura.",
+          "Execute a varredura respeitando janelas de manutenção (operations).",
+          "Revise achados e notas CVSS; descarte falsos positivos.",
+          "Priorize a remediação por risco e contexto do ativo."
+        ]
+      }
     ]
   },
   "6": {
     "titulo": "Análise de vulnerabilidades",
     "labs": [
-      {"id": "6.1.1", "titulo": "Estabelecer consciência de contexto", "skill": "Priorizar vulnerabilidades considerando criticidade do ativo e contexto do ambiente."}
+      {
+        "id": "6.1.1",
+        "titulo": "Estabelecer consciência de contexto",
+        "objetivo": "Priorizar vulnerabilidades considerando a criticidade do ativo e o contexto do ambiente.",
+        "ferramentas": ["CMDB/inventário", "CVSS (métricas ambientais)", "EPSS"],
+        "passos": [
+          "Identifique a criticidade e a exposição do ativo afetado.",
+          "Ajuste a nota com as métricas ambientais do CVSS.",
+          "Considere a exploitabilidade real (EPSS, existência de PoC/exploit).",
+          "Classifique o risco e defina a ordem de correção."
+        ]
+      }
     ]
   },
   "7": {
     "titulo": "Comunicação de informações de vulnerabilidade",
     "labs": [
-      {"id": "7.1.1", "titulo": "Analisar relatórios de vulnerabilidade", "skill": "Ler e interpretar a saída das ferramentas de avaliação."},
-      {"id": "7.2.1", "titulo": "Detectar sistemas legados", "skill": "Localizar sistemas desatualizados/EOL que elevam o risco."}
+      {
+        "id": "7.1.1",
+        "titulo": "Analisar relatórios de vulnerabilidade",
+        "objetivo": "Ler e interpretar a saída das ferramentas e traduzir para ação.",
+        "ferramentas": ["Relatórios de OpenVAS/Nessus/Prowler/ZAP"],
+        "passos": [
+          "Leia o sumário executivo e as severidades.",
+          "Valide os achados (confirmado × falso positivo).",
+          "Mapeie cada item ao ativo e ao responsável.",
+          "Recomende remediação ou controle compensatório e adapte a mensagem ao público."
+        ]
+      },
+      {
+        "id": "7.2.1",
+        "titulo": "Detectar sistemas legados",
+        "objetivo": "Localizar sistemas EOL/sem suporte que elevam o risco.",
+        "ferramentas": ["Scanner de vulnerabilidades", "Fingerprinting", "Inventário"],
+        "passos": [
+          "Identifique versões de SO e serviços no ambiente.",
+          "Cruze com listas de fim de vida (EOL).",
+          "Avalie o risco por falta de patches.",
+          "Recomende isolamento/segmentação, compensatórios ou substituição."
+        ]
+      }
     ]
   },
   "8": {
     "titulo": "Atividades de resposta a incidentes",
     "labs": [
-      {"id": "8.1.1", "titulo": "Resposta a incidentes guiada por playbook (lab adaptativo)", "skill": "Seguir um playbook de IR aplicando as fases num cenário."},
-      {"id": "8.1.2", "titulo": "Detecção e análise de IoC", "skill": "Identificar e analisar indicadores de comprometimento durante um incidente."},
-      {"id": "8.2.1", "titulo": "Análise forense pós-incidente", "skill": "Investigar o que ocorreu após conter o incidente."},
-      {"id": "8.2.2", "titulo": "Coleta de evidência forense", "skill": "Preservar e coletar evidências respeitando a cadeia de custódia."}
+      {
+        "id": "8.1.1",
+        "titulo": "Resposta a incidentes guiada por playbook",
+        "objetivo": "Aplicar as fases de IR num cenário seguindo um playbook.",
+        "ferramentas": ["Playbooks", "SOAR", "SIEM"],
+        "passos": [
+          "Siga as fases do NIST SP 800-61: preparação; detecção e análise; contenção, erradicação e recuperação; atividade pós-incidente.",
+          "Em cada fase, registre decisões e evidências.",
+          "Use o playbook para padronizar ações e acionar automações.",
+          "Feche com lições aprendidas."
+        ]
+      },
+      {
+        "id": "8.1.2",
+        "titulo": "Detecção e análise de IoC",
+        "objetivo": "Identificar e analisar indicadores de comprometimento durante o incidente.",
+        "ferramentas": ["SIEM/EDR", "Analisadores de log/rede"],
+        "passos": [
+          "Colete artefatos (logs, memória, tráfego).",
+          "Extraia IoCs (hashes, IPs, domínios, chaves de registro).",
+          "Correlacione para determinar escopo e impacto.",
+          "Alimente a detecção com os novos indicadores."
+        ]
+      },
+      {
+        "id": "8.2.1",
+        "titulo": "Análise forense pós-incidente",
+        "objetivo": "Reconstruir o que aconteceu após conter o incidente.",
+        "ferramentas": ["Autopsy", "Volatility", "Timelines"],
+        "passos": [
+          "Preserve a evidência antes de analisar.",
+          "Monte a linha do tempo dos eventos.",
+          "Identifique o vetor de entrada e a causa.",
+          "Documente achados para o relatório e as lições aprendidas."
+        ]
+      },
+      {
+        "id": "8.2.2",
+        "titulo": "Coleta de evidência forense",
+        "objetivo": "Coletar evidências preservando a integridade e a cadeia de custódia.",
+        "ferramentas": ["dd/FTK Imager", "Hashing (SHA-256)"],
+        "passos": [
+          "Respeite a ordem de volatilidade (memória antes do disco).",
+          "Faça imagem bit a bit do alvo.",
+          "Gere hash para provar integridade.",
+          "Documente a cadeia de custódia (base na ISO/IEC 27037)."
+        ]
+      }
     ]
   },
   "9": {
     "titulo": "Comunicação na resposta a incidentes",
     "labs": [
-      {"id": "9.1.1", "titulo": "Análise de causa raiz", "skill": "Identificar a origem do incidente para comunicar e prevenir recorrências."}
+      {
+        "id": "9.1.1",
+        "titulo": "Análise de causa raiz",
+        "objetivo": "Identificar a origem do incidente para comunicar e prevenir recorrências.",
+        "ferramentas": ["5 porquês", "Diagrama de Ishikawa", "Timeline"],
+        "passos": [
+          "Reúna os fatos e reconstrua a sequência de eventos.",
+          "Separe a causa-raiz dos sintomas.",
+          "Proponha correções que ataquem a causa.",
+          "Comunique de forma clara aos stakeholders técnicos e de negócio."
+        ]
+      }
     ]
   },
   "10": {
     "titulo": "Ferramentas para identificar atividade maliciosa",
     "labs": [
-      {"id": "10.1.1", "titulo": "Técnicas de análise de arquivos", "skill": "Examinar arquivos (hash, strings, metadados) em busca de sinais de malícia."},
-      {"id": "10.1.2", "titulo": "Analisar arquivos potencialmente maliciosos", "skill": "Fazer triagem e análise (inclusive em sandbox) de arquivos suspeitos."},
-      {"id": "10.1.3", "titulo": "Usar sniffers de rede", "skill": "Capturar e inspecionar tráfego com ferramentas como Wireshark/tcpdump."},
-      {"id": "10.2.1", "titulo": "Pesquisar reputação de DNS e IP", "skill": "Avaliar domínios e IPs suspeitos (WHOIS e listas de reputação)."}
+      {
+        "id": "10.1.1",
+        "titulo": "Técnicas de análise de arquivos",
+        "objetivo": "Examinar arquivos em busca de sinais de malícia sem executá-los.",
+        "ferramentas": ["file", "strings", "exiftool", "Hashing"],
+        "passos": [
+          "Gere o hash e cheque a reputação (ex.: VirusTotal).",
+          "Extraia strings e metadados.",
+          "Confirme o tipo real do arquivo (não confie na extensão).",
+          "Procure sinais de empacotamento/ofuscação."
+        ]
+      },
+      {
+        "id": "10.1.2",
+        "titulo": "Analisar arquivos potencialmente maliciosos",
+        "objetivo": "Fazer triagem dinâmica de arquivos suspeitos com segurança.",
+        "ferramentas": ["Sandbox (Cuckoo/CAPE, Joe)", "Antivírus"],
+        "passos": [
+          "Detone o arquivo numa sandbox isolada.",
+          "Observe o comportamento (rede, persistência, alterações de arquivos/registro).",
+          "Extraia IoCs do relatório.",
+          "Classifique a ameaça e alimente as defesas."
+        ]
+      },
+      {
+        "id": "10.1.3",
+        "titulo": "Usar sniffers de rede",
+        "objetivo": "Capturar e inspecionar tráfego para achar atividade maliciosa.",
+        "ferramentas": ["Wireshark", "tcpdump"],
+        "passos": [
+          "Capture o tráfego relevante.",
+          "Filtre por protocolo/host e use Follow TCP Stream para ver a sessão.",
+          "Identifique exfiltração, C2 ou protocolos inseguros.",
+          "Extraia artefatos (arquivos, credenciais) para análise."
+        ]
+      },
+      {
+        "id": "10.2.1",
+        "titulo": "Pesquisar reputação de DNS e IP",
+        "objetivo": "Avaliar domínios e IPs suspeitos.",
+        "ferramentas": ["WHOIS", "dig", "AbuseIPDB", "VirusTotal"],
+        "passos": [
+          "Resolva o domínio e verifique WHOIS (idade, registrante).",
+          "Consulte listas de reputação de IP/domínio.",
+          "Considere geolocalização e endereços anycast (ex.: 8.8.8.8).",
+          "Decida bloquear, monitorar ou liberar."
+        ]
+      }
     ]
   },
   "11": {
     "titulo": "Análise de atividade potencialmente maliciosa",
     "labs": [
-      {"id": "11.1.1", "titulo": "Ferramentas não tradicionais de varredura", "skill": "Usar utilitários alternativos para encontrar falhas e atividade anômala."}
+      {
+        "id": "11.1.1",
+        "titulo": "Ferramentas não tradicionais de varredura",
+        "objetivo": "Usar utilitários alternativos para encontrar falhas e atividade anômala.",
+        "ferramentas": ["Nmap NSE", "Módulos auxiliares do Metasploit", "Scripts"],
+        "passos": [
+          "Escolha o módulo/script adequado ao serviço-alvo.",
+          "Enumere a vulnerabilidade específica.",
+          "Valide o achado para descartar falso positivo.",
+          "Documente evidências e recomende correção."
+        ]
+      }
     ]
   },
   "12": {
     "titulo": "Avaliação de vulnerabilidades em aplicações",
     "labs": [
-      {"id": "12.1.1", "titulo": "Varredura de vulnerabilidades web", "skill": "Escanear uma aplicação web (ex.: ZAP, Nikto, Burp) e ler os achados."},
-      {"id": "12.2.1", "titulo": "Analisar vulnerabilidades em nuvem", "skill": "Avaliar configurações erradas e falhas em um ambiente de nuvem."}
+      {
+        "id": "12.1.1",
+        "titulo": "Varredura de vulnerabilidades web",
+        "objetivo": "Escanear uma aplicação web e interpretar os achados.",
+        "ferramentas": ["OWASP ZAP", "Burp Suite", "Nikto"],
+        "passos": [
+          "Configure o proxy e defina o escopo.",
+          "Faça o spider/crawl do site e depois o scan ativo.",
+          "Revise os alertas (XSS, SQLi, misconfiguration) por severidade.",
+          "Confirme manualmente os achados de maior risco."
+        ]
+      },
+      {
+        "id": "12.2.1",
+        "titulo": "Analisar vulnerabilidades em nuvem",
+        "objetivo": "Avaliar configurações erradas e falhas em ambiente de nuvem.",
+        "ferramentas": ["Prowler", "ScoutSuite", "Trivy", "Checkov"],
+        "passos": [
+          "Use credenciais de leitura com privilégio mínimo.",
+          "Rode a auditoria contra CIS Benchmarks.",
+          "Revise IAM, buckets de armazenamento e regras de rede.",
+          "Priorize as misconfigurations e recomende correção."
+        ]
+      }
     ]
   },
   "13": {
@@ -92,14 +378,109 @@
   "14": {
     "titulo": "Segurança de aplicações e mitigação de ataques",
     "labs": [
-      {"id": "14.1.1", "titulo": "Explorar criptografia fraca", "skill": "Demonstrar o risco de algoritmos/cifragem fracos."},
-      {"id": "14.2.1", "titulo": "Realizar e detectar directory traversal e command injection", "skill": "Executar e identificar travessia de diretório e injeção de comandos."},
-      {"id": "14.2.2", "titulo": "Realizar e detectar XSS", "skill": "Executar e identificar cross-site scripting."},
-      {"id": "14.2.3", "titulo": "Realizar e detectar LFI/RFI", "skill": "Executar e identificar inclusão de arquivo local/remoto."},
-      {"id": "14.2.4", "titulo": "Realizar e detectar SQL injection", "skill": "Executar e identificar injeção de SQL."},
-      {"id": "14.2.5", "titulo": "Realizar e detectar CSRF", "skill": "Executar e identificar cross-site request forgery."},
-      {"id": "14.3.1", "titulo": "Realizar e detectar escalonamento de privilégio", "skill": "Executar e identificar elevação de privilégios."},
-      {"id": "14.3.2", "titulo": "Detectar e explorar configuração de segurança incorreta", "skill": "Encontrar e explorar security misconfiguration."}
+      {
+        "id": "14.1.1",
+        "titulo": "Explorar criptografia fraca",
+        "objetivo": "Demonstrar o risco de algoritmos e configurações de cifragem fracos.",
+        "ferramentas": ["hashcat/John", "openssl", "testssl.sh"],
+        "passos": [
+          "Identifique algoritmos fracos (MD5, SHA-1, DES) ou TLS obsoleto.",
+          "Quebre o hash fraco ou mostre o problema do TLS antigo.",
+          "Verifique como detectar o uso desses algoritmos."
+        ],
+        "mitigacao": "Use algoritmos fortes e atuais, salt em senhas, TLS moderno e rotação de chaves."
+      },
+      {
+        "id": "14.2.1",
+        "titulo": "Realizar e detectar directory traversal e command injection",
+        "objetivo": "Executar e identificar travessia de diretório e injeção de comandos.",
+        "ferramentas": ["Burp Suite", "curl"],
+        "passos": [
+          "Manipule parâmetros de caminho (<code>../../etc/passwd</code>) para acessar arquivos fora do escopo.",
+          "Injete comandos encadeados (<code>; id</code>, <code>| whoami</code>) em entradas que chegam ao shell.",
+          "Observe a resposta para confirmar a execução."
+        ],
+        "deteccao": "Logs/WAF com sequências <code>../</code> e metacaracteres de shell em parâmetros.",
+        "mitigacao": "Validação e normalização de entrada, allowlist de caminhos, evitar chamadas ao shell e aplicar privilégio mínimo."
+      },
+      {
+        "id": "14.2.2",
+        "titulo": "Realizar e detectar XSS",
+        "objetivo": "Executar e identificar cross-site scripting.",
+        "ferramentas": ["Burp Suite", "Navegador"],
+        "passos": [
+          "Injete payload (<code>&lt;script&gt;...&lt;/script&gt;</code>) em campos refletidos ou armazenados.",
+          "Confirme a execução no navegador da vítima.",
+          "Teste variações para contornar filtros."
+        ],
+        "deteccao": "Entradas com tags/eventos HTML em logs e alertas de WAF.",
+        "mitigacao": "Codificação de saída conforme o contexto, CSP, cookies HttpOnly e validação de entrada."
+      },
+      {
+        "id": "14.2.3",
+        "titulo": "Realizar e detectar LFI/RFI",
+        "objetivo": "Executar e identificar inclusão de arquivo local/remoto.",
+        "ferramentas": ["Burp Suite", "curl"],
+        "passos": [
+          "Aponte um parâmetro de inclusão para um arquivo local sensível (LFI).",
+          "Teste a inclusão de um arquivo remoto que você controla (RFI).",
+          "Observe se o conteúdo é interpretado/exibido."
+        ],
+        "deteccao": "Parâmetros com caminhos ou URLs externas inesperadas nos logs.",
+        "mitigacao": "Allowlist de arquivos permitidos, desabilitar inclusão de URL remota e validar a entrada."
+      },
+      {
+        "id": "14.2.4",
+        "titulo": "Realizar e detectar SQL injection",
+        "objetivo": "Executar e identificar injeção de SQL.",
+        "ferramentas": ["sqlmap", "Burp Suite"],
+        "passos": [
+          "Teste payloads em campos de entrada (<code>' OR 1=1 --</code>, UNION, blind).",
+          "Extraia dados ou enumere o banco com sqlmap.",
+          "Verifique mensagens de erro que revelam a estrutura."
+        ],
+        "deteccao": "Erros de SQL nos logs, padrões de aspas/UNION e alertas de WAF.",
+        "mitigacao": "Consultas parametrizadas (prepared statements), ORM, privilégio mínimo no banco e WAF."
+      },
+      {
+        "id": "14.2.5",
+        "titulo": "Realizar e detectar CSRF",
+        "objetivo": "Executar e identificar cross-site request forgery.",
+        "ferramentas": ["Burp Suite", "Página HTML de prova"],
+        "passos": [
+          "Monte uma requisição que uma página maliciosa dispara em nome do usuário autenticado.",
+          "Confirme que a ação sensível é executada sem o consentimento do usuário.",
+          "Teste se não há token anti-CSRF validado."
+        ],
+        "deteccao": "Ações sensíveis sem token válido ou com origem/referer inesperados.",
+        "mitigacao": "Tokens anti-CSRF, cookies com SameSite e reautenticação em ações críticas."
+      },
+      {
+        "id": "14.3.1",
+        "titulo": "Realizar e detectar escalonamento de privilégio",
+        "objetivo": "Executar e identificar elevação de privilégios.",
+        "ferramentas": ["linPEAS/winPEAS", "GTFOBins"],
+        "passos": [
+          "Enumere o host em busca de brechas (sudo mal configurado, SUID, kernel desatualizado, serviços fracos).",
+          "Explore a brecha para obter privilégios mais altos.",
+          "Confirme o novo nível de acesso (<code>id</code>/<code>whoami</code>)."
+        ],
+        "deteccao": "Mudanças de privilégio e criação de contas de alto acesso nos logs.",
+        "mitigacao": "Patches, privilégio mínimo, remoção de SUID desnecessário e hardening."
+      },
+      {
+        "id": "14.3.2",
+        "titulo": "Detectar e explorar configuração de segurança incorreta",
+        "objetivo": "Encontrar e explorar security misconfiguration.",
+        "ferramentas": ["Scanners de configuração/baseline", "Nmap"],
+        "passos": [
+          "Procure credenciais padrão, serviços expostos e permissões frouxas.",
+          "Explore a configuração fraca para obter acesso.",
+          "Documente o impacto."
+        ],
+        "deteccao": "Desvios em relação a um baseline seguro (ex.: CIS).",
+        "mitigacao": "Hardening, baseline de configuração e revisão periódica."
+      }
     ]
   }
 }
