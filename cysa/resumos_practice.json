@@ -1,0 +1,169 @@
+{
+  "1": {
+    "titulo": "Security Operations",
+    "ideia": "Operar o SOC apoiado em boa arquitetura (IAM com MFA/SSO, zero trust, virtualização e contêineres, logging centralizado e tempo sincronizado), reconhecer indicadores de atividade maliciosa, usar as ferramentas certas para confirmá-la, aplicar inteligência e caça a ameaças e ganhar eficiência com automação.",
+    "pontos": [
+      "Arquitetura e identidade: MFA/SSO/passwordless, zero trust, CASB/SASE, virtualização × contêineres, hardening, segmentação, PKI e proteção de CHD/PII com criptografia e DLP.",
+      "Indicadores de atividade maliciosa: consumo anômalo de CPU/memória/disco, tarefas agendadas e contas suspeitas, beaconing/C2, portas inesperadas, exfiltração, insiders e phishing.",
+      "Ferramentas e técnicas: sandboxes, SIEM/EDR/SOAR, SPF/DKIM/DMARC, Wireshark/tcpdump, honeypots, WHOIS/AbuseIPDB, regex e scripting.",
+      "Inteligência e eficiência: OSINT, ISACs e feeds (relevância/precisão/timeliness), threat hunting por IoCs/IoAs, e automação com APIs, webhooks, SOAR e single pane of glass."
+    ],
+    "objetivos": [
+      {
+        "id": "1.1",
+        "titulo": "Arquitetura de sistemas e redes em SecOps",
+        "pontos": [
+          "<strong>Identidade e acesso</strong>: para verificar quem é o usuário e autorizar acesso use <strong>MFA</strong>. O <strong>SSO</strong> melhora a experiência (menos logins/senhas) e viabiliza autenticação <strong>sem senha</strong> (smart card, celular), mas concentra risco — uma credencial comprometida abre tudo, aumentando o impacto de <strong>phishing</strong>.",
+          "Ao migrar para SSO/passwordless, apps legados incompatíveis podem travar o acesso de alguns usuários; às vezes a decisão certa é <strong>reverter (rollback)</strong> para o sistema anterior até resolver a compatibilidade.",
+          "Conceitos de arquitetura ligados a SecOps: <strong>Zero Trust</strong>, <strong>CASB</strong> (cloud access security broker) e <strong>SASE</strong> (secure access service edge).",
+          "<strong>Virtualização × contêineres</strong>: a virtualização roda vários <strong>sistemas operacionais completos</strong> numa mesma máquina (via hypervisor); contêineres <strong>compartilham o kernel</strong> do SO host e não rodam múltiplos SOs.",
+          "<strong>Serverless</strong>: funções mal configuradas causam vazamentos — aplique <strong>controle de acesso</strong> adequado. Serverless, nuvem, híbrido e on-premises compartilham os mesmos pilares: mecanismos de controle de acesso, frameworks de segurança e procedimentos de resposta a incidentes.",
+          "<strong>Logging</strong>: pilares são <strong>log centralizado</strong>, <strong>rotação de logs</strong> e <strong>correlação de eventos</strong>. O log centralizado permite rastrear e analisar a atividade, detectar incidentes em tempo real, responder rápido e atender a exigências regulatórias.",
+          "<strong>Sincronização de tempo</strong> (NTP) é crucial: garante timestamps consistentes entre fontes, o que sustenta a correlação de eventos e a investigação de incidentes.",
+          "Nível de log mais detalhado no Windows: o curso aponta <strong>Debug</strong> como o mais verboso. (Correção: na escala de severidade do Windows o nível mais verboso é <strong>Verbose</strong>; \"Debug\" e \"Analytic\" são canais de log especiais, normalmente ocultos, não um nível de severidade.)",
+          "<strong>Endurecimento (hardening)</strong> do SO e <strong>segmentação de rede</strong> reduzem a superfície de ataque, limitam o acesso a recursos sensíveis, melhoram o monitoramento/detecção de anomalias e contêm ameaças.",
+          "<strong>SDN</strong> + virtualização: mais agilidade para implantar controles de segurança, segmentação e isolamento mais simples (contenção de ameaças) e gestão mais fácil.",
+          "<strong>PKI</strong>: usa certificados digitais para estabelecer confiança entre entidades e proteger canais de comunicação.",
+          "<strong>Dados sensíveis</strong>: <strong>CHD</strong> (dados do titular do cartão — ex.: número do cartão + validade) e <strong>PII</strong> devem ser protegidos com <strong>criptografia</strong>; o <strong>DLP</strong> monitora e impede a saída indevida de dados, reduzindo risco de vazamento e de não conformidade."
+        ]
+      },
+      {
+        "id": "1.2",
+        "titulo": "Analisar indicadores de atividade maliciosa",
+        "pontos": [
+          "<strong>Prevenção</strong>: avaliações de vulnerabilidade regulares reduzem a chance de o incidente acontecer, corrigindo falhas antes que sejam exploradas.",
+          "<strong>Exfiltração de dados</strong> (comunicação de saída inesperada): monitore o tráfego de saída suspeito, aplique <strong>segmentação de rede</strong> (limita movimento lateral) e verifique malware nos sistemas.",
+          "<strong>Ameaça interna (insider)</strong>: funcionário de confiança vazando arquivos, ou alguém que acabou de se demitir e baixou grande volume de dados — próximo passo típico é checar os <strong>logs de firewall</strong> em busca de conexões externas feitas por essa pessoa.",
+          "<strong>Qual log usar</strong>: alteração não autorizada numa aplicação web aparece no <strong>log de aplicação</strong>; para confirmar uma suspeita de invasão, comece pelos <strong>logs do sistema</strong> procurando atividade incomum.",
+          "<strong>Dispositivos rogue</strong> na rede: detecte com <strong>varredura passiva</strong> e <strong>varredura ativa</strong> (scans/sweeps).",
+          "<strong>Porta inesperada / pico de tráfego</strong>: investigue origem e destino e avise o gestor/partes relevantes; se vier de servidores internos comprometidos, <strong>isole</strong> os afetados e dispare a resposta a incidentes.",
+          "<strong>Consumo anômalo de recursos</strong>: processos maliciosos elevam CPU, memória e uso de disco (este último muitas vezes ligado a exfiltração); alto consumo de memória pode vir de software instalado de <strong>fontes não verificadas</strong>.",
+          "<strong>Tarefas agendadas não autorizadas + anomalias no sistema de arquivos</strong>: sinal de vírus/malware que permite execução remota de código — desative a tarefa e mantenha o servidor sob monitoramento.",
+          "<strong>Beaconing</strong> e comunicação P2P irregular indicam propagação de malware; numa investigação de host falando com servidor <strong>C2</strong>, os conceitos relevantes são <strong>beaconing</strong> e <strong>processos maliciosos</strong>.",
+          "<strong>Interrupção de serviço / pico súbito</strong> pode ser <strong>DoS</strong> sobrecarregando a rede; para mitigar <strong>DDoS</strong>, limite (rate limit) no roteador o tráfego vindo de fontes externas.",
+          "<strong>Links ofuscados</strong> em engenharia social: escondem o destino real, são comuns em phishing e redirecionam para sites que instalam malware ou roubam credenciais; o ataque depende da <strong>interação humana</strong>.",
+          "<strong>Saída inesperada e anomalias de registro</strong>: saída estranha pode indicar malware, mas anomalias no registro também podem resultar de atualizações legítimas de software — nem toda anomalia é ataque.",
+          "<strong>Evasão de antivírus</strong>: processo malicioso passa despercebido quando se <strong>disfarça de arquivo de sistema legítimo</strong>.",
+          "<strong>Contas com privilégio não autorizado</strong>: a forma mais eficaz de achar e desativar contas novas com acesso elevado indevido é <strong>revisar e auditar contas regularmente</strong>, desativando as não usadas ou não autorizadas."
+        ]
+      },
+      {
+        "id": "1.3",
+        "titulo": "Ferramentas e técnicas para determinar atividade maliciosa",
+        "pontos": [
+          "<strong>Análise de malware em ambiente virtualizado (sandbox)</strong>: <strong>Cuckoo Sandbox</strong> e <strong>Joe Sandbox</strong>. (Correção: o Cuckoo clássico está sem manutenção ativa; hoje se usa o fork <strong>CAPE</strong>.)",
+          "<strong>strings</strong>: extrai sequências de caracteres legíveis embutidas em arquivos binários (útil ao examinar um log/arquivo adulterado). O curso trata como \"string + dados binários\"; na prática ela filtra o texto imprimível de dentro do binário.",
+          "<strong>Autenticação de e-mail — SPF, DKIM, DMARC</strong>: o <strong>SPF</strong> valida o <strong>IP de origem</strong> do remetente (via registro DNS); o <strong>DKIM</strong> usa <strong>assinatura digital</strong> para garantir a integridade do conteúdo; o <strong>DMARC</strong> é a <strong>política</strong> que combina SPF+DKIM, exige alinhamento do domínio e gera relatórios. (Correção: o curso diz que \"os três usam assinatura digital\" — <strong>SPF não usa assinatura</strong>; e que o DMARC \"valida links embutidos\" — na verdade ele <strong>autentica o domínio remetente</strong>, não os links.)",
+          "<strong>Domínio-primo (cousin/lookalike domain)</strong>: domínio muito parecido com o legítimo, usado para se passar pela empresa em phishing.",
+          "<strong>Comportamento anômalo de conta</strong>: logins em horários ou locais incomuns (ex.: credencial do CEO usada às 2h a 800 km de distância — \"impossible travel\"). Para rastrear localização, IP e dispositivo do acesso usa-se <strong>perícia digital (digital forensics)</strong>.",
+          "<strong>SIEM</strong>: um alerta de <strong>reverse shell</strong> é forte indício de atividade maliciosa. SIEM correlaciona eventos entre vários sistemas; o <strong>EDR</strong> dá visibilidade profunda no endpoint para detectar e responder a ameaças avançadas — usar os dois se complementa.",
+          "<strong>SOAR × SIEM</strong>: SOAR = <strong>resposta automatizada</strong> a incidentes (orquestração/playbooks); SIEM = <strong>coleta e análise</strong> de dados de segurança.",
+          "<strong>Honeypot</strong>: indicado quando os defensores precisam <strong>observar ataques</strong> na rede e <strong>gerar novos IoCs/IoAs</strong> a partir do que estão sofrendo.",
+          "<strong>Scripting</strong>: <strong>PowerShell</strong> e <strong>shell scripts</strong> automatizam tarefas, mas têm sintaxes diferentes e <strong>não são intercambiáveis</strong>. Para automatizar um <strong>Nmap</strong> procurando a porta 8080, um <strong>shell script</strong> encaixa bem.",
+          "<strong>Formatos de dados</strong>: <strong>JSON</strong> é preferível para scripts (mais leve); <strong>XML</strong> usa <strong>tags de abertura/fechamento</strong> significativas para marcar tipos de dado e serve como formato comum de troca entre sistemas. PowerShell + XML ajudam a automatizar hardening e configuração de servidores.",
+          "<strong>Detecção de texto ofuscado em logs com Python</strong>: combine <strong>expressões regulares</strong> com <strong>manipulação de strings</strong>.",
+          "<strong>Hash</strong>: uma longa cadeia de caracteres desconhecida num anexo suspeito costuma ser um <strong>valor de hash</strong>. Hashing gera uma representação única dos dados; <strong>cabeçalhos (headers)</strong> acrescentam metadados à mensagem/pacote.",
+          "<strong>Captura de pacotes</strong>: <strong>Wireshark</strong> é gráfico e <strong>tcpdump</strong> é de linha de comando; ambos capturam e analisam tráfego para identificar origem e tipo de ataque.",
+          "<strong>Reputação de IP</strong>: <strong>WHOIS</strong> e <strong>AbuseIPDB</strong> ajudam a identificar a origem de um IP/tráfego suspeito."
+        ]
+      },
+      {
+        "id": "1.4",
+        "titulo": "Inteligência de ameaças e caça a ameaças (threat hunting)",
+        "pontos": [
+          "<strong>Reconhecimento / OSINT</strong>: garimpar e-mails no LinkedIn é <strong>reconnaissance</strong>, <strong>coleta OSINT</strong> e <strong>exploração de redes sociais</strong>. Fontes de OSINT ofensivo incluem blogs e redes sociais, <strong>metadados</strong> e o <strong>código HTML</strong> das páginas.",
+          "<strong>Atributos da inteligência de ameaças</strong>: <strong>relevância</strong> (poder filtrar por setor/indústria), <strong>precisão (accuracy)</strong> (assinatura mal escrita gerando muitos falsos positivos é problema de precisão) e <strong>oportunidade (timeliness)</strong> (ingestão automática de indicadores visa manter a informação atual).",
+          "<strong>Fontes de inteligência</strong>: <strong>paid feed</strong> (pesquisa de terceiro comercial); <strong>ISACs</strong> fornecem informação e serviços a operadores de <strong>infraestrutura crítica</strong>; <strong>government bulletins</strong> (ex.: diretiva operacional vinculante do DHS); repositório central de logs melhora a análise de <strong>fontes internas</strong>.",
+          "<strong>Caça a ameaças (threat hunting)</strong>: um foco comum é o <strong>business-critical asset hunting</strong> (servidores, bancos de dados e apps essenciais). A caça é guiada por <strong>IoCs</strong> e <strong>IoAs</strong>.",
+          "<strong>Artefatos para achar novos IoCs</strong> após detectar atividade maliciosa: <strong>arquivos de log</strong>, <strong>dumps de memória</strong> e <strong>tráfego de rede</strong>. A <strong>perícia digital</strong> também gera IoCs, vulnerabilidades e configurações erradas (misconfigurations).",
+          "<strong>Tipos de ator</strong>: <strong>crime organizado</strong> (esquema de fraude financeira contra várias farmacêuticas); <strong>script kiddie</strong> (um único IP usando várias ferramentas simples de varredura); <strong>APT</strong> (usa técnicas anti-forense para evadir detecção); <strong>insider intencional</strong> (admin que envia arquivo financeiro para o e-mail pessoal ao se demitir).",
+          "<strong>Mercado ilícito</strong>: cartões de crédito roubados costumam ser vendidos na <strong>deep/dark web</strong>.",
+          "<strong>Defesa ativa (active defense)</strong>: empregar técnicas ofensivas como medida defensiva para conter ataques em andamento enquanto se estuda o comportamento do adversário.",
+          "<strong>Compartilhar inteligência</strong> beneficia diretamente <strong>resposta a incidentes</strong>, <strong>gestão de risco</strong> e <strong>engenharia de segurança</strong>.",
+          "<strong>Equipes de resposta</strong>: <strong>CERT</strong> e <strong>CSIRT</strong> ajudam a coordenar a resposta (inclusive a ciberterrorismo); para um atacante com acesso persistente, o <strong>CSIRT</strong> é o mais preparado para reagir.",
+          "<strong>Dispositivos rogue</strong>: identifique com uma varredura de mapeamento de rede (o curso chama de \"map scan\" — na prática, um scan de rede tipo Nmap).",
+          "<strong>Ataque à cadeia de suprimentos</strong>: malware que chega em <strong>pen drives novos</strong> recém-adquiridos pela empresa é exemplo de supply chain."
+        ]
+      },
+      {
+        "id": "1.5",
+        "titulo": "Eficiência e melhoria de processos em SecOps",
+        "pontos": [
+          "<strong>Webhooks</strong>: recebem atualizações em <strong>tempo real</strong> de sistemas externos sem precisar ficar consultando (polling) — bons para disparar ações ou atualizar um banco a cada evento.",
+          "<strong>APIs</strong>: conjunto de protocolos e ferramentas para que aplicações se comuniquem; forma <strong>eficiente e barata</strong> de automatizar integrações (ex.: checar URLs no VirusTotal a partir de um playbook de SOAR).",
+          "<strong>Plugins / apps</strong>: estendem a funcionalidade de forma controlada — num site (integração com redes sociais, loja, chatbot) ou num firewall que, \"de fábrica\", não cobre todos os requisitos (recursos adicionais comprados).",
+          "<strong>SOAR</strong>: automatiza operações de segurança, resposta a incidentes, inteligência de ameaças e gestão de vulnerabilidades, com o objetivo de <strong>minimizar o engajamento humano</strong>; reduz o volume de tarefas repetitivas, inclusive triagem de <strong>falsos positivos</strong> no SIEM. SOAR + SIEM juntos diminuem a intervenção manual.",
+          "<strong>Priorizar o que automatizar</strong>: considere a <strong>frequência</strong> da tarefa, o <strong>esforço</strong> exigido e se ela <strong>apoia áreas de alto risco</strong>; tarefas feitas com frequência são boas candidatas à automação.",
+          "<strong>Benefícios da automação</strong> (para um business case): <strong>prevenir erro humano</strong> e <strong>reduzir trabalho manual</strong>; acompanhe métricas como o <strong>time-to-detection</strong>.",
+          "<strong>Orquestração e dados</strong>: <strong>orquestrar threat feeds</strong> melhora a visão das capacidades do adversário; <strong>data enrichment</strong> agrega contexto/metadados aos dados brutos; <strong>threat feed combination</strong> correlaciona logs de rede, endpoints e feeds de inteligência.",
+          "<strong>Single pane of glass</strong>: consolidar várias ferramentas/consoles numa <strong>interface única</strong>, reduzindo o tempo perdido alternando entre telas e facilitando a análise de grandes volumes.",
+          "<strong>Coordenação da equipe (SOC)</strong>: melhora com <strong>treinamento de comunicação</strong> e <strong>SOPs de compartilhamento de informação</strong>; melhor coordenação e comunicação aumentam a eficácia do time."
+        ]
+      }
+    ]
+  },
+  "2": {
+    "titulo": "Vulnerability Management",
+    "ideia": "Planejar e executar varreduras de vulnerabilidade (credenciadas, com/sem agente, ativas/passivas), ler a saída das ferramentas certas, priorizar achados com CVSS e contexto de ativo e recomendar controles.",
+    "pontos": [
+      "Varredura: performance, scheduling e operations; métodos credenciado, agente, agentless, ativo e passivo; baseline, external e fingerprinting; OT (ICS/PLC/SCADA).",
+      "Ferramentas: ZAP, Burp, Arachni, Nikto, Nmap/Zenmap, Prowler/ScoutSuite/Pacu, Metasploit, Maltego, recon-ng, OpenVAS/OpenSCAP — e onde achar cada resultado.",
+      "Priorização com CVSS (mantido pelo FIRST): métricas de explorabilidade e impacto, weaponization, zero-day, falso positivo × falso negativo e valor do ativo."
+    ],
+    "objetivos": [
+      {
+        "id": "2.1",
+        "titulo": "Métodos e conceitos de varredura de vulnerabilidades",
+        "pontos": [
+          "<strong>Planejar o scan</strong> envolve três frentes: <strong>performance</strong> (falsos positivos, velocidade da varredura e identificação dos sistemas), <strong>scheduling</strong> (rodar em tempo hábil frente a novos softwares e updates de fornecedores) e <strong>operations</strong> (alinhar à gestão de mudanças e aos SLOs para não derrubar sistemas críticos).",
+          "<strong>Métodos de varredura</strong>: <strong>credenciado</strong> dá a avaliação mais completa dos dispositivos; <strong>com agente</strong> instala software no endpoint (exige teste, manutenção e proteção dos novos vetores); <strong>sem agente (agentless)</strong> coleta via <strong>SSH</strong> sem instalar nada; <strong>ativo</strong> interage direto com os alvos (enumeração de serviços e <em>banner grabbing</em>); <strong>passivo</strong> apenas monitora/inspeciona o tráfego, com menos overhead e consumo de recursos.",
+          "<strong>Tipos especiais de scan</strong>: <strong>security baseline</strong> compara a configuração do endpoint a um perfil para manter conformidade contínua; <strong>external scanning</strong> mostra a superfície voltada à internet (exigido trimestralmente pelo PCI DSS); <strong>fingerprinting</strong> foca em dispositivos individuais para entender o papel de cada um.",
+          "<strong>Tecnologia operacional (OT)</strong>: exemplos são <strong>ICS</strong>, <strong>PLC</strong> e <strong>SCADA</strong>. O <strong>SCADA</strong> é indicado para controlar dispositivos de campo com PLCs em <strong>sites dispersos geograficamente</strong>; um <strong>ICS</strong> é o tipo de controle que, por exemplo, protege unidades de refrigeração industrial.",
+          "<strong>Padrões e frameworks</strong>: <strong>PCI DSS</strong> (armazenamento/processamento de dados de cartão e banco); <strong>CIS Benchmarks</strong> (guias de configuração inicial para Mac, Windows, UNIX e Linux); <strong>NIST</strong> e <strong>ISO</strong> (frameworks de postura de segurança); <strong>OWASP</strong> (recursos contra vulnerabilidades web como broken authentication, XSS e SQL injection); um relatório de conformidade com políticas, auditorias, treinamento e gap analysis atende a <strong>exigências regulatórias</strong>.",
+          "<strong>Rede e varredura</strong>: um <strong>screened subnet firewall</strong> pode bloquear scans que tentam alcançar um servidor atrás do load balancer; a <strong>segmentação de rede</strong> (num switch de camada 3) torna o tráfego mais previsível, fácil de monitorar e de filtrar.",
+          "<strong>Reverse engineering</strong>: avalia a estrutura de um hardware ou software para revelar funções desconhecidas.",
+          "<strong>Fuzzing</strong>: testa uma página/aplicação injetando de propósito <strong>dados malformados</strong> para descobrir problemas e falhas.",
+          "<strong>Inventário de dados</strong>: catalogue ativos (propriedade intelectual, dados de clientes, dados corporativos confidenciais) por <strong>níveis de sensibilidade</strong>."
+        ]
+      },
+      {
+        "id": "2.2",
+        "titulo": "Analisar a saída de ferramentas de avaliação de vulnerabilidades",
+        "pontos": [
+          "<strong>OWASP ZAP</strong>: as vulnerabilidades (XSS, cross-domain misconfiguration) e o nível de risco ficam na aba <strong>Alerts</strong>. (Nota: o ZAP saiu da OWASP em 2023 — hoje é \"ZAP by Checkmarx\".)",
+          "<strong>Burp Suite</strong>: a aba <strong>Advisory</strong> traz ajuda para resolver cada issue; o <strong>Intruder</strong> destaca em <strong>verde</strong> os elementos potencialmente vulneráveis (ex.: campos de login); a seção <strong>Target</strong> lista os caminhos de URL associados aos achados.",
+          "<strong>Arachni</strong>: a seção <strong>input</strong> mostra como o XSS foi detectado; a seção <strong>Dispatchers</strong> permite distribuir (load balance) a varredura de vários alvos a partir de máquinas remotas.",
+          "<strong>Nikto</strong>: scanner web <strong>só por linha de comando</strong> — reporta directory listing, versão do servidor a atualizar e erros de PHP.",
+          "<strong>Prowler</strong> (auditoria de nuvem contra CIS Benchmarks, ex.: AWS): no relatório HTML, a coluna <strong>status extended</strong> detalha um achado (ex.: root sem MFA) e <strong>S3 buckets config</strong> mostra quais grupos têm acesso ao armazenamento.",
+          "<strong>ScoutSuite</strong>: os achados das instâncias de computação da AWS aparecem no <strong>EC2 dashboard</strong>.",
+          "<strong>Pacu</strong> (exploração de AWS): o módulo <strong>iam_enum_roles</strong> enumera roles; obter um <strong>token de sessão sem conhecer senhas</strong> é a conclusão mais alarmante de um teste.",
+          "<strong>Metasploit Framework</strong>: executa módulos auxiliares (ex.: <code>auxiliary/admin/.../cisco_secure_acs_bypass</code>); na interface web, a seção <strong>Statistics</strong> mostra alvos comprometidos e resultado \"Failed\"/\"Succeeded\" em ataques de força bruta.",
+          "<strong>Maltego</strong>: OSINT e <strong>visualização de relacionamentos</strong> — reúne e-mails e telefones a partir do site e ajuda a mapear o entrelaçamento de sistemas durante um ataque.",
+          "<strong>recon-ng</strong>: use <strong>workspaces</strong> para manter campanhas de reconhecimento isoladas umas das outras.",
+          "<strong>Nmap / Zenmap</strong>: mapeia a topologia em anéis concêntricos (cada anel é um hop); no resultado, cheque <strong>service information</strong> e <strong>port information</strong> para saber quais apps/serviços usam cada porta aberta.",
+          "<strong>Angry IP Scanner</strong>: para ver se há dispositivos acessíveis por <strong>TELNET</strong>, cheque a <strong>porta 23</strong>.",
+          "<strong>Alternativas open source</strong> a um scanner proprietário: <strong>OpenVAS</strong> e <strong>OpenSCAP</strong>.",
+          "<strong>Janela de disassembly</strong> (ferramenta de debug): nomes como <code>LoadLibraryA</code> em destaque representam <strong>funções do programa</strong>."
+        ]
+      },
+      {
+        "id": "2.3",
+        "titulo": "Analisar dados para priorizar vulnerabilidades",
+        "pontos": [
+          "<strong>Métricas de explorabilidade do CVSS</strong> (quão fácil é explorar): <strong>Attack Vector (AV)</strong>, <strong>Attack Complexity (AC)</strong>, <strong>Privileges Required (PR)</strong> e <strong>User Interaction (UI)</strong>. O CVSS é mantido pelo <strong>FIRST</strong>.",
+          "<strong>Attack Complexity</strong>: ataque que exige conhecimento, ferramentas, tempo e recursos especializados pontua <strong>High</strong>. (O curso marca a AC como \"não aplicável\" para uma rede totalmente isolada; na prática o isolamento afeta mais o <em>Attack Vector</em> do que a AC.)",
+          "<strong>User Interaction</strong>: pontua alto quando o ataque depende de a vítima agir — ex.: um vírus que só dispara se o usuário <strong>executar</strong> o anexo.",
+          "<strong>Privileges Required</strong>: o maior obstáculo para alterar/limpar os logs de segurança e esconder a presença é precisar de <strong>privilégio elevado</strong> (um acesso só de usuário não basta).",
+          "<strong>Scope (S)</strong>: quando o impacto <strong>escapa do componente vulnerável</strong>, empurra a nota para muito alta (fator determinante no score alto do EternalBlue).",
+          "<strong>Weaponization</strong> (etapa da kill chain, não uma métrica do CVSS): sem PoC ou exploit público disponível, o maior obstáculo do atacante é justamente <strong>produzir um exploit utilizável</strong>.",
+          "<strong>Zero-day</strong>: um scan credenciado <strong>não</strong> descobre — não há assinatura/ferramenta que o reconheça.",
+          "<strong>Métricas de impacto</strong>: Confidencialidade, <strong>Integridade</strong> (registros de banco alterados) e Disponibilidade. Ao comparar vetores CVSS, a maior ameaça à Confidencialidade é a que traz <strong>C:H</strong>; à Disponibilidade, <strong>A:H</strong>.",
+          "<strong>Falso positivo × falso negativo</strong>: o IPS permitir uma conexão realmente maliciosa (ex.: DC→dispositivo na porta 445 exfiltrando dados) sem alertar é <strong>falso negativo</strong>; o SIEM marcar um SSH legítimo como suspeito é <strong>falso positivo</strong>; um SSH reportado que era, na verdade, uma <strong>isenção temporária</strong> aprovada da equipe também é falso positivo.",
+          "<strong>Vulnerabilidade de rede por exposição</strong>: <strong>isolada</strong> (rede air-gapped em que um insider instalou malware), <strong>interna</strong> (explorável apenas a partir de um host interno específico da mesma sub-rede) e <strong>externa</strong> (servidor web exposto na screened subnet, ex.: serviço desatualizado na porta 443).",
+          "<strong>Contexto/valor do ativo</strong>: vetores de exploração semelhantes podem gerar notas diferentes porque o ativo mais valioso pesa mais — ex.: um <strong>SSO</strong> vale mais que um servidor <strong>NTP</strong>.",
+          "<strong>Remediações</strong>: para dados em repouso fisicamente acessíveis (HDs roubados), <strong>criptografe o servidor virtual</strong>; para um appliance com PR:N/UI:N, o ganho rápido é impor controle de acesso com <strong>grupos do AD e papéis (roles)</strong>."
+        ]
+      }
+    ]
+  }
+}

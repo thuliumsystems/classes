@@ -568,6 +568,11 @@
             <h3>Resumos do CertMaster Learn</h3>
             <p>Resumo em português de cada lição do CertMaster Learn, versão nova do exame (CS0-004), organizado por lição, sub-lição e tópico.</p>
           </div>
+          <div class="home-card" onclick="showView('resumoPractice')">
+            <div class="home-card-eyebrow">CertMaster Practice (CS0-003)</div>
+            <h3>Pontos-chave do CertMaster Practice</h3>
+            <p>Notas de estudo com os pontos-chave e pegadinhas que o CertMaster Practice cobra, por objetivo do edital — Domínio 1 (1.1 a 1.5) e Domínio 2 (2.1 a 2.3). Companheiro do Banco Oficial.</p>
+          </div>
         </div>
       </div>
 
@@ -1562,6 +1567,15 @@
         <div id="resumo-learn-list"></div>
       </div>
 
+      <div id="view-resumo-practice" class="hidden">
+        <div class="domain-header">
+          <div class="domain-eyebrow">CertMaster Practice — CS0-003</div>
+          <h2>Pontos-chave do CertMaster Practice</h2>
+          <p>Notas de estudo escritas com minhas próprias palavras a partir do que o CertMaster Practice cobra — os conceitos e pegadinhas de cada objetivo, não as questões em si (essas estão no Banco Oficial). Cobre o Domínio 1 (1.1 a 1.5) e os itens 2.1 a 2.3 do Domínio 2; os demais serão acrescentados conforme forem concluídos no curso.</p>
+        </div>
+        <div id="resumo-practice-list"></div>
+      </div>
+
     </div>
     <script src="js/shuffle.js"></script>
     <script>
@@ -1569,6 +1583,7 @@
       let oficialDb = {};
       let resumosDb = {};
       let resumosLearnDb = {};
+      let resumosPracticeDb = {};
       let activeSelection = {};
 
       function getDbForTopic(topic) {
@@ -1582,6 +1597,7 @@
           oficial: "view-oficial",
           resumo: "view-resumo",
           resumoLearn: "view-resumo-learn",
+          resumoPractice: "view-resumo-practice",
         };
         Object.values(containerIds).forEach((id) => {
           document.getElementById(id).classList.add("hidden");
@@ -1646,6 +1662,13 @@
         } catch (error) {
           console.error("Erro ao ler resumos_learn.json:", error);
           failures.push("resumos_learn.json");
+        }
+        try {
+          const res = await fetch("resumos_practice.json");
+          resumosPracticeDb = await res.json();
+        } catch (error) {
+          console.error("Erro ao ler resumos_practice.json:", error);
+          failures.push("resumos_practice.json");
         }
         initAllSections();
         renderResumos();
@@ -1814,6 +1837,51 @@
       function renderResumos() {
         renderResumoList(resumosDb, "resumo-list", "res-", true);
         renderResumoList(resumosLearnDb, "resumo-learn-list", "rl-", false);
+        renderPracticeList(resumosPracticeDb, "resumo-practice-list", "rp-");
+      }
+
+      function renderPracticeList(db, listId, prefix) {
+        const list = document.getElementById(listId);
+        if (!list) return;
+        list.innerHTML = "";
+        Object.keys(db).forEach((dom) => {
+          const d = db[dom];
+          const objsHtml = (d.objetivos || [])
+            .map(
+              (o) => `
+            <div class="res-sub collapsed" id="${prefix}${o.id}">
+              <button class="res-sub-title" onclick="this.parentElement.classList.toggle('collapsed')">
+                <span class="obj-num">${o.id}</span>
+                <span>${o.titulo}</span>
+                <span class="toggle-icon">▼</span>
+              </button>
+              <div class="res-sub-body">
+                <div class="res-topic">
+                  <ul>${o.pontos.map((p) => `<li>${p}</li>`).join("")}</ul>
+                </div>
+              </div>
+            </div>`,
+            )
+            .join("");
+          const block = document.createElement("div");
+          block.className = "objective collapsed";
+          block.id = prefix + dom;
+          block.innerHTML = `
+            <div class="obj-title" onclick="toggleObjective('${prefix}${dom}')">
+              <span class="obj-num">${dom}.0</span>
+              <h3>${d.titulo}</h3>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="obj-body">
+              <div class="module-summary">
+                <div class="topics-covered-title">Visão geral do domínio</div>
+                <p><strong>Ideia central:</strong> ${d.ideia}</p>
+                <ul>${d.pontos.map((p) => `<li>${p}</li>`).join("")}</ul>
+              </div>
+              ${objsHtml}
+            </div>`;
+          list.appendChild(block);
+        });
       }
 
       function renderResumoList(db, listId, prefix, linkToQuestions) {
