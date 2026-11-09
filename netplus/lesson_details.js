@@ -106,3 +106,15 @@ const standardReference = [
   ["802.11n / ac / ax", "Wi-Fi generations", "802.11n can use 2.4 or 5 GHz; 802.11ac uses 5 GHz; 802.11ax can use 2.4 and 5 GHz, with 6 GHz available for Wi-Fi 6E devices."],
   ["WPA2 / WPA3", "Wireless security modes", "Protect Wi-Fi authentication and traffic; enterprise deployments commonly pair user authentication with 802.1X and RADIUS."]
 ];
+
+// Assessment questions 1–73 mapped to the lesson that best explains the answer.
+const assessmentReviewModules = [
+  6, 10, 11, 2, 10, 12, 5, 12, 13, 8,
+  3, 2, 6, 14, 2, 14, 4, 7, 10, 3,
+  12, 7, 12, 13, 3, 14, 4, 10, 7, 8,
+  8, 6, 12, 13, 7, 6, 5, 2, 1, 2,
+  12, 3, 10, 7, 14, 2, 10, 12, 6, 12,
+  10, 2, 1, 5, 3, 5, 3, 1, 3, 6,
+  7, 11, 10, 12, 4, 13, 14, 9, 14, 9,
+  8, 8, 6
+];
