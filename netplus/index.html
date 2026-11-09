@@ -67,10 +67,10 @@
       </section>
       <section id="assessment" class="section">
         <div class="section-title"><div><h2>Final Assessment</h2><p>73 questions from the supplied Network Plus Assessment Exam Review</p></div></div>
-        <div class="toolbar"><div id="score" class="score">0 <small>/ 0 answered</small></div><div class="progress"><i id="progress"></i></div><button onclick="resetAssessment()">Reset Assessment</button></div>
+        <div class="toolbar"><div id="score" class="score">0 <small>/ 73 · 0 answered</small></div><div class="progress"><i id="progress"></i></div><button onclick="resetAssessment()">Reset Assessment</button></div>
         <div id="questions"><p style="color:var(--muted)">Loading assessment...</p></div>
       </section>
-      <div class="footer">Study Hub &copy; 2026 · v2.0.26 &mdash; 2026-11-09</div>
+      <div class="footer">Study Hub &copy; 2026 · v2.0.27 &mdash; 2026-11-09</div>
     </main>
     <script src="lesson_details.js"></script>
     <script>
@@ -104,7 +104,7 @@
       function submitMulti(set,i){const box=document.getElementById(`${set}-q-${i}`),chosen=[...box.querySelectorAll('.opt.selected')].map(el=>+el.dataset.j);if(chosen.length!==2){alert('Select exactly two answers.');return;}finishAnswer(set,i,chosen);}
       function finishAnswer(set,i,chosen){const q=(set==='assessment'?banks.assessment:banks.modules[+set.slice(1)])[i],box=document.getElementById(`${set}-q-${i}`);if(box.classList.contains('correct')||box.classList.contains('wrong'))return;const answers=Array.isArray(q.ans)?q.ans:[q.ans],ok=chosen.length===answers.length&&chosen.every(k=>answers.includes(k));box.querySelectorAll('.opt').forEach((el,k)=>{el.classList.add('disabled');if(answers.includes(k))el.classList.add('correct-answer');if(chosen.includes(k)&&!answers.includes(k))el.classList.add('wrong-answer');});box.classList.add(ok?'correct':'wrong');const s=states[set];s.answered++;if(ok)s.correct++;const letters=answers.map(k=>'ABCDEFG'[k]).join(', '),selected=chosen.map(k=>'ABCDEFG'[k]).join(', ');const fb=document.getElementById(`${set}-fb-${i}`);fb.className='feedback show '+(ok?'ok':'err');fb.innerHTML=`<strong>${ok?'✓ Correct':'✗ Incorrect'}${ok?'':` · You selected ${selected}`}</strong><div class="why"><strong>Correct answer${answers.length>1?'s':''}: ${letters}</strong> — ${esc(answers.map(k=>q.opts[k]).join(' · '))}<br>${esc(q.exp)}</div>`;updateScore(set,(set==='assessment'?banks.assessment:banks.modules[+set.slice(1)]).length);}
       function revealShort(button,set,i){const box=document.getElementById(`${set}-q-${i}`),input=box.querySelector('textarea');if(box.classList.contains('answered')||!input.value.trim())return;const q=banks.modules[+set.slice(1)][i],fb=document.getElementById(`${set}-fb-${i}`);box.classList.add('answered');input.disabled=true;button.disabled=true;fb.className='feedback show ok';fb.innerHTML=`<strong>Your answer:</strong> ${esc(input.value)}<div class="why"><strong>Instructor answer:</strong> ${esc(q.answer)}<br>${esc(q.exp)}</div>`;states[set].answered++;updateScore(set,banks.modules[+set.slice(1)].length);}
-      function updateScore(set,total){const s=states[set],score=document.getElementById(set==='assessment'?'score':`score-${set}`),bar=document.getElementById(set==='assessment'?'progress':`progress-${set}`);if(score)score.innerHTML=`${s.correct} <small>/ ${s.answered} answered</small>`;if(bar)bar.style.width=total?`${s.answered/total*100}%`:'0%';}
+      function updateScore(set,total){const s=states[set],score=document.getElementById(set==='assessment'?'score':`score-${set}`),bar=document.getElementById(set==='assessment'?'progress':`progress-${set}`);if(score)score.innerHTML=`${s.correct} <small>/ ${total} · ${s.answered} answered</small>`;if(bar)bar.style.width=total?`${s.answered/total*100}%`:'0%';}
       function resetSet(set){states[set]={answered:0,correct:0};if(set==='assessment')renderAssessment();else renderModule(+set.slice(1));}
       function resetAssessment(){resetSet('assessment');window.scrollTo({top:document.getElementById('assessment').offsetTop-80,behavior:'smooth'});}
     </script>
