@@ -820,8 +820,7 @@
       "Monitoring system logs for irregularities",
       "Enabling logical security such as SSO",
       "Changing default passwords",
-      "Ensuring least privilege concepts are in place",
-      ""
+      "Ensuring least privilege concepts are in place"
     ],
     "ans": [
       0,
@@ -904,8 +903,7 @@
       "Improved scalability of the system",
       "Increased compartmentalization of the system",
       "Stronger authentication of the system",
-      "Reduced complexity of the system",
-      ""
+      "Reduced complexity of the system"
     ],
     "ans": [
       2,
