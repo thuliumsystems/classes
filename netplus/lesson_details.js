@@ -85,5 +85,24 @@ const portReference = [
   ["Syslog", "UDP", "514", "Traditional event log transport"],
   ["SQL Server", "TCP", "1433", "Common database listener"],
   ["RDP", "TCP", "3389", "Remote Windows desktop"],
-  ["SIP / SIP over TLS", "UDP or TCP / TCP", "5060 / 5061", "Voice session signaling"]
+  ["SIP / SIP over TLS", "UDP or TCP / TCP", "5060 / 5061", "Voice session signaling"],
+  ["Kerberos", "TCP / UDP", "88", "Ticket-based authentication used with Active Directory"],
+  ["TACACS+", "TCP", "49", "Centralized administrator authentication and command accounting"],
+  ["RADIUS authentication / accounting", "UDP", "1812 / 1813", "Centralized network access, including enterprise Wi-Fi"],
+  ["IPsec IKE / NAT traversal", "UDP", "500 / 4500", "Negotiates VPN security; 4500 carries IPsec through NAT"],
+  ["NFS", "TCP / UDP", "2049", "Network file sharing commonly used by Unix/Linux"],
+  ["FTPS implicit TLS", "TCP", "990", "FTP control protected by TLS; distinct from SFTP over SSH"]
+];
+
+// IEEE labels and related network technologies are not TCP/UDP port numbers.
+const standardReference = [
+  ["802.1Q", "VLAN tagging on Ethernet trunks", "One inter-switch link can carry frames from several VLANs. An access port usually carries one data VLAN; native-VLAN frames on a typical trunk are untagged."],
+  ["802.1X", "Port-based network access control", "The endpoint is the supplicant, the switch or AP is the authenticator, and an authentication server such as RADIUS checks access. It does not tag VLAN frames."],
+  ["802.1AX / LACP", "Link aggregation", "Combines physical links into a logical bundle for resilience and aggregate capacity. A single flow usually stays on one member link."],
+  ["802.1D / 802.1w", "Spanning Tree / Rapid Spanning Tree", "Blocks or manages redundant Layer 2 paths to avoid loops and broadcast storms; the rapid variant reconverges faster."],
+  ["802.1AB / LLDP", "Neighbor discovery", "Advertises directly connected devices and ports across vendors; CDP is Cisco-specific."],
+  ["802.3", "Wired Ethernet family", "Defines Ethernet operation; 1000BASE-T and 10GBASE-T are examples of Ethernet technologies."],
+  ["802.3af / at / bt", "Power over Ethernet", "PoE standards supply power through Ethernet cabling; check device demand against switch port and total power budgets."],
+  ["802.11n / ac / ax", "Wi-Fi generations", "802.11n can use 2.4 or 5 GHz; 802.11ac uses 5 GHz; 802.11ax can use 2.4 and 5 GHz, with 6 GHz available for Wi-Fi 6E devices."],
+  ["WPA2 / WPA3", "Wireless security modes", "Protect Wi-Fi authentication and traffic; enterprise deployments commonly pair user authentication with 802.1X and RADIUS."]
 ];

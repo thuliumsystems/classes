@@ -46,16 +46,30 @@
       <section class="hero">
         <h2>Network+ N10-009</h2>
         <p>Fourteen classroom modules with instructor notes and practice, followed by the 73-question assessment.</p>
-        <nav class="map"><a href="#module-1">01 Fundamentals</a><a href="#module-2">02 Ethernet</a><a href="#module-3">03 Switching</a><a href="#module-4">04 IP Addressing</a><a href="#module-5">05 Routing</a><a href="#module-6">06 Services</a><a href="#module-7">07 Availability</a><a href="#module-8">08 Operations</a><a href="#module-9">09 Security Concepts</a><a href="#module-10">10 Security Features</a><a href="#module-11">11 Security Design</a><a href="#module-12">12 Wireless</a><a href="#module-13">13 Remote Access</a><a href="#module-14">14 Cloud</a><a href="#assessment">Assessment</a></nav>
+        <nav class="map"><a href="#module-1">01 Fundamentals</a><a href="#module-2">02 Ethernet</a><a href="#module-3">03 Switching</a><a href="#module-4">04 IP Addressing</a><a href="#module-5">05 Routing</a><a href="#module-6">06 Services</a><a href="#module-7">07 Availability</a><a href="#module-8">08 Operations</a><a href="#module-9">09 Security Concepts</a><a href="#module-10">10 Security Features</a><a href="#module-11">11 Security Design</a><a href="#module-12">12 Wireless</a><a href="#module-13">13 Remote Access</a><a href="#module-14">14 Cloud</a><a href="#ports">Final Review</a><a href="#assessment">Assessment</a></nav>
       </section>
       <div id="modules"></div>
-      <section class="section" id="ports"><div class="section-title"><div><h2>Ports and Protocols</h2><p>Quick reference for Modules 6–8 and the assessment</p></div></div><div class="objective"><div class="obj-body table-scroll"><table class="reference-table"><thead><tr><th>Service</th><th>Transport</th><th>Port</th><th>Use</th></tr></thead><tbody id="port-rows"></tbody></table></div></div></section>
+      <section class="section" id="ports">
+        <div class="section-title"><div><h2>Final Review: Ports and Network Standards</h2><p>Review what each service or standard does before the final assessment.</p></div></div>
+        <div class="objective"><div class="obj-body">
+          <h3>Common ports</h3>
+          <p>Port numbers identify application services above IP. TCP emphasizes reliable delivery; UDP is often used for low-overhead requests or real-time traffic. A reachable host can still have a blocked service port.</p>
+          <div class="table-scroll"><table class="reference-table"><thead><tr><th>Service</th><th>Transport</th><th>Port</th><th>What it does</th></tr></thead><tbody id="port-rows"></tbody></table></div>
+          <div class="knowledge">Exam clues: hostname failure → DNS 53; no DHCP lease → UDP 67/68 and relay; file share failure → SMB 445; secure directory connection → LDAPS 636; time drift → NTP 123; enterprise Wi-Fi authentication → RADIUS 1812.</div>
+        </div></div>
+        <div class="objective"><div class="obj-body">
+          <h3>Standards and related technologies</h3>
+          <p>Numbers such as <strong>802.1Q</strong> name IEEE standards. They are not port numbers. Use this list to connect the label to the feature you would configure or troubleshoot.</p>
+          <div class="table-scroll"><table class="reference-table"><thead><tr><th>Standard</th><th>Purpose</th><th>When it matters</th></tr></thead><tbody id="standard-rows"></tbody></table></div>
+          <div class="knowledge">Do not confuse 802.1Q (VLAN tags on a trunk), 802.1X (access authentication), and 802.1AX/LACP (bundled links). STP/RSTP handles Layer 2 loops; LLDP identifies directly connected neighbors.</div>
+        </div></div>
+      </section>
       <section id="assessment" class="section">
         <div class="section-title"><div><h2>Final Assessment</h2><p>73 questions from the supplied Network Plus Assessment Exam Review</p></div></div>
         <div class="toolbar"><div id="score" class="score">0 <small>/ 0 answered</small></div><div class="progress"><i id="progress"></i></div><button onclick="resetAssessment()">Reset Assessment</button></div>
         <div id="questions"><p style="color:var(--muted)">Loading assessment...</p></div>
       </section>
-      <div class="footer">Study Hub &copy; 2026 · v2.0.24 &mdash; 2026-11-09</div>
+      <div class="footer">Study Hub &copy; 2026 · v2.0.25 &mdash; 2026-11-09</div>
     </main>
     <script src="lesson_details.js"></script>
     <script>
@@ -78,6 +92,7 @@
       const modulesEl = document.getElementById('modules');
       modules.forEach(([n,title,ref,points]) => { const section=document.createElement('section'); section.id='module-'+n; section.className='section'; section.innerHTML=`<div class="section-title"><div><h2>Module ${String(n).padStart(2,'0')} · ${title}</h2><p>${ref}</p></div></div><div class="objective"><div class="obj-title" onclick="this.parentElement.classList.toggle('collapsed')"><span class="num">${n}.0</span><h3>Study notes and instructor review</h3><span class="chev">▼</span></div><div class="obj-body">${lessonDetails[n].map(([heading,detail])=>`<div class="lesson-detail"><h4>${heading}</h4><p>${detail}</p></div>`).join('')}<div class="knowledge">Study the notes first, then answer the instructor questions below.</div><div class="module-practice"><h4>Instructor Questions</h4><div class="toolbar"><div id="score-m${n}" class="score">0 <small>/ 0 answered</small></div><div class="progress"><i id="progress-m${n}"></i></div><button onclick="resetSet('m${n}')">Reset Module ${n}</button></div><div id="module-questions-${n}"><p style="color:var(--muted)">Loading instructor questions...</p></div></div></div></div>`; modulesEl.appendChild(section); });
       document.getElementById('port-rows').innerHTML=portReference.map(([service,transport,port,use])=>`<tr><td>${service}</td><td>${transport}</td><td>${port}</td><td>${use}</td></tr>`).join('');
+      document.getElementById('standard-rows').innerHTML=standardReference.map(([standard,purpose,when])=>`<tr><td>${standard}</td><td>${purpose}</td><td>${when}</td></tr>`).join('');
       const banks={assessment:[],modules:{}}; const states={assessment:{answered:0,correct:0}};
       Promise.all(['questions.json','module_questions.json','new_module_questions.json'].map(path=>fetch(path).then(r=>{if(!r.ok)throw Error(path);return r.json();}))).then(([assessment,oldModules,newModules])=>{banks.assessment=assessment;renderAssessment();[...oldModules,...newModules].forEach(q=>(banks.modules[q.module]??=[]).push(q));for(let n=1;n<=14;n++){states['m'+n]={answered:0,correct:0};renderModule(n);}}).catch(()=>{document.getElementById('questions').innerHTML='<p style="color:var(--danger)">Unable to load question banks. Open this page through a local web server.</p>';});
       const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
