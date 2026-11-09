@@ -1,0 +1,970 @@
+[
+  {
+    "domain": "Network Services",
+    "q": "A network administrator installed a new VLAN to the network after a company added an additional floor to the office. Users are unable to obtain an IP address on the new VLAN, but ports on existing VLANs are working properly. Which of the following configurations should the administrator update?",
+    "opts": [
+      "Scope size",
+      "Address reservations",
+      "Lease time",
+      "IP helper"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Security",
+    "q": "After changes were made to a firewall, users are no longer able to access a web server. A network administrator wants to ensure that ports 80 and 443 on the web server are still accessible from the user IP space. Which of the following commands is best suited to perform this testing?",
+    "opts": [
+      "dig",
+      "ifconfig",
+      "ping",
+      "nmap"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Physical Infrastructure",
+    "q": "A network engineer needs to add a boundary network to isolate and separate the internal network from the public-facing internet. Which of the following security defense solutions would best accomplish this task?",
+    "opts": [
+      "Trusted zones",
+      "URL filtering",
+      "ACLs",
+      "Screened subnet"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless",
+    "q": "A technician is planning an equipment installation into a rack in a data center that practices hot aisle/cold aisle ventilation. Which of the following directions should the equipment exhaust face when installed in the rack?",
+    "opts": [
+      "Sides",
+      "Top",
+      "Front",
+      "Rear"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Operations",
+    "q": "A company wants to implement data loss prevention by restricting user access to social media platforms and personal cloud storage on workstations. Which of the following types of filtering should the company deploy to achieve these goals?",
+    "opts": [
+      "Port",
+      "DNS",
+      "MAC",
+      "Content"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Routing and Switching",
+    "q": "The network engineering team needs to implement a wireless network within two separate buildings. Once the network is set up, users will need to authenticate using RADIUS in order to access internal resources. Which of the following wireless technologies should the team implement?",
+    "opts": [
+      "Mesh",
+      "Enterprise",
+      "Ad hoc",
+      "Point to point"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Troubleshooting",
+    "q": "Which of the following protocols is used to route traffic on the public internet?",
+    "opts": [
+      "BGP",
+      "OSPF",
+      "EIGRP",
+      "RIP"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Concepts",
+    "q": "Network administrator deployed wireless networking in the office area. When users visit the outdoor patio and try to download emails with large attachments or stream training videos, they notice buffering issues. Which of the following is the most likely cause?",
+    "opts": [
+      "Network congestion",
+      "Wireless interference",
+      "Signal degradation",
+      "Client disassociation"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Operations",
+    "q": "Which of the following allows a user to connect to an isolated device on a stand-alone network?",
+    "opts": [
+      "Jump box",
+      "API gateway",
+      "Secure Shell",
+      "Clientless VPN"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Security",
+    "q": "A network administrator has been monitoring the company's servers to ensure that they are available. Which of the following should the administrator use for this task?",
+    "opts": [
+      "Packet capture",
+      "Data usage reports",
+      "SNMP traps",
+      "Configuration monitoring"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Switching",
+    "q": "While conducting a network audit, an administrator notices the spanning tree root in VLAN 300 does not match the configuration baseline, which could cause network outages due to spanning tree update failures. Which of the following should the administrator do to restore consistency?",
+    "opts": [
+      "Change the designated port on the misconfigured switch to a root port.",
+      "Change the root port to a listening port on the misconfigured switch.",
+      "Change the blocked port of the misconfigured switch to a learning port.",
+      "Increase the bridge ID/priority on the misconfigured switch"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Physical Infrastructure",
+    "q": "A network administrator determines that some switch ports have more errors present than expected. The administrator traces the cabling associated with these ports. Which of the following would most likely be causing the errors?",
+    "opts": [
+      "Shielded conduit",
+      "Plenum spaces",
+      "Voltage transformers",
+      "Hydraulic lifts"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "DNS",
+    "q": "An organization moved its DNS servers to new IP addresses. After this move, customers are no longer able to access the organization·s website. Which of the following DNS entries should be updated?",
+    "opts": [
+      "AAA",
+      "CNAME",
+      "MX",
+      "NS"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cloud Networking",
+    "q": "Cloud computing has the capacity to meet increased and decreased demands for computing infrastructure for a short period of time. Which of the following best describes this characteristic?",
+    "opts": [
+      "Efficiency",
+      "Elasticity",
+      "Multitenancy",
+      "Scalability"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cabling",
+    "q": "Which of the following is a location where a plenum cable is recommended?",
+    "opts": [
+      "Frequently traveled areas",
+      "Outdoor environments",
+      "Inside conduits",
+      "Airspaces above a ceiling"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Architecture",
+    "q": "A network administrator notices uncommon communication between VMs on ephemeral ports on the same subnet. The administrator is concerned about that traffic moving laterally within the network. Which of the following describes the type of traffic flow the administrator is analyzing?",
+    "opts": [
+      "East-west",
+      "Point-to-point",
+      "Horizontal-scaling",
+      "Hub-and-spoke"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "IPv4 Addressing",
+    "q": "A small company has the following IP addressing strategy: User subnet: 192.168.1.0/24 Voice subnet: 192.168.2.0/24 Server subnet: 192.168.10.0/24 A user is unable to connect to the company fileshare server located at 192.168.10.1. The user·s networking configuration is: Physical Address: 7a-01-7a-21-12-01 \"MAC Address\" IPv4 Address: 192.168.1.50 Subnet Mask: 255.255.0.0 Default Gateway: 192.168.1.200 DNS Servers: 192.168.10.10",
+    "opts": [
+      "Changing the IPv4 address to 192.168.1.10",
+      "Changing the subnet mask to 255.255.255.0",
+      "Changing the DNS servers to internet IPs",
+      "Changing the physical address to 7A-07-1A-21-12-01"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Disaster Recovery",
+    "q": "A network architect is implementing an off-premises computing facility and needs to ensure that operation will not be impacted by major outages. Which of the following should the architect consider?",
+    "opts": [
+      "Hot site",
+      "DCI",
+      "Direct Connect",
+      "Active-passive approach"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Access Control",
+    "q": "Which of the following is a company most likely enacting if an accountant for the company can only see the financial department·s shared folders?",
+    "opts": [
+      "General Data Protection Regulation",
+      "Least privilege network access",
+      "Acceptable use policy",
+      "End user license agreement"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Link Aggregation",
+    "q": "A company is purchasing a 40Gbps broadband connection service from an ISP. Which of the following should most likely be configured on the 10G switch to take advantage of the new service?",
+    "opts": [
+      "802.1Q tagging",
+      "Jumbo frames",
+      "Half duplex",
+      "Link aggregation"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless",
+    "q": "An organization is struggling to get effective coverage using the wireless network. The organization wants to implement a solution that will allow for continuous connectivity anywhere in the facility. Which of the following should the network administrator suggest to ensure the best coverage?",
+    "opts": [
+      "Implementing additional ad hoc access points",
+      "Providing more Ethernet drops for user connections",
+      "Deploying a mesh network in the building",
+      "Changing the current frequency of the Wi-Fi"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Routing",
+    "q": "Which of the following technologies uses a VIP to provide gateway redundancy between two routers?",
+    "opts": [
+      "LACP",
+      "PAT",
+      "FHRP",
+      "BGP"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless",
+    "q": "Users at an organization report that the wireless network is not working in some areas of the building. Users report that other wireless network SSIDs are visible when searching for the network, but the organization·s network is not displayed. Which of the following is the most likely cause?",
+    "opts": [
+      "Interference or channel overlap",
+      "Insufficient wireless coverage",
+      "Roaming misconfiguration",
+      "Client disassociation issues"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Management",
+    "q": "Which of the following should be used to obtain remote access to a network appliance that has failed to start up properly?",
+    "opts": [
+      "Crash cart",
+      "Jump box",
+      "Secure Shell",
+      "Out-of-band management"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Interfaces",
+    "q": "A network administrator performed upgrades on a server and installed a new NIC to improve performance. Following the upgrades, users are unable to reach the server. Which of the following is the most likely reason?",
+    "opts": [
+      "The PoE power budget was exceeded",
+      "TX/RX was transposed",
+      "A port security violation occurred",
+      "An incorrect cable type was installed"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cloud Networking",
+    "q": "Which of the following is concerned with guaranteed availability of a cloud resource?",
+    "opts": [
+      "IPAM",
+      "SLA",
+      "MTBF",
+      "EOL"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Subnetting",
+    "q": "A network administrator needs to add 255 usable IP addresses to the network. A /24 is currently in use. Which of the following prefixes would fulfill this need?",
+    "opts": [
+      "/23",
+      "/25",
+      "/29",
+      "/32"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Server Hardening",
+    "q": "A network administrator is reviewing a production web server and observes the following output from the netstat command: Proto LocalAddress ForeignAddress State PID TCP 0.0.0.0:20 0.0.0.0:0 LISTENING 1308 TCP 0.0.0.0:80 0.0.0.0:0 LISTENING 329 TCP 0.0.0.0:443 0.0.0.0:0 LISTENING 758 TCP 0.0.0.0:8080 0.0.0.0:0 LISTENING 1559 TCP 0.0.0.0:21 0.0.0.0:0 LISTENING 1243 TCP 0.0.0.0:22 0.0.0.0:0 LISTENING 43 TCP 0.0.0.0:445 0.0.0.0:0 LISTENING 987 Which of the following actions should the network administrator take to harden the security of the web server?",
+    "opts": [
+      "Disable the unused ports",
+      "Enforce access control lists",
+      "Perform content filtering",
+      "Set up a screened subnet"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Services",
+    "q": "Which of the following technologies is the best choice to listen for requests and distribute user traffic across web servers?",
+    "opts": [
+      "Router",
+      "Switch",
+      "Firewall",
+      "Load balancer"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Monitoring",
+    "q": "An organization wants better network visibility. The organization·s requirements include: Multivendor/OS-monitoring capabilities Real-time collection Data correlation Which of the following meets these requirements?",
+    "opts": [
+      "SNMP",
+      "SIEM",
+      "Nmap",
+      "Syslog"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "SNMP",
+    "q": "An administrator is evaluating the use of authentication within SNMP. Which of the following is the most secure way of authenticating devices using only SNMP?",
+    "opts": [
+      "Use version 1 of SNMP and use a community string to serve as a PSK.",
+      "Use version 3 of SNMP and set up trap messages for critical events on the network.",
+      "Use version 2c of SNMP and informs to validate device authentication.",
+      "Use version 2u of SNMP to authenticate devices for network monitoring."
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "DNS",
+    "q": "A network administrator changed an external DNS to point customers to a new server. Which of the following tools should the administrator use to test the new server·s configuration?",
+    "opts": [
+      "ping",
+      "tracert",
+      "tcpdump",
+      "nslookup"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless Security",
+    "q": "A company recently converted most of the office laptops to connect wirelessly to the corporate network. After a recent high-traffic malware attack, narrowing the event to a specific user was difficult because of the wireless configuration. Which of the following actions should the company take?",
+    "opts": [
+      "Restrict users to the 5GHz frequency.",
+      "Upgrade to a mesh network.",
+      "Migrate from PSK to Enterprise.",
+      "Implement WPA2 encryption."
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Management",
+    "q": "Which of the following can be implemented to add an additional layer of security between a corporate network and network management interfaces?",
+    "opts": [
+      "Jump box",
+      "Console server",
+      "API interface",
+      "In-band management"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Disaster Recovery",
+    "q": "Which of the following facilities is the best example of a warm site in the event of information system disruption?",
+    "opts": [
+      "A combination of public and private cloud services to restore data",
+      "A partial infrastructure, software, and data on site",
+      "A full electrical infrastructure in place, but no customer devices on site",
+      "A full infrastructure in place, but no current data on site"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "DHCP",
+    "q": "Early in the morning, an administrator installs a new DHCP server. In the afternoon, some users report they are experiencing network outages. Which of the following is the most likely issue?",
+    "opts": [
+      "The administrator did not provision enough IP addresses.",
+      "The administrator configured an incorrect default gateway.",
+      "The administrator did not provision enough routes.",
+      "The administrator did not provision enough MAC addresses."
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "NAT",
+    "q": "Which of the following can also provide a security feature when implemented?",
+    "opts": [
+      "NAT",
+      "BGP",
+      "FHRP",
+      "EIGRP"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cabling",
+    "q": "Which of the following panels would be best to facilitate a central termination point for all network cables on the floor of a company building?",
+    "opts": [
+      "Patch",
+      "UPS",
+      "MDF",
+      "Rack"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Troubleshooting",
+    "q": "Which of the following steps in the troubleshooting methodology includes checking logs for recent changes?",
+    "opts": [
+      "Identify the problem",
+      "Document the findings and outcomes",
+      "Test the theory to determine cause",
+      "Establish a plan of action"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Fiber",
+    "q": "A network technician is terminating a cable to a fiber patch panel in the MDF. Which of the following connector types is most likely in use?",
+    "opts": [
+      "F-type",
+      "RJ11",
+      "BNC",
+      "SC"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless",
+    "q": "A network administrator recently upgraded a wireless infrastructure with new APs. Users are reporting that, when stationary, the wireless connection drops and reconnects after 20 to 30 seconds. While reviewing the logs, the administrator notices that the APs are changing channels. Which of the following is the most likely reason for the service interruptions?",
+    "opts": [
+      "Channel interference",
+      "Roaming misconfiguration",
+      "Network congestion",
+      "Insufficient wireless coverage"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "VLANs",
+    "q": "A network technician is examining the configuration on an access port and notices more than one VLAN has been set. Which of the following best describes how the port is configured?",
+    "opts": [
+      "With a voice VLAN",
+      "With too many VLANs",
+      "With a default VLAN",
+      "With a native VLAN"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Authentication",
+    "q": "After providing a username and password, a user must input a passcode from a phone application. Which of the following authentication technologies is used in this example?",
+    "opts": [
+      "SSO",
+      "LDAP",
+      "MFA",
+      "SAML"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "QoS",
+    "q": "A small business is deploying new phones, and some of the phones have full HD videoconferencing features. The Chief Information Officer is concerned that the network might not be able to handle the traffic if the traffic reaches a certain threshold. Which of the following can the network engineer configure to help ease these concerns?",
+    "opts": [
+      "A VLAN with 100Mbps speed limits",
+      "An IP helper to direct VoIP traffic",
+      "A smaller subnet mask",
+      "Full duplex on all user ports"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Services",
+    "q": "Which of the following is used to stage copies of a website closer to geographically dispersed users?",
+    "opts": [
+      "VPN",
+      "CDN",
+      "SAN",
+      "SDN"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cabling",
+    "q": "After installing a series of Cat 8 keystones, a data center architect notices higher than normal interference during tests. Which of the following steps should the architect take to troubleshoot the issue?",
+    "opts": [
+      "Check to see if the end connections were wrapped in copper tape before terminating.",
+      "Use passthrough modular crimping plugs instead of traditional crimping plugs.",
+      "Connect the RX/TX wires to different pins.",
+      "Run a speed test on a device that can only achieve 100Mbps speeds."
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Content Filtering",
+    "q": "A security analyst wants to control internet access based on site reputation and categorization. The analyst needs a solution that does not require traffic flow changes. Which of the following solutions would most likely meet these requirements?",
+    "opts": [
+      "Proxy",
+      "DNS filtering",
+      "Router ACL",
+      "Load balancer."
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless Planning",
+    "q": "A network consultant needs to decide between running an Ethernet uplink or using the built-in 5GHz point-to- point functionality on a WAP. Which of the following documents provides the best information to assist the consultant with this decision?",
+    "opts": [
+      "Site survey results",
+      "Physical diagram",
+      "Service-level agreement",
+      "Logical diagram"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Ports and Protocols",
+    "q": "Which of the following services runs on port 636?",
+    "opts": [
+      "SMTP",
+      "Syslog",
+      "TFTP",
+      "LDAPS"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless Authentication",
+    "q": "Which of the following should be configured so users can authenticate to a wireless network using company credentials?",
+    "opts": [
+      "SSO",
+      "SAML",
+      "MFA",
+      "RADIUS"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "ACLs",
+    "q": "A network administrator recently updated configurations on a Layer 3 switch. Following the updates, users report being unable to reach a specific file server. Which of the following is the most likely cause?",
+    "opts": [
+      "Incorrect ACLs",
+      "Switching loop",
+      "Duplicate IP addresses",
+      "Wrong default route"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Physical Infrastructure",
+    "q": "Following a fire in a data center, the cabling was replaced. Soon after, an administrator notices network issues. Which of the following are the MOST likely causes of the network issues? (Select two.)",
+    "opts": [
+      "The switches are not the correct voltage",
+      "The HVAC system was not verified as fully functional after the fire",
+      "The VLAN database was not deleted before the equipment was brought back online",
+      "The RJ45 cables were replaced with unshielded cables",
+      "The wrong transceiver type was used for the new termination",
+      "The new RJ45 cables are a higher category than the old ones",
+      "The wrong transceiver type was used for the new termination"
+    ],
+    "ans": [
+      3,
+      4
+    ],
+    "multi": true,
+    "exp": "The supplied Network+ assessment answer key identifies option DE. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Troubleshooting",
+    "q": "While troubleshooting connectivity issues, a junior network administrator is given explicit instructions to test the host·s TCP/IP stack first. Which of the following commands should the network administrator run?",
+    "opts": [
+      "ping 127.0.0.1",
+      "ping 169.254.1.1",
+      "ping 172.16.1.1",
+      "ping 192.168.1.1"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "BGP",
+    "q": "Which of the following describes the best reason for using BGP?",
+    "opts": [
+      "Preventing a loop within a LAN",
+      "Improving reconvergence times",
+      "Exchanging router updates with a different ISP",
+      "Sharing routes with a Layer 3 switch"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Resiliency",
+    "q": "To improve infrastructure resiliency, an organization requires a redundant connection that transmits and receives at the same time. Which of the following supports this requirement?",
+    "opts": [
+      "Band steering",
+      "Link aggregation",
+      "Full duplex",
+      "SD-WAN"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "NAT",
+    "q": "Which of the following is most commonly associated with many systems sharing one IP address in the public IP-addressing space?",
+    "opts": [
+      "PAT",
+      "NAT",
+      "VIP",
+      "NAT64"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "STP",
+    "q": "A network administrator is deploying a new switch and wants to make sure that the default priority value was set for a spanning tree. Which of the following values would the network administrator expect to see?",
+    "opts": [
+      "4096",
+      "8192",
+      "32768",
+      "36864"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "OSI Model",
+    "q": "Which of the following is a characteristic of the application layer?",
+    "opts": [
+      "It relies upon other layers for packet delivery.",
+      "It checks independently for packet loss.",
+      "It encrypts data in transit.",
+      "It performs address translation."
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "STP",
+    "q": "A network engineer configures a new switch and connects it to an existing switch for expansion and redundancy. Users immediately lose connectivity to the network. The network engineer notes the following spanning tree information from both switches. Which of the following best describes the issue?",
+    "opts": [
+      "The port cost should not be equal.",
+      "The ports should use link aggregation.",
+      "A root bridge needs to be identified.",
+      "The switch should be configured for RSTP"
+    ],
+    "ans": 2,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option C. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Secure Protocols",
+    "q": "Which of the following ports creates a secure connection to a directory service?",
+    "opts": [
+      "22",
+      "389",
+      "445",
+      "636"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Availability",
+    "q": "Which of the following disaster recovery concepts is calculated by dividing the total hours of operation by the total number of units?",
+    "opts": [
+      "MTTR",
+      "MTBF",
+      "RPO",
+      "RTO"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "IDS and IPS",
+    "q": "Which of the following is a major difference between an IPS and IDS?",
+    "opts": [
+      "An IPS needs to be installed in line with traffic, and an IDS does not.",
+      "An IPS is signature-based, and an IDS is not.",
+      "An IPS is less susceptible to false positives than an IDS.",
+      "An IPS requires less administrative overhead than an IDS."
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Hardening",
+    "q": "Which of the following are the best device-hardening techniques for network security? (Select two.)",
+    "opts": [
+      "Disabling unused ports",
+      "Performing regular scanning of unauthorized devices",
+      "Monitoring system logs for irregularities",
+      "Enabling logical security such as SSO",
+      "Changing default passwords",
+      "Ensuring least privilege concepts are in place",
+      ""
+    ],
+    "ans": [
+      0,
+      5
+    ],
+    "multi": true,
+    "exp": "The supplied Network+ assessment answer key identifies option AF. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Wireless",
+    "q": "A network engineer is completing a wireless installation in a new building. A requirement is that all clients be able to automatically connect to the fastest supported network. Which of the following best supports this requirement?",
+    "opts": [
+      "Enabling band steering",
+      "Disabling the 5GHz SSID",
+      "Adding a captive portal",
+      "Configuring MAC filtering"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Subnetting",
+    "q": "A junior network technician at a large company needs to create networks from a Class C address with 14 hosts per subnet. Which of the following numbers of host bits is required?",
+    "opts": [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "VPN",
+    "q": "A secure communication link needs to be configured between data centers via the internet. The data centers are located in different regions. Which of the following is the best protocol for the network administrator to use?",
+    "opts": [
+      "DCI",
+      "GRE",
+      "VXLAN",
+      "IPSec"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Cloud Networking",
+    "q": "Which of the following cloud service models most likely requires the greatest up-front expense by the customer when migrating a data center to the cloud?",
+    "opts": [
+      "Infrastructure as a service",
+      "Software as a service",
+      "Platform as a service",
+      "Network as a service"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Risk Management",
+    "q": "While conducting a business continuity tabletop exercise, the security team becomes concerned by potential impact if a generator was to develop a fault during failover. Which of the following is the team most likely to consider in regard to risk management activities?",
+    "opts": [
+      "RPO",
+      "ARO",
+      "BIA",
+      "MTTR"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Network Architecture",
+    "q": "Which of the following best describe the benefits of a microservices architecture when compared to a monolithic architecture? (Select two).",
+    "opts": [
+      "Easier debugging of the system",
+      "Reduced cost of ownership of the system",
+      "Improved scalability of the system",
+      "Increased compartmentalization of the system",
+      "Stronger authentication of the system",
+      "Reduced complexity of the system",
+      ""
+    ],
+    "ans": [
+      2,
+      3
+    ],
+    "multi": true,
+    "exp": "The supplied Network+ assessment answer key identifies option CD. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Shadow IT",
+    "q": "A systems administrator notices that the research and development department is not using the company VPN when accessing various company-related services and systems. Which of the following scenarios describes this activity?",
+    "opts": [
+      "Espionage",
+      "Data exfiltration",
+      "Nation-state attack",
+      "Shadow IT"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "Contracts",
+    "q": "A company filed a complaint with its IT service provider after the company discovered the service provider·s external audit team had access to some of the company·s confidential information. Which of the following is the most likely reason the company filed the complaint?",
+    "opts": [
+      "The MOU had basic clauses from a template.",
+      "A SOW had not been agreed to by the client.",
+      "A WO had not been mutually approved.",
+      "A required NDA had not been signed"
+    ],
+    "ans": 3,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option D. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "LLDP",
+    "q": "While troubleshooting a VoIP handset connection, a technician's laptop is able to successfully connect to network resources using the same port. The technician needs to identify the port on the switch. Which of the following should the technician use to determine the switch and port?",
+    "opts": [
+      "LLDP",
+      "IKE",
+      "VLAN",
+      "netstat"
+    ],
+    "ans": 0,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option A. Review the related module notes and the option analysis after answering."
+  },
+  {
+    "domain": "DHCP",
+    "q": "A network administrator needs to set up a file server to allow user access. The organization uses DHCP to assign IP addresses. Which of the following is the best solution for the administrator to set up?",
+    "opts": [
+      "A separate scope for the file server using a /32 subnet",
+      "A reservation for the server based on the MAC address",
+      "A static IP address within the DHCP IP range",
+      "A SLAAC for the server"
+    ],
+    "ans": 1,
+    "multi": false,
+    "exp": "The supplied Network+ assessment answer key identifies option B. Review the related module notes and the option analysis after answering."
+  }
+]
+

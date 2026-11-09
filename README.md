@@ -1,4 +1,4 @@
-# BSEP & CySA+ Study Hub
+# BSEP, CySA+ & Network+ Study Hub
 
 ## [BSEP — Basic Skill Education Program](bsep/index.html)
 
@@ -15,3 +15,6 @@ Estudo do NCO Creed, questões de MOI para Promotional Board e acesso ao materia
 ## [ESB US Army 2026 — Slideshow](esb/index.html)
 
 Slideshow full-screen (16 slides) cobrindo as etapas do Expert Soldier Badge (ESB): AFT, Land Nav, Weapons Lane, Medical Lane, Patrol Lane, Communications, CBRN e Ruck March.
+## [Network+ N10-009 — Study Guide](netplus/index.html)
+
+Eight-module classroom review based on the supplied Network+ guide, plus the complete 73-question assessment with answer feedback.
