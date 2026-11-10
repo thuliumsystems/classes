@@ -1,0 +1,335 @@
+[
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, security concepts",
+    "domain": "Security controls",
+    "q": "A company adds badge readers, firewalls, and employee security training. Which control categories do these represent, in order?",
+    "opts": ["Physical, technical, administrative", "Technical, physical, administrative", "Administrative, technical, physical", "Physical, administrative, technical"],
+    "ans": 0,
+    "exp": "Badge readers control physical entry; firewalls are technical controls; training is an administrative control."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 7",
+    "domain": "Security assessments",
+    "q": "Which review checks whether an organization follows required rules and standards?",
+    "opts": ["Compliance audit", "Packet capture", "Wireless site survey", "Port scan"],
+    "ans": 0,
+    "exp": "A compliance audit compares evidence and controls with applicable requirements. A technical assessment instead examines the condition of systems."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 8",
+    "domain": "Business impact",
+    "q": "What does a business impact analysis estimate?",
+    "opts": ["The consequences of disrupting a business function", "The Ethernet frame size", "The number of open TCP ports", "The password strength of one user"],
+    "ans": 0,
+    "exp": "A BIA identifies critical functions and estimates the effect of an interruption so recovery priorities can be set."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 10",
+    "domain": "Data protection",
+    "q": "A scenario concerns protection of payment-card data. Which standard is the relevant clue?",
+    "opts": ["PCI DSS", "GDPR", "802.1Q", "SNMPv3"],
+    "ans": 0,
+    "exp": "The Module 9 review associates PCI DSS with cardholder data and GDPR with personal-data privacy."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slides 11–13",
+    "domain": "Cryptography",
+    "q": "Which operation produces a one-way digest used to verify data integrity?",
+    "opts": ["Hashing", "Encryption", "NAT", "Compression"],
+    "ans": 0,
+    "exp": "A hash is intended to be one way. Encryption is reversible with the appropriate key and is primarily used here for confidentiality."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 13",
+    "domain": "Data states",
+    "q": "Full-disk encryption primarily protects which state of data?",
+    "opts": ["Data at rest", "Data in transit", "Data in use", "Data in an SNMP trap"],
+    "ans": 0,
+    "exp": "Files on persistent storage are data at rest. TLS is a typical control for data in transit."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slides 15–16",
+    "domain": "Vulnerabilities",
+    "q": "An attacker uses a newly discovered flaw before a vendor fix exists. What is the exam term?",
+    "opts": ["Zero-day exploit", "Dictionary attack", "Honeynet", "Configuration baseline"],
+    "ans": 0,
+    "exp": "A zero-day exploit uses a flaw before defenders have a ready vendor fix. A vulnerability is the weakness; an exploit is the method that uses it."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 16",
+    "domain": "Deception",
+    "q": "How does a honeynet differ from a honeypot?",
+    "opts": ["It is a decoy network rather than one decoy system", "It encrypts all traffic", "It is a type of firewall ACL", "It authenticates wireless clients"],
+    "ans": 0,
+    "exp": "A honeypot is an individual decoy system; a honeynet presents a broader decoy network."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 21",
+    "domain": "Reconnaissance",
+    "q": "An analyst identifies the exact operating-system and software versions on a target. What is this called?",
+    "opts": ["Fingerprinting", "Tailgating", "Tokenization", "Traffic shaping"],
+    "ans": 0,
+    "exp": "Fingerprinting identifies specific target characteristics; footprinting gathers a broader picture of the environment."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slides 22–23",
+    "domain": "Availability attacks",
+    "q": "A server receives many TCP SYN packets, but the handshakes are not completed. Which attack fits?",
+    "opts": ["SYN flood", "ARP spoofing", "DNS cache poisoning", "Shoulder surfing"],
+    "ans": 0,
+    "exp": "A SYN flood attempts to exhaust connection resources by initiating many incomplete TCP handshakes."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 23",
+    "domain": "Availability attacks",
+    "q": "Small spoofed requests cause open DNS resolvers to send much larger responses to a victim. What is this?",
+    "opts": ["DNS amplification", "MAC flooding", "VLAN hopping", "Dictionary attack"],
+    "ans": 0,
+    "exp": "DNS amplification is a reflected traffic attack that uses larger DNS responses to overwhelm the victim."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 25",
+    "domain": "Malware",
+    "q": "A malicious installer pretends to be a useful application and does not replicate itself across the network. What type of malware is it?",
+    "opts": ["Trojan", "Worm", "Honeypot", "SNMP agent"],
+    "ans": 0,
+    "exp": "A Trojan hides malicious behavior behind a seemingly legitimate program. A worm self-replicates."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 25",
+    "domain": "Malware",
+    "q": "A malicious email attachment delivers ransomware. What is the attachment's role?",
+    "opts": ["Infection vector", "Payload", "Hash digest", "Security baseline"],
+    "ans": 0,
+    "exp": "The vector is the delivery path. Encrypting the victim's files is the harmful payload."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 26",
+    "domain": "Malware",
+    "q": "Which observation best fits fileless malware?",
+    "opts": ["Suspicious PowerShell activity with code mainly running in memory", "A new patch panel", "A switch learning one MAC address", "A correct DNS answer"],
+    "ans": 0,
+    "exp": "Fileless activity can abuse legitimate tools and memory instead of relying on a conventional executable file."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slides 29–30",
+    "domain": "Spoofing",
+    "q": "A packet contains a forged source IP address. Which attack does this describe?",
+    "opts": ["IP spoofing", "MAC flooding", "Phishing", "Baiting"],
+    "ans": 0,
+    "exp": "IP spoofing changes the apparent source IP. It does not by itself mean the attacker has intercepted the session."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 31",
+    "domain": "Spoofing",
+    "q": "A workstation suddenly maps its gateway IP to an unknown MAC address. Which attack is likely?",
+    "opts": ["ARP spoofing", "DNS amplification", "Brute force", "SYN flooding"],
+    "ans": 0,
+    "exp": "ARP spoofing poisons the local IP-to-MAC mapping and may redirect traffic through an attacker."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 32",
+    "domain": "Switch attacks",
+    "q": "A switch port learns thousands of fake source MAC addresses in a short period. What should you suspect?",
+    "opts": ["MAC flooding", "RADIUS authentication", "DNSSEC validation", "Route summarization"],
+    "ans": 0,
+    "exp": "MAC flooding tries to overwhelm the switch's learned-address table and can cause broader frame flooding."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slides 37–38",
+    "domain": "DNS attacks",
+    "q": "Users enter the correct domain but receive an attacker-controlled address from a resolver's bad cache. What happened?",
+    "opts": ["DNS cache poisoning", "DHCP lease renewal", "TCP port mirroring", "IPsec key exchange"],
+    "ans": 0,
+    "exp": "A poisoned DNS cache returns a false address for a legitimate name. A rogue DHCP server instead hands out client network settings."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 42",
+    "domain": "Social engineering",
+    "q": "Someone follows an employee through a secured door without using their own badge. What is this called?",
+    "opts": ["Tailgating", "Fingerprinting", "ARP spoofing", "VLAN hopping"],
+    "ans": 0,
+    "exp": "Tailgating uses another person's authorized entry to gain physical access."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 43",
+    "domain": "Password attacks",
+    "q": "Which attack systematically tries common words and known passwords?",
+    "opts": ["Dictionary attack", "DNS amplification", "On-path attack", "MAC flooding"],
+    "ans": 0,
+    "exp": "Dictionary attacks use likely candidates; brute-force attacks try many possible character combinations."
+  },
+  {
+    "module": 9,
+    "source": "New Module 9 review PDFs, slide 20",
+    "domain": "Threat actors",
+    "q": "A contractor uses valid access to steal confidential records. How is the threat classified?",
+    "opts": ["Internal threat", "External threat", "Zero-day vulnerability", "Deception technology"],
+    "ans": 0,
+    "exp": "An insider or trusted contractor may misuse access they already possess. Internal threats can be deliberate or accidental."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slides 4–5",
+    "domain": "Access control",
+    "q": "A system records successful and failed use of a resource. Which access-control function is this?",
+    "opts": ["Accounting", "Authentication", "Authorization", "Identity"],
+    "ans": 0,
+    "exp": "Accounting records what happened. Authentication verifies identity; authorization decides allowed actions."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 6",
+    "domain": "Authentication factors",
+    "q": "In the instructor review, a geofence represents which access factor or condition?",
+    "opts": ["Somewhere you are", "Something you know", "Something you have", "Something you are"],
+    "ans": 0,
+    "exp": "Geofencing applies a location condition. It is useful context but should not be treated as strong identity proof by itself."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 7",
+    "domain": "Single sign-on",
+    "q": "What is the purpose of single sign-on?",
+    "opts": ["Use one authentication context across trusted applications", "Give all users administrator rights", "Remove application authorization rules", "Turn off logging"],
+    "ans": 0,
+    "exp": "SSO reduces repeated sign-ins. Each application still needs its own authorization decisions."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 8",
+    "domain": "Kerberos",
+    "q": "What does the Kerberos KDC issue after a successful initial authentication?",
+    "opts": ["Ticket-granting ticket", "DHCP lease", "Firewall ACL", "SNMP trap"],
+    "ans": 0,
+    "exp": "The client uses the TGT to ask the ticket-granting service for a ticket to a specific application."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 11",
+    "domain": "Access models",
+    "q": "The owner of a file chooses which users can open it. Which model fits?",
+    "opts": ["Discretionary access control", "Role-based access control", "Network access control", "Single sign-on"],
+    "ans": 0,
+    "exp": "In DAC, the resource owner can grant access. RBAC assigns permissions through roles."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 11",
+    "domain": "Access models",
+    "q": "Permissions are assigned to HR, Sales, and Help Desk groups based on job function. Which model fits?",
+    "opts": ["Role-based access control", "Discretionary access control", "Port security", "DNS filtering"],
+    "ans": 0,
+    "exp": "RBAC groups permissions by role so users inherit access appropriate to their job."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 12",
+    "domain": "Privileged access",
+    "q": "Two different employees must approve a sensitive financial change. Which principle is being applied?",
+    "opts": ["Separation of duties", "Single sign-on", "MAC filtering", "Geofencing"],
+    "ans": 0,
+    "exp": "Separation of duties divides sensitive steps so one person cannot perform and approve everything."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 12",
+    "domain": "Privileged access",
+    "q": "Which practice controls and audits administrator-level account use?",
+    "opts": ["Privileged access management", "Port address translation", "Router advertisement", "Band steering"],
+    "ans": 0,
+    "exp": "PAM reduces abuse of privileged accounts through approval, restricted sessions, and audit records."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 18",
+    "domain": "Network admission",
+    "q": "Which control decides whether a user or device may join the network?",
+    "opts": ["Network access control", "Content delivery network", "Network address translation", "DNS resolver"],
+    "ans": 0,
+    "exp": "NAC applies network admission policy based on user or device identity and sometimes device posture."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 19",
+    "domain": "Switch security",
+    "q": "An attacker sends unauthorized IPv6 router advertisements to make hosts use a false gateway. Which switch control targets this?",
+    "opts": ["RA Guard", "DHCP snooping", "MAC filtering", "Kerberos"],
+    "ans": 0,
+    "exp": "RA Guard filters unauthorized IPv6 router advertisements on switch ports."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 19",
+    "domain": "Switch security",
+    "q": "Which switch control can block replies from an unauthorized DHCP server on an untrusted access port?",
+    "opts": ["DHCP snooping", "RA Guard", "SSO", "Traffic shaping"],
+    "ans": 0,
+    "exp": "DHCP snooping permits server messages from trusted paths and blocks rogue server messages on untrusted ports."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 19",
+    "domain": "Port authentication",
+    "q": "Which standard uses EAP for port-based access authentication on a switch or wireless network?",
+    "opts": ["802.1X", "802.1Q", "802.3af", "802.11ac"],
+    "ans": 0,
+    "exp": "802.1X controls access to a port; 802.1Q is for VLAN tags."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slides 22–23",
+    "domain": "Filtering",
+    "q": "Which device is most associated with enforcing policy on URLs, domains, and site reputation?",
+    "opts": ["Proxy server", "Unmanaged switch", "Kerberos KDC", "Patch panel"],
+    "ans": 0,
+    "exp": "A proxy mediates requests and can apply web content policy. A firewall commonly evaluates addresses, ports, protocol, and connection state."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 24",
+    "domain": "Firewall rules",
+    "q": "A firewall update blocks users from an approved application. Which rule mistake is most likely?",
+    "opts": ["Overly prohibitive ACL", "Overly permissive ACL", "Missing DNS zone transfer", "Wrong Kerberos ticket lifetime"],
+    "ans": 0,
+    "exp": "A rule that denies too much traffic can stop legitimate service. Confirm source, destination, port, direction, and rule order."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 24",
+    "domain": "Firewall rules",
+    "q": "Which policy rejects traffic that has no matching permit rule?",
+    "opts": ["Default deny", "Single sign-on", "Discretionary access control", "Port mirroring"],
+    "ans": 0,
+    "exp": "A default-deny or implicit-deny posture blocks traffic unless a rule explicitly permits it."
+  },
+  {
+    "module": 10,
+    "source": "New Module 10 review PDFs, slide 24",
+    "domain": "Logging",
+    "q": "Why can disabled or poorly configured firewall logging slow incident investigation?",
+    "opts": ["It hides the evidence needed to trace decisions and traffic", "It changes the user's MAC address", "It disables 802.1Q tags", "It automatically opens every port"],
+    "ans": 0,
+    "exp": "Useful logs show which rule matched and what traffic was accepted or denied; excess noise can also hide important events."
+  }
+]

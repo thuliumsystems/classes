@@ -66,7 +66,7 @@
         <div class="toolbar"><div id="score" class="score">0 <small>/ 73 · 0 answered</small></div><div class="progress"><i id="progress"></i></div><button onclick="resetAssessment()">Reset Assessment</button></div>
         <div id="questions"><p style="color:var(--muted)">Loading assessment...</p></div>
       </section>
-      <div class="footer">Study Hub &copy; 2026 · v2.0.32 &mdash; 2026-11-09</div>
+      <div class="footer">Study Hub &copy; 2026 · v2.0.33 &mdash; 2026-11-10</div>
     </main>
     <script src="lesson_details.js"></script>
     <script src="lesson_expansion.js"></script>
@@ -97,7 +97,7 @@
       document.getElementById('port-rows').innerHTML=portReference.map(([service,transport,port,use])=>`<tr><td>${service}</td><td>${transport}</td><td>${port}</td><td>${use}</td></tr>`).join('');
       document.getElementById('standard-rows').innerHTML=standardReference.map(([standard,purpose,when])=>`<tr><td>${standard}</td><td>${purpose}</td><td>${when}</td></tr>`).join('');
       const banks={assessment:[],modules:{}}; const states={assessment:{answered:0,correct:0}};
-      Promise.all(['questions.json','module_questions.json','new_module_questions.json'].map(path=>fetch(path).then(r=>{if(!r.ok)throw Error(path);return r.json();}))).then(([assessment,oldModules,newModules])=>{banks.assessment=assessment;renderAssessment();[...oldModules,...newModules].forEach(q=>(banks.modules[q.module]??=[]).push(q));for(let n=1;n<=14;n++){states['m'+n]={answered:0,correct:0};renderModule(n);}}).catch(()=>{document.getElementById('questions').innerHTML='<p style="color:var(--danger)">Unable to load question banks. Open this page through a local web server.</p>';});
+      Promise.all(['questions.json','module_questions.json','new_module_questions.json','module_9_10_review_questions.json'].map(path=>fetch(path).then(r=>{if(!r.ok)throw Error(path);return r.json();}))).then(([assessment,oldModules,newModules,reviewModules])=>{banks.assessment=assessment;renderAssessment();[...oldModules,...newModules,...reviewModules].forEach(q=>(banks.modules[q.module]??=[]).push(q));for(let n=1;n<=14;n++){states['m'+n]={answered:0,correct:0};renderModule(n);}}).catch(()=>{document.getElementById('questions').innerHTML='<p style="color:var(--danger)">Unable to load question banks. Open this page through a local web server.</p>';});
       const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       function renderAssessment(){renderSet(banks.assessment,'questions','assessment');}
       function renderModule(n){renderSet(banks.modules[n]||[],`module-questions-${n}`,'m'+n);}
