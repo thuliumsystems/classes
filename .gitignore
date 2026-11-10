@@ -1,0 +1,11 @@
+# macOS noise
+.DS_Store
+
+# Local CodeGraph index (indexing is a local choice, not committed)
+.codegraph/
+
+# Heavy source material for the Network+ study site.
+# The site is self-contained and does not link these files; they are
+# kept locally as reference only, so they stay out of the Pages repo.
+netplus/*.pptx
+netplus/*.pdf
