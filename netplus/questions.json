@@ -671,8 +671,7 @@
       "The VLAN database was not deleted before the equipment was brought back online",
       "The RJ45 cables were replaced with unshielded cables",
       "The wrong transceiver type was used for the new termination",
-      "The new RJ45 cables are a higher category than the old ones",
-      "The wrong transceiver type was used for the new termination"
+      "The new RJ45 cables are a higher category than the old ones"
     ],
     "ans": [
       3,
@@ -787,7 +786,7 @@
   },
   {
     "domain": "Availability",
-    "q": "Which of the following disaster recovery concepts is calculated by dividing the total hours of operation by the total number of units?",
+    "q": "Which disaster recovery metric is calculated by dividing total operating hours by the number of failures?",
     "opts": [
       "MTTR",
       "MTBF",
