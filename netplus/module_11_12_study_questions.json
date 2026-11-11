@@ -1,0 +1,394 @@
+[
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slides 5–8",
+    "domain": "Security zones",
+    "q": "Which zone should hold critical internal databases rather than public-facing servers or guest clients?",
+    "opts": [
+      "Private security network",
+      "Guest network",
+      "Public server network",
+      "Internet edge"
+    ],
+    "ans": 0,
+    "exp": "The guide separates critical servers into a private security zone and exposes only necessary services in a perimeter or public server zone."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 7",
+    "domain": "Screened subnet",
+    "q": "In a screened subnet, what does the external filtering boundary separate?",
+    "opts": [
+      "The perimeter network from the private LAN",
+      "The internet from the perimeter network",
+      "Employee laptops from printers",
+      "Two databases in one rack"
+    ],
+    "ans": 1,
+    "exp": "The outside boundary filters traffic between the untrusted internet and the perimeter network; a second boundary protects the private LAN."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 7",
+    "domain": "Screened subnet",
+    "q": "A public web server needs a back-end database. Where should the database remain?",
+    "opts": [
+      "On the same unfiltered public segment",
+      "Directly on the internet",
+      "In a private zone behind an internal filtering boundary",
+      "On the guest WLAN"
+    ],
+    "ans": 2,
+    "exp": "Only specific necessary connections should cross from the public-facing server zone to a protected internal database."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 14",
+    "domain": "Industrial systems",
+    "q": "What is SCADA used for in an industrial environment?",
+    "opts": [
+      "Encrypting every Ethernet frame",
+      "Issuing Wi-Fi guest passwords",
+      "Testing fiber loss",
+      "Supervising and acquiring data from distributed processes"
+    ],
+    "ans": 3,
+    "exp": "Supervisory Control and Data Acquisition systems monitor and control industrial conditions using operational data."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 15",
+    "domain": "IoT gateways",
+    "q": "Why might a low-power sensor network require an IoT gateway?",
+    "opts": [
+      "Its devices may use a protocol that needs bridging to IP",
+      "Every sensor must use fiber",
+      "A gateway removes the need for authentication",
+      "It turns a private zone into a public zone"
+    ],
+    "ans": 0,
+    "exp": "A gateway connects constrained sensor networks to ordinary IP services while their access still needs protection."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 16",
+    "domain": "IoT cellular",
+    "q": "Which cellular technology is suited to small, low-power IoT messages?",
+    "opts": [
+      "802.3ad",
+      "NB-IoT",
+      "HDMI",
+      "SATA"
+    ],
+    "ans": 1,
+    "exp": "Narrowband IoT targets constrained devices that send relatively small amounts of data."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 16",
+    "domain": "IoT cellular",
+    "q": "Compared with NB-IoT, what kind of device demand generally fits LTE-M better?",
+    "opts": [
+      "No cellular connection",
+      "A local serial cable only",
+      "Greater data needs",
+      "Only analog voice"
+    ],
+    "ans": 2,
+    "exp": "The guide contrasts narrowband sensor messaging with LTE-M applications that need more data capacity."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 18",
+    "domain": "IT and OT",
+    "q": "Why should an IT-to-OT connection have tightly limited access and careful change control?",
+    "opts": [
+      "OT traffic cannot be routed",
+      "Industrial devices never need monitoring",
+      "Segmentation eliminates all risk",
+      "A compromise could affect physical process availability or safety"
+    ],
+    "ans": 3,
+    "exp": "Operational technology can control real equipment; availability and safety can matter more than rapid software changes."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 24",
+    "domain": "Surveillance",
+    "q": "Which camera type can pan, tilt, and zoom to follow movement across a wider area?",
+    "opts": [
+      "PTZ camera",
+      "Fixed camera",
+      "Fiber transceiver",
+      "Badge reader"
+    ],
+    "ans": 0,
+    "exp": "A PTZ camera can move its field of view; a fixed camera observes a set area."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slide 24",
+    "domain": "Surveillance",
+    "q": "What can PoE provide to a compatible IP camera over its Ethernet cable?",
+    "opts": [
+      "Access without a switch",
+      "Electrical power and network data",
+      "Guaranteed video encryption",
+      "A satellite uplink"
+    ],
+    "ans": 1,
+    "exp": "Power over Ethernet can supply a compatible network camera while the same cable carries its data."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slides 25–26",
+    "domain": "Geofencing",
+    "q": "Which management system can apply a location-based restriction to a managed phone?",
+    "opts": [
+      "Coax splitter",
+      "DNS cache",
+      "MDM",
+      "Unmanaged hub"
+    ],
+    "ans": 2,
+    "exp": "Mobile device management can use geofencing as a policy condition, though location readings may be imprecise."
+  },
+  {
+    "module": 11,
+    "source": "Module 11 study guide, slides 21–27",
+    "domain": "Physical security",
+    "q": "Why pair a locked server rack with cameras in a shared facility?",
+    "opts": [
+      "Both perform packet filtering",
+      "Cameras physically prevent all entry",
+      "A rack lock replaces storage encryption",
+      "The lock restricts access while cameras record and alert"
+    ],
+    "ans": 3,
+    "exp": "These controls serve different purposes: prevention at the rack and observation or evidence from surveillance."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slides 13–14",
+    "domain": "Satellite",
+    "q": "Which satellite orbit generally adds more propagation delay to a remote internet link?",
+    "opts": [
+      "GEO",
+      "LEO",
+      "A local Wi-Fi access point",
+      "A wired LAN switch"
+    ],
+    "ans": 0,
+    "exp": "Geostationary satellites are much farther from Earth than low-Earth-orbit satellites, increasing signal travel time."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 14",
+    "domain": "Satellite",
+    "q": "A site uses GPS for location. What does this prove about its internet connection?",
+    "opts": [
+      "Its WLAN is encrypted",
+      "Nothing; positioning and satellite broadband are different services",
+      "It must use GEO broadband",
+      "It cannot use cellular backup"
+    ],
+    "ans": 1,
+    "exp": "GPS/GNSS provides positioning signals and does not imply that the site has satellite internet access."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 21",
+    "domain": "RF measurements",
+    "q": "A client has good RSSI but poor SNR. Which condition should you investigate?",
+    "opts": [
+      "The switch's STP root priority",
+      "A missing DHCP reservation only",
+      "Noise or interference near the client",
+      "A lack of any received signal"
+    ],
+    "ans": 2,
+    "exp": "RSSI describes received signal strength; SNR compares the useful signal with background noise."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 22",
+    "domain": "Wireless surveys",
+    "q": "Which site survey associates a test client with the WLAN to measure actual connectivity?",
+    "opts": [
+      "Passive survey",
+      "Predictive survey",
+      "Cable certification",
+      "Active survey"
+    ],
+    "ans": 3,
+    "exp": "An active survey joins the WLAN and tests service; a passive survey listens, while a predictive survey models coverage."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 22",
+    "domain": "Wireless surveys",
+    "q": "Which survey type models expected Wi-Fi coverage before access points are installed?",
+    "opts": [
+      "Predictive survey",
+      "Active survey",
+      "Packet capture",
+      "Cable wiremap"
+    ],
+    "ans": 0,
+    "exp": "A predictive survey estimates RF coverage from building and AP inputs and should be validated after deployment."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slides 19 and 25",
+    "domain": "WLAN identification",
+    "q": "Three APs broadcast one SSID. What identifies one specific AP radio?",
+    "opts": [
+      "Subnet mask",
+      "BSSID",
+      "ESSID",
+      "DNS suffix"
+    ],
+    "ans": 1,
+    "exp": "The BSSID identifies a basic service set, typically using an AP radio MAC; the SSID can be shared across APs."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 25",
+    "domain": "Beacons",
+    "q": "What should replace hidden-SSID settings as the primary way to protect a WLAN?",
+    "opts": [
+      "Maximum transmit power",
+      "A shared guest VLAN with servers",
+      "Proper authentication and WPA2/WPA3 encryption",
+      "More beacon frames"
+    ],
+    "ans": 2,
+    "exp": "Beacons advertise WLAN information; suppressing the SSID name is not a meaningful security control."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 26",
+    "domain": "Wireless backhaul",
+    "q": "What is an important tradeoff when WDS or repeating connects APs wirelessly?",
+    "opts": [
+      "It guarantees double throughput",
+      "It eliminates interference",
+      "It requires a satellite",
+      "Backhaul consumes radio airtime"
+    ],
+    "ans": 3,
+    "exp": "Wireless links between APs use finite airtime and require compatible, secure configuration."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 24",
+    "domain": "Roaming",
+    "q": "A client remains attached to a distant weak AP even though a stronger AP is nearby. What is this called?",
+    "opts": [
+      "Sticky client behavior",
+      "Rogue DHCP",
+      "Cable crosstalk",
+      "A protected management frame"
+    ],
+    "ans": 0,
+    "exp": "A sticky client delays roaming to a better AP; supported 802.11k/v/r features may help roaming behavior."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 28",
+    "domain": "Antennas",
+    "q": "Which antenna type better suits a focused building-to-building wireless bridge?",
+    "opts": [
+      "Internal Bluetooth only",
+      "Directional",
+      "Omnidirectional",
+      "Random wire"
+    ],
+    "ans": 1,
+    "exp": "A directional antenna concentrates its pattern toward a particular target rather than covering a room broadly."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 33",
+    "domain": "WPA3",
+    "q": "Which authentication method does WPA3-Personal use?",
+    "opts": [
+      "Telnet",
+      "PPTP",
+      "SAE",
+      "WEP shared key"
+    ],
+    "ans": 2,
+    "exp": "Simultaneous Authentication of Equals improves password-based Wi-Fi authentication resistance to offline guessing."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 34",
+    "domain": "Enterprise Wi-Fi",
+    "q": "Which EAP method commonly uses client and server certificates for enterprise WLAN authentication?",
+    "opts": [
+      "PAP",
+      "WEP",
+      "CHAP alone",
+      "EAP-TLS"
+    ],
+    "ans": 3,
+    "exp": "EAP-TLS uses certificates with 802.1X and a back-end authentication service such as RADIUS."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 36",
+    "domain": "Guest access",
+    "q": "What does a captive portal fail to provide by itself on an open guest WLAN?",
+    "opts": [
+      "Wi-Fi link encryption",
+      "A web sign-in page",
+      "Terms acceptance",
+      "An onboarding step"
+    ],
+    "ans": 0,
+    "exp": "A portal is an access workflow, not a link-layer encryption protocol."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slides 39–40",
+    "domain": "Wireless threats",
+    "q": "Which feature helps protect clients from forged Wi-Fi deauthentication frames?",
+    "opts": [
+      "PAT",
+      "Protected Management Frames",
+      "NAT",
+      "STP"
+    ],
+    "ans": 1,
+    "exp": "PMF protects selected management frames and helps reduce spoofed deauthentication or disassociation attacks."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slide 49",
+    "domain": "Interference",
+    "q": "Which tool can reveal radio interference that does not appear as Wi-Fi frames?",
+    "opts": [
+      "TDR",
+      "Crimp tool",
+      "Spectrum analyzer",
+      "Cable toner"
+    ],
+    "ans": 2,
+    "exp": "A spectrum analyzer shows RF energy from Wi-Fi and non-Wi-Fi sources such as appliances or other radio devices."
+  },
+  {
+    "module": 12,
+    "source": "Module 12 study guide, slides 47 and 52",
+    "domain": "Capacity",
+    "q": "A dense WLAN has strong signal but poor performance from airtime contention. Which change can help channel reuse?",
+    "opts": [
+      "Set every AP to maximum width and power",
+      "Hide the SSID",
+      "Replace WPA3 with WEP",
+      "Use narrower channels with a planned AP layout"
+    ],
+    "ans": 3,
+    "exp": "Narrower channels and deliberate reuse can reduce contention; capacity planning also considers simultaneous clients."
+  }
+]
